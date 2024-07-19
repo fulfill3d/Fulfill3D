@@ -1,9 +1,9 @@
-import Image from "next/image";
+"use client";
 
 export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div> HELLO </div>
-    </main>
-  );
+    return (
+        <div className="p-10 m-10 rounded-lg text-md text-center h-20 flex flex-col gap-4 antialiased">
+            Hello
+        </div>
+    )
 }
