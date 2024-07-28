@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import {HttpMethod} from "@/types/common/HttpMethod";
+import {HttpMethod} from "@/types/common/http-method";
 
 interface UseHttpResult {
     loading: boolean;
@@ -19,7 +19,7 @@ const useHttp = (): UseHttpResult => {
 
     const request = useCallback(async (
         url: string,
-        method: HttpMethod = 'GET',
+        method: HttpMethod = HttpMethod.GET,
         body: any = null,
         headers: { [key: string]: string } = {},
         token?: string

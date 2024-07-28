@@ -3,16 +3,15 @@
 import React from "react";
 import PageLayout from "@/components/common/page-layout";
 
-export default function Home() {
+export default function Protected() {
     return (
         <PageLayout>
             <PageLayout.Public>
-                <>Welcome to Fulfill3D</>
+                <>No Public Content. NavItem also public content</>
             </PageLayout.Public>
             <PageLayout.Protected>
-                {/*<Dashboard/>*/}
-                Dashboard
+                <>Protected Content</>
             </PageLayout.Protected>
         </PageLayout>
-    )
+    );
 }

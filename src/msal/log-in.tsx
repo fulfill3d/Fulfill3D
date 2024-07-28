@@ -6,9 +6,7 @@ export const LogIn = () => {
     const { instance } = useMsal();
 
     const handleLogin = () => {
-        instance.loginRedirect(loginRequest).catch(e => {
-            console.error(e);
-        });
+        instance.loginRedirect(loginRequest);
     };
 
     return (
