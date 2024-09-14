@@ -4,6 +4,7 @@ import Twitter from "@/svg/twitter";
 import Linkedin from "@/svg/linkedin";
 import Youtube from "@/svg/youtube";
 import Image from "next/image";
+import ImagePlaceholder from "@/svg/image-placeholder";
 
 interface SocialMediaProps {
     platform: SocialMediaPlatform;
@@ -31,11 +32,16 @@ const CompanyComponent: React.FC<CompanyProps> = ({ profile }) => {
         <div className="bg-white shadow-lg rounded-lg p-6">
             {/* Company Logo */}
             <div className="flex justify-center mb-4">
-                <Image
-                    src={profile.logoUrl}
-                    alt={profile.companyName}
-                    className="w-32 h-32 object-cover rounded-md"
-                />
+                <div className="relative w-32 h-32 mb-4">
+                    <Image
+                        src={profile.logoUrl || ImagePlaceholder}
+                        alt={profile.companyName}
+                        layout="fill"  // Ensures the image fills the container
+                        objectFit="cover"  // Maintains the aspect ratio and covers the area
+                        className="rounded-lg"  // Optional Tailwind classes
+                    />
+                </div>
+
             </div>
 
             {/* Company Name and Mission */}

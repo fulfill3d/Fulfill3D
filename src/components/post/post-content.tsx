@@ -9,6 +9,7 @@ import {
     QuoteBlock
 } from "@/models/post/content-block";
 import Image from "next/image";
+import ImagePlaceholder from "@/svg/image-placeholder";
 
 interface PostContentProps {
     post: Post;
@@ -28,12 +29,16 @@ const PostContent: React.FC<PostContentProps> = ({ post }) => {
                 return <p className="mb-6 text-lg text-gray-800">{block.text}</p>;
             case ImageBlock:
                 return (
-                    <Image
-                        src={block.src}
-                        alt={block.alt}
-                        className="w-full h-auto rounded-md mb-6"
-                    />
-                );
+                    <div className="relative w-full h-64 mb-6">
+                        <Image
+                            src={block.src || ImagePlaceholder}
+                            alt={block.alt}
+                            layout="fill"  // Ensures the image fills the container
+                            objectFit="cover"  // Ensures the aspect ratio is maintained and the image covers the area
+                            className="rounded-lg"  // Optional Tailwind classes
+                        />
+                    </div>
+            );
             case CodeBlock:
                 return (
                     <pre className="bg-gray-100 p-4 rounded-md mb-6 overflow-x-auto">
@@ -83,14 +88,19 @@ const PostContent: React.FC<PostContentProps> = ({ post }) => {
 
     return (
         <article className="bg-white shadow-lg rounded-lg p-6 max-w-4xl mx-auto">
-            {/* Blog Metadata */}
+            {/* Post Metadata */}
             <header className="mb-8">
-                {/* Image */}
-                <Image
-                    src={post.image}
-                    alt={post.title}
-                    className="w-full h-64 object-cover rounded-md mb-4"
-                />
+                {/* Header Image */}
+                <div className="relative w-full h-64 mb-4">
+                    <Image
+                        src={post.image || ImagePlaceholder}
+                        alt={post.title}
+                        layout="fill"  // Ensures the image fills the container
+                        objectFit="cover"  // Ensures the aspect ratio is maintained and the image covers the area
+                        className="rounded-lg"  // Optional Tailwind classes
+                    />
+                </div>
+
 
                 {/* Title */}
                 <h1 className="text-4xl font-bold text-gray-800 mb-4">{post.title}</h1>
@@ -116,7 +126,7 @@ const PostContent: React.FC<PostContentProps> = ({ post }) => {
                 <p className="text-lg text-gray-700 italic mb-4">{post.excerpt}</p>
             </header>
 
-            {/* Blog Content */}
+            {/* Post Content */}
             <section>
                 {post.contentBlocks.map((block, index) => (
                     <div key={index}>{renderContentBlock(block)}</div>

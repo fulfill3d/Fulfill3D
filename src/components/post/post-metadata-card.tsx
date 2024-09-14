@@ -2,6 +2,7 @@ import React from 'react';
 import {Post} from "@/models/post/post";
 import {useRouter} from "next/navigation";
 import Image from "next/image";
+import ImagePlaceholder from "@/svg/image-placeholder";
 
 interface PostMetadataCardProps {
     post: Post;
@@ -15,15 +16,20 @@ const PostMetadataCard: React.FC<PostMetadataCardProps> = ({ post }) => {
     };
     return (
         <div
-            className="bg-white shadow-lg rounded-lg p-6"
+            className="bg-white shadow-lg rounded-lg p-6 cursor-pointer"
             onClick={handleClick}
         >
             {/* Image */}
-            <Image
-                src={post.image}
-                alt={post.title}
-                className="w-full h-48 object-cover rounded-md mb-4"
-            />
+            <div className="relative w-full h-48 mb-4">
+                <Image
+                    src={post.image || ImagePlaceholder}
+                    alt={post.title}
+                    layout="fill"  // Ensures the image fills the container
+                    objectFit="cover"  // Ensures the aspect ratio is maintained and the image covers the container
+                    className="rounded-lg"  // Optional Tailwind classes for styling
+                />
+            </div>
+
 
             {/* Title */}
             <h2 className="text-2xl font-bold text-gray-800 mb-2">{post.title}</h2>

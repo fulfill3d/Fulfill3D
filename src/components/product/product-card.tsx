@@ -1,6 +1,7 @@
 import React from 'react';
 import {Product} from "@/models/product/product";
 import Image from "next/image";
+import ImagePlaceholder from "@/svg/image-placeholder";
 
 interface ProductCardProps {
     product: Product;
@@ -10,13 +11,16 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     return (
         <div className="flex flex-col md:flex-row bg-white shadow-lg rounded-lg p-4 mb-6 h-auto">
             {/* Product Image */}
-            <div className="md:w-1/4 w-full mb-4 md:mb-0">
+            <div className="relative md:w-1/4 w-full h-48 md:h-auto mb-4 md:mb-0">
                 <Image
-                    src={product.imageUrl}
+                    src={product.imageUrl || ImagePlaceholder}
                     alt={product.name}
-                    className="w-full h-full object-cover rounded-md"
+                    layout="fill"  // Ensures the image fills the container
+                    objectFit="cover"  // Maintains aspect ratio and covers the container
+                    className="rounded-lg"  // Optional Tailwind classes
                 />
             </div>
+
 
             {/* Product Details */}
             <div className="md:w-2/4 w-full md:px-4 flex flex-col justify-center">

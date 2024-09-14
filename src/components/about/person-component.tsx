@@ -1,6 +1,7 @@
 import React from 'react';
 import {Person} from "@/models/about/person";
 import Image from "next/image";
+import ImagePlaceholder from "@/svg/image-placeholder";
 
 interface PersonProps {
     profile: Person;
@@ -11,11 +12,16 @@ const PersonComponent: React.FC<PersonProps> = ({ profile }) => {
         <div className="bg-white shadow-lg rounded-lg p-6">
             <div className="flex flex-col items-center text-center">
                 {/* Image */}
-                <Image
-                    src={profile.imageUrl}
-                    alt={profile.name}
-                    className="w-32 h-32 object-cover rounded-full mb-4"
-                />
+                <div className="relative w-32 h-32 mb-4">
+                    <Image
+                        src={profile.imageUrl || ImagePlaceholder}
+                        alt={profile.name}
+                        layout="fill"  // Ensures the image fills the container
+                        objectFit="cover"  // Ensures the aspect ratio is maintained
+                        className="rounded-full"  // Rounded image (can be adjusted to 'rounded-lg' or any other)
+                    />
+                </div>
+
 
                 {/* Name and Title */}
                 <h2 className="text-2xl font-bold text-gray-800 mb-2">{profile.name}</h2>
