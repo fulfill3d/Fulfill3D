@@ -2,6 +2,7 @@ import React from 'react';
 import {Product} from "@/models/product/product";
 import Image from "next/image";
 import ImagePlaceholder from "@/svg/image-placeholder";
+import Link from "next/link";
 
 interface ProductCardProps {
     product: Product;
@@ -69,12 +70,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                         Demo
                     </a>
 
-                    <a
-                        href={product.wikiUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-colors"
-                    >
+                    <Link href={product.wikiUrl} className="flex items-center bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-colors">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="h-5 w-5 mr-2"
@@ -90,7 +86,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                             />
                         </svg>
                         Wiki
-                    </a>
+                    </Link>
                 </div>
             </div>
         </div>

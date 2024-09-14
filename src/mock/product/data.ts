@@ -4,7 +4,7 @@ export const mockProductList = [
         "name": "POD",
         "description": "Print-on-Demand platform with full integration capabilities.",
         "demoUrl": "https://fulfill3d.com/pod-demo",
-        "wikiUrl": "https://fulfill3d.com/wiki/pod",
+        "wikiUrl": "/products/wiki/",
         "imageUrl": "/images/pod.png",
         "tags": ["Integration", "E-commerce", "Print"]
     },
@@ -13,7 +13,7 @@ export const mockProductList = [
         "name": "DStudio",
         "description": "3D design studio for custom product creation.",
         "demoUrl": "https://fulfill3d.com/dstudio-demo",
-        "wikiUrl": "https://fulfill3d.com/wiki/dstudio",
+        "wikiUrl": "/products/wiki/",
         "imageUrl": "/images/dstudio.png",
         "tags": ["3D", "Design", "Customization"]
     },
@@ -22,8 +22,83 @@ export const mockProductList = [
         "name": "CRM",
         "description": "Customer Relationship Management platform tailored for small businesses.",
         "demoUrl": "https://fulfill3d.com/crm-demo",
-        "wikiUrl": "https://fulfill3d.com/wiki/crm",
+        "wikiUrl": "/products/wiki/",
         "imageUrl": "/images/crm.png",
         "tags": ["Business", "Customer", "Management"]
     }
 ];
+
+
+export const mockProductWiki = [
+    {
+        "id": "1",
+        "name": "POD (Print-On-Demand)",
+        "purpose": "To automate order processing and 3D printing jobs from e-commerce platforms.",
+        "projectType": "Enterprise-Level Azure Function-Based Microservice Architecture",
+        "overview": "A cloud-based backend system that integrates multiple e-commerce platforms and automates 3D printing processes.",
+        "features": [
+            "Webhook notifications for order updates",
+            "Real-time inventory tracking",
+            "Asynchronous job scheduling for 3D printing"
+        ],
+        "technologyStack": [
+            ".NET Core",
+            "Azure Functions",
+            "Cosmos DB",
+            "Azure Service Bus",
+            "SQL Server"
+        ],
+        "architecture": "Microservice architecture with event-driven design using Azure Service Bus and Functions.",
+        "useCases": [
+            "Automated order management",
+            "3D printing job scheduling",
+            "E-commerce platform integration"
+        ],
+        "microservices": [
+            {
+                "name": "Order Service",
+                "description": "Handles incoming orders from e-commerce platforms.",
+                "openApiUrl": "https://api.pod.com/swagger/orders",
+                "scalability": "Horizontally scalable via Azure Functions.",
+                "deployment": "CI/CD pipeline with Azure DevOps.",
+                "linkToDocs": "https://docs.pod.com/orders",
+                "trigger": "HTTP Trigger"  // Added trigger type
+            },
+            {
+                "name": "Inventory Service",
+                "description": "Manages stock levels and updates inventory in real time.",
+                "openApiUrl": "https://api.pod.com/swagger/inventory",
+                "scalability": "Uses Cosmos DB for global distribution.",
+                "deployment": "Azure Functions integrated with Cosmos DB.",
+                "linkToDocs": "https://docs.pod.com/inventory",
+                "trigger": "HTTP Trigger"  // Added trigger type
+            },
+            {
+                "name": "3D Print Job Scheduler",
+                "description": "Schedules and assigns 3D print jobs based on printer availability.",
+                "openApiUrl": "https://api.pod.com/swagger/print-jobs",
+                "scalability": "Queue-based scheduling via Azure Service Bus.",
+                "deployment": "Azure Functions triggered by Service Bus queues.",
+                "linkToDocs": "https://docs.pod.com/print-jobs",
+                "trigger": "HTTP Trigger"  // Added trigger type
+            }
+        ],
+        "apiDocumentation": "Swagger documentation available for all microservices.",
+        "performance": "Optimized to handle 10,000+ daily orders with minimal latency.",
+        "scalingStrategies": "Horizontally scalable using Azure Functions and Service Bus.",
+        "devOps": "CI/CD implemented via Azure DevOps for continuous deployments.",
+        "ciCdPipeline": "Automated testing and deployment pipelines ensure quality and reliability.",
+        "challenges": [
+            "Managing concurrency with Cosmos DB",
+            "Scaling APIs for large e-commerce platforms"
+        ],
+        "learnings": [
+            "Gained expertise in Azure Functions and Cosmos DB",
+            "Improved skills in event-driven architecture"
+        ],
+        "futureDevelopment": "Add support for additional e-commerce platforms like Amazon.",
+        "demoUrl": "https://demo.pod.com",
+        "sourceCodeUrl": "https://github.com/user/pod-backend",
+        "tags": [".NET", "Azure", "Microservices", "CosmosDB", "Service Bus"]
+    }
+]
