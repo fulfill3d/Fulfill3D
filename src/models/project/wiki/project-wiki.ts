@@ -38,7 +38,7 @@ export class Microservice {
     }
 }
 
-export class ProductWiki {
+export class ProjectWiki {
     id: string;
     name: string;
     purpose: string;
@@ -104,9 +104,9 @@ export class ProductWiki {
         this.sourceCodeUrl = sourceCodeUrl;
     }
 
-    static fromJson(json: any): ProductWiki {
+    static fromJson(json: any): ProjectWiki {
         const microservices = json.microservices.map((ms: any) => Microservice.fromJson(ms));
-        return new ProductWiki(
+        return new ProjectWiki(
             json.id,
             json.name,
             json.purpose,

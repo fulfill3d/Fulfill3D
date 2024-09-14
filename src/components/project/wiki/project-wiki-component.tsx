@@ -1,11 +1,11 @@
 import React from 'react';
-import { ProductWiki } from "@/models/product/wiki/product-wiki";
+import { ProjectWiki } from "@/models/project/wiki/project-wiki";
 
 interface ProductWikiComponentProps {
-    product: ProductWiki;
+    product: ProjectWiki;
 }
 
-const ProductWikiComponent: React.FC<ProductWikiComponentProps> = ({ product }) => {
+const ProjectWikiComponent: React.FC<ProductWikiComponentProps> = ({ product }) => {
     return (
         <div className="bg-white shadow-lg rounded-lg p-6 max-w-4xl mx-auto">
             {/* Product Name */}
@@ -152,4 +152,4 @@ const ProductWikiComponent: React.FC<ProductWikiComponentProps> = ({ product }) 
     );
 };
 
-export default ProductWikiComponent;
+export default ProjectWikiComponent;

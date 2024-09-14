@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 const links = [
-    { name: 'Products', href: '/products' },
+    { name: 'Projects', href: '/projects' },
     { name: 'About', href: '/about' },
 ];
 

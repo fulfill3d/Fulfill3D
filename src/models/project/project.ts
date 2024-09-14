@@ -1,4 +1,4 @@
-export class Product {
+export class Project {
     id: string;
     name: string;
     description: string;
@@ -25,8 +25,8 @@ export class Product {
         this.tags = tags;
     }
 
-    static fromJson(json: any): Product {
-        return new Product(
+    static fromJson(json: any): Project {
+        return new Project(
             json.id,
             json.name,
             json.description,

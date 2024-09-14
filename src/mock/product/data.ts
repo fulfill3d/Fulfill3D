@@ -4,16 +4,16 @@ export const mockProductList = [
         "name": "POD",
         "description": "Print-on-Demand platform with full integration capabilities.",
         "demoUrl": "https://fulfill3d.com/pod-demo",
-        "wikiUrl": "/products/wiki/",
+        "wikiUrl": "/projects/wiki/",
         "imageUrl": "/images/pod.png",
         "tags": ["Integration", "E-commerce", "Print"]
     },
     {
         "id": "dstudio",
         "name": "DStudio",
-        "description": "3D design studio for custom product creation.",
+        "description": "3D design studio for custom project creation.",
         "demoUrl": "https://fulfill3d.com/dstudio-demo",
-        "wikiUrl": "/products/wiki/",
+        "wikiUrl": "/projects/wiki/",
         "imageUrl": "/images/dstudio.png",
         "tags": ["3D", "Design", "Customization"]
     },
@@ -22,7 +22,7 @@ export const mockProductList = [
         "name": "CRM",
         "description": "Customer Relationship Management platform tailored for small businesses.",
         "demoUrl": "https://fulfill3d.com/crm-demo",
-        "wikiUrl": "/products/wiki/",
+        "wikiUrl": "/projects/wiki/",
         "imageUrl": "/images/crm.png",
         "tags": ["Business", "Customer", "Management"]
     }

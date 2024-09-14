@@ -2,15 +2,15 @@
 
 import React from "react";
 import {mockProductList} from "@/mock/product/data";
-import {Product} from "@/models/product/product";
-import ProductList from "@/components/product/product-list";
+import {Project} from "@/models/project/project";
+import ProjectList from "@/components/project/project-list";
 
 export default function Products() {
-    const products = mockProductList.map(product => Product.fromJson(product));
+    const products = mockProductList.map(product => Project.fromJson(product));
     return (
         <div className="w-full h-full">
             <div className="container p-6 max-w-4xl mx-auto">
-                <ProductList products={products}/>
+                <ProjectList products={products}/>
             </div>
         </div>
     );

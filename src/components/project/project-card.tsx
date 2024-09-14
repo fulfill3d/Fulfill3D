@@ -1,14 +1,14 @@
 import React from 'react';
-import {Product} from "@/models/product/product";
+import {Project} from "@/models/project/project";
 import Image from "next/image";
 import ImagePlaceholder from "@/svg/image-placeholder";
 import Link from "next/link";
 
 interface ProductCardProps {
-    product: Product;
+    product: Project;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+const ProjectCard: React.FC<ProductCardProps> = ({ product }) => {
     return (
         <div className="flex flex-col md:flex-row bg-white shadow-lg rounded-lg p-4 mb-6 h-auto">
             {/* Product Image */}
@@ -93,4 +93,4 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     );
 };
 
-export default ProductCard;
+export default ProjectCard;
