@@ -1,18 +1,18 @@
 "use client";
 
 import React from "react";
-import PageLayout from "@/components/common/page-layout";
+import PostGridContainer from "@/components/post/post-grid-container";
+import {mockPostList} from "@/mock/blog/data";
+import {Post} from "@/models/post/post";
 
-export default function Home() {
+export default function Posts() {
+    const posts = mockPostList.map(b => Post.fromJSON(b))
+
     return (
-        <PageLayout>
-            <PageLayout.Public>
-                <>Welcome to Fulfill3D</>
-            </PageLayout.Public>
-            <PageLayout.Protected>
-                {/*<Dashboard/>*/}
-                Dashboard
-            </PageLayout.Protected>
-        </PageLayout>
-    )
+        <div className="w-full h-full">
+            <div className="container mx-auto mt-10">
+                <PostGridContainer posts={posts}/>
+            </div>
+        </div>
+    );
 }
