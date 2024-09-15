@@ -1,5 +1,12 @@
 import { useState, useCallback } from 'react';
-import {HttpMethod} from "@/types/common/http-method";
+
+export enum HttpMethod {
+    GET = 'GET',
+    POST = 'POST',
+    PUT = 'PUT',
+    DELETE = 'DELETE',
+    PATCH = 'PATCH'
+}
 
 interface UseHttpResult {
     loading: boolean;

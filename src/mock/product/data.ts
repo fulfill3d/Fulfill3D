@@ -25,6 +25,42 @@ export const mockProductList = [
         "wikiUrl": "/projects/wiki/",
         "imageUrl": "/images/crm.png",
         "tags": ["Business", "Customer", "Management"]
+    },
+    {
+        "id": "simple-payment",
+        "name": "SimplePayment",
+        "description": "A simple payment system to demonstrate loosely coupled microservices architecture.",
+        "demoUrl": "https://fulfill3d.com/simple-payment-demo",
+        "wikiUrl": "/projects/wiki/",
+        "imageUrl": "/images/simple-payment.png",
+        "tags": ["Stripe", "Customer", "Payment"]
+    },
+    {
+        "id": "chat-box",
+        "name": "ChatBox",
+        "description": "This is a SaaS for AI backed live chat box for a customer service",
+        "demoUrl": "https://fulfill3d.com/chat-box-demo",
+        "wikiUrl": "/projects/wiki/",
+        "imageUrl": "/images/chat-box.png",
+        "tags": ["OpenAI", "Customer", "SaaS"]
+    },
+    {
+        "id": "azure-wheels",
+        "name": "AzureWheels",
+        "description": "A bike rent application inspired from AZ 204",
+        "demoUrl": "https://fulfill3d.com/azure-wheels-demo",
+        "wikiUrl": "/projects/wiki/",
+        "imageUrl": "/images/azure-wheels.png",
+        "tags": ["Bike", "Rental", "MVP"]
+    },
+    {
+        "id": "azure-plates",
+        "name": "AzurePlates",
+        "description": "A nearby restaurants app to order from",
+        "demoUrl": "https://fulfill3d.com/azure-plates-demo",
+        "wikiUrl": "/projects/wiki/",
+        "imageUrl": "/images/azure-plates.png",
+        "tags": ["Food", "Restaurant", "Delivery"]
     }
 ];
 

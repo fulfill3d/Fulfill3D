@@ -1119,7 +1119,7 @@ export const mockPostList = [
     },
     {
         "id": 7,
-        "title": "CRM Database Migration Using FluentMigrator and Azure App Configuration",
+        "title": "Database Migration Strategy with FluentMigrator",
         "slug": "crm-database-migration-with-fluentmigrator",
         "author": "John Doe",
         "tags": ["Azure", "FluentMigrator", "C#", ".NET", "Database", "App Configuration"],
@@ -1434,6 +1434,615 @@ export const mockPostList = [
                 "data": {
                     "href": "https://learn.microsoft.com/en-us/dotnet/api/system.io.stream",
                     "text": "Stream Class in .NET"
+                }
+            }
+        ]
+    },
+    {
+        "id": 9,
+        "title": "Azure Storage Queue Client Integration",
+        "slug": "azure-storage-queue-client",
+        "author": "Your Name",
+        "tags": ["Azure", "Storage Queue", "Cloud Integration", ".NET"],
+        "datePublished": "2024-09-13",
+        "status": "published",
+        "excerpt": "A proof-of-concept demonstrating the integration of Azure Storage Queue with .NET, providing scalable message queue functionality.",
+        "image": "/images/azure-queue-client.png",
+        "contentBlocks": [
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Overview",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "This PoC showcases how to integrate Azure Storage Queue with .NET applications using a simple and scalable approach. Azure Storage Queues provide reliable, persistent message queuing in the cloud, making them ideal for decoupling components in distributed applications."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Key Features",
+                    "level": 2
+                }
+            },
+            {
+                "type": "list",
+                "data": {
+                    "ordered": false,
+                    "items": [
+                        "Queue message sending with Azure Storage Queue",
+                        "Custom configuration for queue client",
+                        "Error handling and retry mechanisms (planned)",
+                        "Easy to extend and integrate with other services"
+                    ]
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Technology Stack",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "This integration uses .NET with Azure Storage Queues. The main components of this PoC are:"
+                }
+            },
+            {
+                "type": "list",
+                "data": {
+                    "ordered": true,
+                    "items": [
+                        "Azure.Storage.Queues",
+                        "Dependency injection (DI) via Microsoft.Extensions.DependencyInjection",
+                        "Options pattern for client configuration"
+                    ]
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "How It Works",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The client is configured via the `QueueClientConfiguration` class, which stores the connection string. A service is added to the DI container using the `AddAzureStorageQueueClient` method. The `IAzureStorageQueueClient` interface defines the contract for sending messages, and the `AzureStorageQueueClient` class implements it."
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "services.AddAzureStorageQueueClient(options =>\n{\n    options.ConnectionString = configuration[\"AzureQueue:ConnectionString\"];\n});"
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Microservice Architecture",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "This PoC demonstrates a microservice that interacts with Azure Storage Queues for decoupled communication. The microservice can be integrated into larger event-driven systems or used to offload processing tasks."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Deployment & Scalability",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "Azure Storage Queues are designed for high scalability, with built-in redundancy and fault tolerance. This client can be deployed across multiple environments and scale out as needed, ensuring reliable message delivery even in high-load systems."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Challenges Solved",
+                    "level": 2
+                }
+            },
+            {
+                "type": "list",
+                "data": {
+                    "ordered": false,
+                    "items": [
+                        "Decoupling services in microservice architecture",
+                        "Ensuring message delivery reliability",
+                        "Simplifying Azure Storage Queue integration with .NET"
+                    ]
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Demo & Source Code",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "You can view the demo and access the source code via the following links:"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://demo.azure.com/queue-client",
+                    "text": "Demo"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://github.com/your-repo/azure-storage-queue-client",
+                    "text": "Source Code"
+                }
+            }
+        ]
+    },
+    {
+        "id": 10,
+        "title": "Printful Client Integration",
+        "slug": "printful-client",
+        "author": "Your Name",
+        "tags": ["Printful", "API", "HttpClient", "Integration"],
+        "datePublished": "2024-09-13",
+        "status": "published",
+        "excerpt": "A proof-of-concept demonstrating how to integrate with the Printful API using HttpClient in .NET.",
+        "image": "/images/printful-client.png",
+        "contentBlocks": [
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Overview",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "This PoC demonstrates how to integrate with the Printful API using HttpClient in .NET for print-on-demand services."
+                }
+            },
+            {
+                "type": "list",
+                "data": {
+                    "ordered": true,
+                    "items": [
+                        "HttpClient for making API requests",
+                        "Authentication via API key",
+                        "Sending orders and receiving fulfillment data"
+                    ]
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "public class PrintfulClient {\n    private readonly HttpClient _httpClient;\n    public PrintfulClient(HttpClient httpClient) {\n        _httpClient = httpClient;\n    }\n    public async Task<string> GetProductsAsync() {\n        var response = await _httpClient.GetAsync(\"/store/products\");\n        return await response.Content.ReadAsStringAsync();\n    }\n}"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://github.com/your-repo/printful-client",
+                    "text": "Source Code"
+                }
+            }
+        ]
+    },
+    {
+        "id": 11,
+        "title": "Shopify Client Integration",
+        "slug": "shopify-client",
+        "author": "Your Name",
+        "tags": ["Shopify", "RestSharp", "API", "Integration"],
+        "datePublished": "2024-09-13",
+        "status": "published",
+        "excerpt": "A proof-of-concept demonstrating how to integrate with Shopify API using RestSharp in .NET.",
+        "image": "/images/shopify-client.png",
+        "contentBlocks": [
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Overview",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "This PoC showcases integrating with the Shopify API using RestSharp to manage products and orders."
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "public class ShopifyClient {\n    private readonly RestClient _client;\n    public ShopifyClient(string baseUrl) {\n        _client = new RestClient(baseUrl);\n    }\n    public async Task<string> GetOrdersAsync() {\n        var request = new RestRequest(\"/orders.json\", Method.GET);\n        var response = await _client.ExecuteAsync(request);\n        return response.Content;\n    }\n}"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://github.com/your-repo/shopify-client",
+                    "text": "Source Code"
+                }
+            }
+        ]
+    },
+    {
+        "id": 12,
+        "title": "Microsoft Graph API Integration",
+        "slug": "microsoft-graph-client",
+        "author": "Your Name",
+        "tags": ["Microsoft Graph", "API", "Azure", "Integration"],
+        "datePublished": "2024-09-13",
+        "status": "published",
+        "excerpt": "A proof-of-concept demonstrating how to integrate with Microsoft Graph API in .NET.",
+        "image": "/images/microsoft-graph-client.png",
+        "contentBlocks": [
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Overview",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "This PoC demonstrates how to communicate with Microsoft Graph API to manage users, emails, and calendars in Azure Active Directory."
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "public class MicrosoftGraphClient {\n    private readonly HttpClient _client;\n    public MicrosoftGraphClient(HttpClient client) {\n        _client = client;\n    }\n    public async Task<string> GetUserAsync(string userId) {\n        var response = await _client.GetAsync($\"/users/{userId}\");\n        return await response.Content.ReadAsStringAsync();\n    }\n}"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://github.com/your-repo/microsoft-graph-client",
+                    "text": "Source Code"
+                }
+            }
+        ]
+    },
+    {
+        "id": 13,
+        "title": "Azure Redis Cache Integration",
+        "slug": "redis-cache-client",
+        "author": "Your Name",
+        "tags": ["Redis", "Azure", "Cache", "API"],
+        "datePublished": "2024-09-13",
+        "status": "published",
+        "excerpt": "A proof-of-concept demonstrating how to integrate with Azure Redis Cache in .NET.",
+        "image": "/images/redis-cache-client.png",
+        "contentBlocks": [
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Overview",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "This PoC demonstrates how to use Azure Redis Cache for caching data in a .NET application."
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "public class RedisCacheClient {\n    private readonly IConnectionMultiplexer _redis;\n    public RedisCacheClient(IConnectionMultiplexer redis) {\n        _redis = redis;\n    }\n    public async Task SetCacheValueAsync(string key, string value) {\n        var db = _redis.GetDatabase();\n        await db.StringSetAsync(key, value);\n    }\n}"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://github.com/your-repo/redis-cache-client",
+                    "text": "Source Code"
+                }
+            }
+        ]
+    },
+    {
+        "id": 14,
+        "title": "Stripe Payment Integration",
+        "slug": "stripe-client",
+        "author": "Your Name",
+        "tags": ["Stripe", "Payment API", ".NET", "Integration"],
+        "datePublished": "2024-09-13",
+        "status": "published",
+        "excerpt": "A proof-of-concept demonstrating how to integrate with Stripe payment API in .NET.",
+        "image": "/images/stripe-client.png",
+        "contentBlocks": [
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Overview",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "This PoC demonstrates how to process payments using the Stripe API in a .NET backend application."
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "public class StripeClient {\n    public async Task<PaymentIntent> CreatePaymentIntentAsync(int amount, string currency) {\n        var options = new PaymentIntentCreateOptions {\n            Amount = amount,\n            Currency = currency,\n        };\n        var service = new PaymentIntentService();\n        return await service.CreateAsync(options);\n    }\n}"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://github.com/your-repo/stripe-client",
+                    "text": "Source Code"
+                }
+            }
+        ]
+    },
+    {
+        "id": 15,
+        "title": "Stripe Payment Integration",
+        "slug": "stripe-client",
+        "author": "Your Name",
+        "tags": ["Stripe", "Payment API", ".NET", "Integration"],
+        "datePublished": "2024-09-13",
+        "status": "published",
+        "excerpt": "A proof-of-concept demonstrating how to integrate with Stripe payment API in .NET.",
+        "image": "/images/stripe-client.png",
+        "contentBlocks": [
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Overview",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "This PoC demonstrates how to process payments using the Stripe API in a .NET backend application."
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "public class StripeClient {\n    public async Task<PaymentIntent> CreatePaymentIntentAsync(int amount, string currency) {\n        var options = new PaymentIntentCreateOptions {\n            Amount = amount,\n            Currency = currency,\n        };\n        var service = new PaymentIntentService();\n        return await service.CreateAsync(options);\n    }\n}"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://github.com/your-repo/stripe-client",
+                    "text": "Source Code"
+                }
+            }
+        ]
+    },
+    {
+        "id": 16,
+        "title": "Braintree Payment Integration",
+        "slug": "braintree-client",
+        "author": "Your Name",
+        "tags": ["Braintree", "Payment API", ".NET", "Integration"],
+        "datePublished": "2024-09-13",
+        "status": "published",
+        "excerpt": "A proof-of-concept demonstrating how to integrate with Braintree payment API in .NET.",
+        "image": "/images/braintree-client.png",
+        "contentBlocks": [
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Overview",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "This PoC demonstrates how to process payments using the Braintree API in a .NET backend application."
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "public class BraintreeClient {\n    public async Task<Transaction> CreateTransactionAsync(decimal amount) {\n        var request = new TransactionRequest {\n            Amount = amount,\n            PaymentMethodNonce = \"fake-valid-nonce\",\n            Options = new TransactionOptionsRequest {\n                SubmitForSettlement = true\n            }\n        };\n        var gateway = new BraintreeGateway();\n        return await gateway.Transaction.SaleAsync(request);\n    }\n}"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://github.com/your-repo/braintree-client",
+                    "text": "Source Code"
+                }
+            }
+        ]
+    },
+    {
+        "id": 17,
+        "title": "Azure Cosmos DB Integration",
+        "slug": "azure-cosmos-client",
+        "author": "Your Name",
+        "tags": ["Azure", "Cosmos DB", ".NET", "Integration"],
+        "datePublished": "2024-09-13",
+        "status": "published",
+        "excerpt": "A proof-of-concept demonstrating how to integrate with Azure Cosmos DB in .NET.",
+        "image": "/images/cosmos-client.png",
+        "contentBlocks": [
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Overview",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "This PoC demonstrates how to use Azure Cosmos DB to store and retrieve data using the .NET SDK."
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "public class CosmosDbClient {\n    private readonly CosmosClient _client;\n    public CosmosDbClient(string connectionString) {\n        _client = new CosmosClient(connectionString);\n    }\n    public async Task<ItemResponse<T>> CreateItemAsync<T>(string databaseId, string containerId, T item) {\n        var container = _client.GetContainer(databaseId, containerId);\n        return await container.CreateItemAsync(item);\n    }\n}"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://github.com/your-repo/azure-cosmos-client",
+                    "text": "Source Code"
+                }
+            }
+        ]
+    },
+    {
+        "id": 18,
+        "title": "Azure Event Grid Integration",
+        "slug": "azure-event-grid-client",
+        "author": "Your Name",
+        "tags": ["Azure", "Event Grid", ".NET", "Integration"],
+        "datePublished": "2024-09-13",
+        "status": "published",
+        "excerpt": "A proof-of-concept demonstrating how to integrate with Azure Event Grid in .NET.",
+        "image": "/images/event-grid-client.png",
+        "contentBlocks": [
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Overview",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "This PoC demonstrates how to publish events to Azure Event Grid, allowing for event-driven architecture in the cloud."
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "public class EventGridClient {\n    private readonly EventGridPublisherClient _client;\n    public EventGridClient(string topicEndpoint, AzureKeyCredential keyCredential) {\n        _client = new EventGridPublisherClient(topicEndpoint, keyCredential);\n    }\n    public async Task SendEventAsync(EventGridEvent eventGridEvent) {\n        await _client.SendEventAsync(eventGridEvent);\n    }\n}"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://github.com/your-repo/azure-event-grid-client",
+                    "text": "Source Code"
+                }
+            }
+        ]
+    },
+    {
+        "id": 19,
+        "title": "Azure OpenAI Integration",
+        "slug": "azure-openai-client",
+        "author": "Your Name",
+        "tags": ["Azure", "OpenAI", ".NET", "Integration", "AI"],
+        "datePublished": "2024-09-13",
+        "status": "published",
+        "excerpt": "A proof-of-concept demonstrating how to integrate Azure OpenAI services in a .NET application.",
+        "image": "/images/azure-openai-client.png",
+        "contentBlocks": [
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Overview",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "This PoC demonstrates how to leverage Azure OpenAI services for natural language processing and generative AI within a .NET application."
+                }
+            },
+            {
+                "type": "list",
+                "data": {
+                    "ordered": true,
+                    "items": [
+                        "Communicate with Azure OpenAI API using HttpClient",
+                        "Authenticate using Azure Active Directory (Azure AD) credentials",
+                        "Generate text completions and manage conversation flow"
+                    ]
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "public class AzureOpenAIClient {\n    private readonly HttpClient _client;\n    public AzureOpenAIClient(HttpClient client) {\n        _client = client;\n    }\n    public async Task<string> GetCompletionAsync(string prompt) {\n        var request = new HttpRequestMessage(HttpMethod.Post, \"/openai/deployments/{deployment-id}/completions\");\n        request.Headers.Add(\"Authorization\", \"Bearer YOUR_API_KEY\");\n        request.Content = new StringContent(JsonConvert.SerializeObject(new {\n            prompt = prompt,\n            max_tokens = 100\n        }), Encoding.UTF8, \"application/json\");\n\n        var response = await _client.SendAsync(request);\n        response.EnsureSuccessStatusCode();\n\n        var result = await response.Content.ReadAsStringAsync();\n        return result;\n    }\n}"
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "API Usage",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "To use Azure OpenAI, you must have access to the OpenAI service through your Azure subscription. This PoC shows how to make authenticated API calls to generate text completions using a prompt."
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://azure.microsoft.com/en-us/services/cognitive-services/openai-service/",
+                    "text": "Learn more about Azure OpenAI"
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "json",
+                    "code": "{\n    \"prompt\": \"What is Azure OpenAI?\",\n    \"max_tokens\": 100\n}"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://github.com/your-repo/azure-openai-client",
+                    "text": "Source Code"
                 }
             }
         ]

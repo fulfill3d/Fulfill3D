@@ -1,4 +1,4 @@
-import {HttpMethod} from "@/types/common/http-method";
+import {HttpMethod} from "@/hooks/common/use-http";
 
 interface Endpoint {
     Uri: string;
@@ -33,10 +33,10 @@ export const paymentEndpoints = {
         Uri: `${process.env.NEXT_PUBLIC_SELLER_PAYMENT_BASE_URL}/api/get/`,
         Method: HttpMethod.GET
     } as Endpoint,
-    GetDefaultPaymentMethod: (Id: number): Endpoint => ({
+    GetDefaultPaymentMethod: {
         Uri: `${process.env.NEXT_PUBLIC_SELLER_PAYMENT_BASE_URL}/api/get/default`,
         Method: HttpMethod.GET
-    }),
+    } as Endpoint,
     SetDefaultPaymentMethod: (Id: number): Endpoint => ({
         Uri: `${process.env.NEXT_PUBLIC_SELLER_PAYMENT_BASE_URL}/api/set/default/${Id}`,
         Method: HttpMethod.PATCH
