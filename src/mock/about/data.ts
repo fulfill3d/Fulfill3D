@@ -30,7 +30,7 @@ export const mockCompanyProfile = {
         },
         {
             platform: "LinkedIn",
-            url: "https://linkedin.com/company/fulfill3d"
+            url: "https://www.linkedin.com/company/fulfill3d/"
         },
         {
             platform: "YouTube",
