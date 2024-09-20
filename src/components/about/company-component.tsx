@@ -1,27 +1,8 @@
 import React from 'react';
-import {Company, SocialMediaPlatform} from "@/models/about/company";
-import Twitter from "@/svg/twitter";
-import Linkedin from "@/svg/linkedin";
-import Youtube from "@/svg/youtube";
+import {Company} from "@/models/about/company";
 import Image from "next/image";
 import ImagePlaceholder from "@/svg/image-placeholder";
-
-interface SocialMediaProps {
-    platform: SocialMediaPlatform;
-}
-
-const SocialMediaIcon: React.FC<SocialMediaProps> = ({ platform }) => {
-    switch (platform) {
-        case 'LinkedIn':
-            return <Linkedin />;
-        case 'YouTube':
-            return <Youtube />;
-        case 'Twitter':
-            return <Twitter />;
-        default:
-            return null;
-    }
-};
+import SocialMediaIcon from "@/components/about/social-media-icon";
 
 interface CompanyProps {
     profile: Company;
@@ -51,16 +32,17 @@ const CompanyComponent: React.FC<CompanyProps> = ({ profile }) => {
             {/* Description */}
             <p className="text-gray-700 leading-relaxed mb-4">{profile.description}</p>
 
-            {/* Services */}
-            <h3 className="text-xl font-bold text-gray-800 mb-2">Our Services</h3>
-            <ul className="list-disc list-inside mb-4">
-                {profile.services.map((service, index) => (
-                    <li key={index} className="text-gray-700">{service}</li>
+            {/* Tags */}
+            <div className="flex flex-wrap gap-2 justify-center">
+                {profile.tags.map((tag, index) => (
+                    <span
+                        key={index}
+                        className="bg-gray-200 text-gray-800 text-xs font-semibold px-2 py-0.5 rounded"
+                    >
+                            {tag}
+                        </span>
                 ))}
-            </ul>
-
-            {/* Founded Year */}
-            <p className="text-sm text-gray-500 mb-4">Founded in {profile.foundedYear}</p>
+            </div>
 
             {/* Social Media Links */}
             <div className="flex justify-center gap-4 mt-4">
@@ -72,7 +54,7 @@ const CompanyComponent: React.FC<CompanyProps> = ({ profile }) => {
                         rel="noopener noreferrer"
                         className="flex items-center justify-center"
                     >
-                        <SocialMediaIcon platform={social.platform} />
+                        <SocialMediaIcon platform={social.platform}/>
                     </a>
                 ))}
             </div>
