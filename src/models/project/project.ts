@@ -1,5 +1,7 @@
 import {ProjectWiki} from "@/models/project/wiki/project-wiki";
 
+export type ProjectStatus = 'active' | 'draft';
+
 export class Project {
     id: number;
     name: string;
@@ -7,6 +9,7 @@ export class Project {
     demoUrl: string;
     wiki: ProjectWiki;
     imageUrl: string;
+    status: ProjectStatus;
     tags: string[];
 
     constructor(
@@ -16,6 +19,7 @@ export class Project {
         demoUrl: string,
         wiki: ProjectWiki,
         imageUrl: string,
+        status: ProjectStatus,
         tags: string[]
     ) {
         this.id = id;
@@ -24,6 +28,7 @@ export class Project {
         this.demoUrl = demoUrl;
         this.wiki = wiki;
         this.imageUrl = imageUrl;
+        this.status = status;
         this.tags = tags;
     }
 
@@ -36,6 +41,7 @@ export class Project {
             json.demoUrl,
             wiki,
             json.imageUrl,
+            json.status,
             json.tags || []
         );
     }
