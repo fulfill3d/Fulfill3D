@@ -1,6 +1,6 @@
 import React from 'react';
 import {Company} from "@/models/about/company";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import ImagePlaceholder from "@/svg/image-placeholder";
 import SocialMediaIcon from "@/components/about/social-media-icon";
 
@@ -18,7 +18,6 @@ const CompanyComponent: React.FC<CompanyProps> = ({ profile }) => {
                         src={profile.logoUrl || ImagePlaceholder}
                         alt={profile.companyName}
                         layout="fill"  // Ensures the image fills the container
-                        objectFit="cover"  // Maintains the aspect ratio and covers the area
                         className="rounded-lg"  // Optional Tailwind classes
                     />
                 </div>

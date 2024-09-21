@@ -2,7 +2,7 @@ export const personProfileJson = {
     id: "person1",
     name: "Abdurrahman Gazi Yavuz",
     title: "Project Lead of Fulfill3D",
-    description: 'Hi, I’m Abdurrahman (Apo), a software developer with 5 years of experience across aerospace, real-time simulators, and web development. Fulfill3D is my platform for creating proof of concepts (PoCs) and developing MVPs that solve real-world backend web development challenges.',
+    description: 'Hi, I’m Abdurrahman (Apo), a software developer with 5 years of engineering experience across aeronautics, real-time simulators, and web development. Fulfill3D is my platform for creating proof of concepts (PoCs) and developing MVPs that solve real-world backend web development challenges.',
     imageUrl: "/fulfill3d_person_profile.png",
     tags: ["System Development", "System Architecture", "Cloud Computing", "Microservices", "Web Apps"],
     socialMedia: [

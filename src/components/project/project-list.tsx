@@ -10,7 +10,7 @@ const ProjectList: React.FC<ProductListProps> = ({ products }) => {
     return (
         <div className="flex flex-col">
             {products.map((product) => (
-                <ProjectCard key={product.id} product={product} />
+                <ProjectCard key={product.id} project={product} />
             ))}
         </div>
     );

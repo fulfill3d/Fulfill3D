@@ -1,18 +1,20 @@
+import {ProjectWiki} from "@/models/project/wiki/project-wiki";
+
 export class Project {
-    id: string;
+    id: number;
     name: string;
     description: string;
     demoUrl: string;
-    wikiUrl: string;
+    wiki: ProjectWiki;
     imageUrl: string;
     tags: string[];
 
     constructor(
-        id: string,
+        id: number,
         name: string,
         description: string,
         demoUrl: string,
-        wikiUrl: string,
+        wiki: ProjectWiki,
         imageUrl: string,
         tags: string[]
     ) {
@@ -20,18 +22,19 @@ export class Project {
         this.name = name;
         this.description = description;
         this.demoUrl = demoUrl;
-        this.wikiUrl = wikiUrl;
+        this.wiki = wiki;
         this.imageUrl = imageUrl;
         this.tags = tags;
     }
 
     static fromJson(json: any): Project {
+        const wiki = ProjectWiki.fromJson(json.wiki);
         return new Project(
             json.id,
             json.name,
             json.description,
             json.demoUrl,
-            json.wikiUrl,
+            wiki,
             json.imageUrl,
             json.tags || []
         );

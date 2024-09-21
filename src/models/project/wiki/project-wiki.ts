@@ -39,7 +39,6 @@ export class Microservice {
 }
 
 export class ProjectWiki {
-    id: string;
     name: string;
     purpose: string;
     projectType: string;
@@ -61,7 +60,6 @@ export class ProjectWiki {
     sourceCodeUrl: string;
 
     constructor(
-        id: string,
         name: string,
         purpose: string,
         projectType: string,
@@ -82,7 +80,6 @@ export class ProjectWiki {
         demoUrl: string,
         sourceCodeUrl: string
     ) {
-        this.id = id;
         this.name = name;
         this.purpose = purpose;
         this.projectType = projectType;
@@ -107,7 +104,6 @@ export class ProjectWiki {
     static fromJson(json: any): ProjectWiki {
         const microservices = json.microservices.map((ms: any) => Microservice.fromJson(ms));
         return new ProjectWiki(
-            json.id,
             json.name,
             json.purpose,
             json.projectType,

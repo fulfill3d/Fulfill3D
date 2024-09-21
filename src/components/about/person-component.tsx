@@ -18,7 +18,7 @@ const PersonComponent: React.FC<PersonProps> = ({ profile }) => {
                         src={profile.imageUrl || ImagePlaceholder}
                         alt={profile.name}
                         layout="fill"  // Ensures the image fills the container
-                        objectFit="cover"  // Ensures the aspect ratio is maintained
+                        objectFit="contain"  // Ensures the aspect ratio is maintained
                         className="rounded-full"  // Rounded image (can be adjusted to 'rounded-lg' or any other)
                     />
                 </div>

@@ -25,7 +25,7 @@ const PostMetadataCard: React.FC<PostMetadataCardProps> = ({ post }) => {
                     src={post.image || ImagePlaceholder}
                     alt={post.title}
                     layout="fill"  // Ensures the image fills the container
-                    objectFit="cover"  // Ensures the aspect ratio is maintained and the image covers the container
+                    objectFit="contain"  // Ensures the aspect ratio is maintained and the image covers the container
                     className="rounded-lg"  // Optional Tailwind classes for styling
                 />
             </div>
@@ -37,7 +37,7 @@ const PostMetadataCard: React.FC<PostMetadataCardProps> = ({ post }) => {
             {/* Author and Date */}
             <p className="text-sm text-gray-500 mb-1">By {post.author}</p>
             <p className="text-sm text-gray-500">
-                Published on {new Date(post.datePublished).toLocaleDateString()}
+                Published on {new Date(post.datePublished).toLocaleDateString('en-US', { timeZone: 'UTC' })}
             </p>
 
             {/* Excerpt */}
