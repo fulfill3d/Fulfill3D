@@ -2,20 +2,25 @@ import React from 'react';
 import {Project} from "@/models/project/project";
 import Image from "next/image";
 import ImagePlaceholder from "@/svg/image-placeholder";
-import Link from "next/link";
+import {useRouter} from "next/navigation";
 
 interface ProductCardProps {
-    product: Project;
+    project: Project;
 }
 
-const ProjectCard: React.FC<ProductCardProps> = ({ product }) => {
+const ProjectCard: React.FC<ProductCardProps> = ({ project }) => {
+    const router = useRouter();
+
+    const handleClick = () => {
+        router.push(`/projects/${project.id}`); // Navigate to dynamic [id] page
+    };
     return (
         <div className="flex flex-col md:flex-row bg-white shadow-lg rounded-lg p-4 mb-6 h-auto">
             {/* Product Image */}
             <div className="relative md:w-1/4 w-full h-48 md:h-auto mb-4 md:mb-0">
                 <Image
-                    src={product.imageUrl || ImagePlaceholder}
-                    alt={product.name}
+                    src={project.imageUrl || ImagePlaceholder}
+                    alt={project.name}
                     layout="fill"  // Ensures the image fills the container
                     objectFit="cover"  // Maintains aspect ratio and covers the container
                     className="rounded-lg"  // Optional Tailwind classes
@@ -26,14 +31,14 @@ const ProjectCard: React.FC<ProductCardProps> = ({ product }) => {
             {/* Product Details */}
             <div className="md:w-2/4 w-full md:px-4 flex flex-col justify-center">
                 {/* Product Name */}
-                <h2 className="text-xl font-bold text-gray-800 mb-2">{product.name}</h2>
+                <h2 className="text-xl font-bold text-gray-800 mb-2">{project.name}</h2>
 
                 {/* Product Description */}
-                <p className="text-gray-700 mb-4">{product.description}</p>
+                <p className="text-gray-700 mb-4">{project.description}</p>
 
                 {/* Tags */}
                 <div className="flex flex-wrap gap-2 mb-4">
-                    {product.tags.map((tag, index) => (
+                    {project.tags.map((tag, index) => (
                         <span
                             key={index}
                             className="bg-gray-200 text-gray-800 text-xs font-semibold px-2 py-0.5 rounded"
@@ -48,7 +53,7 @@ const ProjectCard: React.FC<ProductCardProps> = ({ product }) => {
             <div className="md:w-1/4 w-full flex flex-col md:justify-center md:items-end items-start">
                 <div className="flex gap-4 mt-4 md:mt-0">
                     <a
-                        href={product.demoUrl}
+                        href={project.demoUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors"
@@ -70,7 +75,9 @@ const ProjectCard: React.FC<ProductCardProps> = ({ product }) => {
                         Demo
                     </a>
 
-                    <Link href={product.wikiUrl} className="flex items-center bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-colors">
+                    <div
+                        onClick={handleClick}
+                        className="flex items-center bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-colors cursor-pointer">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="h-5 w-5 mr-2"
@@ -86,7 +93,7 @@ const ProjectCard: React.FC<ProductCardProps> = ({ product }) => {
                             />
                         </svg>
                         Wiki
-                    </Link>
+                    </div>
                 </div>
             </div>
         </div>

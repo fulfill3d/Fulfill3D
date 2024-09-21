@@ -2,6 +2,7 @@ import React from 'react';
 import {Person} from "@/models/about/person";
 import Image from "next/image";
 import ImagePlaceholder from "@/svg/image-placeholder";
+import SocialMediaIcon from "@/components/about/social-media-icon";
 
 interface PersonProps {
     profile: Person;
@@ -17,7 +18,7 @@ const PersonComponent: React.FC<PersonProps> = ({ profile }) => {
                         src={profile.imageUrl || ImagePlaceholder}
                         alt={profile.name}
                         layout="fill"  // Ensures the image fills the container
-                        objectFit="cover"  // Ensures the aspect ratio is maintained
+                        objectFit="contain"  // Ensures the aspect ratio is maintained
                         className="rounded-full"  // Rounded image (can be adjusted to 'rounded-lg' or any other)
                     />
                 </div>
@@ -39,6 +40,21 @@ const PersonComponent: React.FC<PersonProps> = ({ profile }) => {
                         >
                             {tag}
                         </span>
+                    ))}
+                </div>
+
+                {/* Social Media Links */}
+                <div className="flex justify-center gap-4 mt-4">
+                    {profile.socialMedia.map((social, index) => (
+                        <a
+                            key={index}
+                            href={social.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center justify-center"
+                        >
+                            <SocialMediaIcon platform={social.platform}/>
+                        </a>
                     ))}
                 </div>
             </div>

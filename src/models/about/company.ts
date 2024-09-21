@@ -5,9 +5,8 @@ export class Company {
     companyName: string;
     mission: string;
     description: string;
-    services: string[];
+    tags: string[];
     logoUrl: string;
-    foundedYear: number;
     socialMedia: { platform: SocialMediaPlatform; url: string;}[];
 
     constructor(
@@ -15,18 +14,16 @@ export class Company {
         companyName: string,
         mission: string,
         description: string,
-        services: string[],
+        tags: string[],
         logoUrl: string,
-        foundedYear: number,
         socialMedia: { platform: SocialMediaPlatform; url: string;}[]
     ) {
         this.id = id;
         this.companyName = companyName;
         this.mission = mission;
         this.description = description;
-        this.services = services;
+        this.tags = tags;
         this.logoUrl = logoUrl;
-        this.foundedYear = foundedYear;
         this.socialMedia = socialMedia;
     }
 
@@ -36,9 +33,8 @@ export class Company {
             json.companyName,
             json.mission,
             json.description,
-            json.services || [],
+            json.tags || [],
             json.logoUrl,
-            json.foundedYear,
             json.socialMedia || []
         );
     }
