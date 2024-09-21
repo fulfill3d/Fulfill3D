@@ -1,20 +1,20 @@
-export const mockPostList = [
+export const postList = [
     {
         "id": 1,
-        "title": "Azure Service Bus Client Integration Proof of Concept",
+        "title": "PoC1: Azure Service Bus Client Integration",
         "slug": "azure-service-bus-client-integration-poc",
-        "author": "John Doe",
-        "tags": ["Azure Service Bus", "Messaging", "C#", ".NET"],
-        "datePublished": "2024-09-13",
+        "author": "Abdurrahman Gazi Yavuz",
+        "tags": ["Azure", "Service Bus", "Messaging", "C#", ".NET"],
+        "datePublished": "2024-07-30",
         "excerpt": "A proof of concept for integrating an Azure Service Bus client in a .NET application to send messages via the Azure Service Bus.",
-        "image": "/images/servicebus-integration.png",
+        "image": "/service-bus-diagram.png",
         "status": "published",
         "contentBlocks": [
             {
                 "type": "heading",
                 "data": {
                     "text": "Introduction",
-                    "level": 1
+                    "level": 2
                 }
             },
             {
@@ -152,7 +152,7 @@ export const mockPostList = [
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "In .NET 8, Azure Functions use the Isolated Worker model. The `ServiceBusClient` can be registered using the `HostBuilder` in the `Program.cs` file. Once registered, it can be injected into your function classes to send messages in response to HTTP or other types of triggers. You will need to ensure that the connection string for the Service Bus is provided in your application configuration."
+                    "text": "Azure Functions use the Isolated Worker model in .NET 8. The `ServiceBusClient` can be registered using the `HostBuilder` in the `Program.cs` file. Once registered, it can be injected into your function classes to send messages in response to HTTP or other types of triggers. You will need to ensure that the connection string for the Service Bus is provided in your application configuration."
                 }
             },
             {
@@ -171,6 +171,20 @@ export const mockPostList = [
             {
                 "type": "heading",
                 "data": {
+                    "text": "Repository",
+                    "level": 2
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://dev.azure.com/Fulfill3D/Public/_git/ServiceBusClient",
+                    "text": "ServiceBusClient Repository",
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
                     "text": "Further Reading",
                     "level": 2
                 }
@@ -179,41 +193,55 @@ export const mockPostList = [
                 "type": "hyperlink",
                 "data": {
                     "href": "https://learn.microsoft.com/en-us/azure/service-bus-messaging/service-bus-messaging-overview",
-                    "text": "Azure Service Bus Documentation"
+                    "text": "Azure Service Bus"
                 }
             },
             {
                 "type": "hyperlink",
                 "data": {
                     "href": "https://learn.microsoft.com/en-us/azure/azure-functions/",
-                    "text": "Azure Functions Documentation"
+                    "text": "Azure Functions"
                 }
             },
             {
                 "type": "hyperlink",
                 "data": {
-                    "href": "https://learn.microsoft.com/en-us/aspnet/core/",
-                    "text": "ASP.NET Core Documentation"
+                    "href": "https://learn.microsoft.com/en-us/azure/azure-functions/functions-dotnet-dependency-injection",
+                    "text": "Dependency Injection"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/azure/azure-app-configuration/",
+                    "text": "Azure App Configuration"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/azure/key-vault/general/",
+                    "text": "Azure Key Vault"
                 }
             }
         ]
     },
     {
         "id": 2,
-        "title": "SendGrid Client Integration Proof of Concept",
+        "title": "PoC2: SendGrid Client Integration",
         "slug": "sendgrid-client-integration-poc",
-        "author": "John Doe",
-        "tags": ["SendGrid", "API", "C#", ".NET"],
-        "datePublished": "2024-09-13",
+        "author": "Abdurrahman Gazi Yavuz",
+        "tags": ["SendGrid", "Email", "RestSharp", "C#", ".NET"],
+        "datePublished": "2024-08-01",
         "excerpt": "A proof of concept for integrating SendGrid client in a .NET application to send emails via the SendGrid API.",
-        "image": "/images/sendgrid-integration.png",
+        "image": "/send-grid-client-diagram.png",
         "status": "published",
         "contentBlocks": [
             {
                 "type": "heading",
                 "data": {
                     "text": "Introduction",
-                    "level": 1
+                    "level": 2
                 }
             },
             {
@@ -350,6 +378,20 @@ export const mockPostList = [
             {
                 "type": "heading",
                 "data": {
+                    "text": "Repository",
+                    "level": 2
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://dev.azure.com/Fulfill3D/Public/_git/SendGridClient",
+                    "text": "SendGridClient Repository",
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
                     "text": "Further Reading",
                     "level": 2
                 }
@@ -357,42 +399,63 @@ export const mockPostList = [
             {
                 "type": "hyperlink",
                 "data": {
-                    "href": "https://sendgrid.com/docs/API_Reference/api_v3.html",
-                    "text": "SendGrid API Documentation"
+                    "href": "https://www.twilio.com/docs/sendgrid/api-reference",
+                    "text": "SendGrid API"
                 }
             },
             {
                 "type": "hyperlink",
                 "data": {
                     "href": "https://learn.microsoft.com/en-us/azure/azure-functions/",
-                    "text": "Azure Functions Documentation"
+                    "text": "Azure Functions"
                 }
             },
             {
                 "type": "hyperlink",
                 "data": {
-                    "href": "https://learn.microsoft.com/en-us/aspnet/core/",
-                    "text": "ASP.NET Core Documentation"
+                    "href": "https://learn.microsoft.com/en-us/azure/azure-functions/functions-dotnet-dependency-injection",
+                    "text": "Dependency Injection"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://restsharp.dev/docs/intro",
+                    "text": "RestSharp"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/azure/azure-app-configuration/",
+                    "text": "Azure App Configuration"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/azure/key-vault/general/",
+                    "text": "Azure Key Vault"
                 }
             }
         ]
     },
     {
         "id": 3,
-        "title": "Google Maps Client Integration Proof of Concept",
+        "title": "PoC3: Google Maps Client Integration",
         "slug": "google-maps-client-integration-poc",
-        "author": "John Doe",
-        "tags": ["Google Maps", "Geocoding", "C#", ".NET"],
-        "datePublished": "2024-09-13",
+        "author": "Abdurrahman Gazi Yavuz",
+        "tags": ["Google Maps", "Geocoding", "RestSharp", "C#", ".NET"],
+        "datePublished": "2024-08-02",
         "excerpt": "A proof of concept for integrating a Google Maps client in a .NET application to get geocoding data from the Google Maps API.",
-        "image": "/images/google-maps-integration.png",
+        "image": "/google-maps-client.png",
         "status": "published",
         "contentBlocks": [
             {
                 "type": "heading",
                 "data": {
                     "text": "Introduction",
-                    "level": 1
+                    "level": 2
                 }
             },
             {
@@ -478,7 +541,7 @@ export const mockPostList = [
                 "type": "code",
                 "data": {
                     "language": "csharp",
-                    "code": "namespace Client.Models\n{\n    public class GeocodingRequest\n    {\n        public string Address { get; set; }\n    }\n}\n\nusing Newtonsoft.Json;\n\nnamespace Client.Models\n{\n    public class GeocodingResponse\n    {\n        [JsonProperty(\"results\")] public List<Result> Results { get; set; }\n\n        [JsonProperty(\"status\")] public string Status { get; set; }\n\n        public class Result\n        {\n            [JsonProperty(\"geometry\")] public Geometry Geometry { get; set; }\n        }\n\n        public class Geometry\n        {\n            [JsonProperty(\"location\")] public Location Location { get; set; }\n        }\n    }\n}\n\nnamespace Client.Models\n{\n    public class Location\n    {\n        [JsonProperty(\"lat\")] public double Latitude { get; set; }\n\n        [JsonProperty(\"lng\")] public double Longitude { get; set; }\n    }\n}"
+                    "code": "using Newtonsoft.Json;\n\nnamespace Client.Models\n{\n    public class GeocodingRequest\n    {\n        public string Address { get; set; }\n    }\n\n    public class GeocodingResponse\n    {\n        [JsonProperty(\"results\")] public List<Result> Results { get; set; }\n\n        [JsonProperty(\"status\")] public string Status { get; set; }\n\n        public class Result\n        {\n            [JsonProperty(\"geometry\")] public Geometry Geometry { get; set; }\n        }\n\n        public class Geometry\n        {\n            [JsonProperty(\"location\")] public Location Location { get; set; }\n        }\n    }\n\n    public class Location\n    {\n        [JsonProperty(\"lat\")] public double Latitude { get; set; }\n\n        [JsonProperty(\"lng\")] public double Longitude { get; set; }\n    }\n}"
                 }
             },
             {
@@ -548,6 +611,20 @@ export const mockPostList = [
             {
                 "type": "heading",
                 "data": {
+                    "text": "Repository",
+                    "level": 2
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://dev.azure.com/Fulfill3D/Public/_git/GoogleMapsClient",
+                    "text": "GoogleMapsClient Repository",
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
                     "text": "Further Reading",
                     "level": 2
                 }
@@ -556,41 +633,62 @@ export const mockPostList = [
                 "type": "hyperlink",
                 "data": {
                     "href": "https://developers.google.com/maps/documentation/geocoding/start",
-                    "text": "Google Maps Geocoding API Documentation"
+                    "text": "Google Maps Geocoding API"
                 }
             },
             {
                 "type": "hyperlink",
                 "data": {
                     "href": "https://learn.microsoft.com/en-us/azure/azure-functions/",
-                    "text": "Azure Functions Documentation"
+                    "text": "Azure Functions"
                 }
             },
             {
                 "type": "hyperlink",
                 "data": {
-                    "href": "https://learn.microsoft.com/en-us/aspnet/core/",
-                    "text": "ASP.NET Core Documentation"
+                    "href": "https://learn.microsoft.com/en-us/azure/azure-functions/functions-dotnet-dependency-injection",
+                    "text": "Dependency Injection"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://restsharp.dev/docs/intro",
+                    "text": "RestSharp"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/azure/azure-app-configuration/",
+                    "text": "Azure App Configuration"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/azure/key-vault/general/",
+                    "text": "Azure Key Vault"
                 }
             }
         ]
     },
     {
         "id": 4,
-        "title": "Azure Blob Storage Client Integration Proof of Concept",
+        "title": "PoC4: Azure Blob Storage Client Integration",
         "slug": "azure-blob-storage-client-integration-poc",
-        "author": "John Doe",
-        "tags": ["Azure Blob Storage", "File Storage", "C#", ".NET"],
-        "datePublished": "2024-09-13",
+        "author": "Abdurrahman Gazi Yavuz",
+        "tags": ["Azure", "Blob Storage", "C#", ".NET"],
+        "datePublished": "2024-07-30",
         "excerpt": "A proof of concept for integrating an Azure Blob Storage client in a .NET application to upload, download, and delete blobs.",
-        "image": "/images/blob-storage-integration.png",
+        "image": "/blob-client.png",
         "status": "published",
         "contentBlocks": [
             {
                 "type": "heading",
                 "data": {
                     "text": "Introduction",
-                    "level": 1
+                    "level": 2
                 }
             },
             {
@@ -746,6 +844,20 @@ export const mockPostList = [
             {
                 "type": "heading",
                 "data": {
+                    "text": "Repository",
+                    "level": 2
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://dev.azure.com/Fulfill3D/Public/_git/BlobStorageClient",
+                    "text": "BlobStorageClient Repository",
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
                     "text": "Further Reading",
                     "level": 2
                 }
@@ -754,47 +866,242 @@ export const mockPostList = [
                 "type": "hyperlink",
                 "data": {
                     "href": "https://learn.microsoft.com/en-us/azure/storage/blobs/",
-                    "text": "Azure Blob Storage Documentation"
+                    "text": "Azure Blob Storage"
                 }
             },
             {
                 "type": "hyperlink",
                 "data": {
                     "href": "https://learn.microsoft.com/en-us/azure/azure-functions/",
-                    "text": "Azure Functions Documentation"
+                    "text": "Azure Functions"
                 }
             },
             {
                 "type": "hyperlink",
                 "data": {
-                    "href": "https://learn.microsoft.com/en-us/aspnet/core/",
-                    "text": "ASP.NET Core Documentation"
+                    "href": "https://learn.microsoft.com/en-us/azure/azure-functions/functions-dotnet-dependency-injection",
+                    "text": "Dependency Injection"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/azure/azure-app-configuration/",
+                    "text": "Azure App Configuration"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/azure/key-vault/general/",
+                    "text": "Azure Key Vault"
                 }
             }
         ]
     },
     {
         "id": 5,
-        "title": "B2C Redirect Endpoint Microservice Proof of Concept",
-        "slug": "b2c-redirect-endpoint-microservice-poc",
-        "author": "John Doe",
-        "tags": ["Azure Functions", "B2C", "Microservices", "C#", ".NET"],
-        "datePublished": "2024-09-13",
-        "excerpt": "A proof of concept for an Azure Function microservice acting as a B2C redirect endpoint, validating user sign-in/up and creating or updating user entities in the database.",
-        "image": "/images/b2c-redirect-microservice.png",
+        "title": "PoC5: A Secured Microservice",
+        "slug": "jwt-secured-microservice-poc",
+        "author": "Abdurrahman Gazi Yavuz",
+        "tags": ["Azure Functions", "JWT", "Microservices", "C#", ".NET"],
+        "datePublished": "2024-07-30",
+        "excerpt": "Learn how to build a reusable and flexible JWT-secured microservice for authentication and authorization, allowing for easy service injection and customization.",
+        "image": "/secured-microservice.png",
         "status": "published",
         "contentBlocks": [
             {
                 "type": "heading",
                 "data": {
                     "text": "Introduction",
-                    "level": 1
+                    "level": 2
                 }
             },
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "This post demonstrates a proof of concept for building an Azure Function microservice that acts as a B2C redirect endpoint. The service validates the user sign-in/up using Azure AD B2C, processes the token, and creates or updates user entities in the database."
+                    "text": "In this post, a reusable proof-of-concept (PoC) for building secure microservices using JWT (JSON Web Token) is introduced. This PoC is designed to offer flexible service injection, allowing developers to add their own services and secure them with JWT validation and claims-based authorization. The key benefit is the ability to have a secured microservice without building the security framework from scratch."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "JWT and Microservice Security",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "JWT is a widely used standard for securely transmitting information, such as user identity and claims, between parties. By leveraging JWT, this microservice offers authentication and authorization features to ensure that only users with valid tokens can access the service. Developers can extend the PoC with their own logic while inheriting these security features."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "PoC Overview",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "This PoC provides JWT token validation and scope-based authorization out of the box. You can inject your services, such as business logic or data processing, into this framework and rely on the provided security layer to ensure only authorized users can access the microservice."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Service Registration and Configuration",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The core of this PoC is the ability to inject services into a secured microservice environment. The following example shows how to register JWT validation options, token services, and your custom services for use in a secure context."
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "public static class DepInj\n{\n    public static void RegisterServices(\n        this IServiceCollection services, \n        Action<TokenValidationOptions> tokenValidationOptions, \n        Action<AuthorizationScope> authorizationScope)\n    {\n        services.ConfigureServiceOptions<TokenValidationOptions>((_, opt) => tokenValidationOptions(opt));\n        services.ConfigureServiceOptions<AuthorizationScope>((_, opt) => authorizationScope(opt));\n        services.AddSingleton<IJwtValidatorService, JwtValidatorService>();\n    }\n}"
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "Here, you register core security services such as JWT validation and authorization scope management. By injecting your services into this structure, you can add your custom functionality while ensuring security is handled by the underlying framework."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "JWT Validation Logic",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "This PoC includes a robust JWT validation mechanism. When an HTTP request contains a JWT in the `Authorization` header, the service verifies the token's validity, checks the required scopes, and extracts user-specific claims like the unique identifier (OID). This is to ensure only authorized users with the right claims can access your custom service logic."
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "public class JwtValidatorService(IOptions<TokenValidationOptions> opt) : IJwtValidatorService\n{\n    public async Task<string?> AuthenticateAndAuthorize(HttpRequestData req, string[] acceptedScopes)\n    {\n        if (!req.Headers.TryGetValues(\"Authorization\", out var authHeaders))\n        {\n            return null;\n        }\n\n        var authHeader = authHeaders.FirstOrDefault();\n        if (string.IsNullOrEmpty(authHeader) || !authHeader.StartsWith(\"Bearer \"))\n        {\n            return null;\n        }\n\n        var bearerToken = authHeader.Substring(\"Bearer \".Length);\n        try\n        {\n            var openIdConfig = await _configurationManager.GetConfigurationAsync(CancellationToken.None);\n            var validationParameters = new TokenValidationParameters\n            {\n                ValidateIssuer = true,\n                ValidIssuer = _issuer,\n                ValidateAudience = true,\n                ValidAudience = _clientId,\n                ValidateLifetime = true,\n                IssuerSigningKeys = openIdConfig.SigningKeys\n            };\n\n            var tokenHandler = new JwtSecurityTokenHandler();\n            var principal = tokenHandler.ValidateToken(bearerToken, validationParameters, out SecurityToken validatedToken);\n\n            var scopes = principal.Claims\n                .Where(c => c.Type == \"scp\" || c.Type == \"scope\")\n                .SelectMany(c => c.Value.Split(' '))\n                .ToList();\n\n            if (!scopes.Any(scope => acceptedScopes.Contains(scope)))\n            {\n                return null;\n            }\n\n            return principal.Claims.FirstOrDefault(c => c.Type == \"oid\")?.Value;\n        }\n        catch\n        {\n            return null;\n        }\n    }\n}"
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Custom Service Injection and Extension",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "You can inject your services into the secure environment and rely on JWT validation to protect your business logic. For example, you can inject a database service to ensure that only authorized users can access and manipulate data."
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "public class ProtectedFunction(\n    IJwtValidatorService jwtValidatorService, IOptions<AuthorizationScope> opt)\n{\n    private readonly AuthorizationScope _protectedScope = opt.Value;\n    \n    [Function(nameof(Protected))]\n    public async Task<HttpResponseData> Protected(\n        [HttpTrigger(AuthorizationLevel.Anonymous, \"get\", Route = null)] \n        HttpRequestData req, ExecutionContext executionContext)\n    {\n        var acceptedScopes = new[] { _protectedScope.TestScope };\n        var userId = await jwtValidatorService.AuthenticateAndAuthorize(req, acceptedScopes);\n        \n        var response = req.CreateResponse();\n        if (userId == null)\n        {\n            response.StatusCode = HttpStatusCode.Unauthorized;\n            return response;\n        }\n        response.StatusCode = HttpStatusCode.OK;\n        return response;\n    }\n}"
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Repository",
+                    "level": 2
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://dev.azure.com/Fulfill3D/Public/_git/ProtectedAPI",
+                    "text": "The Secured Microservice Repository",
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Further Reading",
+                    "level": 2
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://auth0.com/docs/secure/tokens/json-web-tokens",
+                    "text": "JSON Web Tokens"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-client-creds-grant-flow",
+                    "text": "OAuth 2.0 Client Credentials Grant Flow"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/azure/active-directory-b2c/overview",
+                    "text": "Azure AD B2C"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/azure/azure-functions/",
+                    "text": "Azure Functions"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/azure/azure-app-configuration/",
+                    "text": "Azure App Configuration"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/azure/key-vault/general/",
+                    "text": "Azure Key Vault"
+                }
+            }
+        ]
+    },
+    {
+        "id": 6,
+        "title": "PoC6: A Custom Auth Flow with a Microservice",
+        "slug": "b2c-redirect-endpoint-microservice-poc",
+        "author": "Abdurrahman Gazi Yavuz",
+        "tags": ["Azure Functions", "AD B2C", "Microservices", "C#", ".NET"],
+        "datePublished": "2024-09-13",
+        "excerpt": "A proof of concept for a microservice acting as a B2C auth flow callback, validating user sign-up sign-in, creating or updating user entities in the database and redirecting user to specified endpoints.",
+        "image": "/auth-flow.png",
+        "status": "published",
+        "contentBlocks": [
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Introduction",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "This post demonstrates a proof of concept for building an Azure Function microservice that acts as a B2C redirect endpoint. The service validates the user sign-in/up using Azure AD B2C, processes the token, and creates or updates user entities in the database. Finally, it will either redirect user to successful (200) or failure (401) endpoints."
                 }
             },
             {
@@ -938,6 +1245,20 @@ export const mockPostList = [
             {
                 "type": "heading",
                 "data": {
+                    "text": "Repository",
+                    "level": 2
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://dev.azure.com/Fulfill3D/Public/_git/AuthFlow",
+                    "text": "AuthFlow Repository",
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
                     "text": "Further Reading",
                     "level": 2
                 }
@@ -946,173 +1267,35 @@ export const mockPostList = [
                 "type": "hyperlink",
                 "data": {
                     "href": "https://learn.microsoft.com/en-us/azure/active-directory-b2c/",
-                    "text": "Azure AD B2C Documentation"
+                    "text": "Azure AD B2C"
                 }
             },
             {
                 "type": "hyperlink",
                 "data": {
                     "href": "https://learn.microsoft.com/en-us/azure/azure-functions/",
-                    "text": "Azure Functions Documentation"
+                    "text": "Azure Functions"
                 }
             },
             {
                 "type": "hyperlink",
                 "data": {
                     "href": "https://learn.microsoft.com/en-us/ef/core/",
-                    "text": "Entity Framework Core Documentation"
-                }
-            }
-        ]
-    },
-    {
-        "id": 6,
-        "title": "JWT-Secured Microservice PoC for Flexible Service Injection",
-        "slug": "jwt-secured-microservice-poc",
-        "author": "John Doe",
-        "tags": ["Azure Functions", "JWT", "Microservices", "C#", ".NET", "Security"],
-        "datePublished": "2024-09-14",
-        "excerpt": "Learn how to build a reusable and flexible JWT-secured microservice PoC for authentication and authorization, allowing for easy service injection and customization.",
-        "image": "/images/jwt-secured-microservice.png",
-        "status": "published",
-        "contentBlocks": [
-            {
-                "type": "heading",
-                "data": {
-                    "text": "Introduction",
-                    "level": 1
-                }
-            },
-            {
-                "type": "paragraph",
-                "data": {
-                    "text": "In this post, we introduce a reusable proof-of-concept (PoC) for building secure microservices using JWT (JSON Web Token). This PoC is designed to offer flexible service injection, allowing developers to add their own services and secure them with JWT validation and claims-based authorization. The key benefit is the ability to have a secured microservice without building the security framework from scratch."
-                }
-            },
-            {
-                "type": "heading",
-                "data": {
-                    "text": "JWT and Microservice Security",
-                    "level": 2
-                }
-            },
-            {
-                "type": "paragraph",
-                "data": {
-                    "text": "JWT is a widely used standard for securely transmitting information, such as user identity and permissions, between parties. By leveraging JWT, this microservice PoC offers authentication and authorization features to ensure that only users with valid tokens can access the service. Developers can extend the PoC with their own logic while inheriting these security features."
-                }
-            },
-            {
-                "type": "heading",
-                "data": {
-                    "text": "PoC Overview",
-                    "level": 2
-                }
-            },
-            {
-                "type": "paragraph",
-                "data": {
-                    "text": "This PoC provides JWT token validation and scope-based authorization out of the box. You can inject your services, such as business logic or data processing, into this framework and rely on the provided security layer to ensure only authorized users can access the microservice."
-                }
-            },
-            {
-                "type": "heading",
-                "data": {
-                    "text": "Service Registration and Configuration",
-                    "level": 2
-                }
-            },
-            {
-                "type": "paragraph",
-                "data": {
-                    "text": "The core of this PoC is the ability to inject services into a secured microservice environment. The following example shows how to register JWT validation options, token services, and your custom services for use in a secure context."
-                }
-            },
-            {
-                "type": "code",
-                "data": {
-                    "language": "csharp",
-                    "code": "public static class DepInj\n{\n    public static void RegisterServices(\n        this IServiceCollection services, \n        Action<TokenValidationOptions> tokenValidationOptions, \n        Action<AuthorizationScope> authorizationScope)\n    {\n        services.ConfigureServiceOptions<TokenValidationOptions>((_, opt) => tokenValidationOptions(opt));\n        services.ConfigureServiceOptions<AuthorizationScope>((_, opt) => authorizationScope(opt));\n        services.AddSingleton<IJwtValidatorService, JwtValidatorService>();\n    }\n}"
-                }
-            },
-            {
-                "type": "paragraph",
-                "data": {
-                    "text": "Here, you register core security services such as JWT validation and authorization scope management. By injecting your services into this structure, you can add your custom functionality while ensuring security is handled by the underlying framework."
-                }
-            },
-            {
-                "type": "heading",
-                "data": {
-                    "text": "JWT Validation Logic",
-                    "level": 2
-                }
-            },
-            {
-                "type": "paragraph",
-                "data": {
-                    "text": "This PoC includes a robust JWT validation mechanism. When an HTTP request contains a JWT in the `Authorization` header, the service verifies the token's validity, checks the required scopes, and extracts user-specific claims like the unique identifier (OID). You can extend this to ensure only authorized users with the right claims can access your custom service logic."
-                }
-            },
-            {
-                "type": "code",
-                "data": {
-                    "language": "csharp",
-                    "code": "public class JwtValidatorService(IOptions<TokenValidationOptions> opt) : IJwtValidatorService\n{\n    public async Task<string?> AuthenticateAndAuthorize(HttpRequestData req, string[] acceptedScopes)\n    {\n        if (!req.Headers.TryGetValues(\"Authorization\", out var authHeaders))\n        {\n            return null;\n        }\n\n        var authHeader = authHeaders.FirstOrDefault();\n        if (string.IsNullOrEmpty(authHeader) || !authHeader.StartsWith(\"Bearer \"))\n        {\n            return null;\n        }\n\n        var bearerToken = authHeader.Substring(\"Bearer \".Length);\n        try\n        {\n            var openIdConfig = await _configurationManager.GetConfigurationAsync(CancellationToken.None);\n            var validationParameters = new TokenValidationParameters\n            {\n                ValidateIssuer = true,\n                ValidIssuer = _issuer,\n                ValidateAudience = true,\n                ValidAudience = _clientId,\n                ValidateLifetime = true,\n                IssuerSigningKeys = openIdConfig.SigningKeys\n            };\n\n            var tokenHandler = new JwtSecurityTokenHandler();\n            var principal = tokenHandler.ValidateToken(bearerToken, validationParameters, out SecurityToken validatedToken);\n\n            var scopes = principal.Claims\n                .Where(c => c.Type == \"scp\" || c.Type == \"scope\")\n                .SelectMany(c => c.Value.Split(' '))\n                .ToList();\n\n            if (!scopes.Any(scope => acceptedScopes.Contains(scope)))\n            {\n                return null;\n            }\n\n            return principal.Claims.FirstOrDefault(c => c.Type == \"oid\")?.Value;\n        }\n        catch\n        {\n            return null;\n        }\n    }\n}"
-                }
-            },
-            {
-                "type": "heading",
-                "data": {
-                    "text": "Custom Service Injection and Extension",
-                    "level": 2
-                }
-            },
-            {
-                "type": "paragraph",
-                "data": {
-                    "text": "The main benefit of this PoC is its extensibility. You can inject your services into the secure environment and rely on JWT validation to protect your business logic. For example, you can inject a database service to ensure that only authorized users can access and manipulate data."
-                }
-            },
-            {
-                "type": "code",
-                "data": {
-                    "language": "csharp",
-                    "code": "public class ProtectedFunction(\n    IJwtValidatorService jwtValidatorService, IOptions<AuthorizationScope> opt)\n{\n    private readonly AuthorizationScope _protectedScope = opt.Value;\n    \n    [Function(nameof(Protected))]\n    public async Task<HttpResponseData> Protected(\n        [HttpTrigger(AuthorizationLevel.Anonymous, \"get\", Route = null)] \n        HttpRequestData req, ExecutionContext executionContext)\n    {\n        var acceptedScopes = new[] { _protectedScope.TestScope };\n        var userId = await jwtValidatorService.AuthenticateAndAuthorize(req, acceptedScopes);\n        \n        var response = req.CreateResponse();\n        if (userId == null)\n        {\n            response.StatusCode = HttpStatusCode.Unauthorized;\n            return response;\n        }\n        response.StatusCode = HttpStatusCode.OK;\n        return response;\n    }\n}"
-                }
-            },
-            {
-                "type": "paragraph",
-                "data": {
-                    "text": "In this protected API function, the injected `JwtValidatorService` handles the security logic. Developers can add their custom service functionality here while leveraging the secure framework provided by the JWT validation PoC."
-                }
-            },
-            {
-                "type": "heading",
-                "data": {
-                    "text": "Further Reading",
-                    "level": 2
+                    "text": "Entity Framework Core"
                 }
             },
             {
                 "type": "hyperlink",
                 "data": {
-                    "href": "https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-client-creds-grant-flow",
-                    "text": "OAuth 2.0 Client Credentials Grant Flow"
+                    "href": "https://learn.microsoft.com/en-us/azure/azure-app-configuration/",
+                    "text": "Azure App Configuration"
                 }
             },
             {
                 "type": "hyperlink",
                 "data": {
-                    "href": "https://learn.microsoft.com/en-us/azure/azure-functions/",
-                    "text": "Azure Functions Documentation"
-                }
-            },
-            {
-                "type": "hyperlink",
-                "data": {
-                    "href": "https://learn.microsoft.com/en-us/azure/active-directory-b2c/authorization-v2",
-                    "text": "Azure AD B2C Authorization Documentation"
+                    "href": "https://learn.microsoft.com/en-us/azure/key-vault/general/",
+                    "text": "Azure Key Vault"
                 }
             }
         ]
@@ -1126,7 +1309,7 @@ export const mockPostList = [
         "datePublished": "2024-09-14",
         "excerpt": "Learn how to set up CRM database migration using FluentMigrator, Azure Identity, and Azure App Configuration in a .NET 8 application.",
         "image": "/images/database-migration.png",
-        "status": "published",
+        "status": "draft",
         "contentBlocks": [
             {
                 "type": "heading",
@@ -1300,7 +1483,7 @@ export const mockPostList = [
         "datePublished": "2024-09-14",
         "excerpt": "Learn how to implement HTTP request body mapping and validation using FluentValidation in .NET, ensuring clean and validated inputs in your API services.",
         "image": "/images/http-request-body-mapping.png",
-        "status": "published",
+        "status": "draft",
         "contentBlocks": [
             {
                 "type": "heading",
@@ -1445,7 +1628,7 @@ export const mockPostList = [
         "author": "Your Name",
         "tags": ["Azure", "Storage Queue", "Cloud Integration", ".NET"],
         "datePublished": "2024-09-13",
-        "status": "published",
+        "status": "draft",
         "excerpt": "A proof-of-concept demonstrating the integration of Azure Storage Queue with .NET, providing scalable message queue functionality.",
         "image": "/images/azure-queue-client.png",
         "contentBlocks": [
@@ -1605,7 +1788,7 @@ export const mockPostList = [
         "author": "Your Name",
         "tags": ["Printful", "API", "HttpClient", "Integration"],
         "datePublished": "2024-09-13",
-        "status": "published",
+        "status": "draft",
         "excerpt": "A proof-of-concept demonstrating how to integrate with the Printful API using HttpClient in .NET.",
         "image": "/images/printful-client.png",
         "contentBlocks": [
@@ -1656,7 +1839,7 @@ export const mockPostList = [
         "author": "Your Name",
         "tags": ["Shopify", "RestSharp", "API", "Integration"],
         "datePublished": "2024-09-13",
-        "status": "published",
+        "status": "draft",
         "excerpt": "A proof-of-concept demonstrating how to integrate with Shopify API using RestSharp in .NET.",
         "image": "/images/shopify-client.png",
         "contentBlocks": [
@@ -1696,7 +1879,7 @@ export const mockPostList = [
         "author": "Your Name",
         "tags": ["Microsoft Graph", "API", "Azure", "Integration"],
         "datePublished": "2024-09-13",
-        "status": "published",
+        "status": "draft",
         "excerpt": "A proof-of-concept demonstrating how to integrate with Microsoft Graph API in .NET.",
         "image": "/images/microsoft-graph-client.png",
         "contentBlocks": [
@@ -1736,7 +1919,7 @@ export const mockPostList = [
         "author": "Your Name",
         "tags": ["Redis", "Azure", "Cache", "API"],
         "datePublished": "2024-09-13",
-        "status": "published",
+        "status": "draft",
         "excerpt": "A proof-of-concept demonstrating how to integrate with Azure Redis Cache in .NET.",
         "image": "/images/redis-cache-client.png",
         "contentBlocks": [
@@ -1776,7 +1959,7 @@ export const mockPostList = [
         "author": "Your Name",
         "tags": ["Stripe", "Payment API", ".NET", "Integration"],
         "datePublished": "2024-09-13",
-        "status": "published",
+        "status": "draft",
         "excerpt": "A proof-of-concept demonstrating how to integrate with Stripe payment API in .NET.",
         "image": "/images/stripe-client.png",
         "contentBlocks": [
@@ -1811,52 +1994,12 @@ export const mockPostList = [
     },
     {
         "id": 15,
-        "title": "Stripe Payment Integration",
-        "slug": "stripe-client",
-        "author": "Your Name",
-        "tags": ["Stripe", "Payment API", ".NET", "Integration"],
-        "datePublished": "2024-09-13",
-        "status": "published",
-        "excerpt": "A proof-of-concept demonstrating how to integrate with Stripe payment API in .NET.",
-        "image": "/images/stripe-client.png",
-        "contentBlocks": [
-            {
-                "type": "heading",
-                "data": {
-                    "text": "Overview",
-                    "level": 2
-                }
-            },
-            {
-                "type": "paragraph",
-                "data": {
-                    "text": "This PoC demonstrates how to process payments using the Stripe API in a .NET backend application."
-                }
-            },
-            {
-                "type": "code",
-                "data": {
-                    "language": "csharp",
-                    "code": "public class StripeClient {\n    public async Task<PaymentIntent> CreatePaymentIntentAsync(int amount, string currency) {\n        var options = new PaymentIntentCreateOptions {\n            Amount = amount,\n            Currency = currency,\n        };\n        var service = new PaymentIntentService();\n        return await service.CreateAsync(options);\n    }\n}"
-                }
-            },
-            {
-                "type": "hyperlink",
-                "data": {
-                    "href": "https://github.com/your-repo/stripe-client",
-                    "text": "Source Code"
-                }
-            }
-        ]
-    },
-    {
-        "id": 16,
         "title": "Braintree Payment Integration",
         "slug": "braintree-client",
         "author": "Your Name",
         "tags": ["Braintree", "Payment API", ".NET", "Integration"],
         "datePublished": "2024-09-13",
-        "status": "published",
+        "status": "draft",
         "excerpt": "A proof-of-concept demonstrating how to integrate with Braintree payment API in .NET.",
         "image": "/images/braintree-client.png",
         "contentBlocks": [
@@ -1890,13 +2033,13 @@ export const mockPostList = [
         ]
     },
     {
-        "id": 17,
+        "id": 16,
         "title": "Azure Cosmos DB Integration",
         "slug": "azure-cosmos-client",
         "author": "Your Name",
         "tags": ["Azure", "Cosmos DB", ".NET", "Integration"],
         "datePublished": "2024-09-13",
-        "status": "published",
+        "status": "draft",
         "excerpt": "A proof-of-concept demonstrating how to integrate with Azure Cosmos DB in .NET.",
         "image": "/images/cosmos-client.png",
         "contentBlocks": [
@@ -1930,13 +2073,13 @@ export const mockPostList = [
         ]
     },
     {
-        "id": 18,
+        "id": 17,
         "title": "Azure Event Grid Integration",
         "slug": "azure-event-grid-client",
         "author": "Your Name",
         "tags": ["Azure", "Event Grid", ".NET", "Integration"],
         "datePublished": "2024-09-13",
-        "status": "published",
+        "status": "draft",
         "excerpt": "A proof-of-concept demonstrating how to integrate with Azure Event Grid in .NET.",
         "image": "/images/event-grid-client.png",
         "contentBlocks": [
@@ -1970,13 +2113,13 @@ export const mockPostList = [
         ]
     },
     {
-        "id": 19,
+        "id": 18,
         "title": "Azure OpenAI Integration",
         "slug": "azure-openai-client",
         "author": "Your Name",
         "tags": ["Azure", "OpenAI", ".NET", "Integration", "AI"],
         "datePublished": "2024-09-13",
-        "status": "published",
+        "status": "draft",
         "excerpt": "A proof-of-concept demonstrating how to integrate Azure OpenAI services in a .NET application.",
         "image": "/images/azure-openai-client.png",
         "contentBlocks": [

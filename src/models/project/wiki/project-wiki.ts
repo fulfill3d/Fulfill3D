@@ -1,28 +1,42 @@
+class SeeAlso {
+    name: string;
+    url: string;
+
+    constructor(
+        name: string,
+        url: string,
+    ) {
+        this.name = name;
+        this.url = url;
+    }
+
+    static fromJson(data: any): SeeAlso {
+        return new SeeAlso(
+            data.name,
+            data.url,
+        );
+    }
+}
+
 export class Microservice {
     name: string;
     description: string;
     scalability: string;
     deployment: string;
-    openApiUrl: string;
-    linkToDocs: string;
-    trigger: string; // Added trigger field
+    trigger: string;
 
     constructor(
         name: string,
         description: string,
         scalability: string,
         deployment: string,
-        openApiUrl: string,
-        linkToDocs: string,
-        trigger: string // Added trigger parameter
+        trigger: string,
     ) {
         this.name = name;
         this.description = description;
         this.scalability = scalability;
         this.deployment = deployment;
-        this.openApiUrl = openApiUrl;
-        this.linkToDocs = linkToDocs;
-        this.trigger = trigger; // Initialize trigger field
+        this.trigger = trigger;
     }
 
     static fromJson(json: any): Microservice {
@@ -31,15 +45,12 @@ export class Microservice {
             json.description,
             json.scalability,
             json.deployment,
-            json.openApiUrl,
-            json.linkToDocs,
-            json.trigger // Map trigger field from JSON
+            json.trigger
         );
     }
 }
 
 export class ProjectWiki {
-    id: string;
     name: string;
     purpose: string;
     projectType: string;
@@ -49,19 +60,11 @@ export class ProjectWiki {
     architecture: string;
     useCases: string[];
     microservices: Microservice[];
-    apiDocumentation: string;
-    performance: string;
-    scalingStrategies: string;
     devOps: string;
-    ciCdPipeline: string;
-    challenges: string[];
-    learnings: string[];
-    futureDevelopment: string;
-    demoUrl: string;
     sourceCodeUrl: string;
+    seeAlso: SeeAlso[];
 
     constructor(
-        id: string,
         name: string,
         purpose: string,
         projectType: string,
@@ -71,18 +74,10 @@ export class ProjectWiki {
         architecture: string,
         useCases: string[],
         microservices: Microservice[],
-        apiDocumentation: string,
-        performance: string,
-        scalingStrategies: string,
         devOps: string,
-        ciCdPipeline: string,
-        challenges: string[],
-        learnings: string[],
-        futureDevelopment: string,
-        demoUrl: string,
-        sourceCodeUrl: string
+        sourceCodeUrl: string,
+        seeAlso: SeeAlso[]
     ) {
-        this.id = id;
         this.name = name;
         this.purpose = purpose;
         this.projectType = projectType;
@@ -92,22 +87,15 @@ export class ProjectWiki {
         this.architecture = architecture;
         this.useCases = useCases;
         this.microservices = microservices;
-        this.apiDocumentation = apiDocumentation;
-        this.performance = performance;
-        this.scalingStrategies = scalingStrategies;
         this.devOps = devOps;
-        this.ciCdPipeline = ciCdPipeline;
-        this.challenges = challenges;
-        this.learnings = learnings;
-        this.futureDevelopment = futureDevelopment;
-        this.demoUrl = demoUrl;
         this.sourceCodeUrl = sourceCodeUrl;
+        this.seeAlso = seeAlso;
     }
 
     static fromJson(json: any): ProjectWiki {
         const microservices = json.microservices.map((ms: any) => Microservice.fromJson(ms));
+        const seeAlso = json.seeAlso.map((seeAlso: any) => SeeAlso.fromJson(seeAlso));
         return new ProjectWiki(
-            json.id,
             json.name,
             json.purpose,
             json.projectType,
@@ -117,16 +105,9 @@ export class ProjectWiki {
             json.architecture,
             json.useCases,
             microservices,
-            json.apiDocumentation,
-            json.performance,
-            json.scalingStrategies,
             json.devOps,
-            json.ciCdPipeline,
-            json.challenges,
-            json.learnings,
-            json.futureDevelopment,
-            json.demoUrl,
-            json.sourceCodeUrl
+            json.sourceCodeUrl,
+            seeAlso
         );
     }
 }

@@ -1,15 +1,15 @@
 "use client";
 
 import React from "react";
-import {mockCompanyProfile, mockPersonProfile} from "@/mock/about/data";
 import CompanyComponent from "@/components/about/company-component";
 import PersonComponent from "@/components/about/person-component";
 import {Company} from "@/models/about/company";
 import {Person} from "@/models/about/person";
+import {companyProfileJson, personProfileJson} from "@/mock/about/data";
 
 export default function About() {
-    const companyProfile = Company.fromJson(mockCompanyProfile);
-    const personProfile = Person.fromJson(mockPersonProfile);
+    const companyProfile = Company.fromJson(companyProfileJson);
+    const personProfile = Person.fromJson(personProfileJson);
     return (
         <div className="w-full h-full">
             <div className="container mx-auto p-6 space-y-12 max-w-4xl">

@@ -3,15 +3,17 @@ import ProjectCard from "@/components/project/project-card";
 import {Project} from "@/models/project/project";
 
 interface ProductListProps {
-    products: Project[];
+    projects: Project[];
 }
 
-const ProjectList: React.FC<ProductListProps> = ({ products }) => {
+const ProjectList: React.FC<ProductListProps> = ({ projects }) => {
     return (
         <div className="flex flex-col">
-            {products.map((product) => (
-                <ProjectCard key={product.id} product={product} />
-            ))}
+            {projects
+                .filter(project => project.status === 'active')
+                .reverse()
+                .map((project) => <ProjectCard key={project.id} project={project} />)
+            }
         </div>
     );
 };
