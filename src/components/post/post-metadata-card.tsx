@@ -16,7 +16,9 @@ const PostMetadataCard: React.FC<PostMetadataCardProps> = ({ post }) => {
     };
     return (
         <div
-            className="bg-white shadow-lg rounded-lg p-6 cursor-pointer"
+            role="button"  // Adds button role for accessibility
+            tabIndex={0}    // Makes the div focusable
+            className="bg-white shadow-lg rounded-lg p-6 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#FF7F50] hover:bg-gray-50 active:bg-gray-200 transition-all"
             onClick={handleClick}
         >
             {/* Image */}
