@@ -3,11 +3,11 @@
 import {ProjectWiki} from "@/models/project/wiki/project-wiki";
 import ProjectWikiComponent from "@/components/project/wiki/project-wiki-component";
 import {useEffect, useState} from "react";
-import {mockProjectList} from "@/mock/project/data";
+import {projectList} from "@/mock/project/data";
 
 // Mock function to fetch post based on id (replace this with actual API call)
 const fetchWikiById = (id: string): ProjectWiki | null => {
-    const data = mockProjectList.find((product) => product.id.toString() === id);
+    const data = projectList.find((product) => product.id.toString() === id);
     if (data) {
         return ProjectWiki.fromJson(data.wiki);
     }

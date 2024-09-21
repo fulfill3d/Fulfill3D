@@ -209,6 +209,20 @@ export const postList = [
                     "href": "https://learn.microsoft.com/en-us/azure/azure-functions/functions-dotnet-dependency-injection",
                     "text": "Dependency Injection"
                 }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/azure/azure-app-configuration/",
+                    "text": "Azure App Configuration"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/azure/key-vault/general/",
+                    "text": "Azure Key Vault"
+                }
             }
         ]
     },
@@ -407,7 +421,21 @@ export const postList = [
                 "type": "hyperlink",
                 "data": {
                     "href": "https://restsharp.dev/docs/intro",
-                    "text": "RestSharp Documentation"
+                    "text": "RestSharp"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/azure/azure-app-configuration/",
+                    "text": "Azure App Configuration"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/azure/key-vault/general/",
+                    "text": "Azure Key Vault"
                 }
             }
         ]
@@ -628,6 +656,20 @@ export const postList = [
                     "href": "https://restsharp.dev/docs/intro",
                     "text": "RestSharp"
                 }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/azure/azure-app-configuration/",
+                    "text": "Azure App Configuration"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/azure/key-vault/general/",
+                    "text": "Azure Key Vault"
+                }
             }
         ]
     },
@@ -635,7 +677,7 @@ export const postList = [
         "id": 4,
         "title": "PoC4: Azure Blob Storage Client Integration",
         "slug": "azure-blob-storage-client-integration-poc",
-        "author": "John Doe",
+        "author": "Abdurrahman Gazi Yavuz",
         "tags": ["Azure", "Blob Storage", "C#", ".NET"],
         "datePublished": "2024-07-30",
         "excerpt": "A proof of concept for integrating an Azure Blob Storage client in a .NET application to upload, download, and delete blobs.",
@@ -840,6 +882,20 @@ export const postList = [
                     "href": "https://learn.microsoft.com/en-us/azure/azure-functions/functions-dotnet-dependency-injection",
                     "text": "Dependency Injection"
                 }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/azure/azure-app-configuration/",
+                    "text": "Azure App Configuration"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/azure/key-vault/general/",
+                    "text": "Azure Key Vault"
+                }
             }
         ]
     },
@@ -850,21 +906,21 @@ export const postList = [
         "author": "Abdurrahman Gazi Yavuz",
         "tags": ["Azure Functions", "JWT", "Microservices", "C#", ".NET"],
         "datePublished": "2024-07-30",
-        "excerpt": "Learn how to build a reusable and flexible JWT-secured microservice PoC for authentication and authorization, allowing for easy service injection and customization.",
-        "image": "/images/jwt-secured-microservice.png",
-        "status": "draft",
+        "excerpt": "Learn how to build a reusable and flexible JWT-secured microservice for authentication and authorization, allowing for easy service injection and customization.",
+        "image": "/secured-microservice.png",
+        "status": "published",
         "contentBlocks": [
             {
                 "type": "heading",
                 "data": {
                     "text": "Introduction",
-                    "level": 1
+                    "level": 2
                 }
             },
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "In this post, we introduce a reusable proof-of-concept (PoC) for building secure microservices using JWT (JSON Web Token). This PoC is designed to offer flexible service injection, allowing developers to add their own services and secure them with JWT validation and claims-based authorization. The key benefit is the ability to have a secured microservice without building the security framework from scratch."
+                    "text": "In this post, a reusable proof-of-concept (PoC) for building secure microservices using JWT (JSON Web Token) is introduced. This PoC is designed to offer flexible service injection, allowing developers to add their own services and secure them with JWT validation and claims-based authorization. The key benefit is the ability to have a secured microservice without building the security framework from scratch."
                 }
             },
             {
@@ -877,7 +933,7 @@ export const postList = [
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "JWT is a widely used standard for securely transmitting information, such as user identity and permissions, between parties. By leveraging JWT, this microservice PoC offers authentication and authorization features to ensure that only users with valid tokens can access the service. Developers can extend the PoC with their own logic while inheriting these security features."
+                    "text": "JWT is a widely used standard for securely transmitting information, such as user identity and claims, between parties. By leveraging JWT, this microservice offers authentication and authorization features to ensure that only users with valid tokens can access the service. Developers can extend the PoC with their own logic while inheriting these security features."
                 }
             },
             {
@@ -929,7 +985,7 @@ export const postList = [
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "This PoC includes a robust JWT validation mechanism. When an HTTP request contains a JWT in the `Authorization` header, the service verifies the token's validity, checks the required scopes, and extracts user-specific claims like the unique identifier (OID). You can extend this to ensure only authorized users with the right claims can access your custom service logic."
+                    "text": "This PoC includes a robust JWT validation mechanism. When an HTTP request contains a JWT in the `Authorization` header, the service verifies the token's validity, checks the required scopes, and extracts user-specific claims like the unique identifier (OID). This is to ensure only authorized users with the right claims can access your custom service logic."
                 }
             },
             {
@@ -949,7 +1005,7 @@ export const postList = [
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "The main benefit of this PoC is its extensibility. You can inject your services into the secure environment and rely on JWT validation to protect your business logic. For example, you can inject a database service to ensure that only authorized users can access and manipulate data."
+                    "text": "You can inject your services into the secure environment and rely on JWT validation to protect your business logic. For example, you can inject a database service to ensure that only authorized users can access and manipulate data."
                 }
             },
             {
@@ -960,9 +1016,17 @@ export const postList = [
                 }
             },
             {
-                "type": "paragraph",
+                "type": "heading",
                 "data": {
-                    "text": "In this protected API function, the injected `JwtValidatorService` handles the security logic. Developers can add their custom service functionality here while leveraging the secure framework provided by the JWT validation PoC."
+                    "text": "Repository",
+                    "level": 2
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://dev.azure.com/Fulfill3D/Public/_git/ProtectedAPI",
+                    "text": "The Secured Microservice Repository",
                 }
             },
             {
@@ -975,6 +1039,13 @@ export const postList = [
             {
                 "type": "hyperlink",
                 "data": {
+                    "href": "https://auth0.com/docs/secure/tokens/json-web-tokens",
+                    "text": "JSON Web Tokens"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
                     "href": "https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-client-creds-grant-flow",
                     "text": "OAuth 2.0 Client Credentials Grant Flow"
                 }
@@ -982,41 +1053,55 @@ export const postList = [
             {
                 "type": "hyperlink",
                 "data": {
-                    "href": "https://learn.microsoft.com/en-us/azure/azure-functions/",
-                    "text": "Azure Functions Documentation"
+                    "href": "https://learn.microsoft.com/en-us/azure/active-directory-b2c/overview",
+                    "text": "Azure AD B2C"
                 }
             },
             {
                 "type": "hyperlink",
                 "data": {
-                    "href": "https://learn.microsoft.com/en-us/azure/active-directory-b2c/authorization-v2",
-                    "text": "Azure AD B2C Authorization Documentation"
+                    "href": "https://learn.microsoft.com/en-us/azure/azure-functions/",
+                    "text": "Azure Functions"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/azure/azure-app-configuration/",
+                    "text": "Azure App Configuration"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/azure/key-vault/general/",
+                    "text": "Azure Key Vault"
                 }
             }
         ]
     },
     {
         "id": 6,
-        "title": "B2C Redirect Endpoint Microservice Proof of Concept",
+        "title": "PoC6: A Custom Auth Flow with a Microservice",
         "slug": "b2c-redirect-endpoint-microservice-poc",
-        "author": "John Doe",
-        "tags": ["Azure Functions", "B2C", "Microservices", "C#", ".NET"],
+        "author": "Abdurrahman Gazi Yavuz",
+        "tags": ["Azure Functions", "AD B2C", "Microservices", "C#", ".NET"],
         "datePublished": "2024-09-13",
-        "excerpt": "A proof of concept for an Azure Function microservice acting as a B2C redirect endpoint, validating user sign-in/up and creating or updating user entities in the database.",
-        "image": "/images/b2c-redirect-microservice.png",
-        "status": "draft",
+        "excerpt": "A proof of concept for a microservice acting as a B2C auth flow callback, validating user sign-up sign-in, creating or updating user entities in the database and redirecting user to specified endpoints.",
+        "image": "/auth-flow.png",
+        "status": "published",
         "contentBlocks": [
             {
                 "type": "heading",
                 "data": {
                     "text": "Introduction",
-                    "level": 1
+                    "level": 2
                 }
             },
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "This post demonstrates a proof of concept for building an Azure Function microservice that acts as a B2C redirect endpoint. The service validates the user sign-in/up using Azure AD B2C, processes the token, and creates or updates user entities in the database."
+                    "text": "This post demonstrates a proof of concept for building an Azure Function microservice that acts as a B2C redirect endpoint. The service validates the user sign-in/up using Azure AD B2C, processes the token, and creates or updates user entities in the database. Finally, it will either redirect user to successful (200) or failure (401) endpoints."
                 }
             },
             {
@@ -1160,6 +1245,20 @@ export const postList = [
             {
                 "type": "heading",
                 "data": {
+                    "text": "Repository",
+                    "level": 2
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://dev.azure.com/Fulfill3D/Public/_git/AuthFlow",
+                    "text": "AuthFlow Repository",
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
                     "text": "Further Reading",
                     "level": 2
                 }
@@ -1168,21 +1267,35 @@ export const postList = [
                 "type": "hyperlink",
                 "data": {
                     "href": "https://learn.microsoft.com/en-us/azure/active-directory-b2c/",
-                    "text": "Azure AD B2C Documentation"
+                    "text": "Azure AD B2C"
                 }
             },
             {
                 "type": "hyperlink",
                 "data": {
                     "href": "https://learn.microsoft.com/en-us/azure/azure-functions/",
-                    "text": "Azure Functions Documentation"
+                    "text": "Azure Functions"
                 }
             },
             {
                 "type": "hyperlink",
                 "data": {
                     "href": "https://learn.microsoft.com/en-us/ef/core/",
-                    "text": "Entity Framework Core Documentation"
+                    "text": "Entity Framework Core"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/azure/azure-app-configuration/",
+                    "text": "Azure App Configuration"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/azure/key-vault/general/",
+                    "text": "Azure Key Vault"
                 }
             }
         ]
