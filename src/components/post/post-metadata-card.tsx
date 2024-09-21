@@ -1,6 +1,6 @@
 import React from 'react';
-import { Post } from "@/models/post/post";
-import { useRouter } from "next/navigation";
+import {Post} from "@/models/post/post";
+import {useRouter} from "next/navigation";
 import Image from "next/image";
 import ImagePlaceholder from "@/svg/image-placeholder";
 
@@ -14,12 +14,9 @@ const PostMetadataCard: React.FC<PostMetadataCardProps> = ({ post }) => {
     const handleClick = () => {
         router.push(`/${post.id}`); // Navigate to dynamic [id] page
     };
-
     return (
         <div
-            role="button"  // Adds button role for accessibility
-            tabIndex={0}    // Makes the div focusable
-            className="bg-white shadow-lg rounded-lg p-6 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#FF7F50] hover:bg-gray-50 active:bg-gray-200 transition-all"
+            className="bg-white shadow-lg rounded-lg p-6 cursor-pointer"
             onClick={handleClick}
         >
             {/* Image */}
@@ -32,6 +29,7 @@ const PostMetadataCard: React.FC<PostMetadataCardProps> = ({ post }) => {
                     className="rounded-lg"  // Optional Tailwind classes for styling
                 />
             </div>
+
 
             {/* Title */}
             <h2 className="text-2xl font-bold text-gray-800 mb-2">{post.title}</h2>
@@ -52,8 +50,8 @@ const PostMetadataCard: React.FC<PostMetadataCardProps> = ({ post }) => {
                         key={index}
                         className="bg-gray-200 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"
                     >
-                        {tag}
-                    </span>
+            {tag}
+          </span>
                 ))}
             </div>
         </div>
