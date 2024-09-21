@@ -16,8 +16,8 @@ export const personProfileJson = {
 export const companyProfileJson = {
     id: "fulfill3d",
     companyName: "Fulfill3D",
-    mission: "A proof of concept (PoC) and minimum viable product (MVP) lab specialized in backend development",
-    description: 'Fulfill3D serves as a proof of concept (PoC) and minimum viable product (MVP) lab focused on backend development using Azure (PaaS). It showcases innovative approaches to cloud-native solutions, microservices, and scalable architectures. Through technical content and real-world projects, Fulfill3D highlights the process of transforming ideas into functional MVPs. By leveraging Azure and cutting-edge backend technologies, it provides a platform for rapid development and scalable solutions.',
+    mission: "A proof of concept (PoC) and minimum viable project (MVP) lab specialized in backend development",
+    description: 'Fulfill3D serves as a proof of concept (PoC) and minimum viable project (MVP) lab focused on backend development using Azure (PaaS). It showcases innovative approaches to cloud-native solutions, microservices, and scalable architectures. Through technical content and real-world projects, Fulfill3D highlights the process of transforming ideas into functional MVPs. By leveraging Azure and cutting-edge backend technologies, it provides a platform for rapid development and scalable solutions.',
     tags: [".NET", "C#", "NextJS", "TypeScript", "Microsoft Azure", "Azure DevOps"],
     logoUrl: "/fulfill3d_company_profile.png",
     socialMedia: [

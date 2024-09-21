@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import {mockProjectList} from "@/mock/product/data";
+import {mockProjectList} from "@/mock/project/data";
 import {Project} from "@/models/project/project";
 import ProjectList from "@/components/project/project-list";
 

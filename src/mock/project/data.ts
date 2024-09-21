@@ -2,9 +2,9 @@ export const mockProjectList = [
     {
         "id": 1,
         "name": "CRM",
-        "description": "CRM tailored for small businesses.",
+        "description": "Customer relationship management tailored for small businesses.",
         "demoUrl": "https://crm.fulfill3d.com/",
-        "imageUrl": "/images/crm.png",
+        "imageUrl": "/crm.png",
         "tags": ["Appointment", "Small Business", "CRM"],
         "status": "active",
         "wiki": {
@@ -160,7 +160,7 @@ export const mockProjectList = [
     {
         "id": 3,
         "name": "DStudio",
-        "description": "3D product design studio SaaS",
+        "description": "3D project design studio SaaS",
         "demoUrl": "https://dstudio.fulfill3d.com/",
         "wikiUrl": "/projects/[id]/",
         "imageUrl": "/images/dstudio.png",
