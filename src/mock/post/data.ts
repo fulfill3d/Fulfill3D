@@ -1,12 +1,13 @@
 export const postList = [
     {
         "id": 1,
-        "title": "PoC1: Azure Service Bus Client Integration",
+        "uid": "8a593841-83ce-44de-a224-18a7f08cbbc1",
+        "title": "PoC1: Azure Service Bus Integration",
         "slug": "azure-service-bus-client-integration-poc",
         "author": "Abdurrahman Gazi Yavuz",
         "tags": ["Azure", "Service Bus", "Messaging", "C#", ".NET"],
         "datePublished": "2024-07-30",
-        "excerpt": "A proof of concept for integrating an Azure Service Bus client in a .NET application to send messages via the Azure Service Bus.",
+        "excerpt": "A proof of concept for integrating an Azure Service Bus in a .NET application to send messages via the Azure Service Bus.",
         "image": "/service-bus-diagram.png",
         "status": "published",
         "contentBlocks": [
@@ -20,7 +21,7 @@ export const postList = [
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "Azure Service Bus is a fully managed enterprise message broker that supports messaging between applications and services. This post demonstrates a proof of concept for integrating Azure Service Bus into a .NET application using a custom-built `ServiceBusClient`."
+                    "text": "Azure Service Bus is a fully managed enterprise message broker that supports messaging between applications and services. This post demonstrates a proof of concept for integrating Azure Service Bus into a .NET application using a custom-built client `ServiceBusClient`."
                 }
             },
             {
@@ -33,7 +34,37 @@ export const postList = [
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "First, we need to configure a `ServiceBusClient` that handles the logic for sending messages to Azure Service Bus. The client will be set up using .NET dependency injection to allow for easy integration into various services or applications."
+                    "text": "To integrate `ServiceBusClient` into your .NET application, you need to add the following NuGet packages:"
+                }
+            },
+            {
+                "type": "list",
+                "data": {
+                    "items": [
+                        "Azure.Messaging.ServiceBus",
+                        "Microsoft.Extensions.DependencyInjection",
+                        "Microsoft.Extensions.Options"
+                    ],
+                    "ordered": false
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "These packages provide the necessary libraries for Azure Service Bus communication and dependency injection setup. `Azure.Messaging.ServiceBus` provides the necessary classes and methods to interact with Azure Service Bus, allowing you to send, receive, and manage messages in a fully managed enterprise message broker service. `Microsoft.Extensions.DependencyInjection` enables built-in support for dependency injection in .NET applications, promoting clean architecture and separation of concerns by allowing you to register and inject services. `Microsoft.Extensions.Options` provides a way to manage application settings in a strongly-typed manner, simplifying the configuration of settings and services through dependency injection."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Coding",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "First, we need to configure a `ServiceBusClient` service that handles the logic for sending messages to Azure Service Bus. The client will be set up using .NET dependency injection to allow for easy integration into various services or applications."
                 }
             },
             {
@@ -46,13 +77,13 @@ export const postList = [
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "In the above code, we define a `DepInj` class that registers the `ServiceBusClient` and its options using the dependency injection container. This will allow the client to be injected wherever it's needed."
+                    "text": "In the above code, we define a `DepInj` class that registers the `ServiceBusClient` service and its options using the dependency injection container. This will allow the client to be injected wherever it's needed."
                 }
             },
             {
                 "type": "heading",
                 "data": {
-                    "text": "Creating the Service Bus Client Interface",
+                    "text": "Creating the `ServiceBusClient` interface",
                     "level": 2
                 }
             },
@@ -72,7 +103,7 @@ export const postList = [
             {
                 "type": "heading",
                 "data": {
-                    "text": "Implementing the Service Bus Client",
+                    "text": "Implementing the `ServiceBusClient` service",
                     "level": 2
                 }
             },
@@ -86,13 +117,13 @@ export const postList = [
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "The `ServiceBusClient` implementation handles sending messages to the Azure Service Bus. It accepts a `ServiceBusClientMessage`, which encapsulates the message and queue details, and sends it using the Azure Service Bus SDK."
+                    "text": "The `ServiceBusClient` service implementation handles sending messages to the Azure Service Bus. It accepts a `ServiceBusClientMessage`, which encapsulates the message and queue details, and sends it using the Azure Service Bus SDK."
                 }
             },
             {
                 "type": "heading",
                 "data": {
-                    "text": "Defining the Service Bus Message Model",
+                    "text": "Defining the `ServiceBusClientMessage` model",
                     "level": 2
                 }
             },
@@ -100,7 +131,7 @@ export const postList = [
                 "type": "code",
                 "data": {
                     "language": "csharp",
-                    "code": "using System.Text;\nusing Azure.Messaging.ServiceBus;\n\nnamespace Client.Models\n{\n    public class ServiceBusClientMessage\n    {\n        public string Message { get; set; }\n        public string QueueName { get; set; }\n        public string? SessionId { get; set; }\n\n        public async Task SendMessage(Client.Options.ServiceBusClientOptions options)\n        {\n            await using var client = new Azure.Messaging.ServiceBus.ServiceBusClient(options.ConnectionString);\n            var sender = client.CreateSender(QueueName);\n            var serviceBusMessage = CreateServiceBusMessage();\n            await sender.SendMessageAsync(serviceBusMessage);\n        }\n\n        public async Task SendMessageWithTimeout(Client.Options.ServiceBusClientOptions options, CancellationToken cancellationToken)\n        {\n            await using var client = new Azure.Messaging.ServiceBus.ServiceBusClient(options.ConnectionString);\n            var sender = client.CreateSender(QueueName);\n            var serviceBusMessage = CreateServiceBusMessage();\n            await sender.SendMessageAsync(serviceBusMessage, cancellationToken);\n        }\n\n        private ServiceBusMessage CreateServiceBusMessage()\n        {\n            if (SessionId == null)\n            {\n                return new ServiceBusMessage(Encoding.UTF8.GetBytes(Message));\n            }\n            return new ServiceBusMessage(Encoding.UTF8.GetBytes(Message))\n            {\n                SessionId = SessionId\n            };\n        }\n    }\n}"
+                    "code": "using System.Text;\nusing Azure.Messaging.ServiceBus;\n\nnamespace Client.Models\n{\n    public class ServiceBusClientMessage\n    {\n        public string Message { get; set; }\n        public string QueueOrTopicName { get; set; }\n        public string? SessionId { get; set; }\n\n        public async Task SendMessage(Client.Options.ServiceBusClientOptions options)\n        {\n            await using var client = new Azure.Messaging.ServiceBus.ServiceBusClient(options.ConnectionString);\n            var sender = client.CreateSender(QueueName);\n            var serviceBusMessage = CreateServiceBusMessage();\n            await sender.SendMessageAsync(serviceBusMessage);\n        }\n\n        public async Task SendMessageWithTimeout(Client.Options.ServiceBusClientOptions options, CancellationToken cancellationToken)\n        {\n            await using var client = new Azure.Messaging.ServiceBus.ServiceBusClient(options.ConnectionString);\n            var sender = client.CreateSender(QueueName);\n            var serviceBusMessage = CreateServiceBusMessage();\n            await sender.SendMessageAsync(serviceBusMessage, cancellationToken);\n        }\n\n        private ServiceBusMessage CreateServiceBusMessage()\n        {\n            if (SessionId == null)\n            {\n                return new ServiceBusMessage(Encoding.UTF8.GetBytes(Message));\n            }\n            return new ServiceBusMessage(Encoding.UTF8.GetBytes(Message))\n            {\n                SessionId = SessionId\n            };\n        }\n    }\n}"
                 }
             },
             {
@@ -132,7 +163,7 @@ export const postList = [
             {
                 "type": "heading",
                 "data": {
-                    "text": "Integrating Service Bus Client into Azure Functions or ASP.NET Core",
+                    "text": "Integrating ServiceBusClient` into Azure Functions or ASP.NET Core",
                     "level": 2
                 }
             },
@@ -228,12 +259,13 @@ export const postList = [
     },
     {
         "id": 2,
-        "title": "PoC2: SendGrid Client Integration",
+        "uid": "c8bbefdb-e137-44ea-9614-4371b9e1cd54",
+        "title": "PoC2: SendGrid Integration",
         "slug": "sendgrid-client-integration-poc",
         "author": "Abdurrahman Gazi Yavuz",
         "tags": ["SendGrid", "Email", "RestSharp", "C#", ".NET"],
         "datePublished": "2024-08-01",
-        "excerpt": "A proof of concept for integrating SendGrid client in a .NET application to send emails via the SendGrid API.",
+        "excerpt": "A proof of concept for integrating SendGrid email service in a .NET application to send emails via the SendGrid API.",
         "image": "/send-grid-client-diagram.png",
         "status": "published",
         "contentBlocks": [
@@ -260,7 +292,37 @@ export const postList = [
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "First, we need to configure a `SendGridClient` that uses RestSharp to send requests to the SendGrid API. The client will handle the sending of emails, and we will use .NET dependency injection for configuration."
+                    "text": "To integrate `SendGridClient` into your .NET application, you need to add the following NuGet packages:"
+                }
+            },
+            {
+                "type": "list",
+                "data": {
+                    "items": [
+                        "RestSharp",
+                        "Microsoft.Extensions.DependencyInjection",
+                        "Microsoft.Extensions.Options"
+                    ],
+                    "ordered": false
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "`RestSharp` is a popular HTTP client library that simplifies sending requests to RESTful APIs, making it ideal for communicating with the SendGrid API for email delivery. `Microsoft.Extensions.DependencyInjection` provides built-in support for dependency injection, enabling you to register and inject services into your application. `Microsoft.Extensions.Options` helps in managing application settings in a strongly-typed manner, allowing for easy configuration and injection of options into services."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Coding",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "First, we need to configure a `SendGridClient` service that uses RestSharp to send requests to the SendGrid API. The client will handle the sending of emails, and we will use .NET dependency injection for configuration."
                 }
             },
             {
@@ -273,13 +335,13 @@ export const postList = [
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "In the above code, we define a `DepInj` class that registers the `SendGridClient` and its options in the dependency injection container."
+                    "text": "In the above code, we define a `DepInj` class that registers the `SendGridClient` service and its options in the dependency injection container."
                 }
             },
             {
                 "type": "heading",
                 "data": {
-                    "text": "Creating the SendGrid Client Interface",
+                    "text": "Creating the `SendGridClient` interface",
                     "level": 2
                 }
             },
@@ -299,7 +361,7 @@ export const postList = [
             {
                 "type": "heading",
                 "data": {
-                    "text": "Implementing the SendGrid Client",
+                    "text": "Implementing the `SendGridClient` service",
                     "level": 2
                 }
             },
@@ -313,7 +375,7 @@ export const postList = [
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "The `SendGridClient` implementation sends a request to the SendGrid API to send an email."
+                    "text": "The `SendGridClient` service implementation sends a request to the SendGrid API to send an email."
                 }
             },
             {
@@ -339,7 +401,7 @@ export const postList = [
             {
                 "type": "heading",
                 "data": {
-                    "text": "Integrating SendGrid Client into Azure Functions or ASP.NET Core",
+                    "text": "Integrating `SendGridClient` into Azure Functions or ASP.NET Core",
                     "level": 2
                 }
             },
@@ -442,12 +504,13 @@ export const postList = [
     },
     {
         "id": 3,
-        "title": "PoC3: Google Maps Client Integration",
+        "uid": "cca7efb5-d9a7-4f2c-b5c8-72d76797de8d",
+        "title": "PoC3: Google Maps API Integration",
         "slug": "google-maps-client-integration-poc",
         "author": "Abdurrahman Gazi Yavuz",
         "tags": ["Google Maps", "Geocoding", "RestSharp", "C#", ".NET"],
         "datePublished": "2024-08-02",
-        "excerpt": "A proof of concept for integrating a Google Maps client in a .NET application to get geocoding data from the Google Maps API.",
+        "excerpt": "A proof of concept for integrating a Google Maps service in a .NET application to get geocoding data from the Google Maps API.",
         "image": "/google-maps-client.png",
         "status": "published",
         "contentBlocks": [
@@ -461,7 +524,7 @@ export const postList = [
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "Google Maps is one of the most widely used mapping services available, providing geocoding, routing, and location data. This post demonstrates a proof of concept for integrating the Google Maps API into a .NET application using a custom-built `GoogleMapsClient` to retrieve geocoding data."
+                    "text": "Google Maps is one of the most widely used mapping services available, providing geocoding, routing, and location data. This post demonstrates a proof of concept for integrating the Google Maps API into a .NET application using a custom-built client `GoogleMapsClient` to retrieve geocoding data."
                 }
             },
             {
@@ -474,7 +537,38 @@ export const postList = [
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "First, we need to configure a `GoogleMapsClient` that will handle geocoding requests to the Google Maps API. We will use .NET dependency injection to manage the client’s configuration and ensure it can be easily integrated into services or applications."
+                    "text": "To set up the `GoogleMapsClient` in your .NET application, you need to add the following NuGet packages:"
+                }
+            },
+            {
+                "type": "list",
+                "data": {
+                    "items": [
+                        "RestSharp",
+                        "Newtonsoft.Json",
+                        "Microsoft.Extensions.DependencyInjection",
+                        "Microsoft.Extensions.Options"
+                    ],
+                    "ordered": false
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "`RestSharp` is a lightweight HTTP client library that simplifies sending requests to RESTful APIs like the Google Maps API. `Newtonsoft.Json` is a popular JSON serialization library that makes it easy to parse and serialize JSON data from the Google Maps API. `Microsoft.Extensions.DependencyInjection` provides support for dependency injection, enabling you to inject services into your application with a clean architecture. `Microsoft.Extensions.Options` helps in managing application settings in a strongly-typed manner, allowing for easy configuration and injection of options into services."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Coding",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "First, we need to configure a `GoogleMapsClient` service that will handle geocoding requests to the Google Maps API. We will use .NET dependency injection to manage the client’s configuration and ensure it can be easily integrated into services or applications."
                 }
             },
             {
@@ -487,13 +581,13 @@ export const postList = [
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "In the above code, we define a `DepInj` class that registers the `GoogleMapsClient` and its options using the dependency injection container. This allows the client to be injected wherever it’s needed within the application."
+                    "text": "In the above code, we define a `DepInj` class that registers the `GoogleMapsClient` service and its options using the dependency injection container. This allows the client to be injected wherever it’s needed within the application."
                 }
             },
             {
                 "type": "heading",
                 "data": {
-                    "text": "Creating the Google Maps Client Interface",
+                    "text": "Creating the `GoogleMapsClient` interface",
                     "level": 2
                 }
             },
@@ -513,7 +607,7 @@ export const postList = [
             {
                 "type": "heading",
                 "data": {
-                    "text": "Implementing the Google Maps Client",
+                    "text": "Implementing the `GoogleMapsClient` service",
                     "level": 2
                 }
             },
@@ -527,7 +621,7 @@ export const postList = [
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "The `GoogleMapsClient` implements the geocoding logic by sending a request to the Google Maps API with the specified address and API key. It handles retries and error logging, and deserializes the response to extract the location's latitude and longitude."
+                    "text": "The `GoogleMapsClient` service implements the geocoding logic by sending a request to the Google Maps API with the specified address and API key. It handles retries and error logging, and deserializes the response to extract the location's latitude and longitude."
                 }
             },
             {
@@ -572,7 +666,7 @@ export const postList = [
             {
                 "type": "heading",
                 "data": {
-                    "text": "Integrating Google Maps Client into Azure Functions or ASP.NET Core",
+                    "text": "Integrating `GoogleMapsClient` into Azure Functions or ASP.NET Core",
                     "level": 2
                 }
             },
@@ -675,12 +769,13 @@ export const postList = [
     },
     {
         "id": 4,
-        "title": "PoC4: Azure Blob Storage Client Integration",
+        "uid": "d1ffeca0-1eb3-4cd8-89db-fac8c88dccf2",
+        "title": "PoC4: Azure Blob Storage Integration",
         "slug": "azure-blob-storage-client-integration-poc",
         "author": "Abdurrahman Gazi Yavuz",
         "tags": ["Azure", "Blob Storage", "C#", ".NET"],
         "datePublished": "2024-07-30",
-        "excerpt": "A proof of concept for integrating an Azure Blob Storage client in a .NET application to upload, download, and delete blobs.",
+        "excerpt": "A proof of concept for integrating an Azure Blob Storage service in a .NET application to upload, download, and delete blobs.",
         "image": "/blob-client.png",
         "status": "published",
         "contentBlocks": [
@@ -694,7 +789,7 @@ export const postList = [
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "Azure Blob Storage is a scalable, secure, and highly available object storage solution from Microsoft Azure. This post demonstrates a proof of concept for integrating Azure Blob Storage into a .NET application using a custom-built `BlobStorageClient` to handle file uploads, downloads, and deletion."
+                    "text": "Azure Blob Storage is a scalable, secure, and highly available object storage solution from Microsoft Azure. This post demonstrates a proof of concept for integrating Azure Blob Storage into a .NET application using a custom-built client `BlobStorageClient` to handle file uploads, downloads, and deletion."
                 }
             },
             {
@@ -707,7 +802,37 @@ export const postList = [
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "First, we need to configure a `BlobStorageClient` that will handle interactions with Azure Blob Storage. We will use .NET dependency injection to manage the client’s configuration and ensure it can be easily integrated into services or applications."
+                    "text": "To integrate `BlobStorageClient` into your .NET application, you need to add the following NuGet packages:"
+                }
+            },
+            {
+                "type": "list",
+                "data": {
+                    "items": [
+                        "Azure.Storage.Blobs",
+                        "Microsoft.Extensions.DependencyInjection",
+                        "Microsoft.Extensions.Options"
+                    ],
+                    "ordered": false
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "`Azure.Storage.Blobs` provides the necessary classes and methods to interact with Azure Blob Storage, allowing you to manage and manipulate blob data. `Microsoft.Extensions.DependencyInjection` offers built-in support for dependency injection, enabling you to register and inject services within your application. `Microsoft.Extensions.Options` helps manage application settings in a strongly-typed manner, simplifying configuration and enabling easy injection of options into services."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Coding",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "First, we need to configure a `BlobStorageClient` service that will handle interactions with Azure Blob Storage. We will use .NET dependency injection to manage the client’s configuration and ensure it can be easily integrated into services or applications."
                 }
             },
             {
@@ -720,13 +845,13 @@ export const postList = [
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "In the above code, we define a `DepInj` class that registers the `BlobStorageClient` and its options using the dependency injection container. This allows the client to be injected wherever it’s needed."
+                    "text": "In the above code, we define a `DepInj` class that registers the `BlobStorageClient` service and its options using the dependency injection container. This allows the client to be injected wherever it’s needed."
                 }
             },
             {
                 "type": "heading",
                 "data": {
-                    "text": "Creating the Blob Storage Client Interface",
+                    "text": "Creating the `BlobStorageClient` interface",
                     "level": 2
                 }
             },
@@ -746,7 +871,7 @@ export const postList = [
             {
                 "type": "heading",
                 "data": {
-                    "text": "Implementing the Blob Storage Client",
+                    "text": "Implementing the `BlobStorageClient` service",
                     "level": 2
                 }
             },
@@ -805,7 +930,7 @@ export const postList = [
             {
                 "type": "heading",
                 "data": {
-                    "text": "Integrating Blob Storage Client into Azure Functions or ASP.NET Core",
+                    "text": "Integrating `BlobStorageClient` into Azure Functions or ASP.NET Core",
                     "level": 2
                 }
             },
@@ -901,12 +1026,13 @@ export const postList = [
     },
     {
         "id": 5,
+        "uid": "a05ecc86-9313-4959-a644-f1e59fde6eeb",
         "title": "PoC5: A Secured Microservice",
         "slug": "jwt-secured-microservice-poc",
         "author": "Abdurrahman Gazi Yavuz",
         "tags": ["Azure Functions", "JWT", "Microservices", "C#", ".NET"],
         "datePublished": "2024-07-30",
-        "excerpt": "Learn how to build a reusable and flexible JWT-secured microservice for authentication and authorization, allowing for easy service injection and customization.",
+        "excerpt": "This PoC is to build a reusable and flexible JWT-secured microservice, allowing for easy service injection and customization.",
         "image": "/secured-microservice.png",
         "status": "published",
         "contentBlocks": [
@@ -920,7 +1046,7 @@ export const postList = [
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "In this post, a reusable proof-of-concept (PoC) for building secure microservices using JWT (JSON Web Token) is introduced. This PoC is designed to offer flexible service injection, allowing developers to add their own services and secure them with JWT validation and claims-based authorization. The key benefit is the ability to have a secured microservice without building the security framework from scratch."
+                    "text": "In this post, a reusable proof-of-concept (PoC) for building secure microservices using JWT (JSON Web Token) is introduced. This PoC is designed to offer flexible service injection, allowing developers to add their own services and secure them with JWT validation and scope-based authorization. The key benefit is the ability to have a secured microservice without building the security framework from scratch."
                 }
             },
             {
@@ -933,20 +1059,65 @@ export const postList = [
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "JWT is a widely used standard for securely transmitting information, such as user identity and claims, between parties. By leveraging JWT, this microservice offers authentication and authorization features to ensure that only users with valid tokens can access the service. Developers can extend the PoC with their own logic while inheriting these security features."
+                    "text": "JWT is a widely used standard for securely transmitting information, such as user identity and claims, between parties. By leveraging JWT, this microservice offers authentication and authorization features to ensure that only users with valid tokens can access the service. Developers can extend the PoC with their own logic while inheriting these security features. They can inject their services, such as business logic or data processing, into this framework and rely on the provided security layer to ensure only authorized users can access the microservice."
                 }
             },
             {
                 "type": "heading",
                 "data": {
-                    "text": "PoC Overview",
+                    "text": "Setup",
                     "level": 2
                 }
             },
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "This PoC provides JWT token validation and scope-based authorization out of the box. You can inject your services, such as business logic or data processing, into this framework and rely on the provided security layer to ensure only authorized users can access the microservice."
+                    "text": "To build a secure microservice with JWT validation and Azure Functions, you need to add the following NuGet packages to your .NET application. These packages provide essential functionality for building secure, scalable, and maintainable microservices with Azure Functions, dependency injection, and authentication support."
+                }
+            },
+            {
+                "type": "list",
+                "data": {
+                    "items": [
+                        "Microsoft.AspNetCore.App",
+                        "Microsoft.Azure.Functions.Worker",
+                        "Microsoft.Azure.Functions.Worker.Extensions.Http",
+                        "Microsoft.Azure.Functions.Worker.Sdk",
+                        "Microsoft.ApplicationInsights.WorkerService",
+                        "Azure.Identity",
+                        "Microsoft.Azure.AppConfiguration.Functions.Worker",
+                        "Microsoft.Extensions.DependencyInjection",
+                        "Microsoft.Extensions.Http",
+                        "Microsoft.IdentityModel.Protocols",
+                        "Microsoft.IdentityModel.Protocols.OpenIdConnect",
+                        "Microsoft.NET.Sdk.Functions",
+                        "System.IdentityModel.Tokens.Jwt"
+                    ],
+                    "ordered": false
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `Microsoft.AspNetCore.App` framework reference is essential for ASP.NET Core-based applications, offering fundamental libraries for web development and middleware support. The `Microsoft.Azure.Functions.Worker` package and its related extensions enable you to build isolated Azure Functions, providing a flexible and performant environment for developing microservices. The `Microsoft.Azure.Functions.Worker.Sdk` simplifies the build and deployment process of function apps, ensuring smooth integration with the Azure Functions runtime."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "To enhance monitoring and telemetry, the `Microsoft.ApplicationInsights.WorkerService` package is included, allowing you to track and analyze your function's performance and diagnose issues effectively. The `Azure.Identity` package simplifies authentication and access to Azure resources like App Configuration and Key Vault using managed identities or service principals."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `Microsoft.Azure.AppConfiguration.Functions.Worker` package integrates Azure App Configuration with Azure Functions, enabling dynamic loading of configuration settings at runtime. The `Microsoft.Extensions.DependencyInjection` and `Microsoft.Extensions.Http` packages provide robust dependency injection and HTTP client management capabilities, essential for building scalable and maintainable services."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "For handling authentication flows and JWT validation, the `Microsoft.IdentityModel.Protocols`, `Microsoft.IdentityModel.Protocols.OpenIdConnect`, and `System.IdentityModel.Tokens.Jwt` packages are crucial. These packages facilitate working with OpenID Connect and JWT, enabling secure communication and validation of user identities. Lastly, the `Microsoft.NET.Sdk.Functions` package is used for building and running Azure Functions, providing essential tools and libraries for developing and deploying function apps."
                 }
             },
             {
@@ -978,6 +1149,44 @@ export const postList = [
             {
                 "type": "heading",
                 "data": {
+                    "text": "Understanding the `JWTValidatorService` interface",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `IJwtValidatorService` interface defines a contract for services that handle JWT authentication and authorization. This service is essential for verifying the validity of JWT tokens and ensuring that users have the necessary permissions to access protected resources. It abstracts the logic required to validate JWT tokens and to check if the user's claims meet the specified authorization requirements."
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "using Microsoft.Azure.Functions.Worker.Http;\n\nnamespace ProtectedAPI.Service.Interfaces\n{\n    public interface IJwtValidatorService\n    {\n        Task<string?> AuthenticateAndAuthorize(HttpRequestData req, string[] acceptedScopes);\n    }\n}"
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "In the interface definition, the `AuthenticateAndAuthorize` method accepts two parameters: an `HttpRequestData` object, which represents the incoming HTTP request, and an array of accepted scopes. The method returns a `Task<string?>` that resolves to the unique identifier of the authenticated user if the token is valid and the user is authorized, or `null` if the validation or authorization fails."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The purpose of this method is twofold: first, it authenticates the user by validating the JWT token found in the `Authorization` header of the request. Second, it authorizes the user by checking whether the token contains the required scopes that match the provided `acceptedScopes` array. This ensures that only users with the necessary permissions can access the microservice."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "This interface is implemented in the `JwtValidatorService` class, which contains the concrete logic for token validation and user authorization. By using this interface, you can inject the `JwtValidatorService` wherever it is needed in the application, allowing for a modular and testable approach to handling security in your microservices."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
                     "text": "JWT Validation Logic",
                     "level": 2
                 }
@@ -985,7 +1194,13 @@ export const postList = [
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "This PoC includes a robust JWT validation mechanism. When an HTTP request contains a JWT in the `Authorization` header, the service verifies the token's validity, checks the required scopes, and extracts user-specific claims like the unique identifier (OID). This is to ensure only authorized users with the right claims can access your custom service logic."
+                    "text": "This PoC includes a robust JWT validation mechanism. When an HTTP request contains a JWT in the `Authorization` header, the service verifies the token's validity, checks the required scopes, and extracts user-specific claims like the unique identifier (OID). This ensures that only authorized users with the appropriate claims can access your custom service logic."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `JwtValidatorService` class implements the logic required to authenticate and authorize HTTP requests using JWT tokens. The class uses the `TokenValidationParameters` to define the rules for validating the token, such as issuer validation, audience validation, and token lifetime validation. The method `AuthenticateAndAuthorize` is responsible for extracting the token from the request, validating it, and checking whether the user has the required scopes."
                 }
             },
             {
@@ -993,6 +1208,150 @@ export const postList = [
                 "data": {
                     "language": "csharp",
                     "code": "public class JwtValidatorService(IOptions<TokenValidationOptions> opt) : IJwtValidatorService\n{\n    public async Task<string?> AuthenticateAndAuthorize(HttpRequestData req, string[] acceptedScopes)\n    {\n        if (!req.Headers.TryGetValues(\"Authorization\", out var authHeaders))\n        {\n            return null;\n        }\n\n        var authHeader = authHeaders.FirstOrDefault();\n        if (string.IsNullOrEmpty(authHeader) || !authHeader.StartsWith(\"Bearer \"))\n        {\n            return null;\n        }\n\n        var bearerToken = authHeader.Substring(\"Bearer \".Length);\n        try\n        {\n            var openIdConfig = await _configurationManager.GetConfigurationAsync(CancellationToken.None);\n            var validationParameters = new TokenValidationParameters\n            {\n                ValidateIssuer = true,\n                ValidIssuer = _issuer,\n                ValidateAudience = true,\n                ValidAudience = _clientId,\n                ValidateLifetime = true,\n                IssuerSigningKeys = openIdConfig.SigningKeys\n            };\n\n            var tokenHandler = new JwtSecurityTokenHandler();\n            var principal = tokenHandler.ValidateToken(bearerToken, validationParameters, out SecurityToken validatedToken);\n\n            var scopes = principal.Claims\n                .Where(c => c.Type == \"scp\" || c.Type == \"scope\")\n                .SelectMany(c => c.Value.Split(' '))\n                .ToList();\n\n            if (!scopes.Any(scope => acceptedScopes.Contains(scope)))\n            {\n                return null;\n            }\n\n            return principal.Claims.FirstOrDefault(c => c.Type == \"oid\")?.Value;\n        }\n        catch\n        {\n            return null;\n        }\n    }\n}"
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `AuthenticateAndAuthorize` method first checks if the request contains an `Authorization` header with a Bearer token. If the header is missing or improperly formatted, the method returns `null`, indicating an unauthorized request. The token is extracted from the header and validated using the `TokenValidationParameters` defined in the method."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The validation parameters are configured to ensure that the token is issued by a trusted issuer (`ValidIssuer`), is intended for a specific audience (`ValidAudience`), and has not expired (`ValidateLifetime`). The method uses the signing keys obtained from the OpenID Connect configuration (`IssuerSigningKeys`) to validate the token's integrity."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "If the token is valid, the method extracts the user's claims from the token and checks whether the required scopes are present. The `scopes` variable collects all scope claims from the token, and the method checks if any of the required scopes (`acceptedScopes`) are included in the user's claims. If none of the required scopes are found, the method returns `null`, indicating that the user is not authorized to access the resource."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "Finally, if the token is valid and the user has the required scopes, the method returns the unique identifier of the user (`oid` claim) from the token. This identifier can be used to associate the request with a specific user in the microservice logic."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `JwtValidatorService` provides a reusable, centralized way to handle JWT validation and authorization in the microservice. By abstracting the token validation logic into this service, it allows for secure and maintainable code that can be easily extended or modified to meet additional security requirements."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Configuring the Microservice with the IOptions Pattern",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `IOptions` pattern in .NET provides a convenient way to manage and access configuration settings in a strongly-typed manner. In the context of this JWT-secured microservice, the `TokenValidationOptions` and `AuthorizationScope` classes are used to encapsulate configuration data required for JWT validation and authorization management. This approach allows for clean and maintainable code by separating configuration settings from the business logic."
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "namespace ProtectedAPI.Service.Options\n{\n    public class TokenValidationOptions\n    {\n        public string MetadataUrl { get; set; }\n        public string ClientId { get; set; }\n        public string Issuer { get; set; }\n    }\n    public class AuthorizationScope\n    {\n        public string TestScope { get; set; }\n    }\n}"
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `TokenValidationOptions` class holds the configuration settings required to validate JWT tokens. These include:"
+                }
+            },
+            {
+                "type": "list",
+                "data": {
+                    "items": [
+                        "**`MetadataUrl`**: The URL from which the OpenID Connect configuration is fetched. This configuration provides information about the issuer, available signing keys, and other necessary metadata for validating JWT tokens.",
+                        "**`ClientId`**: The unique identifier for the client application that the token is intended for. This value is used to validate that the token's audience matches the expected client ID.",
+                        "**`Issuer`**: The issuer of the token, which is usually a trusted authority, such as an identity provider. This value is checked against the `iss` claim in the token to ensure it was issued by a trusted entity."
+                    ],
+                    "ordered": false
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "These settings are crucial for ensuring that the JWT tokens are valid, originate from a trusted source, and are intended for the correct client application. By using the `TokenValidationOptions` class with the `IOptions` pattern, the microservice can easily access and manage these settings in a centralized and strongly-typed manner."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `AuthorizationScope` class, on the other hand, is used to define the scopes required for accessing certain parts of the microservice. In this example, it includes a single property:"
+                }
+            },
+            {
+                "type": "list",
+                "data": {
+                    "items": [
+                        "**`TestScope`**: A string representing a scope required to access a specific API endpoint or functionality. Scopes are typically used to limit access to resources based on the user's permissions. For example, a user with the `TestScope` can access certain API endpoints that require this scope."
+                    ],
+                    "ordered": false
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "Scopes are used in combination with the claims in the JWT token to authorize access to different parts of the microservice. By configuring the required scopes in the `AuthorizationScope` class, developers can easily manage access control and ensure that only users with the appropriate permissions can access protected resources."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "Using the `IOptions` pattern with these configuration classes allows the microservice to be easily configured and adapted to different environments and security requirements. For instance, the `TokenValidationOptions` can be loaded from a configuration file, environment variables, or a secret store like Azure Key Vault, making it flexible and secure. Similarly, the `AuthorizationScope` settings can be customized based on the application's authorization policies."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "In the `JwtValidatorService`, these options are injected via the constructor using the `IOptions<TokenValidationOptions>` and `IOptions<AuthorizationScope>` interfaces. This allows the service to access the necessary configuration values for token validation and scope management without directly depending on hardcoded values, leading to a more modular and testable architecture."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Implementing the Azure Function App",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The following example demonstrates how to implement an Azure Function that leverages the JWT validation mechanism provided by the `JwtValidatorService`. This function is protected by the JWT-based authentication and authorization system, ensuring that only users with valid tokens and appropriate scopes can access the function's resources. The function checks the `Authorization` header for a valid token and verifies that the token contains the required scopes."
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "public class ProtectedFunction(\n    IJwtValidatorService jwtValidatorService, IOptions<AuthorizationScope> opt)\n{\n    private readonly AuthorizationScope _protectedScope = opt.Value;\n    \n    [Function(nameof(Protected))]\n    public async Task<HttpResponseData> Protected(\n        [HttpTrigger(AuthorizationLevel.Anonymous, \"get\", Route = null)] \n        HttpRequestData req, ExecutionContext executionContext)\n    {\n        var acceptedScopes = new[] { _protectedScope.TestScope };\n        var userId = await jwtValidatorService.AuthenticateAndAuthorize(req, acceptedScopes);\n        \n        var response = req.CreateResponse();\n        if (userId == null)\n        {\n            response.StatusCode = HttpStatusCode.Unauthorized;\n            return response;\n        }\n        response.StatusCode = HttpStatusCode.OK;\n        return response;\n    }\n}"
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "In this example, the `ProtectedFunction` class is an Azure Function that uses the `JwtValidatorService` to authenticate and authorize incoming requests. The function is defined with the `[Function]` attribute and is triggered by an anonymous HTTP request. However, the function itself is not accessible without a valid JWT token."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `AuthenticateAndAuthorize` method of the `JwtValidatorService` is called to validate the token and ensure that the user has the required scope (`_protectedScope.TestScope`). If the token is valid and the user is authorized, the function returns a 200 OK response. Otherwise, it returns a 401 Unauthorized response, indicating that the user does not have the necessary permissions to access the function."
+                },
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "This approach allows you to build secured Azure Functions that are protected by JWT authentication and authorization, providing a flexible and reusable way to secure microservices. The function app can be extended to include more complex logic, additional endpoints, or different scopes, making it adaptable to a wide range of use cases."
                 }
             },
             {
@@ -1005,14 +1364,19 @@ export const postList = [
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "You can inject your services into the secure environment and rely on JWT validation to protect your business logic. For example, you can inject a database service to ensure that only authorized users can access and manipulate data."
+                    "text": "The design of this PoC allows you to inject custom services into the secure environment, providing flexibility and reusability. By leveraging the provided JWT validation mechanism, you can protect any business logic or service you inject into the microservice. For instance, you can integrate a database service to ensure that only users with valid tokens and appropriate permissions can access and manipulate data. This makes the PoC highly adaptable to various use cases and allows developers to add custom functionality while still maintaining a secure environment."
                 }
             },
             {
-                "type": "code",
+                "type": "paragraph",
                 "data": {
-                    "language": "csharp",
-                    "code": "public class ProtectedFunction(\n    IJwtValidatorService jwtValidatorService, IOptions<AuthorizationScope> opt)\n{\n    private readonly AuthorizationScope _protectedScope = opt.Value;\n    \n    [Function(nameof(Protected))]\n    public async Task<HttpResponseData> Protected(\n        [HttpTrigger(AuthorizationLevel.Anonymous, \"get\", Route = null)] \n        HttpRequestData req, ExecutionContext executionContext)\n    {\n        var acceptedScopes = new[] { _protectedScope.TestScope };\n        var userId = await jwtValidatorService.AuthenticateAndAuthorize(req, acceptedScopes);\n        \n        var response = req.CreateResponse();\n        if (userId == null)\n        {\n            response.StatusCode = HttpStatusCode.Unauthorized;\n            return response;\n        }\n        response.StatusCode = HttpStatusCode.OK;\n        return response;\n    }\n}"
+                    "text": "To inject a custom service, you would typically register the service with the dependency injection container, following the same pattern used for the `JwtValidatorService`. This allows your service to be injected into the microservice functions, providing secure access to business logic, data, or external APIs. By doing this, you can extend the microservice framework without modifying the core security logic, promoting modularity and maintainability."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "For example, you could create a service that handles business-specific operations, such as processing orders or managing user data. This service would be registered and injected into the secure environment, where it would operate under the protection of the JWT validation and scope-based authorization mechanisms. This pattern enables you to focus on implementing business logic while relying on the secure foundation provided by the PoC."
                 }
             },
             {
@@ -1082,7 +1446,8 @@ export const postList = [
     },
     {
         "id": 6,
-        "title": "PoC6: A Custom Auth Flow with a Microservice",
+        "uid": "46fe9dc9-4adb-45e7-a024-58cb52e37c77",
+        "title": "PoC6: A Custom Auth Flow using a Microservice",
         "slug": "b2c-redirect-endpoint-microservice-poc",
         "author": "Abdurrahman Gazi Yavuz",
         "tags": ["Azure Functions", "AD B2C", "Microservices", "C#", ".NET"],
@@ -1114,6 +1479,64 @@ export const postList = [
             {
                 "type": "paragraph",
                 "data": {
+                    "text": "To implement the custom authentication flow and microservice, you need to add the following NuGet packages to your .NET application. These packages provide essential functionality for Azure Functions, authentication, database access, and configuration management."
+                }
+            },
+            {
+                "type": "list",
+                "data": {
+                    "items": [
+                        "Microsoft.AspNetCore.App",
+                        "Azure.Identity",
+                        "Microsoft.Azure.Functions.Worker",
+                        "Microsoft.Azure.Functions.Worker.Extensions.Http",
+                        "Microsoft.Azure.Functions.Worker.Sdk",
+                        "Microsoft.Azure.AppConfiguration.Functions.Worker",
+                        "Microsoft.EntityFrameworkCore",
+                        "Microsoft.EntityFrameworkCore.SqlServer",
+                        "Microsoft.Extensions.Http",
+                        "Microsoft.IdentityModel.Protocols",
+                        "Microsoft.IdentityModel.Protocols.OpenIdConnect",
+                        "Microsoft.NET.Sdk.Functions",
+                        "System.IdentityModel.Tokens.Jwt"
+                    ],
+                    "ordered": false
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `Microsoft.AspNetCore.App` framework reference is essential for ASP.NET Core-based applications, providing common functionality such as dependency injection and middleware support. The `Azure.Identity` package offers a simplified way to manage Azure authentication, allowing the application to securely access resources like Azure App Configuration and Key Vault using default credentials. `Microsoft.Azure.Functions.Worker` and its extensions enable the development of isolated Azure Functions using the .NET worker model, providing a robust environment for building microservices with improved performance and control."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `Microsoft.Azure.AppConfiguration.Functions.Worker` package integrates Azure App Configuration with the Azure Functions worker model, allowing the function app to dynamically load configuration values at runtime. For database interactions, `Microsoft.EntityFrameworkCore` and `Microsoft.EntityFrameworkCore.SqlServer` provide the necessary ORM capabilities to interact with a SQL Server database using Entity Framework Core."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "To handle HTTP requests and responses within Azure Functions, `Microsoft.Azure.Functions.Worker.Extensions.Http` is used to provide HTTP trigger and binding capabilities. `Microsoft.Extensions.Http` adds advanced HTTP client management features, enabling efficient and scalable communication with external APIs. The `Microsoft.IdentityModel.Protocols` and `Microsoft.IdentityModel.Protocols.OpenIdConnect` packages facilitate handling OpenID Connect authentication flows, making it easier to work with Azure AD B2C and other identity providers."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "For JWT handling and token validation, `System.IdentityModel.Tokens.Jwt` is a crucial package that provides APIs for creating, validating, and parsing JWTs. Lastly, the `Microsoft.NET.Sdk.Functions` package is used to build and run Azure Functions, simplifying the development experience by providing essential tools and libraries for function apps."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Coding",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
                     "text": "To implement this microservice, we need to set up the `AuthFlow` service, which includes an Azure Function that handles B2C sign-in and user management. The service uses dependency injection to register services such as `AuthService` and `TokenService`, and the `DbContext` for database interaction."
                 }
             },
@@ -1133,6 +1556,38 @@ export const postList = [
             {
                 "type": "heading",
                 "data": {
+                    "text": "AuthService Interface for User Management",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `IAuthService` interface defines the contract for services that handle the user management workflow in the `AuthFlow` microservice. It provides a method, `VerifyAndProcess`, which is responsible for verifying the authentication code received from Azure AD B2C and processing the user entity accordingly. This method supports both user creation and updates in the database."
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "namespace AuthFlow.Service.Interfaces\n{\n    public interface IAuthService\n    {\n        Task<bool> VerifyAndProcess(string code, bool update = false);\n    }\n}"
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `VerifyAndProcess` method accepts an authentication code and an optional boolean parameter `update`. If `update` is `true`, the method will update the existing user entity in the database. Otherwise, it will create a new user entity. This design allows the microservice to handle both new user sign-ups and existing user updates using the same interface."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "By defining this interface, the microservice separates the user management logic from the underlying implementation details. This promotes loose coupling and makes it easier to extend or modify the user management functionality without changing the overall service structure. The `AuthService` implementation of this interface will utilize the `TokenService` to exchange the received code for an ID token, decode the token to extract user information, and then interact with the database to create or update the user entity."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
                     "text": "Creating the AuthService",
                     "level": 2
                 }
@@ -1140,7 +1595,7 @@ export const postList = [
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "The `AuthService` validates the authentication code received from the B2C redirect, decodes the token, and processes the user entity (creating or updating it in the database)."
+                    "text": "The `AuthService` class is responsible for handling the core logic related to user management within the `AuthFlow` microservice. It implements the `IAuthService` interface, which defines the contract for verifying the authentication code received from the Azure AD B2C redirect and processing the user entity accordingly. The service interacts with the `TokenService` to exchange the authorization code for an ID token, which is then used to extract user information and either create a new user entity or update an existing one in the database."
                 }
             },
             {
@@ -1153,7 +1608,63 @@ export const postList = [
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "In the `AuthService`, we use the `TokenService` to exchange the code for an ID token and decode it to extract user information. The user entity is then created or updated in the database."
+                    "text": "In this implementation, the `VerifyAndProcess` method starts by calling the `ExchangeCodeForTokenAsync` method of the `TokenService` to exchange the received authorization code for an ID token. The `update` parameter determines whether the operation is for a new user sign-up (`update = false`) or an existing user update (`update = true`)."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "If the token exchange is successful, the method extracts the `id_token` from the returned JSON object (`jObject`). This token is then passed to the `DecodeIdToken` method, which decodes the token to extract user information such as the unique identifier, email, and other claims."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "Depending on the value of the `update` parameter, the `VerifyAndProcess` method either calls the `CreateNewEntity` method to create a new user entity in the database or the `UpdateEntity` method to update an existing user entity. Both methods interact with the `AuthFlowDbContext` to perform the necessary database operations, ensuring that user information is accurately stored and updated."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "By leveraging the `IAuthService` interface, the `AuthService` class decouples the user management logic from the underlying implementation. This allows the microservice to be extended or modified with minimal impact on other components. For example, if the process for creating or updating user entities changes, only the `AuthService` implementation needs to be updated, while the rest of the microservice remains unaffected."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "TokenService Interface for Token Handling",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `ITokenService` interface defines the contract for handling token-related operations within the `AuthFlow` microservice. It provides a method, `ExchangeCodeForTokenAsync`, which is responsible for exchanging the authorization code received from Azure AD B2C for an ID token. This token is then used to extract user information and validate the user's identity."
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "using Newtonsoft.Json.Linq;\n\nnamespace AuthFlow.Service.Interfaces\n{\n    public interface ITokenService\n    {\n        Task<JObject?> ExchangeCodeForTokenAsync(string code, bool update = false);\n    }\n}"
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `ExchangeCodeForTokenAsync` method accepts an authentication code and an optional boolean parameter `update`. The method sends a POST request to the Azure AD B2C token endpoint, exchanging the code for an ID token. If `update` is `true`, the method uses the update policy for the token exchange, ensuring the correct flow is used for updating user information."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The returned `JObject` contains the ID token, which includes claims such as the user's unique identifier and other attributes. This token is then passed to the `AuthService` for further processing, such as creating or updating the user entity in the database. By abstracting the token handling logic into this interface, the microservice can easily adapt to changes in the token exchange flow or integrate with different identity providers without modifying the core logic."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `ITokenService` interface promotes separation of concerns by isolating token exchange and validation from the rest of the service. This makes the microservice more modular and easier to test, as the token handling logic can be mocked or replaced independently of other components."
                 }
             },
             {
@@ -1166,7 +1677,7 @@ export const postList = [
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "The `TokenService` is responsible for exchanging the code received from the B2C redirect with a token using the OAuth 2.0 flow. It also handles token validation and expiration."
+                    "text": "The `TokenService` class handles the logic for exchanging the authorization code received from Azure AD B2C with an ID token. It implements the `ITokenService` interface, which defines the contract for this token exchange operation. The service interacts with the OAuth 2.0 token endpoint to request the ID token and validates the response before passing it to the `AuthService` for further processing."
                 }
             },
             {
@@ -1174,6 +1685,163 @@ export const postList = [
                 "data": {
                     "language": "csharp",
                     "code": "public class TokenService(\n    IHttpClientFactory httpClientFactory, \n    IOptions<TokenServiceOptions> opt): ITokenService\n{\n    public async Task<JObject?> ExchangeCodeForTokenAsync(string code, bool update = false)\n    {\n        var httpClient = httpClientFactory.CreateClient();\n        var policy = update ? _b2CUpdatePolicy.ToLower() : _b2CSignInUpPolicy.ToLower();\n        var request = new HttpRequestMessage(HttpMethod.Post, $\"{_b2CTokenEndpoint}?p={policy}\");\n        var content = new FormUrlEncodedContent(new[]\n        {\n            new KeyValuePair<string, string>(\"code\", code),\n            new KeyValuePair<string, string>(\"client_id\", _b2CClientId),\n            new KeyValuePair<string, string>(\"client_secret\", _b2CClientSecret),\n            new KeyValuePair<string, string>(\"redirect_uri\", _b2CPostRegisterRedirectUri),\n            new KeyValuePair<string, string>(\"grant_type\", _b2CGrantType),\n            new KeyValuePair<string, string>(\"scope\", _b2CScope)\n        });\n        request.Content = content;\n        var response = await httpClient.SendAsync(request);\n        return response.IsSuccessStatusCode ? JObject.Parse(await response.Content.ReadAsStringAsync()) : null;\n    }\n}"
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `ExchangeCodeForTokenAsync` method takes an authorization code and an optional boolean parameter `update`. It creates a POST request to the Azure AD B2C token endpoint, sending the required parameters, such as the code, client ID, client secret, redirect URI, and grant type. The `policy` parameter determines whether the request is for a sign-up/sign-in operation or an update operation, depending on the value of the `update` parameter."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "If the request is successful, the method parses the response content into a `JObject` and returns it. This `JObject` contains the ID token, which the `AuthService` uses to extract user information. If the request fails, the method returns `null`, indicating that the token exchange was unsuccessful."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "By abstracting the token exchange logic into the `TokenService`, the microservice can easily modify the token handling process without affecting the rest of the system. For example, if the token endpoint changes or additional parameters are required, these changes can be made in the `TokenService` class without impacting other components."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `ITokenService` interface defines a clear contract for token exchange operations, ensuring that the `AuthService` can interact with the `TokenService` without needing to know the details of how the token exchange is performed. This separation of concerns enhances the maintainability and testability of the microservice."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Integrating the Interfaces into the AuthFlow Microservice",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `AuthFlow` microservice uses these interfaces to manage authentication and user data processing seamlessly. The `IAuthService` and `ITokenService` interfaces are registered in the dependency injection container, allowing them to be injected into the Azure Functions or other services that require them."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "In the `AuthFlow` microservice, the `AuthService` implementation of the `IAuthService` interface coordinates the user management workflow. It relies on the `TokenService`, which implements the `ITokenService` interface, to handle the token exchange process. This collaboration ensures that the microservice can handle the complete authentication flow from code exchange to user entity management in a secure and efficient manner."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "By decoupling the token exchange and user management logic into separate interfaces, the microservice can be extended or modified with minimal impact on existing components. For instance, if you need to change the token exchange policy or support additional claims in the user entity, you can modify the respective service without affecting other parts of the microservice."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "This modular design enhances the maintainability and scalability of the `AuthFlow` microservice, making it easier to integrate with various authentication providers or expand the service to support additional authentication flows and business requirements."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Service Configuration Using IOptions Pattern",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The microservice leverages the `IOptions` pattern to manage configuration settings for both the `AuthService` and `TokenService`. This pattern provides a clean and maintainable way to handle service configuration, allowing developers to specify the required settings in a strongly-typed manner and inject them into the services. This setup is particularly useful in cloud-native applications, where configuration values like URLs, client secrets, and redirect URIs may differ across environments."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "AuthServiceOptions",
+                    "level": 3
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `AuthServiceOptions` class encapsulates configuration settings required by the `AuthService` to handle redirect URIs for various operations. It includes properties for `PostRegisterRedirectUri`, `PostUpdateRedirectUri`, and `UnauthorizedRedirectUri`. These properties are used to redirect users to the appropriate endpoints after a successful or unsuccessful authentication attempt."
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "namespace AuthFlow.Service.Options\n{\n    public class AuthServiceOptions\n    {\n        public string PostRegisterRedirectUri { get; set; }\n        public string PostUpdateRedirectUri { get; set; }\n        public string UnauthorizedRedirectUri { get; set; }\n    }\n}"
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "In the `AuthService`, these options are accessed through the `IOptions<AuthServiceOptions>` interface. This allows the service to dynamically use the configured URIs based on the environment without hardcoding them. For example, in the `PostRegister` method, the `PostRegisterRedirectUri` is used to redirect the user after a successful registration, while the `UnauthorizedRedirectUri` is used when the user fails to authenticate. This separation of configuration and logic enhances the flexibility and maintainability of the service."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "TokenServiceOptions",
+                    "level": 3
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `TokenServiceOptions` class defines the configuration settings required by the `TokenService` to interact with the Azure AD B2C token endpoint. It includes properties such as `TokenEndpoint`, `UpdatePolicy`, `SignInUpPolicy`, `ClientId`, `ClientSecret`, `GrantType`, and `Scope`. These properties are essential for constructing requests to the B2C token endpoint and exchanging authentication codes for tokens."
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "namespace AuthFlow.Service.Options\n{\n    public class TokenServiceOptions\n    {\n        public string B2CPostRegisterRedirectUri { get; set; }\n        public string B2CPostUpdateRedirectUri { get; set; }\n        public string TokenEndpoint { get; set; }\n        public string UpdatePolicy { get; set; }\n        public string SignInUpPolicy { get; set; }\n        public string ClientId { get; set; }\n        public string ClientSecret { get; set; }\n        public string GrantType { get; set; }\n        public string Scope { get; set; }\n    }\n}"
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `TokenService` uses these options to construct the request payload for token exchange. The `TokenEndpoint` defines the URL for the token exchange, while the `ClientId` and `ClientSecret` are used for authentication. The `GrantType` and `Scope` define the type of OAuth 2.0 grant and the permissions being requested. This flexibility allows the service to support multiple B2C policies, such as sign-in/sign-up and profile update, by specifying different values for `SignInUpPolicy` and `UpdatePolicy`."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "These options are injected into the `TokenService` using the `IOptions<TokenServiceOptions>` interface. This pattern allows the service to easily access and utilize the configured values, making it adaptable to different environments and scenarios. For example, the `TokenEndpoint` and `ClientSecret` might vary between development and production environments, and using the `IOptions` pattern ensures that the service always uses the correct settings without modifying the codebase."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Benefits of the IOptions Pattern",
+                    "level": 3
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "Using the `IOptions` pattern to manage configurations in the microservice offers several benefits:"
+                }
+            },
+            {
+                "type": "list",
+                "data": {
+                    "items": [
+                        "It provides a strongly-typed and centralized way to manage configuration settings, reducing the risk of errors and inconsistencies.",
+                        "It supports different configurations for different environments (e.g., development, staging, production) without changing the codebase.",
+                        "It enables easy modification of configuration values via external sources such as app settings, environment variables, or Azure App Configuration.",
+                        "It decouples the configuration from the business logic, making the application more maintainable and easier to test."
+                    ],
+                    "ordered": false
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "Overall, the use of `AuthServiceOptions` and `TokenServiceOptions` with the `IOptions` pattern enhances the flexibility, maintainability, and security of the microservice, allowing it to adapt to different deployment environments and configurations seamlessly."
                 }
             },
             {
@@ -1186,27 +1854,89 @@ export const postList = [
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "The microservice uses Entity Framework Core to interact with the database. The `AuthFlowDbContext` handles CRUD operations for user entities."
+                    "text": "The microservice utilizes Entity Framework Core to interact with the database, providing an abstraction over the data access layer. This makes it easier to perform CRUD (Create, Read, Update, Delete) operations on user entities. The `AuthFlowDbContext` class serves as the primary interface between the application and the database, handling the configuration of the entity model and managing database connections. This setup enables seamless integration with Azure SQL, SQL Server, or other database providers supported by Entity Framework Core."
                 }
             },
             {
                 "type": "code",
                 "data": {
                     "language": "csharp",
-                    "code": "public class AuthFlowDbContext(DbContextOptions<AuthFlowDbContext> options) : DbContext(options)\n{\n    public DbSet<Entity> Entities { get; set; }\n\n    protected override void OnModelCreating(ModelBuilder modelBuilder)\n    {\n        modelBuilder.Entity<Entity>(entity =>\n        {\n            entity.HasKey(e => e.Id);\n            entity.Property(e => e.RefId).IsRequired();\n            entity.Property(e => e.CreatedAt).IsRequired();\n            entity.Property(e => e.UpdatedAt).IsRequired();\n        });\n    }\n}"
+                    "code": "public class AuthFlowDbContext(DbContextOptions<AuthFlowDbContext> options) : DbContext(options)\n{\n    public DbSet<Entity> Entities { get; set; }\n\n    protected override void OnModelCreating(ModelBuilder modelBuilder)\n    {\n        base.OnModelCreating(modelBuilder);\n\n        modelBuilder.Entity<Entity>(entity =>\n        {\n            entity.HasKey(e => e.Id);\n\n            entity.Property(e => e.Id)\n                .ValueGeneratedOnAdd();\n\n            entity.Property(e => e.RefId)\n                .IsRequired();\n\n            entity.Property(e => e.CreatedAt)\n                .IsRequired();\n\n            entity.Property(e => e.UpdatedAt)\n                .IsRequired();\n\n            entity.Property(e => e.IsEnabled)\n                .IsRequired();\n\n            entity.Property(e => e.FirstName)\n                .IsRequired()\n                .HasMaxLength(255);\n\n            entity.Property(e => e.LastName)\n                .IsRequired()\n                .HasMaxLength(255);\n\n            entity.Property(e => e.Email)\n                .IsRequired()\n                .HasMaxLength(255);\n        });\n    }\n}"
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `AuthFlowDbContext` class extends the `DbContext` class provided by Entity Framework Core and is configured with the necessary options through dependency injection. It defines a `DbSet<Entity>` property, representing a collection of `Entity` objects in the database. The `OnModelCreating` method is overridden to configure the entity model, defining constraints such as primary keys, required fields, and maximum lengths for specific properties."
                 }
             },
             {
                 "type": "heading",
                 "data": {
-                    "text": "Azure Functions for Redirect Handling",
+                    "text": "User Entity Definition"
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `Entity` class represents the user entity stored in the database. It contains properties such as `Id`, `RefId`, `CreatedAt`, `UpdatedAt`, `IsEnabled`, `FirstName`, `LastName`, and `Email`. These properties are annotated with data annotations to specify constraints like required fields and maximum lengths. The class uses `System.ComponentModel.DataAnnotations` and `System.ComponentModel.DataAnnotations.Schema` to enforce these rules, ensuring data integrity and consistency in the database."
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "public class Entity\n{\n    [Key]\n    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]\n    public int Id { get; set; }\n\n    [Required]\n    public Guid RefId { get; set; }\n\n    [Required]\n    public DateTime CreatedAt { get; set; }\n\n    [Required]\n    public DateTime UpdatedAt { get; set; }\n\n    [Required]\n    public bool IsEnabled { get; set; } = true;\n\n    [Required]\n    [MaxLength(255)]\n    public string FirstName { get; set; }\n\n    [Required]\n    [MaxLength(255)]\n    public string LastName { get; set; }\n\n    [Required]\n    [MaxLength(255)]\n    public string Email { get; set; }\n}"
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `Entity` class defines the schema for the user entity in the database. Each property corresponds to a column in the database table, and the data annotations provide additional configuration. For example, the `[Key]` attribute designates the `Id` property as the primary key, and the `[DatabaseGenerated(DatabaseGeneratedOption.Identity)]` attribute specifies that this value is auto-generated by the database. The `RefId` is a unique identifier for each user, while `CreatedAt` and `UpdatedAt` track the timestamps for when the entity was created and last updated. The `IsEnabled` property indicates whether the user account is active, and the `FirstName`, `LastName`, and `Email` properties store the user's personal information."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Database Configuration Using IOptions Pattern"
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `DatabaseOption` class is used to manage the database connection string through the `IOptions` pattern. This pattern allows the microservice to retrieve configuration settings in a strongly-typed manner, making it easier to manage and modify settings like connection strings. The `DatabaseOption` class contains a single property, `ConnectionString`, which holds the connection string needed to connect to the database. This configuration is injected into the `AuthFlowDbContext` during startup, ensuring that the context has access to the necessary settings for database interaction."
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "namespace AuthFlow.Data\n{\n    public class DatabaseOption\n    {\n        public string ConnectionString { get; set; }\n    }\n}"
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "In this example, the `DatabaseOption` class is registered with the dependency injection container, and the connection string is provided through application settings or Azure App Configuration. This allows for a clean separation of configuration and code, making the application more maintainable and secure."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "During the application startup, the `DatabaseOption` is configured and injected into the `AuthFlowDbContext`. This setup ensures that the database context has access to the correct connection string without hardcoding it in the codebase. This approach is especially useful for cloud-native applications where connection strings and other sensitive information are stored in secure configurations like Azure Key Vault or Azure App Configuration."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Handling User Sign-Up and Update with Azure Functions",
                     "level": 2
                 }
             },
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "The Azure Function microservice contains two endpoints: `PostRegister` and `PostUpdate`. These endpoints handle B2C redirects for user sign-up and updates, respectively."
+                    "text": "The microservice consists of two Azure Function endpoints: `PostRegister` and `PostUpdate`. These endpoints are designed to handle redirects from Azure AD B2C after a user completes the sign-up or profile update process. Each function verifies the incoming authentication code, processes the user information, and redirects the user to the appropriate endpoint based on the outcome of the operation."
                 }
             },
             {
@@ -1219,20 +1949,51 @@ export const postList = [
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "The `PostRegister` and `PostUpdate` functions handle the Azure AD B2C redirect for user registration and updates. If the code is valid and the user is processed successfully, the user is redirected to the appropriate URL. Otherwise, they are redirected to the unauthorized URL."
+                    "text": "The `PostRegister` function is triggered when a user completes the sign-up process in Azure AD B2C. It accepts an HTTP request containing a query parameter `code`, which represents the authorization code provided by Azure AD B2C. This code is then verified and processed by the `AuthService`. If the verification is successful and the user entity is created or updated in the database, the function redirects the user to a post-registration URL defined in the configuration. Otherwise, the user is redirected to an unauthorized URL."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "Similarly, the `PostUpdate` function handles user profile updates. It uses the same logic as `PostRegister` but is specifically configured for processing updates. If the verification and processing are successful, the user is redirected to a post-update URL. If not, the user is redirected to the unauthorized URL. This separation allows for distinct handling of registration and update flows, providing a more structured and secure way to manage user data and authentication states."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "Both functions use the `RedirectResponse` helper method to redirect users to the appropriate URL based on the outcome of the authentication and processing. This method sets the HTTP status code to `302 Found` and includes the target URL in the `Location` header of the response."
                 }
             },
             {
                 "type": "heading",
                 "data": {
-                    "text": "Integrating with Azure Functions and B2C",
+                    "text": "Function App Configuration and Dependency Injection",
                     "level": 2
                 }
             },
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "To run the microservice, we need to configure the Azure Function with settings such as the Azure AD B2C policies, token endpoints, client IDs, and secrets. These values can be stored securely using Azure App Configuration and Azure Key Vault, ensuring that sensitive information is protected."
+                    "text": "The microservice uses dependency injection to configure and inject the necessary services, such as `AuthService` and `TokenService`. These services are responsible for verifying the authentication code, processing user information, and interacting with the database. Configuration settings, such as redirect URIs and client secrets, are managed through the `IOptions` pattern, allowing for easy modification and secure management of sensitive data through Azure App Configuration and Azure Key Vault."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Configuring and Running the Azure Function with B2C Integration",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "To integrate the microservice with Azure AD B2C, the Azure Function needs to be configured with various settings such as Azure AD B2C policies, token endpoints, client IDs, and secrets. This configuration allows the function to communicate securely with Azure AD B2C and manage user authentication and token validation. Sensitive information such as client secrets and token endpoints is stored securely using Azure App Configuration and Azure Key Vault, which ensures that these values are not exposed in the codebase and can be managed separately."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The Azure Function is built and configured using the `HostBuilder`, which is a part of the Azure Functions .NET Worker SDK. It sets up the application with the necessary services, configuration options, and dependencies. By utilizing Azure App Configuration and Azure Key Vault, the application can dynamically retrieve configuration values and secrets at runtime, providing a secure and scalable solution for managing sensitive settings."
                 }
             },
             {
@@ -1240,6 +2001,30 @@ export const postList = [
                 "data": {
                     "language": "csharp",
                     "code": "using AuthFlow;\nusing AuthFlow.Data;\nusing Azure.Identity;\nusing Microsoft.Extensions.Configuration;\nusing Microsoft.Extensions.Hosting;\n\nvar host = new HostBuilder()\n    .ConfigureFunctionsWorkerDefaults()\n    .ConfigureAppConfiguration(builder =>\n    {\n        var configuration = builder.Build();\n        var token = new DefaultAzureCredential();\n        var appConfigUrl = configuration[\"app_config_url_in_app_configuration\"] ?? string.Empty;\n        \n        builder.AddAzureAppConfiguration(config =>\n        {\n            config.Connect(new Uri(appConfigUrl), token);\n            config.ConfigureKeyVault(kv => kv.SetCredential(token));\n        });\n    })\n    .ConfigureServices((context, services) =>\n    {\n        var configuration = context.Configuration;\n        \n        services.RegisterServices(new DatabaseOption\n        {\n            ConnectionString = configuration[\"database_connection_string_in_app_configuration\"] ?? string.Empty,\n        }, tokenConfig =>\n        {\n            tokenConfig.TokenEndpoint = configuration[\"token_endpoint_in_app_configuration\"] ?? string.Empty;\n            tokenConfig.SignInUpPolicy = configuration[\"sign_in_up_policy_in_app_configuration\"] ?? string.Empty;\n            tokenConfig.UpdatePolicy = configuration[\"update_policy_in_app_configuration\"] ?? string.Empty;\n            tokenConfig.ClientId = configuration[\"client_id_in_app_configuration\"] ?? string.Empty;\n            tokenConfig.ClientSecret = configuration[\"client_secret_in_app_configuration\"] ?? string.Empty;\n            tokenConfig.Scope = configuration[\"scope_in_app_configuration\"] ?? string.Empty;\n            tokenConfig.GrantType = configuration[\"grant_type_in_app_configuration\"] ?? string.Empty;\n        }, authOpt =>\n        {\n            authOpt.PostRegisterRedirectUri = configuration[\"post_register_redirect_uri_in_app_configuration\"] ?? string.Empty;\n            authOpt.PostUpdateRedirectUri = configuration[\"post_update_redirect_uri_in_app_configuration\"] ?? string.Empty;\n            authOpt.UnauthorizedRedirectUri = configuration[\"unauthorized_redirect_uri_in_app_configuration\"] ?? string.Empty;\n        });\n    })\n    .Build();\n\nhost.Run();"
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "In the above code, the `HostBuilder` is configured to run the Azure Function. It uses `ConfigureFunctionsWorkerDefaults` to set up the function with the necessary default configurations. The `ConfigureAppConfiguration` method is used to add Azure App Configuration and Azure Key Vault, which are both essential for managing configuration values and secrets securely."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `DefaultAzureCredential` is used to authenticate against Azure App Configuration and Azure Key Vault, allowing the function to access configuration settings and secrets without storing them directly in the code. This approach provides a high level of security and flexibility, as configuration values can be changed dynamically in Azure App Configuration without requiring code changes or redeployments."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `RegisterServices` method is used to register various services needed for the microservice to function. This includes the `DatabaseOption`, which contains the database connection string, and the `TokenServiceOptions` and `AuthServiceOptions` for managing the authentication and token exchange processes. By using the `IOptions` pattern, the configuration values are injected into the services, making the application easier to configure and maintain."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The microservice is then started with `host.Run()`, which runs the configured Azure Function. This setup ensures that all necessary services and configurations are properly initialized before the function begins handling requests."
                 }
             },
             {
@@ -1302,6 +2087,7 @@ export const postList = [
     },
     {
         "id": 7,
+        "uid": "",
         "title": "Database Migration Strategy with FluentMigrator",
         "slug": "crm-database-migration-with-fluentmigrator",
         "author": "John Doe",
@@ -1476,6 +2262,7 @@ export const postList = [
     },
     {
         "id": 8,
+        "uid": "",
         "title": "HTTP Request Body Mapping and Validation Using FluentValidation",
         "slug": "http-request-body-mapping-with-fluentvalidation",
         "author": "John Doe",
@@ -1623,6 +2410,7 @@ export const postList = [
     },
     {
         "id": 9,
+        "uid": "",
         "title": "Azure Storage Queue Client Integration",
         "slug": "azure-storage-queue-client",
         "author": "Your Name",
@@ -1783,6 +2571,7 @@ export const postList = [
     },
     {
         "id": 10,
+        "uid": "",
         "title": "Printful Client Integration",
         "slug": "printful-client",
         "author": "Your Name",
@@ -1834,6 +2623,7 @@ export const postList = [
     },
     {
         "id": 11,
+        "uid": "",
         "title": "Shopify Client Integration",
         "slug": "shopify-client",
         "author": "Your Name",
@@ -1874,6 +2664,7 @@ export const postList = [
     },
     {
         "id": 12,
+        "uid": "",
         "title": "Microsoft Graph API Integration",
         "slug": "microsoft-graph-client",
         "author": "Your Name",
@@ -1914,6 +2705,7 @@ export const postList = [
     },
     {
         "id": 13,
+        "uid": "",
         "title": "Azure Redis Cache Integration",
         "slug": "redis-cache-client",
         "author": "Your Name",
@@ -1954,6 +2746,7 @@ export const postList = [
     },
     {
         "id": 14,
+        "uid": "",
         "title": "Stripe Payment Integration",
         "slug": "stripe-client",
         "author": "Your Name",
@@ -1994,6 +2787,7 @@ export const postList = [
     },
     {
         "id": 15,
+        "uid": "",
         "title": "Braintree Payment Integration",
         "slug": "braintree-client",
         "author": "Your Name",
@@ -2034,6 +2828,7 @@ export const postList = [
     },
     {
         "id": 16,
+        "uid": "",
         "title": "Azure Cosmos DB Integration",
         "slug": "azure-cosmos-client",
         "author": "Your Name",
@@ -2074,6 +2869,7 @@ export const postList = [
     },
     {
         "id": 17,
+        "uid": "",
         "title": "Azure Event Grid Integration",
         "slug": "azure-event-grid-client",
         "author": "Your Name",
@@ -2114,6 +2910,7 @@ export const postList = [
     },
     {
         "id": 18,
+        "uid": "",
         "title": "Azure OpenAI Integration",
         "slug": "azure-openai-client",
         "author": "Your Name",

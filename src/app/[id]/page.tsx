@@ -6,8 +6,8 @@ import { useEffect, useState } from 'react';
 import PostContent from '@/components/post/post-content';
 
 // Mock function to fetch post based on id (replace this with actual API call)
-const fetchPostById = (id: string): Post | null => {
-    const data = postList.find((post) => post.id.toString() === id);
+const fetchPostById = (uid: string): Post | null => {
+    const data = postList.find((post) => post.uid === uid);
     if (data) {
         return Post.fromJSON(data);
     }
