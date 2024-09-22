@@ -87,10 +87,21 @@ const ProjectWikiComponent: React.FC<ProductWikiComponentProps> = ({ wiki }) => 
                         </div>
                         {expandedService === index && (
                             <div className="p-4 border-l-4 border-blue-500 mt-2 bg-gray-50 rounded-lg">
-                                <p className="text-lg text-gray-700 mb-2"><strong>Description:</strong> {service.description}</p>
-                                <p className="text-lg text-gray-700 mb-2"><strong>Scalability:</strong> {service.scalability}</p>
-                                <p className="text-lg text-gray-700 mb-2"><strong>Deployment:</strong> {service.deployment}</p>
-                                <p className="text-lg text-gray-700 mb-2"><strong>Trigger:</strong> {service.trigger}</p>
+                                <p className="text-lg text-gray-700 mb-2">
+                                    <strong>Type:</strong> {service.type}
+                                </p>
+                                <p className="text-lg text-gray-700 mb-2">
+                                    <strong>Description:</strong> {service.description}
+                                </p>
+                                <p className="text-lg text-gray-700 mb-2">
+                                    <strong>Scalability:</strong> {service.scalability}
+                                </p>
+                                <p className="text-lg text-gray-700 mb-2">
+                                    <strong>Deployment:</strong> {service.deployment}
+                                </p>
+                                <p className="text-lg text-gray-700 mb-2">
+                                    <strong>Trigger:</strong> {service.trigger}
+                                </p>
                             </div>
                         )}
                     </div>
@@ -142,31 +153,6 @@ const ProjectWikiComponent: React.FC<ProductWikiComponentProps> = ({ wiki }) => 
                                             rows={4}
                                             required
                                         />
-                                    </label>
-                                    <label className="text-gray-700">
-                                        Do you want to hire me?
-                                        <div className="mt-2 flex gap-4">
-                                            <label className="flex items-center">
-                                                <input
-                                                    type="radio"
-                                                    name="hireMe"
-                                                    value="yes"
-                                                    className="mr-2"
-                                                    required
-                                                />
-                                                Yes
-                                            </label>
-                                            <label className="flex items-center">
-                                                <input
-                                                    type="radio"
-                                                    name="hireMe"
-                                                    value="no"
-                                                    className="mr-2"
-                                                    required
-                                                />
-                                                No
-                                            </label>
-                                        </div>
                                     </label>
                                     <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors">
                                         Request Source Code

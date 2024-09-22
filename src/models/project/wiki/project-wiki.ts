@@ -1,4 +1,4 @@
-class SeeAlso {
+export class SeeAlso {
     name: string;
     url: string;
 
@@ -20,6 +20,7 @@ class SeeAlso {
 
 export class Microservice {
     name: string;
+    type: string;
     description: string;
     scalability: string;
     deployment: string;
@@ -27,12 +28,14 @@ export class Microservice {
 
     constructor(
         name: string,
+        type: string,
         description: string,
         scalability: string,
         deployment: string,
         trigger: string,
     ) {
         this.name = name;
+        this.type = type;
         this.description = description;
         this.scalability = scalability;
         this.deployment = deployment;
@@ -42,6 +45,7 @@ export class Microservice {
     static fromJson(json: any): Microservice {
         return new Microservice(
             json.name,
+            json.type,
             json.description,
             json.scalability,
             json.deployment,
