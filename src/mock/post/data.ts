@@ -2319,7 +2319,7 @@ export const postList = [
     {
         "id": 8,
         "uid": "f4b3b6e1-61fc-4d48-a2a4-56db06f0c3d7",
-        "title": "PoC8: Redis Cache Integration",
+        "title": "PoC8: Azure Cache for Redis Integration",
         "slug": "redis-cache-client-integration-poc",
         "author": "Abdurrahman Gazi Yavuz",
         "tags": ["Redis", "Caching", "C#", ".NET"],
