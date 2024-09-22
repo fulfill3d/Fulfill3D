@@ -1,8 +1,246 @@
 export const postList = [
     {
         "id": 1,
+        "uid": "e3a45b10-5dfb-4eac-bbfa-d8d4f7c2b2f3",
+        "title": "PoC1: Azure Storage Queue Integration",
+        "slug": "azure-storage-queue-client-integration-poc",
+        "author": "Abdurrahman Gazi Yavuz",
+        "tags": ["Azure", "Storage Queue", "C#", ".NET"],
+        "datePublished": "2024-09-21",
+        "excerpt": "A proof of concept for integrating an Azure Storage Queue service in a .NET application to send and manage messages in queues.",
+        "image": "/storage-queue-client.png",
+        "status": "published",
+        "contentBlocks": [
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Introduction",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "Azure Storage Queue is a service for storing large numbers of messages that can be accessed from anywhere in the world via authenticated calls using HTTP or HTTPS. This post demonstrates a proof of concept for integrating Azure Storage Queue into a .NET application using a custom-built client `StorageQueueClient` to handle message sending and management."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Setup",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "To integrate `StorageQueueClient` into your .NET application, you need to add the following NuGet packages:"
+                }
+            },
+            {
+                "type": "list",
+                "data": {
+                    "items": [
+                        "Azure.Storage.Queues",
+                        "Microsoft.Extensions.DependencyInjection",
+                        "Microsoft.Extensions.Options"
+                    ],
+                    "ordered": false
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "`Azure.Storage.Queues` provides the necessary classes and methods to interact with Azure Storage Queues, allowing you to manage and manipulate queue messages. `Microsoft.Extensions.DependencyInjection` offers built-in support for dependency injection, enabling you to register and inject services within your application. `Microsoft.Extensions.Options` helps manage application settings in a strongly-typed manner, simplifying configuration and enabling easy injection of options into services."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Coding",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "First, we need to configure a `StorageQueueClient` service that will handle interactions with Azure Storage Queue. We will use .NET dependency injection to manage the client’s configuration and ensure it can be easily integrated into services or applications."
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "namespace Client\n{\n    public static class DepInj\n    {\n        public static void RegisterStorageQueueClient(\n            this IServiceCollection services, Action<StorageQueueClientOptions> configureQueueOptions)\n        {\n            services.ConfigureServiceOptions<StorageQueueClientOptions>((_, options) => configureQueueOptions(options));\n            services.AddTransient<IStorageQueueClient, StorageQueueClient>();\n        }\n        \n        private static void ConfigureServiceOptions<TOptions>(\n            this IServiceCollection services,\n            Action<IServiceProvider, TOptions> configure)\n            where TOptions : class\n        {\n            services\n                .AddOptions<TOptions>()\n                .Configure<IServiceProvider>((options, resolver) => configure(resolver, options));\n        }\n    }\n}"
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "In the above code, we define a `DepInj` class that registers the `StorageQueueClient` service and its options using the dependency injection container. This allows the client to be injected wherever it’s needed."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Creating the `StorageQueueClient` interface",
+                    "level": 2
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "namespace Client.Interfaces\n{\n    public interface IStorageQueueClient\n    {\n        Task SendMessageAsync(string queueName, string message);\n    }\n}"
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `IStorageQueueClient` interface defines the contract for the client, which includes a method to send messages to Azure Storage Queues."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Implementing the `StorageQueueClient` service",
+                    "level": 2
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "using Azure.Storage.Queues;\nusing Client.Interfaces;\nusing Client.Options;\nusing Microsoft.Extensions.Options;\n\nnamespace Client\n{\n    public class StorageQueueClient(IOptions<StorageQueueClientOptions> options): IStorageQueueClient\n    {\n        private readonly string connectionString = options.Value.ConnectionString;\n        \n        public async Task SendMessageAsync(string queueName, string message)\n        {\n            var client = await GetQueueClientAsync(queueName);\n            await client.SendMessageAsync(message);\n        }\n        \n        private async Task<QueueClient> GetQueueClientAsync(string queueName)\n        {\n            var queueClient = new QueueClient(connectionString, queueName);\n            await queueClient.CreateIfNotExistsAsync();\n            return queueClient;\n        }\n    }\n}"
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `StorageQueueClient` implements the logic for sending messages to Azure Storage Queues. It interacts with the Azure SDK and handles the operations through the `QueueClient`."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Simple C# Program Example",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "Here's a simple C# program that demonstrates how to use the `StorageQueueClient` to send messages to Azure Storage Queues:"
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "using Client.Interfaces;\nusing Client.Options;\nusing Microsoft.Extensions.DependencyInjection;\n\nclass Program\n{\n    static async Task Main(string[] args)\n    {\n        // Set up Dependency Injection\n        var serviceCollection = new ServiceCollection();\n        serviceCollection.RegisterStorageQueueClient(options =>\n        {\n            options.ConnectionString = \"your-storage-queue-connection-string\";\n        });\n        var serviceProvider = serviceCollection.BuildServiceProvider();\n\n        // Resolve StorageQueueClient\n        var storageQueueClient = serviceProvider.GetService<IStorageQueueClient>();\n\n        // Send a message to the queue\n        await storageQueueClient.SendMessageAsync(\"my-queue\", \"Hello from Azure Storage Queue\");\n        Console.WriteLine(\"Message sent successfully.\");\n    }\n}"
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Integrating `StorageQueueClient` into Azure Functions or ASP.NET Core",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `StorageQueueClient` can be easily integrated into an Azure Function or an ASP.NET Core application using dependency injection. The same principles used for registering the client in a console app can be applied in Azure Functions and ASP.NET Core, with the client being injected into the required services or controllers."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Azure Functions Integration in .NET 8 Isolated Worker",
+                    "level": 3
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "In .NET 8, Azure Functions use the Isolated Worker model. The `StorageQueueClient` can be registered using the `HostBuilder` in the `Program.cs` file. Once registered, it can be injected into your function classes to handle queue operations in response to HTTP or other types of triggers. You will need to ensure that the connection string for Azure Storage Queue is provided in your application configuration."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "ASP.NET Core Integration",
+                    "level": 3
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "In ASP.NET Core, you can register the `StorageQueueClient` in the `ConfigureServices` method within the `Startup.cs` or `Program.cs`. This will allow the client to be injected into any services or controllers that need to interact with Azure Storage Queues. The connection string can be managed via app settings, and you can inject the `StorageQueueClient` wherever needed."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Repository",
+                    "level": 2
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://dev.azure.com/Fulfill3D/Public/_git/StorageQueueClient",
+                    "text": "StorageQueueClient Repository"
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Further Reading",
+                    "level": 2
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/azure/storage/queues/",
+                    "text": "Azure Storage Queues"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/azure/azure-functions/",
+                    "text": "Azure Functions"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/azure/azure-functions/functions-dotnet-dependency-injection",
+                    "text": "Dependency Injection"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/azure/azure-app-configuration/",
+                    "text": "Azure App Configuration"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/azure/key-vault/general/",
+                    "text": "Azure Key Vault"
+                }
+            }
+        ]
+    },
+    {
+        "id": 2,
         "uid": "8a593841-83ce-44de-a224-18a7f08cbbc1",
-        "title": "PoC1: Azure Service Bus Integration",
+        "title": "PoC2: Azure Service Bus Integration",
         "slug": "azure-service-bus-client-integration-poc",
         "author": "Abdurrahman Gazi Yavuz",
         "tags": ["Azure", "Service Bus", "Messaging", "C#", ".NET"],
@@ -258,9 +496,9 @@ export const postList = [
         ]
     },
     {
-        "id": 2,
+        "id": 3,
         "uid": "c8bbefdb-e137-44ea-9614-4371b9e1cd54",
-        "title": "PoC2: SendGrid Integration",
+        "title": "PoC3: SendGrid Integration",
         "slug": "sendgrid-client-integration-poc",
         "author": "Abdurrahman Gazi Yavuz",
         "tags": ["SendGrid", "Email", "RestSharp", "C#", ".NET"],
@@ -503,9 +741,9 @@ export const postList = [
         ]
     },
     {
-        "id": 3,
+        "id": 4,
         "uid": "cca7efb5-d9a7-4f2c-b5c8-72d76797de8d",
-        "title": "PoC3: Google Maps API Integration",
+        "title": "PoC4: Google Maps API Integration",
         "slug": "google-maps-client-integration-poc",
         "author": "Abdurrahman Gazi Yavuz",
         "tags": ["Google Maps", "Geocoding", "RestSharp", "C#", ".NET"],
@@ -768,9 +1006,9 @@ export const postList = [
         ]
     },
     {
-        "id": 4,
+        "id": 5,
         "uid": "d1ffeca0-1eb3-4cd8-89db-fac8c88dccf2",
-        "title": "PoC4: Azure Blob Storage Integration",
+        "title": "PoC5: Azure Blob Storage Integration",
         "slug": "azure-blob-storage-client-integration-poc",
         "author": "Abdurrahman Gazi Yavuz",
         "tags": ["Azure", "Blob Storage", "C#", ".NET"],
@@ -1025,9 +1263,9 @@ export const postList = [
         ]
     },
     {
-        "id": 5,
+        "id": 6,
         "uid": "a05ecc86-9313-4959-a644-f1e59fde6eeb",
-        "title": "PoC5: A Secured Microservice",
+        "title": "PoC6: A Secured Microservice",
         "slug": "jwt-secured-microservice-poc",
         "author": "Abdurrahman Gazi Yavuz",
         "tags": ["Azure Functions", "JWT", "Microservices", "C#", ".NET"],
@@ -1445,9 +1683,9 @@ export const postList = [
         ]
     },
     {
-        "id": 6,
+        "id": 7,
         "uid": "46fe9dc9-4adb-45e7-a024-58cb52e37c77",
-        "title": "PoC6: A Custom Auth Flow using a Microservice",
+        "title": "PoC7: A Custom Auth Flow using a Microservice",
         "slug": "b2c-redirect-endpoint-microservice-poc",
         "author": "Abdurrahman Gazi Yavuz",
         "tags": ["Azure Functions", "AD B2C", "Microservices", "C#", ".NET"],

@@ -93,7 +93,7 @@ const ProjectCard: React.FC<ProductCardProps> = ({ project }) => {
                             </svg>
                             Demo
                             <span className="absolute bottom-full mb-2 hidden text-xs text-white bg-gray-700 p-1 rounded-lg group-hover:block">
-                                Not ready yet
+                                Frontend not ready yet
                             </span>
                         </div>
                     )}
