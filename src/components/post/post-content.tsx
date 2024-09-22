@@ -107,7 +107,7 @@ const PostContent: React.FC<PostContentProps> = ({ post }) => {
 
                 {/* Author and Date */}
                 <p className="text-sm text-gray-500 mb-2">
-                    By {post.author} | Published on {new Date(post.datePublished).toLocaleDateString('en-US', { timeZone: 'UTC' })}
+                    By {post.author}
                 </p>
 
                 {/* Tags */}
