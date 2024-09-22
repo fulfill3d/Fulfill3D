@@ -18,7 +18,6 @@ export class Post {
     slug: string;
     author: string;
     tags: string[];
-    datePublished: Date;
     excerpt: string;
     image: string;
     status: BlogPostStatus;
@@ -31,7 +30,6 @@ export class Post {
         slug: string,
         author: string,
         tags: string[],
-        datePublished: Date,
         excerpt: string,
         image: string,
         status: BlogPostStatus,
@@ -43,7 +41,6 @@ export class Post {
         this.slug = slug;
         this.author = author;
         this.tags = tags;
-        this.datePublished = datePublished;
         this.excerpt = excerpt;
         this.image = image;
         this.status = status;
@@ -80,7 +77,6 @@ export class Post {
             json.slug,
             json.author,
             json.tags,
-            new Date(json.datePublished),
             json.excerpt,
             json.image,
             json.status,

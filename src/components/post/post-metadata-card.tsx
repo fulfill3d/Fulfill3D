@@ -32,15 +32,11 @@ const PostMetadataCard: React.FC<PostMetadataCardProps> = ({ post }) => {
                 />
             </div>
 
-
             {/* Title */}
             <h2 className="text-2xl font-bold text-gray-800 mb-2">{post.title}</h2>
 
-            {/* Author and Date */}
+            {/* Author */}
             <p className="text-sm text-gray-500 mb-1">By {post.author}</p>
-            <p className="text-sm text-gray-500">
-                Published on {new Date(post.datePublished).toLocaleDateString('en-US', { timeZone: 'UTC' })}
-            </p>
 
             {/* Excerpt */}
             <p className="text-gray-700 mt-4 mb-4">{post.excerpt}</p>

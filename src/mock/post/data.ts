@@ -1,12 +1,248 @@
 export const postList = [
     {
         "id": 1,
+        "uid": "e3a45b10-5dfb-4eac-bbfa-d8d4f7c2b2f3",
+        "title": "PoC1: Azure Storage Queue Integration",
+        "slug": "azure-storage-queue-client-integration-poc",
+        "author": "Abdurrahman Gazi Yavuz",
+        "tags": ["Azure", "Storage Queue", "C#", ".NET"],
+        "excerpt": "A proof of concept for integrating an Azure Storage Queue service in a .NET application to send and manage messages in queues.",
+        "image": "/storage-queue-client.png",
+        "status": "published",
+        "contentBlocks": [
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Introduction",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "Azure Storage Queue is a service for storing large numbers of messages that can be accessed from anywhere in the world via authenticated calls using HTTP or HTTPS. This post demonstrates a proof of concept for integrating Azure Storage Queue into a .NET application using a custom-built client `StorageQueueClient` to handle message sending and management."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Setup",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "To integrate `StorageQueueClient` into your .NET application, you need to add the following NuGet packages:"
+                }
+            },
+            {
+                "type": "list",
+                "data": {
+                    "items": [
+                        "Azure.Storage.Queues",
+                        "Microsoft.Extensions.DependencyInjection",
+                        "Microsoft.Extensions.Options"
+                    ],
+                    "ordered": false
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "`Azure.Storage.Queues` provides the necessary classes and methods to interact with Azure Storage Queues, allowing you to manage and manipulate queue messages. `Microsoft.Extensions.DependencyInjection` offers built-in support for dependency injection, enabling you to register and inject services within your application. `Microsoft.Extensions.Options` helps manage application settings in a strongly-typed manner, simplifying configuration and enabling easy injection of options into services."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Coding",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "First, we need to configure a `StorageQueueClient` service that will handle interactions with Azure Storage Queue. We will use .NET dependency injection to manage the client’s configuration and ensure it can be easily integrated into services or applications."
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "namespace Client\n{\n    public static class DepInj\n    {\n        public static void RegisterStorageQueueClient(\n            this IServiceCollection services, Action<StorageQueueClientOptions> configureQueueOptions)\n        {\n            services.ConfigureServiceOptions<StorageQueueClientOptions>((_, options) => configureQueueOptions(options));\n            services.AddTransient<IStorageQueueClient, StorageQueueClient>();\n        }\n        \n        private static void ConfigureServiceOptions<TOptions>(\n            this IServiceCollection services,\n            Action<IServiceProvider, TOptions> configure)\n            where TOptions : class\n        {\n            services\n                .AddOptions<TOptions>()\n                .Configure<IServiceProvider>((options, resolver) => configure(resolver, options));\n        }\n    }\n}"
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "In the above code, we define a `DepInj` class that registers the `StorageQueueClient` service and its options using the dependency injection container. This allows the client to be injected wherever it’s needed."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Creating the `StorageQueueClient` interface",
+                    "level": 2
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "namespace Client.Interfaces\n{\n    public interface IStorageQueueClient\n    {\n        Task SendMessageAsync(string queueName, string message);\n    }\n}"
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `IStorageQueueClient` interface defines the contract for the client, which includes a method to send messages to Azure Storage Queues."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Implementing the `StorageQueueClient` service",
+                    "level": 2
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "using Azure.Storage.Queues;\nusing Client.Interfaces;\nusing Client.Options;\nusing Microsoft.Extensions.Options;\n\nnamespace Client\n{\n    public class StorageQueueClient(IOptions<StorageQueueClientOptions> options): IStorageQueueClient\n    {\n        private readonly string connectionString = options.Value.ConnectionString;\n        \n        public async Task SendMessageAsync(string queueName, string message)\n        {\n            var client = await GetQueueClientAsync(queueName);\n            await client.SendMessageAsync(message);\n        }\n        \n        private async Task<QueueClient> GetQueueClientAsync(string queueName)\n        {\n            var queueClient = new QueueClient(connectionString, queueName);\n            await queueClient.CreateIfNotExistsAsync();\n            return queueClient;\n        }\n    }\n}"
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `StorageQueueClient` implements the logic for sending messages to Azure Storage Queues. It interacts with the Azure SDK and handles the operations through the `QueueClient`."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Simple C# Program Example",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "Here's a simple C# program that demonstrates how to use the `StorageQueueClient` to send messages to Azure Storage Queues:"
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "using Client.Interfaces;\nusing Client.Options;\nusing Microsoft.Extensions.DependencyInjection;\n\nclass Program\n{\n    static async Task Main(string[] args)\n    {\n        // Set up Dependency Injection\n        var serviceCollection = new ServiceCollection();\n        serviceCollection.RegisterStorageQueueClient(options =>\n        {\n            options.ConnectionString = \"your-storage-queue-connection-string\";\n        });\n        var serviceProvider = serviceCollection.BuildServiceProvider();\n\n        // Resolve StorageQueueClient\n        var storageQueueClient = serviceProvider.GetService<IStorageQueueClient>();\n\n        // Send a message to the queue\n        await storageQueueClient.SendMessageAsync(\"my-queue\", \"Hello from Azure Storage Queue\");\n        Console.WriteLine(\"Message sent successfully.\");\n    }\n}"
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Integrating `StorageQueueClient` into Azure Functions or ASP.NET Core",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `StorageQueueClient` can be easily integrated into an Azure Function or an ASP.NET Core application using dependency injection. The same principles used for registering the client in a console app can be applied in Azure Functions and ASP.NET Core, with the client being injected into the required services or controllers."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Azure Functions Integration in .NET 8 Isolated Worker",
+                    "level": 3
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "In .NET 8, Azure Functions use the Isolated Worker model. The `StorageQueueClient` can be registered using the `HostBuilder` in the `Program.cs` file. Once registered, it can be injected into your function classes to handle queue operations in response to HTTP or other types of triggers. You will need to ensure that the connection string for Azure Storage Queue is provided in your application configuration."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "ASP.NET Core Integration",
+                    "level": 3
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "In ASP.NET Core, you can register the `StorageQueueClient` in the `ConfigureServices` method within the `Startup.cs` or `Program.cs`. This will allow the client to be injected into any services or controllers that need to interact with Azure Storage Queues. The connection string can be managed via app settings, and you can inject the `StorageQueueClient` wherever needed."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Repository",
+                    "level": 2
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://dev.azure.com/Fulfill3D/Public/_git/StorageQueueClient",
+                    "text": "StorageQueueClient Repository"
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Further Reading",
+                    "level": 2
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/azure/storage/queues/",
+                    "text": "Azure Storage Queues"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/azure/azure-functions/",
+                    "text": "Azure Functions"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/azure/azure-functions/functions-dotnet-dependency-injection",
+                    "text": "Dependency Injection"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/azure/azure-app-configuration/",
+                    "text": "Azure App Configuration"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/azure/key-vault/general/",
+                    "text": "Azure Key Vault"
+                }
+            }
+        ]
+    },
+    {
+        "id": 2,
         "uid": "8a593841-83ce-44de-a224-18a7f08cbbc1",
-        "title": "PoC1: Azure Service Bus Integration",
+        "title": "PoC2: Azure Service Bus Integration",
         "slug": "azure-service-bus-client-integration-poc",
         "author": "Abdurrahman Gazi Yavuz",
         "tags": ["Azure", "Service Bus", "Messaging", "C#", ".NET"],
-        "datePublished": "2024-07-30",
         "excerpt": "A proof of concept for integrating an Azure Service Bus in a .NET application to send messages via the Azure Service Bus.",
         "image": "/service-bus-diagram.png",
         "status": "published",
@@ -258,13 +494,12 @@ export const postList = [
         ]
     },
     {
-        "id": 2,
+        "id": 3,
         "uid": "c8bbefdb-e137-44ea-9614-4371b9e1cd54",
-        "title": "PoC2: SendGrid Integration",
+        "title": "PoC3: SendGrid Integration",
         "slug": "sendgrid-client-integration-poc",
         "author": "Abdurrahman Gazi Yavuz",
         "tags": ["SendGrid", "Email", "RestSharp", "C#", ".NET"],
-        "datePublished": "2024-08-01",
         "excerpt": "A proof of concept for integrating SendGrid email service in a .NET application to send emails via the SendGrid API.",
         "image": "/send-grid-client-diagram.png",
         "status": "published",
@@ -503,13 +738,12 @@ export const postList = [
         ]
     },
     {
-        "id": 3,
+        "id": 4,
         "uid": "cca7efb5-d9a7-4f2c-b5c8-72d76797de8d",
-        "title": "PoC3: Google Maps API Integration",
+        "title": "PoC4: Google Maps API Integration",
         "slug": "google-maps-client-integration-poc",
         "author": "Abdurrahman Gazi Yavuz",
         "tags": ["Google Maps", "Geocoding", "RestSharp", "C#", ".NET"],
-        "datePublished": "2024-08-02",
         "excerpt": "A proof of concept for integrating a Google Maps service in a .NET application to get geocoding data from the Google Maps API.",
         "image": "/google-maps-client.png",
         "status": "published",
@@ -768,13 +1002,12 @@ export const postList = [
         ]
     },
     {
-        "id": 4,
+        "id": 5,
         "uid": "d1ffeca0-1eb3-4cd8-89db-fac8c88dccf2",
-        "title": "PoC4: Azure Blob Storage Integration",
+        "title": "PoC5: Azure Blob Storage Integration",
         "slug": "azure-blob-storage-client-integration-poc",
         "author": "Abdurrahman Gazi Yavuz",
         "tags": ["Azure", "Blob Storage", "C#", ".NET"],
-        "datePublished": "2024-07-30",
         "excerpt": "A proof of concept for integrating an Azure Blob Storage service in a .NET application to upload, download, and delete blobs.",
         "image": "/blob-client.png",
         "status": "published",
@@ -1025,13 +1258,12 @@ export const postList = [
         ]
     },
     {
-        "id": 5,
+        "id": 6,
         "uid": "a05ecc86-9313-4959-a644-f1e59fde6eeb",
-        "title": "PoC5: A Secured Microservice",
+        "title": "PoC6: A Secured Microservice",
         "slug": "jwt-secured-microservice-poc",
         "author": "Abdurrahman Gazi Yavuz",
         "tags": ["Azure Functions", "JWT", "Microservices", "C#", ".NET"],
-        "datePublished": "2024-07-30",
         "excerpt": "This PoC is to build a reusable and flexible JWT-secured microservice, allowing for easy service injection and customization.",
         "image": "/secured-microservice.png",
         "status": "published",
@@ -1445,13 +1677,12 @@ export const postList = [
         ]
     },
     {
-        "id": 6,
+        "id": 7,
         "uid": "46fe9dc9-4adb-45e7-a024-58cb52e37c77",
-        "title": "PoC6: A Custom Auth Flow using a Microservice",
+        "title": "PoC7: A Custom Auth Flow using a Microservice",
         "slug": "b2c-redirect-endpoint-microservice-poc",
         "author": "Abdurrahman Gazi Yavuz",
         "tags": ["Azure Functions", "AD B2C", "Microservices", "C#", ".NET"],
-        "datePublished": "2024-09-13",
         "excerpt": "A proof of concept for a microservice acting as a B2C auth flow callback, validating user sign-up sign-in, creating or updating user entities in the database and redirecting user to specified endpoints.",
         "image": "/auth-flow.png",
         "status": "published",
@@ -2086,13 +2317,249 @@ export const postList = [
         ]
     },
     {
+        "id": 8,
+        "uid": "f4b3b6e1-61fc-4d48-a2a4-56db06f0c3d7",
+        "title": "PoC8: Azure Cache for Redis Integration",
+        "slug": "redis-cache-client-integration-poc",
+        "author": "Abdurrahman Gazi Yavuz",
+        "tags": ["Redis", "Caching", "C#", ".NET"],
+        "excerpt": "A proof of concept for integrating Redis Cache in a .NET application to manage cached objects using a custom-built client `RedisCacheClient`.",
+        "image": "/redis-cache-client.png",
+        "status": "published",
+        "contentBlocks": [
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Introduction",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "Redis is an in-memory data structure store used as a database, cache, and message broker. This post demonstrates a proof of concept for integrating Redis Cache into a .NET application using a custom-built client `RedisCacheClient` to manage caching of objects."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Setup",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "To integrate `RedisCacheClient` into your .NET application, you need to add the following NuGet packages:"
+                }
+            },
+            {
+                "type": "list",
+                "data": {
+                    "items": [
+                        "StackExchange.Redis",
+                        "Microsoft.Extensions.DependencyInjection",
+                        "Microsoft.Extensions.Options"
+                    ],
+                    "ordered": false
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "`StackExchange.Redis` is a high-performance library used for connecting to Redis. `Microsoft.Extensions.DependencyInjection` offers built-in support for dependency injection, enabling you to register and inject services within your application. `Microsoft.Extensions.Options` helps manage application settings in a strongly-typed manner, simplifying configuration and enabling easy injection of options into services."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Coding",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "First, we need to configure a `RedisCacheClient` service that will handle interactions with Redis Cache. We will use .NET dependency injection to manage the client’s configuration and ensure it can be easily integrated into services or applications."
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "namespace Client\n{\n    public static class DepInj\n    {\n        public static void RegisterRedisCacheClient(\n            this IServiceCollection services, Action<RedisCacheClientOptions> configureClientOptions)\n        {\n            services.ConfigureServiceOptions<RedisCacheClientOptions>((_, opt) => configureClientOptions(opt));\n            services.ConnectToRedisCacheServer();\n            services.AddSingleton<IRedisCacheClient, RedisCacheClient>();\n        }\n        \n        private static void ConfigureServiceOptions<TOptions>(\n            this IServiceCollection services,\n            Action<IServiceProvider, TOptions> configure)\n            where TOptions : class\n        {\n            services\n                .AddOptions<TOptions>()\n                .Configure<IServiceProvider>((options, resolver) => configure(resolver, options));\n        }\n\n        private static void ConnectToRedisCacheServer(this IServiceCollection services)\n        {\n            services.AddSingleton<IConnectionMultiplexer>(sp =>\n            {\n                var option = sp.GetRequiredService<IOptions<RedisCacheClientOptions>>();\n                \n                var cfg = new ConfigurationOptions\n                {\n                    Password = option.Value.Password,\n                    Ssl = option.Value.Ssl,\n                    AbortOnConnectFail = option.Value.AbortOnConnectFail,\n                };\n                cfg.EndPoints.Add(option.Value.Host);\n\n                return ConnectionMultiplexer.Connect(cfg);\n            });\n        } \n    }\n}"
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "In the above code, we define a `DepInj` class that registers the `RedisCacheClient` service and its options using the dependency injection container. This allows the client to be injected wherever it’s needed."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Creating the `RedisCacheClient` interface",
+                    "level": 2
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "namespace Client.Interfaces\n{\n    public interface IRedisCacheClient\n    {\n        Task<T> GetCacheObjectAsync<T>(string key);\n        Task<bool> SetCacheObjectAsync<T>(string key, T value, TimeSpan? expiry = null);\n        Task<T> GetCacheObjectAsync<T>(string key, string field);\n        Task<bool> SetCacheObjectAsync<T>(string key, string field, T value, TimeSpan? expiry = null);\n        Task<bool> DeleteCacheObjectAsync(string key);\n        Task<bool> DeleteCacheObjectAsync(string key, string hashField);\n    }\n}"
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `IRedisCacheClient` interface defines the contract for the client, which includes methods to get, set, and delete cached objects using Redis."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Implementing the `RedisCacheClient` service",
+                    "level": 2
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "using StackExchange.Redis;\nusing Client.Interfaces;\nusing Client.Options;\nusing Microsoft.Extensions.Options;\nusing Newtonsoft.Json;\n\nnamespace Client\n{\n    public class RedisCacheClient(IConnectionMultiplexer connectionMultiplexer, IOptions<RedisCacheClientOptions> opt): IRedisCacheClient\n    {\n        private readonly IDatabaseAsync _database = connectionMultiplexer.GetDatabase();\n        private readonly RedisCacheClientOptions _redisCacheClientOptions = opt.Value;\n\n        public async Task<T> GetCacheObjectAsync<T>(string key) \n        {\n            string value = await _database.StringGetAsync(key);\n            if(value == null) return default;\n            return JsonConvert.DeserializeObject<T>(value);\n        }\n\n        public async Task<bool> SetCacheObjectAsync<T>(string key, T value, TimeSpan? expiry = null)\n        {\n            return await _database.StringSetAsync(\n                key,\n                JsonConvert.SerializeObject(value),\n                expiry ?? TimeSpan.FromDays(_redisCacheClientOptions.DefaultStringExpiryDay));\n        }\n\n        public async Task<T> GetCacheObjectAsync<T>(string key, string field)\n        {\n            string value = await _database.HashGetAsync(key, field);\n            if (value == null) return default(T);\n            return JsonConvert.DeserializeObject<T>(value);\n        }\n\n        public async Task<bool> SetCacheObjectAsync<T>(string key, string field, T value, TimeSpan? expiry = null)\n        {\n            bool keyExists = await _database.KeyExistsAsync(key);\n            var result = await _database.HashSetAsync(\n                key,\n                field,\n                JsonConvert.SerializeObject(value));\n            if (!keyExists && result)\n            {\n                await _database.KeyExpireAsync(key, expiry ?? TimeSpan.FromDays(_redisCacheClientOptions.DefaultHashExpiryDay));\n            }\n            return result;\n        }\n\n        public async Task<bool> DeleteCacheObjectAsync(string key)\n        {\n            return await _database.KeyDeleteAsync(key);\n        }\n\n        public async Task<bool> DeleteCacheObjectAsync(string key, string hashField)\n        {\n            return await _database.HashDeleteAsync(key, hashField);\n        }\n    }\n}"
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `RedisCacheClient` implements the logic for getting, setting, and deleting cached objects in Redis. It interacts with the StackExchange.Redis library and handles the operations through the Redis database."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Simple C# Program Example",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "Here's a simple C# program that demonstrates how to use the `RedisCacheClient` to manage cached objects in Redis:"
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "using Client.Interfaces;\nusing Client.Options;\nusing Microsoft.Extensions.DependencyInjection;\n\nclass Program\n{\n    static async Task Main(string[] args)\n    {\n        // Set up Dependency Injection\n        var serviceCollection = new ServiceCollection();\n        serviceCollection.RegisterRedisCacheClient(options =>\n        {\n            options.Host = \"localhost\";\n            options.Password = \"your-redis-password\";\n            options.Ssl = false;\n            options.AbortOnConnectFail = true;\n            options.DefaultStringExpiryDay = 30;\n            options.DefaultHashExpiryDay = 30;\n        });\n        var serviceProvider = serviceCollection.BuildServiceProvider();\n\n        // Resolve RedisCacheClient\n        var redisCacheClient = serviceProvider.GetService<IRedisCacheClient>();\n\n        // Set a cached object\n        var setResult = await redisCacheClient.SetCacheObjectAsync(\"my-key\", \"Hello from Redis Cache\");\n        Console.WriteLine($\"Object set result: {setResult}\");\n\n        // Get the cached object\n        var cachedValue = await redisCacheClient.GetCacheObjectAsync<string>(\"my-key\");\n        Console.WriteLine($\"Cached value: {cachedValue}\");\n\n        // Delete the cached object\n        var deleteResult = await redisCacheClient.DeleteCacheObjectAsync(\"my-key\");\n        Console.WriteLine($\"Object delete result: {deleteResult}\");\n    }\n}"
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Integrating `RedisCacheClient` into Azure Functions or ASP.NET Core",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `RedisCacheClient` can be easily integrated into an Azure Function or an ASP.NET Core application using dependency injection. The same principles used for registering the client in a console app can be applied in Azure Functions and ASP.NET Core, with the client being injected into the required services or controllers."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Azure Functions Integration in .NET 8 Isolated Worker",
+                    "level": 3
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "In .NET 8, Azure Functions use the Isolated Worker model. The `RedisCacheClient` can be registered using the `HostBuilder` in the `Program.cs` file. Once registered, it can be injected into your function classes to handle caching operations in response to HTTP or other types of triggers. You will need to ensure that the connection details for Redis Cache are provided in your application configuration."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "ASP.NET Core Integration",
+                    "level": 3
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "In ASP.NET Core, you can register the `RedisCacheClient` in the `ConfigureServices` method within the `Startup.cs` or `Program.cs`. This will allow the client to be injected into any services or controllers that need to interact with Redis Cache. The connection details can be managed via app settings, and you can inject the `RedisCacheClient` wherever needed."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Repository",
+                    "level": 2
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://dev.azure.com/Fulfill3D/Public/_git/RedisCacheClient",
+                    "text": "RedisCacheClient Repository"
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Further Reading",
+                    "level": 2
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/azure/azure-cache-for-redis/",
+                    "text": "Azure Cache for Redis"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/azure/azure-functions/",
+                    "text": "Azure Functions"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/azure/azure-functions/functions-dotnet-dependency-injection",
+                    "text": "Dependency Injection"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/azure/azure-app-configuration/",
+                    "text": "Azure App Configuration"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/azure/key-vault/general/",
+                    "text": "Azure Key Vault"
+                }
+            }
+        ]
+    },
+    {
         "id": 7,
         "uid": "",
         "title": "Database Migration Strategy with FluentMigrator",
         "slug": "crm-database-migration-with-fluentmigrator",
         "author": "John Doe",
         "tags": ["Azure", "FluentMigrator", "C#", ".NET", "Database", "App Configuration"],
-        "datePublished": "2024-09-14",
         "excerpt": "Learn how to set up CRM database migration using FluentMigrator, Azure Identity, and Azure App Configuration in a .NET 8 application.",
         "image": "/images/database-migration.png",
         "status": "draft",
@@ -2267,7 +2734,6 @@ export const postList = [
         "slug": "http-request-body-mapping-with-fluentvalidation",
         "author": "John Doe",
         "tags": ["FluentValidation", "C#", ".NET", "Validation", "Dependency Injection"],
-        "datePublished": "2024-09-14",
         "excerpt": "Learn how to implement HTTP request body mapping and validation using FluentValidation in .NET, ensuring clean and validated inputs in your API services.",
         "image": "/images/http-request-body-mapping.png",
         "status": "draft",
@@ -2409,174 +2875,12 @@ export const postList = [
         ]
     },
     {
-        "id": 9,
-        "uid": "",
-        "title": "Azure Storage Queue Client Integration",
-        "slug": "azure-storage-queue-client",
-        "author": "Your Name",
-        "tags": ["Azure", "Storage Queue", "Cloud Integration", ".NET"],
-        "datePublished": "2024-09-13",
-        "status": "draft",
-        "excerpt": "A proof-of-concept demonstrating the integration of Azure Storage Queue with .NET, providing scalable message queue functionality.",
-        "image": "/images/azure-queue-client.png",
-        "contentBlocks": [
-            {
-                "type": "heading",
-                "data": {
-                    "text": "Overview",
-                    "level": 2
-                }
-            },
-            {
-                "type": "paragraph",
-                "data": {
-                    "text": "This PoC showcases how to integrate Azure Storage Queue with .NET applications using a simple and scalable approach. Azure Storage Queues provide reliable, persistent message queuing in the cloud, making them ideal for decoupling components in distributed applications."
-                }
-            },
-            {
-                "type": "heading",
-                "data": {
-                    "text": "Key Features",
-                    "level": 2
-                }
-            },
-            {
-                "type": "list",
-                "data": {
-                    "ordered": false,
-                    "items": [
-                        "Queue message sending with Azure Storage Queue",
-                        "Custom configuration for queue client",
-                        "Error handling and retry mechanisms (planned)",
-                        "Easy to extend and integrate with other services"
-                    ]
-                }
-            },
-            {
-                "type": "heading",
-                "data": {
-                    "text": "Technology Stack",
-                    "level": 2
-                }
-            },
-            {
-                "type": "paragraph",
-                "data": {
-                    "text": "This integration uses .NET with Azure Storage Queues. The main components of this PoC are:"
-                }
-            },
-            {
-                "type": "list",
-                "data": {
-                    "ordered": true,
-                    "items": [
-                        "Azure.Storage.Queues",
-                        "Dependency injection (DI) via Microsoft.Extensions.DependencyInjection",
-                        "Options pattern for client configuration"
-                    ]
-                }
-            },
-            {
-                "type": "heading",
-                "data": {
-                    "text": "How It Works",
-                    "level": 2
-                }
-            },
-            {
-                "type": "paragraph",
-                "data": {
-                    "text": "The client is configured via the `QueueClientConfiguration` class, which stores the connection string. A service is added to the DI container using the `AddAzureStorageQueueClient` method. The `IAzureStorageQueueClient` interface defines the contract for sending messages, and the `AzureStorageQueueClient` class implements it."
-                }
-            },
-            {
-                "type": "code",
-                "data": {
-                    "language": "csharp",
-                    "code": "services.AddAzureStorageQueueClient(options =>\n{\n    options.ConnectionString = configuration[\"AzureQueue:ConnectionString\"];\n});"
-                }
-            },
-            {
-                "type": "heading",
-                "data": {
-                    "text": "Microservice Architecture",
-                    "level": 2
-                }
-            },
-            {
-                "type": "paragraph",
-                "data": {
-                    "text": "This PoC demonstrates a microservice that interacts with Azure Storage Queues for decoupled communication. The microservice can be integrated into larger event-driven systems or used to offload processing tasks."
-                }
-            },
-            {
-                "type": "heading",
-                "data": {
-                    "text": "Deployment & Scalability",
-                    "level": 2
-                }
-            },
-            {
-                "type": "paragraph",
-                "data": {
-                    "text": "Azure Storage Queues are designed for high scalability, with built-in redundancy and fault tolerance. This client can be deployed across multiple environments and scale out as needed, ensuring reliable message delivery even in high-load systems."
-                }
-            },
-            {
-                "type": "heading",
-                "data": {
-                    "text": "Challenges Solved",
-                    "level": 2
-                }
-            },
-            {
-                "type": "list",
-                "data": {
-                    "ordered": false,
-                    "items": [
-                        "Decoupling services in microservice architecture",
-                        "Ensuring message delivery reliability",
-                        "Simplifying Azure Storage Queue integration with .NET"
-                    ]
-                }
-            },
-            {
-                "type": "heading",
-                "data": {
-                    "text": "Demo & Source Code",
-                    "level": 2
-                }
-            },
-            {
-                "type": "paragraph",
-                "data": {
-                    "text": "You can view the demo and access the source code via the following links:"
-                }
-            },
-            {
-                "type": "hyperlink",
-                "data": {
-                    "href": "https://demo.azure.com/queue-client",
-                    "text": "Demo"
-                }
-            },
-            {
-                "type": "hyperlink",
-                "data": {
-                    "href": "https://github.com/your-repo/azure-storage-queue-client",
-                    "text": "Source Code"
-                }
-            }
-        ]
-    },
-    {
         "id": 10,
         "uid": "",
         "title": "Printful Client Integration",
         "slug": "printful-client",
         "author": "Your Name",
         "tags": ["Printful", "API", "HttpClient", "Integration"],
-        "datePublished": "2024-09-13",
         "status": "draft",
         "excerpt": "A proof-of-concept demonstrating how to integrate with the Printful API using HttpClient in .NET.",
         "image": "/images/printful-client.png",
@@ -2628,7 +2932,6 @@ export const postList = [
         "slug": "shopify-client",
         "author": "Your Name",
         "tags": ["Shopify", "RestSharp", "API", "Integration"],
-        "datePublished": "2024-09-13",
         "status": "draft",
         "excerpt": "A proof-of-concept demonstrating how to integrate with Shopify API using RestSharp in .NET.",
         "image": "/images/shopify-client.png",
@@ -2669,7 +2972,6 @@ export const postList = [
         "slug": "microsoft-graph-client",
         "author": "Your Name",
         "tags": ["Microsoft Graph", "API", "Azure", "Integration"],
-        "datePublished": "2024-09-13",
         "status": "draft",
         "excerpt": "A proof-of-concept demonstrating how to integrate with Microsoft Graph API in .NET.",
         "image": "/images/microsoft-graph-client.png",
@@ -2704,54 +3006,12 @@ export const postList = [
         ]
     },
     {
-        "id": 13,
-        "uid": "",
-        "title": "Azure Redis Cache Integration",
-        "slug": "redis-cache-client",
-        "author": "Your Name",
-        "tags": ["Redis", "Azure", "Cache", "API"],
-        "datePublished": "2024-09-13",
-        "status": "draft",
-        "excerpt": "A proof-of-concept demonstrating how to integrate with Azure Redis Cache in .NET.",
-        "image": "/images/redis-cache-client.png",
-        "contentBlocks": [
-            {
-                "type": "heading",
-                "data": {
-                    "text": "Overview",
-                    "level": 2
-                }
-            },
-            {
-                "type": "paragraph",
-                "data": {
-                    "text": "This PoC demonstrates how to use Azure Redis Cache for caching data in a .NET application."
-                }
-            },
-            {
-                "type": "code",
-                "data": {
-                    "language": "csharp",
-                    "code": "public class RedisCacheClient {\n    private readonly IConnectionMultiplexer _redis;\n    public RedisCacheClient(IConnectionMultiplexer redis) {\n        _redis = redis;\n    }\n    public async Task SetCacheValueAsync(string key, string value) {\n        var db = _redis.GetDatabase();\n        await db.StringSetAsync(key, value);\n    }\n}"
-                }
-            },
-            {
-                "type": "hyperlink",
-                "data": {
-                    "href": "https://github.com/your-repo/redis-cache-client",
-                    "text": "Source Code"
-                }
-            }
-        ]
-    },
-    {
         "id": 14,
         "uid": "",
         "title": "Stripe Payment Integration",
         "slug": "stripe-client",
         "author": "Your Name",
         "tags": ["Stripe", "Payment API", ".NET", "Integration"],
-        "datePublished": "2024-09-13",
         "status": "draft",
         "excerpt": "A proof-of-concept demonstrating how to integrate with Stripe payment API in .NET.",
         "image": "/images/stripe-client.png",
@@ -2792,7 +3052,6 @@ export const postList = [
         "slug": "braintree-client",
         "author": "Your Name",
         "tags": ["Braintree", "Payment API", ".NET", "Integration"],
-        "datePublished": "2024-09-13",
         "status": "draft",
         "excerpt": "A proof-of-concept demonstrating how to integrate with Braintree payment API in .NET.",
         "image": "/images/braintree-client.png",
@@ -2833,7 +3092,6 @@ export const postList = [
         "slug": "azure-cosmos-client",
         "author": "Your Name",
         "tags": ["Azure", "Cosmos DB", ".NET", "Integration"],
-        "datePublished": "2024-09-13",
         "status": "draft",
         "excerpt": "A proof-of-concept demonstrating how to integrate with Azure Cosmos DB in .NET.",
         "image": "/images/cosmos-client.png",
@@ -2874,7 +3132,6 @@ export const postList = [
         "slug": "azure-event-grid-client",
         "author": "Your Name",
         "tags": ["Azure", "Event Grid", ".NET", "Integration"],
-        "datePublished": "2024-09-13",
         "status": "draft",
         "excerpt": "A proof-of-concept demonstrating how to integrate with Azure Event Grid in .NET.",
         "image": "/images/event-grid-client.png",
@@ -2915,7 +3172,6 @@ export const postList = [
         "slug": "azure-openai-client",
         "author": "Your Name",
         "tags": ["Azure", "OpenAI", ".NET", "Integration", "AI"],
-        "datePublished": "2024-09-13",
         "status": "draft",
         "excerpt": "A proof-of-concept demonstrating how to integrate Azure OpenAI services in a .NET application.",
         "image": "/images/azure-openai-client.png",
