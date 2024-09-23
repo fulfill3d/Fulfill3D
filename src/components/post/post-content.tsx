@@ -1,10 +1,11 @@
 import React from 'react';
-import {Post} from "@/models/post/post";
+import { Post } from "@/models/post/post";
 import {
     CodeBlock,
     HeadingBlock,
     HyperlinkBlock,
-    ImageBlock, ListBlock,
+    ImageBlock,
+    ListBlock,
     ParagraphBlock,
     QuoteBlock
 } from "@/models/post/content-block";
@@ -21,12 +22,12 @@ const PostContent: React.FC<PostContentProps> = ({ post }) => {
         switch (block.constructor) {
             case HeadingBlock:
                 return (
-                    <h2 className={`text-${block.level === 1 ? '3xl' : '2xl'} font-bold mb-4`}>
+                    <h2 className={`text-${block.level === 1 ? '2xl md:text-3xl' : 'xl md:text-2xl'} font-bold mb-4`}>
                         {block.text}
                     </h2>
                 );
             case ParagraphBlock:
-                return <p className="mb-6 text-lg text-gray-800">{block.text}</p>;
+                return <p className="mb-6 text-base md:text-lg text-gray-800 break-words">{block.text}</p>;
             case ImageBlock:
                 return (
                     <div className="relative w-full h-64 mb-6">
@@ -38,16 +39,16 @@ const PostContent: React.FC<PostContentProps> = ({ post }) => {
                             className="rounded-lg"  // Optional Tailwind classes
                         />
                     </div>
-            );
+                );
             case CodeBlock:
                 return (
                     <pre className="bg-gray-100 p-4 rounded-md mb-6 overflow-x-auto">
-                        <code className="text-sm text-gray-800">{block.code}</code>
+                        <code className="text-xs md:text-sm text-gray-800">{block.code}</code>
                     </pre>
                 );
             case QuoteBlock:
                 return (
-                    <blockquote className="border-l-4 border-blue-500 pl-4 italic text-lg text-gray-600 mb-6">
+                    <blockquote className="border-l-4 border-blue-500 pl-4 italic text-base md:text-lg text-gray-600 mb-6">
                         {block.quote}
                         {block.author && <p className="text-right mt-2">- {block.author}</p>}
                     </blockquote>
@@ -56,7 +57,7 @@ const PostContent: React.FC<PostContentProps> = ({ post }) => {
                 return (
                     <a
                         href={block.href}
-                        className="text-blue-600 underline mb-6 block"
+                        className="text-blue-600 underline mb-6 block break-words"
                         target="_blank"
                         rel="noopener noreferrer"
                     >
@@ -67,7 +68,7 @@ const PostContent: React.FC<PostContentProps> = ({ post }) => {
                 return block.ordered ? (
                     <ol className="list-decimal pl-6 mb-6">
                         {block.items.map((item: string, index: number) => (
-                            <li key={index} className="text-lg text-gray-800 mb-2">
+                            <li key={index} className="text-base md:text-lg text-gray-800 mb-2 break-words">
                                 {item}
                             </li>
                         ))}
@@ -75,7 +76,7 @@ const PostContent: React.FC<PostContentProps> = ({ post }) => {
                 ) : (
                     <ul className="list-disc pl-6 mb-6">
                         {block.items.map((item: string, index: number) => (
-                            <li key={index} className="text-lg text-gray-800 mb-2">
+                            <li key={index} className="text-base md:text-lg text-gray-800 mb-2 break-words">
                                 {item}
                             </li>
                         ))}
@@ -87,7 +88,7 @@ const PostContent: React.FC<PostContentProps> = ({ post }) => {
     };
 
     return (
-        <article className="bg-white shadow-lg rounded-lg p-6 max-w-4xl mx-auto">
+        <article className="bg-white shadow-lg rounded-lg p-4 md:p-6 max-w-4xl mx-auto overflow-hidden">
             {/* Post Metadata */}
             <header className="mb-8">
                 {/* Header Image */}
@@ -101,12 +102,11 @@ const PostContent: React.FC<PostContentProps> = ({ post }) => {
                     />
                 </div>
 
-
                 {/* Title */}
-                <h1 className="text-4xl font-bold text-gray-800 mb-4">{post.title}</h1>
+                <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4 break-words">{post.title}</h1>
 
                 {/* Author and Date */}
-                <p className="text-sm text-gray-500 mb-2">
+                <p className="text-xs md:text-sm text-gray-500 mb-2">
                     By {post.author}
                 </p>
 
@@ -117,13 +117,13 @@ const PostContent: React.FC<PostContentProps> = ({ post }) => {
                             key={index}
                             className="bg-gray-200 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"
                         >
-              {tag}
-            </span>
+                            {tag}
+                        </span>
                     ))}
                 </div>
 
                 {/* Excerpt */}
-                <p className="text-lg text-gray-700 italic mb-4">{post.excerpt}</p>
+                <p className="text-base md:text-lg text-gray-700 italic mb-4 break-words">{post.excerpt}</p>
             </header>
 
             {/* Post Content */}

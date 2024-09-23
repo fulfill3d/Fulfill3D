@@ -4,7 +4,7 @@ export class Company {
     id: string;
     companyName: string;
     mission: string;
-    description: string;
+    descriptions: string[];
     tags: string[];
     logoUrl: string;
     socialMedia: { platform: SocialMediaPlatform; url: string;}[];
@@ -13,7 +13,7 @@ export class Company {
         id: string,
         companyName: string,
         mission: string,
-        description: string,
+        descriptions: string[],
         tags: string[],
         logoUrl: string,
         socialMedia: { platform: SocialMediaPlatform; url: string;}[]
@@ -21,7 +21,7 @@ export class Company {
         this.id = id;
         this.companyName = companyName;
         this.mission = mission;
-        this.description = description;
+        this.descriptions = descriptions;
         this.tags = tags;
         this.logoUrl = logoUrl;
         this.socialMedia = socialMedia;
@@ -32,7 +32,7 @@ export class Company {
             json.id,
             json.companyName,
             json.mission,
-            json.description,
+            json.descriptions || [],
             json.tags || [],
             json.logoUrl,
             json.socialMedia || []

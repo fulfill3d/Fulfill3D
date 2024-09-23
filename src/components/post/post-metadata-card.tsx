@@ -12,7 +12,7 @@ const PostMetadataCard: React.FC<PostMetadataCardProps> = ({ post }) => {
     const router = useRouter();
 
     const handleClick = () => {
-        router.push(`/${post.uid}`); // Navigate to dynamic [id] page
+        router.push(`/${post.uuid}`); // Navigate to dynamic [id] page
     };
     return (
         <div

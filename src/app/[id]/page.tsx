@@ -7,7 +7,7 @@ import PostContent from '@/components/post/post-content';
 
 // Mock function to fetch post based on id (replace this with actual API call)
 const fetchPostById = (uid: string): Post | null => {
-    const data = postList.find((post) => post.uid === uid);
+    const data = postList.find((post) => post.uuid === uid);
     if (data) {
         return Post.fromJSON(data);
     }

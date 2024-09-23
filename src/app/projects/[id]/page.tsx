@@ -7,7 +7,7 @@ import {projectList} from "@/mock/project/data";
 
 // Mock function to fetch post based on id (replace this with actual API call)
 const fetchWikiById = (uid: string): ProjectWiki | null => {
-    const data = projectList.find((product) => product.uid === uid);
+    const data = projectList.find((product) => product.uuid === uid);
     if (data) {
         return ProjectWiki.fromJson(data.wiki);
     }
