@@ -4,10 +4,12 @@ export type ProjectStatus = 'active' | 'draft';
 
 export class Project {
     id: number;
-    uid: string;
+    uuid: string;
     name: string;
     description: string;
+    isDemoReady: boolean;
     demoUrl: string;
+    isWikiReady: boolean;
     wiki: ProjectWiki;
     imageUrl: string;
     status: ProjectStatus;
@@ -15,20 +17,24 @@ export class Project {
 
     constructor(
         id: number,
-        uid: string,
+        uuid: string,
         name: string,
         description: string,
+        isDemoReady: boolean,
         demoUrl: string,
+        isWikiReady: boolean,
         wiki: ProjectWiki,
         imageUrl: string,
         status: ProjectStatus,
         tags: string[]
     ) {
         this.id = id;
-        this.uid = uid;
+        this.uuid = uuid;
         this.name = name;
         this.description = description;
+        this.isDemoReady = isDemoReady;
         this.demoUrl = demoUrl;
+        this.isWikiReady = isWikiReady;
         this.wiki = wiki;
         this.imageUrl = imageUrl;
         this.status = status;
@@ -39,10 +45,12 @@ export class Project {
         const wiki = ProjectWiki.fromJson(json.wiki);
         return new Project(
             json.id,
-            json.uid,
+            json.uuid,
             json.name,
             json.description,
+            json.isDemoReady,
             json.demoUrl,
+            json.isWikiReady,
             wiki,
             json.imageUrl,
             json.status,

@@ -2,7 +2,7 @@ export const personProfileJson = {
     id: "person1",
     name: "Abdurrahman Gazi Yavuz",
     title: "Project Lead of Fulfill3D",
-    description: 'Hi, I’m Abdurrahman (Apo), a software developer with 5 years of engineering experience across aeronautics, real-time simulators, and web development. Fulfill3D is my platform for creating proof of concepts (PoCs) and developing MVPs that solve real-world backend web development challenges.',
+    description: 'Hi, I’m Abdurrahman (Apo), a software developer with 5 years of experience in engineering and software development. At Fulfill3D, I design and implement backend solutions using .NET and Microsoft Azure, focusing on scalability, performance, and security. I am skilled in developing distributed systems, integrating with cloud platforms, and utilizing modern development practices to build efficient and maintainable applications.',
     imageUrl: "/fulfill3d_person_profile.png",
     tags: ["System Development", "System Architecture", "Cloud Computing", "Microservices", "Web Apps"],
     socialMedia: [
@@ -21,8 +21,13 @@ export const companyProfileJson = {
     id: "fulfill3d",
     companyName: "Fulfill3D",
     mission: "A proof of concept (PoC) and minimum viable product (MVP) lab specialized in backend development",
-    description: 'Fulfill3D serves as a proof of concept (PoC) and minimum viable project (MVP) lab focused on backend development using Azure (PaaS). It showcases innovative approaches to cloud-native solutions, microservices, and scalable architectures. Through technical content and real-world projects, Fulfill3D highlights the process of transforming ideas into functional MVPs. By leveraging Azure and cutting-edge backend technologies, it provides a platform for rapid development and scalable solutions.',
-    tags: [".NET", "C#", "NextJS", "TypeScript", "Microsoft Azure", "Azure DevOps"],
+    descriptions: [
+        'Fulfill3D serves as a proof of concept (PoC) and minimum viable product (MVP) lab focused on backend development using Azure (PaaS). It showcases advanced backend solutions leveraging a range of Azure services, including Azure Functions, Azure Service Bus, Azure Storage, and identity management using Azure AD B2C.',
+        'The lab demonstrates the integration of Azure API Management (APIM) for managing and securing API endpoints, Azure App Configuration for centralized management of application settings, and Azure Key Vault for secure storage and management of secrets, keys, and certificates. Additionally, it utilizes Azure Redis Cache for low-latency data access and caching, enhancing the performance and scalability of distributed systems.',
+        'By employing .NET technologies, orchestrating complex workflows with Durable Functions, and leveraging event-driven architectures with Event Grid, Fulfill3D illustrates how to build resilient, high-performance backend systems that meet enterprise-level demands. Through best practices in dependency injection, clean architecture, and asynchronous processing, it provides real-world examples of how to design and implement scalable and maintainable solutions.',
+        'Fulfill3D serves as both a knowledge base and a portfolio, offering detailed technical documentation, architectural diagrams, and hands-on code samples. It demonstrates expertise in modern cloud development and the effective use of Azure services to deliver scalable, secure, and maintainable solutions.'
+    ],
+    tags: ["C#", ".NET", "Microsoft Azure", "Azure Functions", "Azure Service Bus", "Azure Storage", "Azure AD B2C", "Azure API Management", "Azure App Configuration", "Azure Key Vault", "Azure Redis Cache", "Durable Functions", "Azure Event Grid", "Azure Event Hub", "Next.js", "TypeScript"],
     logoUrl: "/fulfill3d_company_profile.png",
     socialMedia: [
         // {

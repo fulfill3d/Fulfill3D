@@ -1,7 +1,7 @@
 export const postList = [
     {
         "id": 1,
-        "uid": "e3a45b10-5dfb-4eac-bbfa-d8d4f7c2b2f3",
+        "uuid": "e3a45b10-5dfb-4eac-bbfa-d8d4f7c2b2f3",
         "title": "PoC1: Azure Storage Queue Integration",
         "slug": "azure-storage-queue-client-integration-poc",
         "author": "Abdurrahman Gazi Yavuz",
@@ -44,13 +44,13 @@ export const postList = [
                         "Microsoft.Extensions.DependencyInjection",
                         "Microsoft.Extensions.Options"
                     ],
-                    "ordered": false
+                    "ordered": true
                 }
             },
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "`Azure.Storage.Queues` provides the necessary classes and methods to interact with Azure Storage Queues, allowing you to manage and manipulate queue messages. `Microsoft.Extensions.DependencyInjection` offers built-in support for dependency injection, enabling you to register and inject services within your application. `Microsoft.Extensions.Options` helps manage application settings in a strongly-typed manner, simplifying configuration and enabling easy injection of options into services."
+                    "text": "[1] provides the necessary classes and methods to interact with Azure Storage Queues, allowing you to manage and manipulate queue messages. [2] offers built-in support for dependency injection, enabling you to register and inject services within your application. [3] helps manage application settings in a strongly-typed manner, simplifying configuration and enabling easy injection of options into services."
                 }
             },
             {
@@ -238,7 +238,7 @@ export const postList = [
     },
     {
         "id": 2,
-        "uid": "8a593841-83ce-44de-a224-18a7f08cbbc1",
+        "uuid": "8a593841-83ce-44de-a224-18a7f08cbbc1",
         "title": "PoC2: Azure Service Bus Integration",
         "slug": "azure-service-bus-client-integration-poc",
         "author": "Abdurrahman Gazi Yavuz",
@@ -281,13 +281,13 @@ export const postList = [
                         "Microsoft.Extensions.DependencyInjection",
                         "Microsoft.Extensions.Options"
                     ],
-                    "ordered": false
+                    "ordered": true
                 }
             },
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "These packages provide the necessary libraries for Azure Service Bus communication and dependency injection setup. `Azure.Messaging.ServiceBus` provides the necessary classes and methods to interact with Azure Service Bus, allowing you to send, receive, and manage messages in a fully managed enterprise message broker service. `Microsoft.Extensions.DependencyInjection` enables built-in support for dependency injection in .NET applications, promoting clean architecture and separation of concerns by allowing you to register and inject services. `Microsoft.Extensions.Options` provides a way to manage application settings in a strongly-typed manner, simplifying the configuration of settings and services through dependency injection."
+                    "text": "These packages provide the necessary libraries for Azure Service Bus communication and dependency injection setup. [1] provides the necessary classes and methods to interact with Azure Service Bus, allowing you to send, receive, and manage messages in a fully managed enterprise message broker service. [2] enables built-in support for dependency injection in .NET applications, promoting clean architecture and separation of concerns by allowing you to register and inject services. [3] provides a way to manage application settings in a strongly-typed manner, simplifying the configuration of settings and services through dependency injection."
                 }
             },
             {
@@ -495,7 +495,7 @@ export const postList = [
     },
     {
         "id": 3,
-        "uid": "c8bbefdb-e137-44ea-9614-4371b9e1cd54",
+        "uuid": "c8bbefdb-e137-44ea-9614-4371b9e1cd54",
         "title": "PoC3: SendGrid Integration",
         "slug": "sendgrid-client-integration-poc",
         "author": "Abdurrahman Gazi Yavuz",
@@ -538,13 +538,13 @@ export const postList = [
                         "Microsoft.Extensions.DependencyInjection",
                         "Microsoft.Extensions.Options"
                     ],
-                    "ordered": false
+                    "ordered": true
                 }
             },
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "`RestSharp` is a popular HTTP client library that simplifies sending requests to RESTful APIs, making it ideal for communicating with the SendGrid API for email delivery. `Microsoft.Extensions.DependencyInjection` provides built-in support for dependency injection, enabling you to register and inject services into your application. `Microsoft.Extensions.Options` helps in managing application settings in a strongly-typed manner, allowing for easy configuration and injection of options into services."
+                    "text": "[1] is a popular HTTP client library that simplifies sending requests to RESTful APIs, making it ideal for communicating with the SendGrid API for email delivery. [2] provides built-in support for dependency injection, enabling you to register and inject services into your application. [3] helps in managing application settings in a strongly-typed manner, allowing for easy configuration and injection of options into services."
                 }
             },
             {
@@ -703,6 +703,13 @@ export const postList = [
             {
                 "type": "hyperlink",
                 "data": {
+                    "href": "https://restsharp.dev/docs/intro",
+                    "text": "RestSharp"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
                     "href": "https://learn.microsoft.com/en-us/azure/azure-functions/",
                     "text": "Azure Functions"
                 }
@@ -712,13 +719,6 @@ export const postList = [
                 "data": {
                     "href": "https://learn.microsoft.com/en-us/azure/azure-functions/functions-dotnet-dependency-injection",
                     "text": "Dependency Injection"
-                }
-            },
-            {
-                "type": "hyperlink",
-                "data": {
-                    "href": "https://restsharp.dev/docs/intro",
-                    "text": "RestSharp"
                 }
             },
             {
@@ -739,7 +739,7 @@ export const postList = [
     },
     {
         "id": 4,
-        "uid": "cca7efb5-d9a7-4f2c-b5c8-72d76797de8d",
+        "uuid": "cca7efb5-d9a7-4f2c-b5c8-72d76797de8d",
         "title": "PoC4: Google Maps API Integration",
         "slug": "google-maps-client-integration-poc",
         "author": "Abdurrahman Gazi Yavuz",
@@ -783,13 +783,13 @@ export const postList = [
                         "Microsoft.Extensions.DependencyInjection",
                         "Microsoft.Extensions.Options"
                     ],
-                    "ordered": false
+                    "ordered": true
                 }
             },
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "`RestSharp` is a lightweight HTTP client library that simplifies sending requests to RESTful APIs like the Google Maps API. `Newtonsoft.Json` is a popular JSON serialization library that makes it easy to parse and serialize JSON data from the Google Maps API. `Microsoft.Extensions.DependencyInjection` provides support for dependency injection, enabling you to inject services into your application with a clean architecture. `Microsoft.Extensions.Options` helps in managing application settings in a strongly-typed manner, allowing for easy configuration and injection of options into services."
+                    "text": "[1] is a lightweight HTTP client library that simplifies sending requests to RESTful APIs like the Google Maps API. [2] is a popular JSON serialization library that makes it easy to parse and serialize JSON data from the Google Maps API. [3] provides support for dependency injection, enabling you to inject services into your application with a clean architecture. [4] helps in managing application settings in a strongly-typed manner, allowing for easy configuration and injection of options into services."
                 }
             },
             {
@@ -869,7 +869,7 @@ export const postList = [
                 "type": "code",
                 "data": {
                     "language": "csharp",
-                    "code": "using Newtonsoft.Json;\n\nnamespace Client.Models\n{\n    public class GeocodingRequest\n    {\n        public string Address { get; set; }\n    }\n\n    public class GeocodingResponse\n    {\n        [JsonProperty(\"results\")] public List<Result> Results { get; set; }\n\n        [JsonProperty(\"status\")] public string Status { get; set; }\n\n        public class Result\n        {\n            [JsonProperty(\"geometry\")] public Geometry Geometry { get; set; }\n        }\n\n        public class Geometry\n        {\n            [JsonProperty(\"location\")] public Location Location { get; set; }\n        }\n    }\n\n    public class Location\n    {\n        [JsonProperty(\"lat\")] public double Latitude { get; set; }\n\n        [JsonProperty(\"lng\")] public double Longitude { get; set; }\n    }\n}"
+                    "code": "using Newtonsoft.Json;\n\nnamespace Client.Models\n{\n\n    public class GeocodingRequest\n    {\n        public string Address { get; set; }\n    }\n    \n    public class GeocodingResponse\n    {\n        [JsonProperty(\"results\")] public List<Result> Results { get; set; }\n\n        [JsonProperty(\"status\")] public string Status { get; set; }\n\n        public class Result\n        {\n            [JsonProperty(\"address_components\")] public List<AddressComponent> AddressComponents { get; set; }\n\n            [JsonProperty(\"formatted_address\")] public string FormattedAddress { get; set; }\n\n            [JsonProperty(\"geometry\")] public Geometry Geometry { get; set; }\n\n            [JsonProperty(\"place_id\")] public string PlaceId { get; set; }\n\n            [JsonProperty(\"types\")] public List<string> Types { get; set; }\n        }\n\n        public class AddressComponent\n        {\n            [JsonProperty(\"long_name\")] public string LongName { get; set; }\n\n            [JsonProperty(\"short_name\")] public string ShortName { get; set; }\n\n            [JsonProperty(\"types\")] public List<string> Types { get; set; }\n        }\n\n        public class Geometry\n        {\n            [JsonProperty(\"bounds\")] public Bounds Bounds { get; set; }\n\n            [JsonProperty(\"location\")] public Location Location { get; set; }\n\n            [JsonProperty(\"location_type\")] public string LocationType { get; set; }\n\n            [JsonProperty(\"viewport\")] public Viewport Viewport { get; set; }\n        }\n\n        public class Bounds\n        {\n            [JsonProperty(\"northeast\")] public Location Northeast { get; set; }\n\n            [JsonProperty(\"southwest\")] public Location Southwest { get; set; }\n        }\n\n        public class Viewport\n        {\n            [JsonProperty(\"northeast\")] public Location Northeast { get; set; }\n\n            [JsonProperty(\"southwest\")] public Location Southwest { get; set; }\n        }\n    }\n    \n    public class Location\n    {\n        [JsonProperty(\"lat\")] public double Latitude { get; set; }\n\n        [JsonProperty(\"lng\")] public double Longitude { get; set; }\n    }\n}"
                 }
             },
             {
@@ -967,6 +967,13 @@ export const postList = [
             {
                 "type": "hyperlink",
                 "data": {
+                    "href": "https://restsharp.dev/docs/intro",
+                    "text": "RestSharp"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
                     "href": "https://learn.microsoft.com/en-us/azure/azure-functions/",
                     "text": "Azure Functions"
                 }
@@ -976,13 +983,6 @@ export const postList = [
                 "data": {
                     "href": "https://learn.microsoft.com/en-us/azure/azure-functions/functions-dotnet-dependency-injection",
                     "text": "Dependency Injection"
-                }
-            },
-            {
-                "type": "hyperlink",
-                "data": {
-                    "href": "https://restsharp.dev/docs/intro",
-                    "text": "RestSharp"
                 }
             },
             {
@@ -1003,7 +1003,7 @@ export const postList = [
     },
     {
         "id": 5,
-        "uid": "d1ffeca0-1eb3-4cd8-89db-fac8c88dccf2",
+        "uuid": "d1ffeca0-1eb3-4cd8-89db-fac8c88dccf2",
         "title": "PoC5: Azure Blob Storage Integration",
         "slug": "azure-blob-storage-client-integration-poc",
         "author": "Abdurrahman Gazi Yavuz",
@@ -1046,13 +1046,13 @@ export const postList = [
                         "Microsoft.Extensions.DependencyInjection",
                         "Microsoft.Extensions.Options"
                     ],
-                    "ordered": false
+                    "ordered": true
                 }
             },
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "`Azure.Storage.Blobs` provides the necessary classes and methods to interact with Azure Blob Storage, allowing you to manage and manipulate blob data. `Microsoft.Extensions.DependencyInjection` offers built-in support for dependency injection, enabling you to register and inject services within your application. `Microsoft.Extensions.Options` helps manage application settings in a strongly-typed manner, simplifying configuration and enabling easy injection of options into services."
+                    "text": "[1] provides the necessary classes and methods to interact with Azure Blob Storage, allowing you to manage and manipulate blob data. [2] offers built-in support for dependency injection, enabling you to register and inject services within your application. [3] helps manage application settings in a strongly-typed manner, simplifying configuration and enabling easy injection of options into services."
                 }
             },
             {
@@ -1259,8 +1259,245 @@ export const postList = [
     },
     {
         "id": 6,
-        "uid": "a05ecc86-9313-4959-a644-f1e59fde6eeb",
-        "title": "PoC6: A Secured Microservice",
+        "uuid": "f4b3b6e1-61fc-4d48-a2a4-56db06f0c3d7",
+        "title": "PoC6: Azure Cache for Redis Integration",
+        "slug": "redis-cache-client-integration-poc",
+        "author": "Abdurrahman Gazi Yavuz",
+        "tags": ["Redis", "Caching", "C#", ".NET"],
+        "excerpt": "A proof of concept for integrating Redis Cache in a .NET application to manage cached objects using a custom-built client `RedisCacheClient`.",
+        "image": "/redis-cache-client.png",
+        "status": "published",
+        "contentBlocks": [
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Introduction",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "Redis is an in-memory data structure store used as a database, cache, and message broker. This post demonstrates a proof of concept for integrating Redis Cache into a .NET application using a custom-built client `RedisCacheClient` to manage caching of objects."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Setup",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "To integrate `RedisCacheClient` into your .NET application, you need to add the following NuGet packages:"
+                }
+            },
+            {
+                "type": "list",
+                "data": {
+                    "items": [
+                        "StackExchange.Redis",
+                        "Microsoft.Extensions.DependencyInjection",
+                        "Microsoft.Extensions.Options"
+                    ],
+                    "ordered": true
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "[1] is a high-performance library used for connecting to Redis. [2] offers built-in support for dependency injection, enabling you to register and inject services within your application. [3] helps manage application settings in a strongly-typed manner, simplifying configuration and enabling easy injection of options into services."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Coding",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "First, we need to configure a `RedisCacheClient` service that will handle interactions with Redis Cache. We will use .NET dependency injection to manage the client’s configuration and ensure it can be easily integrated into services or applications."
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "namespace Client\n{\n    public static class DepInj\n    {\n        public static void RegisterRedisCacheClient(\n            this IServiceCollection services, Action<RedisCacheClientOptions> configureClientOptions)\n        {\n            services.ConfigureServiceOptions<RedisCacheClientOptions>((_, opt) => configureClientOptions(opt));\n            services.ConnectToRedisCacheServer();\n            services.AddSingleton<IRedisCacheClient, RedisCacheClient>();\n        }\n        \n        private static void ConfigureServiceOptions<TOptions>(\n            this IServiceCollection services,\n            Action<IServiceProvider, TOptions> configure)\n            where TOptions : class\n        {\n            services\n                .AddOptions<TOptions>()\n                .Configure<IServiceProvider>((options, resolver) => configure(resolver, options));\n        }\n\n        private static void ConnectToRedisCacheServer(this IServiceCollection services)\n        {\n            services.AddSingleton<IConnectionMultiplexer>(sp =>\n            {\n                var option = sp.GetRequiredService<IOptions<RedisCacheClientOptions>>();\n                \n                var cfg = new ConfigurationOptions\n                {\n                    Password = option.Value.Password,\n                    Ssl = option.Value.Ssl,\n                    AbortOnConnectFail = option.Value.AbortOnConnectFail,\n                };\n                cfg.EndPoints.Add(option.Value.Host);\n\n                return ConnectionMultiplexer.Connect(cfg);\n            });\n        } \n    }\n}"
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "In the above code, we define a `DepInj` class that registers the `RedisCacheClient` service and its options using the dependency injection container. This allows the client to be injected wherever it’s needed."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Creating the `RedisCacheClient` interface",
+                    "level": 2
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "namespace Client.Interfaces\n{\n    public interface IRedisCacheClient\n    {\n        Task<T> GetCacheObjectAsync<T>(string key);\n        Task<bool> SetCacheObjectAsync<T>(string key, T value, TimeSpan? expiry = null);\n        Task<T> GetCacheObjectAsync<T>(string key, string field);\n        Task<bool> SetCacheObjectAsync<T>(string key, string field, T value, TimeSpan? expiry = null);\n        Task<bool> DeleteCacheObjectAsync(string key);\n        Task<bool> DeleteCacheObjectAsync(string key, string hashField);\n    }\n}"
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `IRedisCacheClient` interface defines the contract for the client, which includes methods to get, set, and delete cached objects using Redis."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Implementing the `RedisCacheClient` service",
+                    "level": 2
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "using StackExchange.Redis;\nusing Client.Interfaces;\nusing Client.Options;\nusing Microsoft.Extensions.Options;\nusing Newtonsoft.Json;\n\nnamespace Client\n{\n    public class RedisCacheClient(IConnectionMultiplexer connectionMultiplexer, IOptions<RedisCacheClientOptions> opt): IRedisCacheClient\n    {\n        private readonly IDatabaseAsync _database = connectionMultiplexer.GetDatabase();\n        private readonly RedisCacheClientOptions _redisCacheClientOptions = opt.Value;\n\n        public async Task<T> GetCacheObjectAsync<T>(string key) \n        {\n            string value = await _database.StringGetAsync(key);\n            if(value == null) return default;\n            return JsonConvert.DeserializeObject<T>(value);\n        }\n\n        public async Task<bool> SetCacheObjectAsync<T>(string key, T value, TimeSpan? expiry = null)\n        {\n            return await _database.StringSetAsync(\n                key,\n                JsonConvert.SerializeObject(value),\n                expiry ?? TimeSpan.FromDays(_redisCacheClientOptions.DefaultStringExpiryDay));\n        }\n\n        public async Task<T> GetCacheObjectAsync<T>(string key, string field)\n        {\n            string value = await _database.HashGetAsync(key, field);\n            if (value == null) return default(T);\n            return JsonConvert.DeserializeObject<T>(value);\n        }\n\n        public async Task<bool> SetCacheObjectAsync<T>(string key, string field, T value, TimeSpan? expiry = null)\n        {\n            bool keyExists = await _database.KeyExistsAsync(key);\n            var result = await _database.HashSetAsync(\n                key,\n                field,\n                JsonConvert.SerializeObject(value));\n            if (!keyExists && result)\n            {\n                await _database.KeyExpireAsync(key, expiry ?? TimeSpan.FromDays(_redisCacheClientOptions.DefaultHashExpiryDay));\n            }\n            return result;\n        }\n\n        public async Task<bool> DeleteCacheObjectAsync(string key)\n        {\n            return await _database.KeyDeleteAsync(key);\n        }\n\n        public async Task<bool> DeleteCacheObjectAsync(string key, string hashField)\n        {\n            return await _database.HashDeleteAsync(key, hashField);\n        }\n    }\n}"
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `RedisCacheClient` implements the logic for getting, setting, and deleting cached objects in Redis. It interacts with the StackExchange.Redis library and handles the operations through the Redis database."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Simple C# Program Example",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "Here's a simple C# program that demonstrates how to use the `RedisCacheClient` to manage cached objects in Redis:"
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "using Client.Interfaces;\nusing Client.Options;\nusing Microsoft.Extensions.DependencyInjection;\n\nclass Program\n{\n    static async Task Main(string[] args)\n    {\n        // Set up Dependency Injection\n        var serviceCollection = new ServiceCollection();\n        serviceCollection.RegisterRedisCacheClient(options =>\n        {\n            options.Host = \"localhost\";\n            options.Password = \"your-redis-password\";\n            options.Ssl = false;\n            options.AbortOnConnectFail = true;\n            options.DefaultStringExpiryDay = 30;\n            options.DefaultHashExpiryDay = 30;\n        });\n        var serviceProvider = serviceCollection.BuildServiceProvider();\n\n        // Resolve RedisCacheClient\n        var redisCacheClient = serviceProvider.GetService<IRedisCacheClient>();\n\n        // Set a cached object\n        var setResult = await redisCacheClient.SetCacheObjectAsync(\"my-key\", \"Hello from Redis Cache\");\n        Console.WriteLine($\"Object set result: {setResult}\");\n\n        // Get the cached object\n        var cachedValue = await redisCacheClient.GetCacheObjectAsync<string>(\"my-key\");\n        Console.WriteLine($\"Cached value: {cachedValue}\");\n\n        // Delete the cached object\n        var deleteResult = await redisCacheClient.DeleteCacheObjectAsync(\"my-key\");\n        Console.WriteLine($\"Object delete result: {deleteResult}\");\n    }\n}"
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Integrating `RedisCacheClient` into Azure Functions or ASP.NET Core",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `RedisCacheClient` can be easily integrated into an Azure Function or an ASP.NET Core application using dependency injection. The same principles used for registering the client in a console app can be applied in Azure Functions and ASP.NET Core, with the client being injected into the required services or controllers."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Azure Functions Integration in .NET 8 Isolated Worker",
+                    "level": 3
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "In .NET 8, Azure Functions use the Isolated Worker model. The `RedisCacheClient` can be registered using the `HostBuilder` in the `Program.cs` file. Once registered, it can be injected into your function classes to handle caching operations in response to HTTP or other types of triggers. You will need to ensure that the connection details for Redis Cache are provided in your application configuration."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "ASP.NET Core Integration",
+                    "level": 3
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "In ASP.NET Core, you can register the `RedisCacheClient` in the `ConfigureServices` method within the `Startup.cs` or `Program.cs`. This will allow the client to be injected into any services or controllers that need to interact with Redis Cache. The connection details can be managed via app settings, and you can inject the `RedisCacheClient` wherever needed."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Repository",
+                    "level": 2
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://github.com/fulfill3d/RedisCacheClient",
+                    "text": "GitHub Repository"
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Further Reading",
+                    "level": 2
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/azure/azure-cache-for-redis/",
+                    "text": "Azure Cache for Redis"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/azure/azure-functions/",
+                    "text": "Azure Functions"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/azure/azure-functions/functions-dotnet-dependency-injection",
+                    "text": "Dependency Injection"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/azure/azure-app-configuration/",
+                    "text": "Azure App Configuration"
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/azure/key-vault/general/",
+                    "text": "Azure Key Vault"
+                }
+            }
+        ]
+    },
+    {
+        "id": 7,
+        "uuid": "a05ecc86-9313-4959-a644-f1e59fde6eeb",
+        "title": "PoC7: A Secured Microservice",
         "slug": "jwt-secured-microservice-poc",
         "author": "Abdurrahman Gazi Yavuz",
         "tags": ["Azure Functions", "JWT", "Microservices", "C#", ".NET"],
@@ -1291,7 +1528,7 @@ export const postList = [
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "JWT is a widely used standard for securely transmitting information, such as user identity and claims, between parties. By leveraging JWT, this microservice offers authentication and authorization features to ensure that only users with valid tokens can access the service. Developers can extend the PoC with their own logic while inheriting these security features. They can inject their services, such as business logic or data processing, into this framework and rely on the provided security layer to ensure only authorized users can access the microservice."
+                    "text": "JWT is a widely used standard for securely transmitting information, such as user identity and permissions, between parties. By leveraging JWT, this microservice offers authentication and authorization features to ensure that only users with valid tokens can access the service. Developers can extend the PoC with their own logic while inheriting these security features. They can inject their services, such as business logic or data processing, into this framework and rely on the provided security layer to ensure only authorized users can access the microservice."
                 }
             },
             {
@@ -1315,41 +1552,40 @@ export const postList = [
                         "Microsoft.Azure.Functions.Worker",
                         "Microsoft.Azure.Functions.Worker.Extensions.Http",
                         "Microsoft.Azure.Functions.Worker.Sdk",
-                        "Microsoft.ApplicationInsights.WorkerService",
                         "Azure.Identity",
                         "Microsoft.Azure.AppConfiguration.Functions.Worker",
                         "Microsoft.Extensions.DependencyInjection",
                         "Microsoft.Extensions.Http",
                         "Microsoft.IdentityModel.Protocols",
                         "Microsoft.IdentityModel.Protocols.OpenIdConnect",
-                        "Microsoft.NET.Sdk.Functions",
-                        "System.IdentityModel.Tokens.Jwt"
+                        "System.IdentityModel.Tokens.Jwt",
+                        "Microsoft.NET.Sdk.Functions"
                     ],
-                    "ordered": false
+                    "ordered": true
                 }
             },
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "The `Microsoft.AspNetCore.App` framework reference is essential for ASP.NET Core-based applications, offering fundamental libraries for web development and middleware support. The `Microsoft.Azure.Functions.Worker` package and its related extensions enable you to build isolated Azure Functions, providing a flexible and performant environment for developing microservices. The `Microsoft.Azure.Functions.Worker.Sdk` simplifies the build and deployment process of function apps, ensuring smooth integration with the Azure Functions runtime."
+                    "text": "The [1] framework reference is essential for ASP.NET Core-based applications, offering fundamental libraries for web development and middleware support. The [2] package and its related extensions enable you to build isolated Azure Functions, providing a flexible and performant environment for developing microservices. The [4] simplifies the build and deployment process of function apps, ensuring smooth integration with the Azure Functions runtime."
                 }
             },
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "To enhance monitoring and telemetry, the `Microsoft.ApplicationInsights.WorkerService` package is included, allowing you to track and analyze your function's performance and diagnose issues effectively. The `Azure.Identity` package simplifies authentication and access to Azure resources like App Configuration and Key Vault using managed identities or service principals."
+                    "text": "The [5] package simplifies authentication and access to Azure resources like App Configuration and Key Vault using managed identities or service principals."
                 }
             },
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "The `Microsoft.Azure.AppConfiguration.Functions.Worker` package integrates Azure App Configuration with Azure Functions, enabling dynamic loading of configuration settings at runtime. The `Microsoft.Extensions.DependencyInjection` and `Microsoft.Extensions.Http` packages provide robust dependency injection and HTTP client management capabilities, essential for building scalable and maintainable services."
+                    "text": "The [6] package integrates Azure App Configuration with Azure Functions, enabling dynamic loading of configuration settings at runtime. The [7] and [8] packages provide robust dependency injection and HTTP client management capabilities, essential for building scalable and maintainable services."
                 }
             },
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "For handling authentication flows and JWT validation, the `Microsoft.IdentityModel.Protocols`, `Microsoft.IdentityModel.Protocols.OpenIdConnect`, and `System.IdentityModel.Tokens.Jwt` packages are crucial. These packages facilitate working with OpenID Connect and JWT, enabling secure communication and validation of user identities. Lastly, the `Microsoft.NET.Sdk.Functions` package is used for building and running Azure Functions, providing essential tools and libraries for developing and deploying function apps."
+                    "text": "For handling authentication flows and JWT validation, the [9], [10], and [11] packages are crucial. These packages facilitate working with OpenID Connect and JWT, enabling secure communication and validation of user identities. Lastly, the [12] package is used for building and running Azure Functions, providing essential tools and libraries for developing and deploying function apps."
                 }
             },
             {
@@ -1439,7 +1675,7 @@ export const postList = [
                 "type": "code",
                 "data": {
                     "language": "csharp",
-                    "code": "public class JwtValidatorService(IOptions<TokenValidationOptions> opt) : IJwtValidatorService\n{\n    public async Task<string?> AuthenticateAndAuthorize(HttpRequestData req, string[] acceptedScopes)\n    {\n        if (!req.Headers.TryGetValues(\"Authorization\", out var authHeaders))\n        {\n            return null;\n        }\n\n        var authHeader = authHeaders.FirstOrDefault();\n        if (string.IsNullOrEmpty(authHeader) || !authHeader.StartsWith(\"Bearer \"))\n        {\n            return null;\n        }\n\n        var bearerToken = authHeader.Substring(\"Bearer \".Length);\n        try\n        {\n            var openIdConfig = await _configurationManager.GetConfigurationAsync(CancellationToken.None);\n            var validationParameters = new TokenValidationParameters\n            {\n                ValidateIssuer = true,\n                ValidIssuer = _issuer,\n                ValidateAudience = true,\n                ValidAudience = _clientId,\n                ValidateLifetime = true,\n                IssuerSigningKeys = openIdConfig.SigningKeys\n            };\n\n            var tokenHandler = new JwtSecurityTokenHandler();\n            var principal = tokenHandler.ValidateToken(bearerToken, validationParameters, out SecurityToken validatedToken);\n\n            var scopes = principal.Claims\n                .Where(c => c.Type == \"scp\" || c.Type == \"scope\")\n                .SelectMany(c => c.Value.Split(' '))\n                .ToList();\n\n            if (!scopes.Any(scope => acceptedScopes.Contains(scope)))\n            {\n                return null;\n            }\n\n            return principal.Claims.FirstOrDefault(c => c.Type == \"oid\")?.Value;\n        }\n        catch\n        {\n            return null;\n        }\n    }\n}"
+                    "code": "public class JwtValidatorService(IOptions<TokenValidationOptions> opt) : IJwtValidatorService\n{\n    private const string ScopeClaimType1 = \"http://schemas.microsoft.com/identity/claims/scope\";\n    private const string ScopeClaimType2 = \"scp\";\n    private const string OidClaimType = \"http://schemas.microsoft.com/identity/claims/objectidentifier\";\n    private const string AuthKey = \"Authorization\";\n    private const string TokenHeaderIdentifier = \"Bearer \";\n    private readonly string _clientId = opt.Value.ClientId;\n    private readonly string _issuer = opt.Value.Issuer;\n    private readonly ConfigurationManager<OpenIdConnectConfiguration> _configurationManager = new (opt.Value.MetadataUrl, new OpenIdConnectConfigurationRetriever());\n\n    public async Task<string?> AuthenticateAndAuthorize(HttpRequestData req, string[] acceptedScopes)\n    {\n        if (!req.Headers.TryGetValues(AuthKey, out var authHeaders))\n        {\n            return null;\n        }\n\n        var authHeader = authHeaders.FirstOrDefault();\n        if (string.IsNullOrEmpty(authHeader) || !authHeader.StartsWith(TokenHeaderIdentifier))\n        {\n            return null;\n        }\n\n        var bearerToken = authHeader.Substring(TokenHeaderIdentifier.Length);\n\n        try\n        {\n            var openIdConfig = await _configurationManager.GetConfigurationAsync(CancellationToken.None);\n            var validationParameters = new TokenValidationParameters\n            {\n                ValidateIssuer = true,\n                ValidIssuer = _issuer,\n                ValidateAudience = true,\n                ValidAudience = _clientId,\n                ValidateLifetime = true,\n                IssuerSigningKeys = openIdConfig.SigningKeys\n            };\n\n            var tokenHandler = new JwtSecurityTokenHandler();\n            var principal = tokenHandler.ValidateToken(bearerToken, validationParameters, out SecurityToken validatedToken);\n\n            var scopes = principal.Claims\n                .Where(c => c.Type == ScopeClaimType1 || c.Type == ScopeClaimType2)\n                .SelectMany(c => c.Value.Split(' '))\n                .ToList();\n\n            if (!scopes.Any(scope => acceptedScopes.Contains(scope)))\n            {\n                return null;\n            }\n\n            var oid = principal.Claims.FirstOrDefault(c => c.Type == OidClaimType)?.Value;\n\n            return oid;\n        }\n        catch\n        {\n            return null;\n        }\n    }\n}"
                 }
             },
             {
@@ -1589,6 +1825,102 @@ export const postList = [
             {
                 "type": "heading",
                 "data": {
+                    "text": "Implementing the Program.cs for ProtectedAPI",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `Program.cs` file is crucial for setting up the `ProtectedAPI` microservice. It defines how the host is built, configures Azure App Configuration and Key Vault integration, and registers services for JWT validation and scope-based authorization. This structure ensures that the microservice is configured securely and efficiently."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Configuring the Host and Middleware",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `HostBuilder` in the `Program.cs` is used to configure the application host with essential middleware components like Azure Functions and Azure App Configuration. It also integrates with Azure Key Vault for secure secret management. The host serves as the entry point for the application and defines how it should be built and run."
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "using Azure.Identity;\nusing Microsoft.Extensions.Configuration;\nusing Microsoft.Extensions.Hosting;\nusing ProtectedAPI;\n\nvar host = new HostBuilder()\n    .ConfigureFunctionsWorkerDefaults()\n    .ConfigureAppConfiguration(builder =>\n    {\n        var configuration = builder.Build();\n        var token = new DefaultAzureCredential();\n        var appConfigUrl = configuration[\"app_config_url\"] ?? string.Empty;\n        \n        builder.AddAzureAppConfiguration(config =>\n        {\n            config.Connect(new Uri(appConfigUrl), token);\n            config.ConfigureKeyVault(kv => kv.SetCredential(token));\n        });\n    })\n    .ConfigureServices((context, services) =>\n    {\n        var configuration = context.Configuration;\n        \n        services.RegisterServices(tokenOptions =>\n        {\n            tokenOptions.MetadataUrl = configuration[\"metadata_url_in_app_configuration\"] ?? string.Empty;\n            tokenOptions.Issuer = configuration[\"issuer_in_app_configuration\"] ?? string.Empty;\n            tokenOptions.ClientId = configuration[\"client_id_url_in_app_configuration\"] ?? string.Empty;\n        },\n        authScope =>\n        {\n            authScope.TestScope = configuration[\"scope_url_in_app_configuration\"] ?? string.Empty;\n        });\n    })\n    .Build();\n\nhost.Run();"
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "In this snippet, the host is configured to use `ConfigureFunctionsWorkerDefaults`, which sets up the Azure Functions environment. The `ConfigureAppConfiguration` method connects to Azure App Configuration using a managed identity through `DefaultAzureCredential`. This approach ensures that all necessary configurations are securely loaded from the App Configuration and Key Vault without exposing sensitive information in the code."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Azure App Configuration and Key Vault Integration",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "Azure App Configuration provides a centralized place to manage application settings, while Azure Key Vault securely stores secrets. By integrating these services, the `Program.cs` file ensures that the application can dynamically load configuration settings and secrets at runtime, enhancing security and flexibility."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "In the above configuration, the application connects to Azure App Configuration using the URI provided in the `app_config_url` variable. It also sets up Key Vault integration, enabling the secure retrieval of sensitive information like API keys and connection strings."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Service Registration and Configuration",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `ConfigureServices` method in `Program.cs` registers necessary services, such as JWT validation options and authorization scopes. These configurations are critical for securing the microservice, as they define how tokens are validated and what scopes are required for accessing different parts of the service."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "In this example, the `RegisterServices` extension method is used to configure `TokenValidationOptions` and `AuthorizationScope`. These options are loaded from Azure App Configuration, ensuring that they can be easily updated without changing the code. This design promotes a secure, maintainable, and flexible configuration setup."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `TokenValidationOptions` are used to validate incoming JWT tokens, including issuer, audience, and token metadata. The `AuthorizationScope` defines the scopes required to access different endpoints in the microservice. Together, these settings ensure that only authorized users with valid tokens can access the microservice."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Running the Host",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "Finally, the `host.Run()` command is used to start the application. This command initializes the host, loads the configuration, and begins listening for incoming requests. With the security and configuration settings in place, the microservice is ready to handle requests securely and efficiently."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
                     "text": "Custom Service Injection and Extension",
                     "level": 2
                 }
@@ -1677,9 +2009,9 @@ export const postList = [
         ]
     },
     {
-        "id": 7,
-        "uid": "46fe9dc9-4adb-45e7-a024-58cb52e37c77",
-        "title": "PoC7: A Custom Auth Flow using a Microservice",
+        "id": 8,
+        "uuid": "46fe9dc9-4adb-45e7-a024-58cb52e37c77",
+        "title": "PoC8: A Custom Auth Flow using a Microservice",
         "slug": "b2c-redirect-endpoint-microservice-poc",
         "author": "Abdurrahman Gazi Yavuz",
         "tags": ["Azure Functions", "AD B2C", "Microservices", "C#", ".NET"],
@@ -1728,34 +2060,34 @@ export const postList = [
                         "Microsoft.Extensions.Http",
                         "Microsoft.IdentityModel.Protocols",
                         "Microsoft.IdentityModel.Protocols.OpenIdConnect",
-                        "Microsoft.NET.Sdk.Functions",
-                        "System.IdentityModel.Tokens.Jwt"
+                        "System.IdentityModel.Tokens.Jwt",
+                        "Microsoft.NET.Sdk.Functions"
                     ],
-                    "ordered": false
+                    "ordered": true
                 }
             },
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "The `Microsoft.AspNetCore.App` framework reference is essential for ASP.NET Core-based applications, providing common functionality such as dependency injection and middleware support. The `Azure.Identity` package offers a simplified way to manage Azure authentication, allowing the application to securely access resources like Azure App Configuration and Key Vault using default credentials. `Microsoft.Azure.Functions.Worker` and its extensions enable the development of isolated Azure Functions using the .NET worker model, providing a robust environment for building microservices with improved performance and control."
+                    "text": "The [1] framework reference is essential for ASP.NET Core-based applications, providing common functionality such as dependency injection and middleware support. The [2] package offers a simplified way to manage Azure authentication, allowing the application to securely access resources like Azure App Configuration and Key Vault using default credentials. [3] and its extensions enable the development of isolated Azure Functions using the .NET worker model, providing a robust environment for building microservices with improved performance and control."
                 }
             },
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "The `Microsoft.Azure.AppConfiguration.Functions.Worker` package integrates Azure App Configuration with the Azure Functions worker model, allowing the function app to dynamically load configuration values at runtime. For database interactions, `Microsoft.EntityFrameworkCore` and `Microsoft.EntityFrameworkCore.SqlServer` provide the necessary ORM capabilities to interact with a SQL Server database using Entity Framework Core."
+                    "text": "The [6] package integrates Azure App Configuration with the Azure Functions worker model, allowing the function app to dynamically load configuration values at runtime. For database interactions, [7] and [8] provide the necessary ORM capabilities to interact with a SQL Server database using Entity Framework Core."
                 }
             },
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "To handle HTTP requests and responses within Azure Functions, `Microsoft.Azure.Functions.Worker.Extensions.Http` is used to provide HTTP trigger and binding capabilities. `Microsoft.Extensions.Http` adds advanced HTTP client management features, enabling efficient and scalable communication with external APIs. The `Microsoft.IdentityModel.Protocols` and `Microsoft.IdentityModel.Protocols.OpenIdConnect` packages facilitate handling OpenID Connect authentication flows, making it easier to work with Azure AD B2C and other identity providers."
+                    "text": "To handle HTTP requests and responses within Azure Functions, [4] is used to provide HTTP trigger and binding capabilities. [9] adds advanced HTTP client management features, enabling efficient and scalable communication with external APIs. The [10] and [11] packages facilitate handling OpenID Connect authentication flows, making it easier to work with Azure AD B2C and other identity providers."
                 }
             },
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "For JWT handling and token validation, `System.IdentityModel.Tokens.Jwt` is a crucial package that provides APIs for creating, validating, and parsing JWTs. Lastly, the `Microsoft.NET.Sdk.Functions` package is used to build and run Azure Functions, simplifying the development experience by providing essential tools and libraries for function apps."
+                    "text": "For JWT handling and token validation, [12] is a crucial package that provides APIs for creating, validating, and parsing JWTs. Lastly, the [13] package is used to build and run Azure Functions, simplifying the development experience by providing essential tools and libraries for function apps."
                 }
             },
             {
@@ -1768,20 +2100,20 @@ export const postList = [
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "To implement this microservice, we need to set up the `AuthFlow` service, which includes an Azure Function that handles B2C sign-in and user management. The service uses dependency injection to register services such as `AuthService` and `TokenService`, and the `DbContext` for database interaction."
+                    "text": "To implement this microservice, we need to set up the `AuthFlow`, which includes an Azure Function that handles B2C sign-in and user management. The microservice uses dependency injection to register services such as `AuthService` and `TokenService`, and the `DbContext` for database interaction."
                 }
             },
             {
                 "type": "code",
                 "data": {
                     "language": "csharp",
-                    "code": "namespace AuthFlow\n{\n    public static class DepInj\n    {\n        public static void RegisterServices(\n            this IServiceCollection services, \n            DatabaseOption dbOption, \n            Action<TokenServiceOptions> tokenServiceOptions, \n            Action<AuthServiceOptions> authServiceOptions)\n        {\n            services.AddDatabaseContext<AuthFlowDbContext>(dbOption);\n            services.ConfigureServiceOptions<TokenServiceOptions>((_, opt) => tokenServiceOptions(opt));\n            services.ConfigureServiceOptions<AuthServiceOptions>((_, opt) => authServiceOptions(opt));\n            services.AddTransient<IAuthService, AuthService>();\n            services.AddTransient<ITokenService, TokenService>();\n        }\n    }\n}"
+                    "code": "public static class DepInj\n{\n    public static void RegisterServices(\n        this IServiceCollection services, \n        DatabaseOption dbOption, \n        Action<TokenServiceOptions> tokenServiceOptions, \n        Action<AuthServiceOptions> authServiceOptions)\n    {\n        services.AddDatabaseContext<AuthFlowDbContext>(dbOption);\n        services.ConfigureServiceOptions<TokenServiceOptions>((_, opt) => tokenServiceOptions(opt));\n        services.ConfigureServiceOptions<AuthServiceOptions>((_, opt) => authServiceOptions(opt));\n        services.AddHttpClient();\n        services.AddTransient<IAuthService, AuthService>();\n        services.AddTransient<ITokenService, TokenService>();\n    }\n    \n    private static void ConfigureServiceOptions<TOptions>(\n        this IServiceCollection services,\n        Action<IServiceProvider, TOptions> configure)\n        where TOptions : class\n    {\n        services\n            .AddOptions<TOptions>()\n            .Configure<IServiceProvider>((options, resolver) => configure(resolver, options));\n    }\n    \n    private static void AddDatabaseContext<TContext>(\n        this IServiceCollection services, DatabaseOption dbConnectionsOptions)\n        where TContext : DbContext\n    {\n        \n        services.AddDbContext<TContext>(\n            options =>\n            {\n                if (!options.IsConfigured)\n                {\n                    options.UseSqlServer(dbConnectionsOptions.ConnectionString, opt =>\n                    {\n                        opt.EnableRetryOnFailure(\n                            maxRetryCount: 5,\n                            maxRetryDelay: TimeSpan.FromSeconds(30),\n                            errorNumbersToAdd: null);\n                    });\n                }\n            });\n    }\n}"
                 }
             },
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "The `DepInj` class handles the registration of services such as the `AuthService`, `TokenService`, and `DbContext`. This allows seamless interaction between the authentication flow, token processing, and database operations."
+                    "text": "The `DepInj` class handles the registration of services such as the `AuthService`, `TokenService`, and `DbContext`. This allows seamless interaction between the authentication flow, token processing, and database operations. Additionally, it registers an HTTP client using the `services.AddHttpClient()` method, which is crucial for making HTTP calls to exchange authorization codes with tokens from the Azure AD B2C Identity Provider (IdP). By leveraging the `HttpClient` registration, the microservice can efficiently communicate with the AD B2C endpoints, enabling secure and reliable token exchange, which is an essential part of the authentication flow. This setup ensures that the microservice is capable of handling authentication and authorization scenarios with external identity providers while maintaining modular and maintainable code."
                 }
             },
             {
@@ -1807,7 +2139,7 @@ export const postList = [
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "The `VerifyAndProcess` method accepts an authentication code and an optional boolean parameter `update`. If `update` is `true`, the method will update the existing user entity in the database. Otherwise, it will create a new user entity. This design allows the microservice to handle both new user sign-ups and existing user updates using the same interface."
+                    "text": "The `VerifyAndProcess` method accepts an authorization code and an optional boolean parameter `update`. If `update` is `true`, the method will update the existing user entity in the database. Otherwise, it will create a new user entity. This design allows the microservice to handle both new user sign-ups and existing user updates using the same interface."
                 }
             },
             {
@@ -1940,6 +2272,12 @@ export const postList = [
                 "type": "paragraph",
                 "data": {
                     "text": "The `ITokenService` interface defines a clear contract for token exchange operations, ensuring that the `AuthService` can interact with the `TokenService` without needing to know the details of how the token exchange is performed. This separation of concerns enhances the maintainability and testability of the microservice."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `TokenService` uses the `IHttpClientFactory` to create an `HttpClient` instance for making HTTP requests to the Azure AD B2C token endpoint. Using `HttpClientFactory.CreateClient()` is crucial for several reasons. It provides a centralized way to configure and manage multiple instances of `HttpClient`, which can improve performance and resource management. By using the `HttpClientFactory`, we avoid common pitfalls associated with creating `HttpClient` instances manually, such as socket exhaustion and DNS changes not being respected. Additionally, the `HttpClientFactory` allows for named clients, enabling custom configuration for different use cases, and supports Polly policies for resilience, such as retries and circuit breakers, which enhance the robustness of the token exchange process."
                 }
             },
             {
@@ -2317,245 +2655,8 @@ export const postList = [
         ]
     },
     {
-        "id": 8,
-        "uid": "f4b3b6e1-61fc-4d48-a2a4-56db06f0c3d7",
-        "title": "PoC8: Azure Cache for Redis Integration",
-        "slug": "redis-cache-client-integration-poc",
-        "author": "Abdurrahman Gazi Yavuz",
-        "tags": ["Redis", "Caching", "C#", ".NET"],
-        "excerpt": "A proof of concept for integrating Redis Cache in a .NET application to manage cached objects using a custom-built client `RedisCacheClient`.",
-        "image": "/redis-cache-client.png",
-        "status": "published",
-        "contentBlocks": [
-            {
-                "type": "heading",
-                "data": {
-                    "text": "Introduction",
-                    "level": 2
-                }
-            },
-            {
-                "type": "paragraph",
-                "data": {
-                    "text": "Redis is an in-memory data structure store used as a database, cache, and message broker. This post demonstrates a proof of concept for integrating Redis Cache into a .NET application using a custom-built client `RedisCacheClient` to manage caching of objects."
-                }
-            },
-            {
-                "type": "heading",
-                "data": {
-                    "text": "Setup",
-                    "level": 2
-                }
-            },
-            {
-                "type": "paragraph",
-                "data": {
-                    "text": "To integrate `RedisCacheClient` into your .NET application, you need to add the following NuGet packages:"
-                }
-            },
-            {
-                "type": "list",
-                "data": {
-                    "items": [
-                        "StackExchange.Redis",
-                        "Microsoft.Extensions.DependencyInjection",
-                        "Microsoft.Extensions.Options"
-                    ],
-                    "ordered": false
-                }
-            },
-            {
-                "type": "paragraph",
-                "data": {
-                    "text": "`StackExchange.Redis` is a high-performance library used for connecting to Redis. `Microsoft.Extensions.DependencyInjection` offers built-in support for dependency injection, enabling you to register and inject services within your application. `Microsoft.Extensions.Options` helps manage application settings in a strongly-typed manner, simplifying configuration and enabling easy injection of options into services."
-                }
-            },
-            {
-                "type": "heading",
-                "data": {
-                    "text": "Coding",
-                    "level": 2
-                }
-            },
-            {
-                "type": "paragraph",
-                "data": {
-                    "text": "First, we need to configure a `RedisCacheClient` service that will handle interactions with Redis Cache. We will use .NET dependency injection to manage the client’s configuration and ensure it can be easily integrated into services or applications."
-                }
-            },
-            {
-                "type": "code",
-                "data": {
-                    "language": "csharp",
-                    "code": "namespace Client\n{\n    public static class DepInj\n    {\n        public static void RegisterRedisCacheClient(\n            this IServiceCollection services, Action<RedisCacheClientOptions> configureClientOptions)\n        {\n            services.ConfigureServiceOptions<RedisCacheClientOptions>((_, opt) => configureClientOptions(opt));\n            services.ConnectToRedisCacheServer();\n            services.AddSingleton<IRedisCacheClient, RedisCacheClient>();\n        }\n        \n        private static void ConfigureServiceOptions<TOptions>(\n            this IServiceCollection services,\n            Action<IServiceProvider, TOptions> configure)\n            where TOptions : class\n        {\n            services\n                .AddOptions<TOptions>()\n                .Configure<IServiceProvider>((options, resolver) => configure(resolver, options));\n        }\n\n        private static void ConnectToRedisCacheServer(this IServiceCollection services)\n        {\n            services.AddSingleton<IConnectionMultiplexer>(sp =>\n            {\n                var option = sp.GetRequiredService<IOptions<RedisCacheClientOptions>>();\n                \n                var cfg = new ConfigurationOptions\n                {\n                    Password = option.Value.Password,\n                    Ssl = option.Value.Ssl,\n                    AbortOnConnectFail = option.Value.AbortOnConnectFail,\n                };\n                cfg.EndPoints.Add(option.Value.Host);\n\n                return ConnectionMultiplexer.Connect(cfg);\n            });\n        } \n    }\n}"
-                }
-            },
-            {
-                "type": "paragraph",
-                "data": {
-                    "text": "In the above code, we define a `DepInj` class that registers the `RedisCacheClient` service and its options using the dependency injection container. This allows the client to be injected wherever it’s needed."
-                }
-            },
-            {
-                "type": "heading",
-                "data": {
-                    "text": "Creating the `RedisCacheClient` interface",
-                    "level": 2
-                }
-            },
-            {
-                "type": "code",
-                "data": {
-                    "language": "csharp",
-                    "code": "namespace Client.Interfaces\n{\n    public interface IRedisCacheClient\n    {\n        Task<T> GetCacheObjectAsync<T>(string key);\n        Task<bool> SetCacheObjectAsync<T>(string key, T value, TimeSpan? expiry = null);\n        Task<T> GetCacheObjectAsync<T>(string key, string field);\n        Task<bool> SetCacheObjectAsync<T>(string key, string field, T value, TimeSpan? expiry = null);\n        Task<bool> DeleteCacheObjectAsync(string key);\n        Task<bool> DeleteCacheObjectAsync(string key, string hashField);\n    }\n}"
-                }
-            },
-            {
-                "type": "paragraph",
-                "data": {
-                    "text": "The `IRedisCacheClient` interface defines the contract for the client, which includes methods to get, set, and delete cached objects using Redis."
-                }
-            },
-            {
-                "type": "heading",
-                "data": {
-                    "text": "Implementing the `RedisCacheClient` service",
-                    "level": 2
-                }
-            },
-            {
-                "type": "code",
-                "data": {
-                    "language": "csharp",
-                    "code": "using StackExchange.Redis;\nusing Client.Interfaces;\nusing Client.Options;\nusing Microsoft.Extensions.Options;\nusing Newtonsoft.Json;\n\nnamespace Client\n{\n    public class RedisCacheClient(IConnectionMultiplexer connectionMultiplexer, IOptions<RedisCacheClientOptions> opt): IRedisCacheClient\n    {\n        private readonly IDatabaseAsync _database = connectionMultiplexer.GetDatabase();\n        private readonly RedisCacheClientOptions _redisCacheClientOptions = opt.Value;\n\n        public async Task<T> GetCacheObjectAsync<T>(string key) \n        {\n            string value = await _database.StringGetAsync(key);\n            if(value == null) return default;\n            return JsonConvert.DeserializeObject<T>(value);\n        }\n\n        public async Task<bool> SetCacheObjectAsync<T>(string key, T value, TimeSpan? expiry = null)\n        {\n            return await _database.StringSetAsync(\n                key,\n                JsonConvert.SerializeObject(value),\n                expiry ?? TimeSpan.FromDays(_redisCacheClientOptions.DefaultStringExpiryDay));\n        }\n\n        public async Task<T> GetCacheObjectAsync<T>(string key, string field)\n        {\n            string value = await _database.HashGetAsync(key, field);\n            if (value == null) return default(T);\n            return JsonConvert.DeserializeObject<T>(value);\n        }\n\n        public async Task<bool> SetCacheObjectAsync<T>(string key, string field, T value, TimeSpan? expiry = null)\n        {\n            bool keyExists = await _database.KeyExistsAsync(key);\n            var result = await _database.HashSetAsync(\n                key,\n                field,\n                JsonConvert.SerializeObject(value));\n            if (!keyExists && result)\n            {\n                await _database.KeyExpireAsync(key, expiry ?? TimeSpan.FromDays(_redisCacheClientOptions.DefaultHashExpiryDay));\n            }\n            return result;\n        }\n\n        public async Task<bool> DeleteCacheObjectAsync(string key)\n        {\n            return await _database.KeyDeleteAsync(key);\n        }\n\n        public async Task<bool> DeleteCacheObjectAsync(string key, string hashField)\n        {\n            return await _database.HashDeleteAsync(key, hashField);\n        }\n    }\n}"
-                }
-            },
-            {
-                "type": "paragraph",
-                "data": {
-                    "text": "The `RedisCacheClient` implements the logic for getting, setting, and deleting cached objects in Redis. It interacts with the StackExchange.Redis library and handles the operations through the Redis database."
-                }
-            },
-            {
-                "type": "heading",
-                "data": {
-                    "text": "Simple C# Program Example",
-                    "level": 2
-                }
-            },
-            {
-                "type": "paragraph",
-                "data": {
-                    "text": "Here's a simple C# program that demonstrates how to use the `RedisCacheClient` to manage cached objects in Redis:"
-                }
-            },
-            {
-                "type": "code",
-                "data": {
-                    "language": "csharp",
-                    "code": "using Client.Interfaces;\nusing Client.Options;\nusing Microsoft.Extensions.DependencyInjection;\n\nclass Program\n{\n    static async Task Main(string[] args)\n    {\n        // Set up Dependency Injection\n        var serviceCollection = new ServiceCollection();\n        serviceCollection.RegisterRedisCacheClient(options =>\n        {\n            options.Host = \"localhost\";\n            options.Password = \"your-redis-password\";\n            options.Ssl = false;\n            options.AbortOnConnectFail = true;\n            options.DefaultStringExpiryDay = 30;\n            options.DefaultHashExpiryDay = 30;\n        });\n        var serviceProvider = serviceCollection.BuildServiceProvider();\n\n        // Resolve RedisCacheClient\n        var redisCacheClient = serviceProvider.GetService<IRedisCacheClient>();\n\n        // Set a cached object\n        var setResult = await redisCacheClient.SetCacheObjectAsync(\"my-key\", \"Hello from Redis Cache\");\n        Console.WriteLine($\"Object set result: {setResult}\");\n\n        // Get the cached object\n        var cachedValue = await redisCacheClient.GetCacheObjectAsync<string>(\"my-key\");\n        Console.WriteLine($\"Cached value: {cachedValue}\");\n\n        // Delete the cached object\n        var deleteResult = await redisCacheClient.DeleteCacheObjectAsync(\"my-key\");\n        Console.WriteLine($\"Object delete result: {deleteResult}\");\n    }\n}"
-                }
-            },
-            {
-                "type": "heading",
-                "data": {
-                    "text": "Integrating `RedisCacheClient` into Azure Functions or ASP.NET Core",
-                    "level": 2
-                }
-            },
-            {
-                "type": "paragraph",
-                "data": {
-                    "text": "The `RedisCacheClient` can be easily integrated into an Azure Function or an ASP.NET Core application using dependency injection. The same principles used for registering the client in a console app can be applied in Azure Functions and ASP.NET Core, with the client being injected into the required services or controllers."
-                }
-            },
-            {
-                "type": "heading",
-                "data": {
-                    "text": "Azure Functions Integration in .NET 8 Isolated Worker",
-                    "level": 3
-                }
-            },
-            {
-                "type": "paragraph",
-                "data": {
-                    "text": "In .NET 8, Azure Functions use the Isolated Worker model. The `RedisCacheClient` can be registered using the `HostBuilder` in the `Program.cs` file. Once registered, it can be injected into your function classes to handle caching operations in response to HTTP or other types of triggers. You will need to ensure that the connection details for Redis Cache are provided in your application configuration."
-                }
-            },
-            {
-                "type": "heading",
-                "data": {
-                    "text": "ASP.NET Core Integration",
-                    "level": 3
-                }
-            },
-            {
-                "type": "paragraph",
-                "data": {
-                    "text": "In ASP.NET Core, you can register the `RedisCacheClient` in the `ConfigureServices` method within the `Startup.cs` or `Program.cs`. This will allow the client to be injected into any services or controllers that need to interact with Redis Cache. The connection details can be managed via app settings, and you can inject the `RedisCacheClient` wherever needed."
-                }
-            },
-            {
-                "type": "heading",
-                "data": {
-                    "text": "Repository",
-                    "level": 2
-                }
-            },
-            {
-                "type": "hyperlink",
-                "data": {
-                    "href": "https://github.com/fulfill3d/RedisCacheClient",
-                    "text": "GitHub Repository"
-                }
-            },
-            {
-                "type": "heading",
-                "data": {
-                    "text": "Further Reading",
-                    "level": 2
-                }
-            },
-            {
-                "type": "hyperlink",
-                "data": {
-                    "href": "https://learn.microsoft.com/en-us/azure/azure-cache-for-redis/",
-                    "text": "Azure Cache for Redis"
-                }
-            },
-            {
-                "type": "hyperlink",
-                "data": {
-                    "href": "https://learn.microsoft.com/en-us/azure/azure-functions/",
-                    "text": "Azure Functions"
-                }
-            },
-            {
-                "type": "hyperlink",
-                "data": {
-                    "href": "https://learn.microsoft.com/en-us/azure/azure-functions/functions-dotnet-dependency-injection",
-                    "text": "Dependency Injection"
-                }
-            },
-            {
-                "type": "hyperlink",
-                "data": {
-                    "href": "https://learn.microsoft.com/en-us/azure/azure-app-configuration/",
-                    "text": "Azure App Configuration"
-                }
-            },
-            {
-                "type": "hyperlink",
-                "data": {
-                    "href": "https://learn.microsoft.com/en-us/azure/key-vault/general/",
-                    "text": "Azure Key Vault"
-                }
-            }
-        ]
-    },
-    {
         "id": 7,
-        "uid": "",
+        "uuid": "",
         "title": "Database Migration Strategy with FluentMigrator",
         "slug": "crm-database-migration-with-fluentmigrator",
         "author": "John Doe",
@@ -2729,7 +2830,7 @@ export const postList = [
     },
     {
         "id": 8,
-        "uid": "",
+        "uuid": "",
         "title": "HTTP Request Body Mapping and Validation Using FluentValidation",
         "slug": "http-request-body-mapping-with-fluentvalidation",
         "author": "John Doe",
@@ -2876,7 +2977,7 @@ export const postList = [
     },
     {
         "id": 10,
-        "uid": "",
+        "uuid": "",
         "title": "Printful Client Integration",
         "slug": "printful-client",
         "author": "Your Name",
@@ -2927,7 +3028,7 @@ export const postList = [
     },
     {
         "id": 11,
-        "uid": "",
+        "uuid": "",
         "title": "Shopify Client Integration",
         "slug": "shopify-client",
         "author": "Your Name",
@@ -2967,7 +3068,7 @@ export const postList = [
     },
     {
         "id": 12,
-        "uid": "",
+        "uuid": "",
         "title": "Microsoft Graph API Integration",
         "slug": "microsoft-graph-client",
         "author": "Your Name",
@@ -3007,7 +3108,7 @@ export const postList = [
     },
     {
         "id": 14,
-        "uid": "",
+        "uuid": "",
         "title": "Stripe Payment Integration",
         "slug": "stripe-client",
         "author": "Your Name",
@@ -3047,7 +3148,7 @@ export const postList = [
     },
     {
         "id": 15,
-        "uid": "",
+        "uuid": "",
         "title": "Braintree Payment Integration",
         "slug": "braintree-client",
         "author": "Your Name",
@@ -3087,7 +3188,7 @@ export const postList = [
     },
     {
         "id": 16,
-        "uid": "",
+        "uuid": "",
         "title": "Azure Cosmos DB Integration",
         "slug": "azure-cosmos-client",
         "author": "Your Name",
@@ -3127,7 +3228,7 @@ export const postList = [
     },
     {
         "id": 17,
-        "uid": "",
+        "uuid": "",
         "title": "Azure Event Grid Integration",
         "slug": "azure-event-grid-client",
         "author": "Your Name",
@@ -3167,7 +3268,7 @@ export const postList = [
     },
     {
         "id": 18,
-        "uid": "",
+        "uuid": "",
         "title": "Azure OpenAI Integration",
         "slug": "azure-openai-client",
         "author": "Your Name",

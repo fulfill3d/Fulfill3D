@@ -12,7 +12,7 @@ const ProjectCard: React.FC<ProductCardProps> = ({ project }) => {
     const router = useRouter();
 
     const handleClick = () => {
-        router.push(`/projects/${project.uid}`); // Navigate to dynamic [id] page
+        router.push(`/projects/${project.uuid}`); // Navigate to dynamic [id] page
     };
     return (
         <div className="flex flex-col md:flex-row bg-white shadow-lg rounded-lg p-4 mb-6 h-auto">
@@ -52,7 +52,7 @@ const ProjectCard: React.FC<ProductCardProps> = ({ project }) => {
             {/* Links */}
             <div className="md:w-1/4 w-full flex flex-col md:justify-center md:items-end items-start">
                 <div className="flex gap-4 mt-4 md:mt-0">
-                    {project.demoUrl ? (
+                    {project.isDemoReady ? (
                         <a
                             href={project.demoUrl}
                             target="_blank"
@@ -93,31 +93,54 @@ const ProjectCard: React.FC<ProductCardProps> = ({ project }) => {
                             </svg>
                             Demo
                             <span className="absolute bottom-full mb-2 hidden text-xs text-white bg-gray-700 p-1 rounded-lg group-hover:block">
-                                Frontend not ready yet
+                                Not Ready
                             </span>
                         </div>
                     )}
-
-
-                    <div
-                        onClick={handleClick}
-                        className="flex items-center bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-colors cursor-pointer">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-5 w-5 mr-2"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M12 20l9-9-9-9M3 12l9-9m0 18l9-9"
-                            />
-                        </svg>
-                        Wiki
-                    </div>
+                    {project.isWikiReady ? (
+                        <div
+                            onClick={handleClick}
+                            className="flex items-center bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-colors cursor-pointer">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-5 w-5 mr-2"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M12 20l9-9-9-9M3 12l9-9m0 18l9-9"
+                                />
+                            </svg>
+                            Wiki
+                        </div>
+                    ) : (
+                        <div
+                            className="relative flex items-center bg-gray-400 text-white px-4 py-2 rounded-lg cursor-not-allowed group">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-5 w-5 mr-2"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M12 20l9-9-9-9M3 12l9-9m0 18l9-9"
+                                />
+                            </svg>
+                            Wiki
+                            <span
+                                className="absolute bottom-full mb-2 hidden text-xs text-white bg-gray-700 p-1 rounded-lg group-hover:block">
+                                Not Ready
+                            </span>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
