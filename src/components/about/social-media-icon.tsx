@@ -3,6 +3,7 @@ import React from "react";
 import Linkedin from "@/svg/linkedin";
 import Youtube from "@/svg/youtube";
 import Twitter from "@/svg/twitter";
+import GitHub from "@/svg/github";
 
 interface SocialMediaProps {
     platform: SocialMediaPlatform;
@@ -16,6 +17,8 @@ const SocialMediaIcon: React.FC<SocialMediaProps> = ({ platform }) => {
             return <Youtube />;
         case 'Twitter':
             return <Twitter />;
+        case 'GitHub':
+            return <GitHub />;
         default:
             return null;
     }
