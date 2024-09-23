@@ -1,4 +1,4 @@
-export type SocialMediaPlatform = 'LinkedIn' | 'YouTube' | 'Twitter'
+export type SocialMediaPlatform = 'LinkedIn' | 'YouTube' | 'Twitter' | 'GitHub'
 
 export class Company {
     id: string;

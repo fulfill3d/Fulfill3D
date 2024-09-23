@@ -188,8 +188,8 @@ export const postList = [
             {
                 "type": "hyperlink",
                 "data": {
-                    "href": "https://dev.azure.com/Fulfill3D/Public/_git/StorageQueueClient",
-                    "text": "StorageQueueClient Repository"
+                    "href": "https://github.com/fulfill3d/StorageQueueClient",
+                    "text": "GitHub Repository"
                 }
             },
             {
@@ -445,8 +445,8 @@ export const postList = [
             {
                 "type": "hyperlink",
                 "data": {
-                    "href": "https://dev.azure.com/Fulfill3D/Public/_git/ServiceBusClient",
-                    "text": "ServiceBusClient Repository",
+                    "href": "https://github.com/fulfill3d/ServiceBusClient",
+                    "text": "GitHub Repository",
                 }
             },
             {
@@ -682,8 +682,8 @@ export const postList = [
             {
                 "type": "hyperlink",
                 "data": {
-                    "href": "https://dev.azure.com/Fulfill3D/Public/_git/SendGridClient",
-                    "text": "SendGridClient Repository",
+                    "href": "https://github.com/fulfill3d/SendGridClient",
+                    "text": "GitHub Repository",
                 }
             },
             {
@@ -946,8 +946,8 @@ export const postList = [
             {
                 "type": "hyperlink",
                 "data": {
-                    "href": "https://dev.azure.com/Fulfill3D/Public/_git/GoogleMapsClient",
-                    "text": "GoogleMapsClient Repository",
+                    "href": "https://github.com/fulfill3d/GoogleMapsClient",
+                    "text": "GitHub Repository",
                 }
             },
             {
@@ -1209,8 +1209,8 @@ export const postList = [
             {
                 "type": "hyperlink",
                 "data": {
-                    "href": "https://dev.azure.com/Fulfill3D/Public/_git/BlobStorageClient",
-                    "text": "BlobStorageClient Repository",
+                    "href": "https://github.com/fulfill3d/BlobStorageClient",
+                    "text": "GitHub Repository",
                 }
             },
             {
@@ -1621,8 +1621,8 @@ export const postList = [
             {
                 "type": "hyperlink",
                 "data": {
-                    "href": "https://dev.azure.com/Fulfill3D/Public/_git/ProtectedAPI",
-                    "text": "The Secured Microservice Repository",
+                    "href": "https://github.com/fulfill3d/ProtectedAPI",
+                    "text": "GitHub Repository",
                 }
             },
             {
@@ -2268,8 +2268,8 @@ export const postList = [
             {
                 "type": "hyperlink",
                 "data": {
-                    "href": "https://dev.azure.com/Fulfill3D/Public/_git/AuthFlow",
-                    "text": "AuthFlow Repository",
+                    "href": "https://github.com/fulfill3d/AuthFlow",
+                    "text": "GitHub Repository",
                 }
             },
             {
@@ -2505,8 +2505,8 @@ export const postList = [
             {
                 "type": "hyperlink",
                 "data": {
-                    "href": "https://dev.azure.com/Fulfill3D/Public/_git/RedisCacheClient",
-                    "text": "RedisCacheClient Repository"
+                    "href": "https://github.com/fulfill3d/RedisCacheClient",
+                    "text": "GitHub Repository"
                 }
             },
             {
