@@ -1813,7 +1813,7 @@ export const postList = [
             {
                 "type": "hyperlink",
                 "data": {
-                    "href": "https://learn.microsoft.com/en-us/azure/active-directory-b2c/overview",
+                    "href": "https://learn.microsoft.com/en-us/azure/active-directory-b2c/",
                     "text": "Azure AD B2C"
                 }
             },
