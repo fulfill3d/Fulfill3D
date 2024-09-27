@@ -142,40 +142,14 @@ export const postList = [
             {
                 "type": "heading",
                 "data": {
-                    "text": "Integrating `StorageQueueClient` into Azure Functions or ASP.NET Core",
+                    "text": "Integrating `StorageQueueClient` into Azure Functions",
                     "level": 2
                 }
             },
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "The `StorageQueueClient` can be easily integrated into an Azure Function or an ASP.NET Core application using dependency injection. The same principles used for registering the client in a console app can be applied in Azure Functions and ASP.NET Core, with the client being injected into the required services or controllers."
-                }
-            },
-            {
-                "type": "heading",
-                "data": {
-                    "text": "Azure Functions Integration in .NET 8 Isolated Worker",
-                    "level": 3
-                }
-            },
-            {
-                "type": "paragraph",
-                "data": {
-                    "text": "In .NET 8, Azure Functions use the Isolated Worker model. The `StorageQueueClient` can be registered using the `HostBuilder` in the `Program.cs` file. Once registered, it can be injected into your function classes to handle queue operations in response to HTTP or other types of triggers. You will need to ensure that the connection string for Azure Storage Queue is provided in your application configuration."
-                }
-            },
-            {
-                "type": "heading",
-                "data": {
-                    "text": "ASP.NET Core Integration",
-                    "level": 3
-                }
-            },
-            {
-                "type": "paragraph",
-                "data": {
-                    "text": "In ASP.NET Core, you can register the `StorageQueueClient` in the `ConfigureServices` method within the `Startup.cs` or `Program.cs`. This will allow the client to be injected into any services or controllers that need to interact with Azure Storage Queues. The connection string can be managed via app settings, and you can inject the `StorageQueueClient` wherever needed."
+                    "text": "The `StorageQueueClient` can be easily integrated into an Azure Function application using dependency injection. The same principles used for registering the client in a console app can be applied in Azure Functions, with the client being injected into the required services or controllers."
                 }
             },
             {
@@ -373,7 +347,7 @@ export const postList = [
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "The `ServiceBusClientMessage` class is responsible for encapsulating the message details (such as the queue name, message content, and optional session ID) and sending it to Azure Service Bus using the Azure SDK."
+                    "text": "The `ServiceBusClientMessage` class is responsible for encapsulating the message details (such as the queue/topic name, message content, and optional session ID) and sending it to Azure Service Bus using the Azure SDK."
                 }
             },
             {
@@ -399,40 +373,14 @@ export const postList = [
             {
                 "type": "heading",
                 "data": {
-                    "text": "Integrating ServiceBusClient` into Azure Functions or ASP.NET Core",
+                    "text": "Integrating ServiceBusClient` into Azure Functions",
                     "level": 2
                 }
             },
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "The `ServiceBusClient` can be easily integrated into an Azure Function or an ASP.NET Core application using dependency injection. The same principles used for registering the client in a console app can be applied in Azure Functions and ASP.NET Core, with the client being injected into the required services or controllers."
-                }
-            },
-            {
-                "type": "heading",
-                "data": {
-                    "text": "Azure Functions Integration in .NET 8 Isolated Worker",
-                    "level": 3
-                }
-            },
-            {
-                "type": "paragraph",
-                "data": {
-                    "text": "Azure Functions use the Isolated Worker model in .NET 8. The `ServiceBusClient` can be registered using the `HostBuilder` in the `Program.cs` file. Once registered, it can be injected into your function classes to send messages in response to HTTP or other types of triggers. You will need to ensure that the connection string for the Service Bus is provided in your application configuration."
-                }
-            },
-            {
-                "type": "heading",
-                "data": {
-                    "text": "ASP.NET Core Integration",
-                    "level": 3
-                }
-            },
-            {
-                "type": "paragraph",
-                "data": {
-                    "text": "In ASP.NET Core, you can register the `ServiceBusClient` in the `ConfigureServices` method within the `Startup.cs` or `Program.cs`. This will allow the client to be injected into any services or controllers that need to interact with Azure Service Bus. The connection string can be managed via app settings, and you can inject the `ServiceBusClient` wherever needed."
+                    "text": "The `ServiceBusClient` can be easily integrated into an Azure Function application using dependency injection. The same principles used for registering the client in a console app can be applied in Azure Functions, with the client being injected into the required services or controllers."
                 }
             },
             {
@@ -636,40 +584,14 @@ export const postList = [
             {
                 "type": "heading",
                 "data": {
-                    "text": "Integrating `SendGridClient` into Azure Functions or ASP.NET Core",
+                    "text": "Integrating `SendGridClient` into Azure Functions",
                     "level": 2
                 }
             },
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "The `SendGridClient` can be easily integrated into both Azure Functions (in the Isolated Worker model for .NET 8) and ASP.NET Core applications using dependency injection (DI). In both scenarios, you need to register the `SendGridClient` in the startup configuration."
-                }
-            },
-            {
-                "type": "heading",
-                "data": {
-                    "text": "Azure Functions Integration in .NET 8 Isolated Worker",
-                    "level": 3
-                }
-            },
-            {
-                "type": "paragraph",
-                "data": {
-                    "text": "In .NET 8, Azure Functions use the Isolated Worker model, which separates the function execution from the Azure Functions runtime. To use the `SendGridClient` in this model, you need to configure it in the `Program.cs` file. In the Isolated Worker model, dependency injection (DI) is set up via the `HostBuilder`, and the `SendGridClient` must be registered during the application startup. This setup will allow the client to be injected into your Azure Functions to send emails. You also need to configure the `SendGridOptions` with your API key in this process."
-                }
-            },
-            {
-                "type": "heading",
-                "data": {
-                    "text": "ASP.NET Core Integration",
-                    "level": 3
-                }
-            },
-            {
-                "type": "paragraph",
-                "data": {
-                    "text": "In an ASP.NET Core application, you register the `SendGridClient` within the `Startup.cs` or `Program.cs` file. This is done in the `ConfigureServices` method, where the `SendGridClient` is added to the service container with the necessary configuration for the SendGrid API key. Once registered, the client can be injected into controllers, services, or other components where it is needed to send emails."
+                    "text": "The `SendGridClient` can be easily integrated into Azure Functions using dependency injection (DI). The `SendGridClient` service just needs to be registered in the startup configuration."
                 }
             },
             {
@@ -900,40 +822,14 @@ export const postList = [
             {
                 "type": "heading",
                 "data": {
-                    "text": "Integrating `GoogleMapsClient` into Azure Functions or ASP.NET Core",
+                    "text": "Integrating `GoogleMapsClient` into Azure Functions",
                     "level": 2
                 }
             },
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "The `GoogleMapsClient` can be easily integrated into an Azure Function or an ASP.NET Core application using dependency injection. The same principles used for registering the client in a console app can be applied in Azure Functions and ASP.NET Core, with the client being injected into the required services or controllers."
-                }
-            },
-            {
-                "type": "heading",
-                "data": {
-                    "text": "Azure Functions Integration in .NET 8 Isolated Worker",
-                    "level": 3
-                }
-            },
-            {
-                "type": "paragraph",
-                "data": {
-                    "text": "In .NET 8, Azure Functions use the Isolated Worker model. The `GoogleMapsClient` can be registered using the `HostBuilder` in the `Program.cs` file. Once registered, it can be injected into your function classes to retrieve geocoding data in response to HTTP or other types of triggers. You will need to ensure that the API key for Google Maps is provided in your application configuration."
-                }
-            },
-            {
-                "type": "heading",
-                "data": {
-                    "text": "ASP.NET Core Integration",
-                    "level": 3
-                }
-            },
-            {
-                "type": "paragraph",
-                "data": {
-                    "text": "In ASP.NET Core, you can register the `GoogleMapsClient` in the `ConfigureServices` method within the `Startup.cs` or `Program.cs`. This will allow the client to be injected into any services or controllers that need to interact with the Google Maps API. The API key can be managed via app settings, and you can inject the `GoogleMapsClient` wherever needed."
+                    "text": "The `GoogleMapsClient` can be easily integrated into an Azure Function application using dependency injection. The same principles used for registering the client in a console app can be applied in Azure Functions, with the client being injected into the required services."
                 }
             },
             {
@@ -1132,15 +1028,16 @@ export const postList = [
                 "type": "code",
                 "data": {
                     "language": "csharp",
-                    "code": "using System.Text;\nusing Azure.Storage.Blobs;\nusing Azure.Storage.Blobs.Models;\nusing Azure.Storage.Blobs.Specialized;\n\nnamespace Client.Models\n{\n    public class Blob\n    {\n        public string Name { get; set; }\n        public BlobUploadOptions Options { get; set; }\n        public string Container { get; set; }\n        private Stream _stream;\n        public Stream Stream { get => _stream; private set => _stream = value; }\n\n        public byte[]? Bytes { get; set; }\n        public string? Text { get; set; }\n\n        public async Task<BlockBlobClient> GetBlockBlobClient(BlobStorageClientOptions configuration)\n        {\n            var blobContainerClient = new BlobContainerClient(configuration.ConnectionString, Container);\n            return blobContainerClient.GetBlockBlobClient(Name);\n        }\n    }\n}"
+                    "code": "public class Blob\n{\n    public string Name { get; set; }\n    public BlobUploadOptions Options { get; set; }\n    \n    private ContentType _type;\n    public ContentType Type\n    {\n        get => _type;\n        \n        set\n        {\n            _type = value;\n            \n            Options = new BlobUploadOptions\n            {\n                HttpHeaders = new BlobHttpHeaders\n                {\n                    ContentType = value.ToString()\n                }\n            };\n        }\n    }\n    \n    public string Container { get; set; }\n    private Stream _stream;\n    public Stream Stream \n    { \n        get => _stream;\n        private set => _stream = value;\n    }\n    private byte[]? _bytes;\n    public byte[]? Bytes\n    {\n        get => _bytes;\n        set\n        {\n            _bytes = value;\n            UpdateStreamFromBytes(value);\n        }\n    }\n\n    private string? _text;\n    public string? Text\n    {\n        get => _text;\n        set\n        {\n            _text = value;\n            UpdateStreamFromText(value);\n        }\n    }\n    \n    private void UpdateStreamFromBytes(byte[]? bytes)\n    {\n        if (bytes != null)\n        {\n            Stream = new MemoryStream(bytes);\n        }\n        else\n        {\n            Stream = null;\n        }\n    }\n\n    private void UpdateStreamFromText(string? text)\n    {\n        if (text != null)\n        {\n            var bytes = Encoding.UTF8.GetBytes(text);\n            Stream = new MemoryStream(bytes);\n        }\n        else\n        {\n            Stream = null;\n        }\n    }\n    \n    public async Task<BlockBlobClient> GetBlockBlobClient(Options.BlobStorageClientOptions configuration)\n    {\n        var cloudBlobContainer = await GetBlobContainer(configuration);\n        return cloudBlobContainer.GetBlockBlobClient(Name);\n    }\n\n    private async Task<BlobContainerClient> GetBlobContainer(Options.BlobStorageClientOptions configuration)\n    {\n        var blobContainerClient = new BlobContainerClient(configuration.ConnectionString, Container);\n        var isContainerExists = await blobContainerClient.ExistsAsync();\n        if (isContainerExists)\n        {\n            return blobContainerClient;\n        }\n\n        return await CreateBlobContainer(configuration);\n    }\n    \n    private async Task<BlobContainerClient> CreateBlobContainer(Options.BlobStorageClientOptions configuration)\n    {\n        BlobServiceClient blobServiceClient = new BlobServiceClient(configuration.ConnectionString);\n\n        BlobContainerClient blobContainerClient = await blobServiceClient.CreateBlobContainerAsync(Container);\n\n        return blobContainerClient;\n    }\n}"
                 }
             },
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "The `Blob` model encapsulates the details of a blob, including its name, container, and options for uploading. It also includes helper methods to retrieve `BlockBlobClient` objects for interacting with Azure Blob Storage."
+                    "text": "The `Blob` class represents a model for managing blob storage in Azure. It includes properties like `Name`, `Container`, and `Options` to configure the blob, as well as properties for handling the blob's content in different formats, such as `Bytes` and `Text`. The `Type` property automatically updates the `BlobUploadOptions` based on the content type set. The class provides methods to retrieve or create a `BlobContainerClient` and obtain a `BlockBlobClient` for interacting with Azure Blob Storage. Helper methods like `UpdateStreamFromBytes` and `UpdateStreamFromText` are used to convert the content into a stream for uploading."
                 }
-            },    {
+            },
+            {
                 "type": "heading",
                 "data": {
                     "text": "Simple C# Program Example",
@@ -1163,40 +1060,14 @@ export const postList = [
             {
                 "type": "heading",
                 "data": {
-                    "text": "Integrating `BlobStorageClient` into Azure Functions or ASP.NET Core",
+                    "text": "Integrating `BlobStorageClient` into Azure Functions",
                     "level": 2
                 }
             },
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "The `BlobStorageClient` can be easily integrated into an Azure Function or an ASP.NET Core application using dependency injection. The same principles used for registering the client in a console app can be applied in Azure Functions and ASP.NET Core, with the client being injected into the required services or controllers."
-                }
-            },
-            {
-                "type": "heading",
-                "data": {
-                    "text": "Azure Functions Integration in .NET 8 Isolated Worker",
-                    "level": 3
-                }
-            },
-            {
-                "type": "paragraph",
-                "data": {
-                    "text": "In .NET 8, Azure Functions use the Isolated Worker model. The `BlobStorageClient` can be registered using the `HostBuilder` in the `Program.cs` file. Once registered, it can be injected into your function classes to handle blob storage operations in response to HTTP or other types of triggers. You will need to ensure that the connection string for Azure Blob Storage is provided in your application configuration."
-                }
-            },
-            {
-                "type": "heading",
-                "data": {
-                    "text": "ASP.NET Core Integration",
-                    "level": 3
-                }
-            },
-            {
-                "type": "paragraph",
-                "data": {
-                    "text": "In ASP.NET Core, you can register the `BlobStorageClient` in the `ConfigureServices` method within the `Startup.cs` or `Program.cs`. This will allow the client to be injected into any services or controllers that need to interact with Azure Blob Storage. The connection string can be managed via app settings, and you can inject the `BlobStorageClient` wherever needed."
+                    "text": "The `BlobStorageClient` can be easily integrated into an Azure Function application using dependency injection. The same principles used for registering the client in a console app can be applied in Azure Functions, with the client being injected into the required services."
                 }
             },
             {
@@ -1400,40 +1271,14 @@ export const postList = [
             {
                 "type": "heading",
                 "data": {
-                    "text": "Integrating `RedisCacheClient` into Azure Functions or ASP.NET Core",
+                    "text": "Integrating `RedisCacheClient` into Azure Functions",
                     "level": 2
                 }
             },
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "The `RedisCacheClient` can be easily integrated into an Azure Function or an ASP.NET Core application using dependency injection. The same principles used for registering the client in a console app can be applied in Azure Functions and ASP.NET Core, with the client being injected into the required services or controllers."
-                }
-            },
-            {
-                "type": "heading",
-                "data": {
-                    "text": "Azure Functions Integration in .NET 8 Isolated Worker",
-                    "level": 3
-                }
-            },
-            {
-                "type": "paragraph",
-                "data": {
-                    "text": "In .NET 8, Azure Functions use the Isolated Worker model. The `RedisCacheClient` can be registered using the `HostBuilder` in the `Program.cs` file. Once registered, it can be injected into your function classes to handle caching operations in response to HTTP or other types of triggers. You will need to ensure that the connection details for Redis Cache are provided in your application configuration."
-                }
-            },
-            {
-                "type": "heading",
-                "data": {
-                    "text": "ASP.NET Core Integration",
-                    "level": 3
-                }
-            },
-            {
-                "type": "paragraph",
-                "data": {
-                    "text": "In ASP.NET Core, you can register the `RedisCacheClient` in the `ConfigureServices` method within the `Startup.cs` or `Program.cs`. This will allow the client to be injected into any services or controllers that need to interact with Redis Cache. The connection details can be managed via app settings, and you can inject the `RedisCacheClient` wherever needed."
+                    "text": "The `RedisCacheClient` can be easily integrated into an Azure Function application using dependency injection. The same principles used for registering the client in a console app can be applied in Azure Functions, with the client being injected into the required services."
                 }
             },
             {
@@ -1550,10 +1395,10 @@ export const postList = [
                     "items": [
                         "Microsoft.AspNetCore.App",
                         "Microsoft.Azure.Functions.Worker",
-                        "Microsoft.Azure.Functions.Worker.Extensions.Http",
                         "Microsoft.Azure.Functions.Worker.Sdk",
-                        "Azure.Identity",
+                        "Microsoft.Azure.Functions.Worker.Extensions.Http",
                         "Microsoft.Azure.AppConfiguration.Functions.Worker",
+                        "Azure.Identity",
                         "Microsoft.Extensions.DependencyInjection",
                         "Microsoft.Extensions.Http",
                         "Microsoft.IdentityModel.Protocols",
@@ -1567,7 +1412,7 @@ export const postList = [
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "The [1] framework reference is essential for ASP.NET Core-based applications, offering fundamental libraries for web development and middleware support. The [2] package and its related extensions enable you to build isolated Azure Functions, providing a flexible and performant environment for developing microservices. The [4] simplifies the build and deployment process of function apps, ensuring smooth integration with the Azure Functions runtime."
+                    "text": "The [1] framework reference is essential for ASP.NET Core-based applications, offering fundamental libraries for web development and middleware support. The [2] package and its related extensions enable you to build isolated Azure Functions, providing a flexible and performant environment for developing microservices. The [3] simplifies the build and deployment process of function apps, ensuring smooth integration with the Azure Functions runtime."
                 }
             },
             {
@@ -1637,7 +1482,7 @@ export const postList = [
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "In the interface definition, the `AuthenticateAndAuthorize` method accepts two parameters: an `HttpRequestData` object, which represents the incoming HTTP request, and an array of accepted scopes. The method returns a `Task<string?>` that resolves to the unique identifier of the authenticated user if the token is valid and the user is authorized, or `null` if the validation or authorization fails."
+                    "text": "In the interface definition, the `ValidateTokenAndCheckScopes` method accepts two parameters: an `HttpRequestData` object, which represents the incoming HTTP request, and an array of accepted scopes. The method returns a `Task<string?>` that resolves to the unique identifier of the authenticated user if the token is valid and the user is authorized, or `null` if the validation or authorization fails."
                 }
             },
             {
@@ -1675,19 +1520,19 @@ export const postList = [
                 "type": "code",
                 "data": {
                     "language": "csharp",
-                    "code": "public class JwtValidatorService(IOptions<TokenValidationOptions> opt) : IJwtValidatorService\n{\n    private const string ScopeClaimType1 = \"http://schemas.microsoft.com/identity/claims/scope\";\n    private const string ScopeClaimType2 = \"scp\";\n    private const string OidClaimType = \"http://schemas.microsoft.com/identity/claims/objectidentifier\";\n    private const string AuthKey = \"Authorization\";\n    private const string TokenHeaderIdentifier = \"Bearer \";\n    private readonly string _clientId = opt.Value.ClientId;\n    private readonly string _issuer = opt.Value.Issuer;\n    private readonly ConfigurationManager<OpenIdConnectConfiguration> _configurationManager = new (opt.Value.MetadataUrl, new OpenIdConnectConfigurationRetriever());\n\n    public async Task<string?> AuthenticateAndAuthorize(HttpRequestData req, string[] acceptedScopes)\n    {\n        if (!req.Headers.TryGetValues(AuthKey, out var authHeaders))\n        {\n            return null;\n        }\n\n        var authHeader = authHeaders.FirstOrDefault();\n        if (string.IsNullOrEmpty(authHeader) || !authHeader.StartsWith(TokenHeaderIdentifier))\n        {\n            return null;\n        }\n\n        var bearerToken = authHeader.Substring(TokenHeaderIdentifier.Length);\n\n        try\n        {\n            var openIdConfig = await _configurationManager.GetConfigurationAsync(CancellationToken.None);\n            var validationParameters = new TokenValidationParameters\n            {\n                ValidateIssuer = true,\n                ValidIssuer = _issuer,\n                ValidateAudience = true,\n                ValidAudience = _clientId,\n                ValidateLifetime = true,\n                IssuerSigningKeys = openIdConfig.SigningKeys\n            };\n\n            var tokenHandler = new JwtSecurityTokenHandler();\n            var principal = tokenHandler.ValidateToken(bearerToken, validationParameters, out SecurityToken validatedToken);\n\n            var scopes = principal.Claims\n                .Where(c => c.Type == ScopeClaimType1 || c.Type == ScopeClaimType2)\n                .SelectMany(c => c.Value.Split(' '))\n                .ToList();\n\n            if (!scopes.Any(scope => acceptedScopes.Contains(scope)))\n            {\n                return null;\n            }\n\n            var oid = principal.Claims.FirstOrDefault(c => c.Type == OidClaimType)?.Value;\n\n            return oid;\n        }\n        catch\n        {\n            return null;\n        }\n    }\n}"
+                    "code": "public class JwtValidatorService(IOptions<TokenValidationOptions> opt) : IJwtValidatorService\n{\n    private const string ScopeClaimType1 = \"http://schemas.microsoft.com/identity/claims/scope\";\n    private const string ScopeClaimType2 = \"scp\";\n    private const string OidClaimType = \"http://schemas.microsoft.com/identity/claims/objectidentifier\";\n    private const string AuthKey = \"Authorization\";\n    private const string TokenHeaderIdentifier = \"Bearer \";\n    private readonly string _clientId = opt.Value.ClientId;\n    private readonly string _issuer = opt.Value.Issuer;\n    private readonly ConfigurationManager<OpenIdConnectConfiguration> _configurationManager = \n        new (opt.Value.MetadataUrl, new OpenIdConnectConfigurationRetriever());\n\n    public async Task<string?> ValidateTokenAndCheckScopes(HttpRequestData req, string[] acceptedScopes)\n    {\n        if (!req.Headers.TryGetValues(AuthKey, out var authHeaders))\n        {\n            return null;\n        }\n\n        var authHeader = authHeaders.FirstOrDefault();\n        if (string.IsNullOrEmpty(authHeader) || !authHeader.StartsWith(TokenHeaderIdentifier))\n        {\n            return null;\n        }\n\n        var bearerToken = authHeader.Substring(TokenHeaderIdentifier.Length);\n\n        try\n        {\n            var openIdConfig = await _configurationManager.GetConfigurationAsync(CancellationToken.None);\n            var validationParameters = new TokenValidationParameters\n            {\n                ValidateIssuer = true,\n                ValidIssuer = _issuer,\n                ValidateAudience = true,\n                ValidAudience = _clientId,\n                ValidateLifetime = true,\n                IssuerSigningKeys = openIdConfig.SigningKeys,\n                ValidateIssuerSigningKey = true,\n                RequireSignedTokens = true\n            };\n\n            var tokenHandler = new JwtSecurityTokenHandler();\n            var principal = tokenHandler.ValidateToken(bearerToken, validationParameters, out SecurityToken validatedToken);\n\n            var scopes = principal.Claims\n                .Where(c => c.Type == ScopeClaimType1 || c.Type == ScopeClaimType2)\n                .SelectMany(c => c.Value.Split(' '))\n                .ToList();\n\n            if (!scopes.Any(scope => acceptedScopes.Contains(scope, StringComparer.OrdinalIgnoreCase)))\n            {\n                return null;\n            }\n\n            var oid = principal.Claims.FirstOrDefault(c => c.Type == OidClaimType)?.Value;\n\n            return oid;\n        }\n        catch\n        {\n            return null;\n        }\n    }\n}"
                 }
             },
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "The `AuthenticateAndAuthorize` method first checks if the request contains an `Authorization` header with a Bearer token. If the header is missing or improperly formatted, the method returns `null`, indicating an unauthorized request. The token is extracted from the header and validated using the `TokenValidationParameters` defined in the method."
+                    "text": "The `ValidateTokenAndCheckScopes` method first checks if the request contains an `Authorization` header with a Bearer token. If the header is missing or improperly formatted, the method returns `null`, indicating an unauthorized request. The token is extracted from the header and validated using the `TokenValidationParameters` defined in the method."
                 }
             },
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "The validation parameters are configured to ensure that the token is issued by a trusted issuer (`ValidIssuer`), is intended for a specific audience (`ValidAudience`), and has not expired (`ValidateLifetime`). The method uses the signing keys obtained from the OpenID Connect configuration (`IssuerSigningKeys`) to validate the token's integrity."
+                    "text": "The validation parameters are configured to ensure that the token is issued by a trusted issuer (`ValidIssuer`), is intended for a specific audience (`ValidAudience`), and has not expired (`ValidateLifetime`). The method uses the signing keys obtained from the OpenID Connect configuration (`IssuerSigningKeys`) to validate the token's integrity (`ValidateIssuerSigningKey`). Additionally, it ensures that only signed tokens are accepted (`RequireSignedTokens`), providing an extra layer of security by rejecting unsigned tokens."
                 }
             },
             {
@@ -1725,7 +1570,7 @@ export const postList = [
                 "type": "code",
                 "data": {
                     "language": "csharp",
-                    "code": "namespace ProtectedAPI.Service.Options\n{\n    public class TokenValidationOptions\n    {\n        public string MetadataUrl { get; set; }\n        public string ClientId { get; set; }\n        public string Issuer { get; set; }\n    }\n    public class AuthorizationScope\n    {\n        public string TestScope { get; set; }\n    }\n}"
+                    "code": "public class TokenValidationOptions\n{\n    public string MetadataUrl { get; set; }\n    public string ClientId { get; set; }\n    public string Issuer { get; set; }\n}\n\npublic class AuthorizationScope\n{\n    public string TestScope { get; set; }\n}"
                 }
             },
             {
@@ -1820,19 +1665,6 @@ export const postList = [
                 "type": "paragraph",
                 "data": {
                     "text": "This approach allows you to build secured Azure Functions that are protected by JWT authentication and authorization, providing a flexible and reusable way to secure microservices. The function app can be extended to include more complex logic, additional endpoints, or different scopes, making it adaptable to a wide range of use cases."
-                }
-            },
-            {
-                "type": "heading",
-                "data": {
-                    "text": "Implementing the Program.cs for ProtectedAPI",
-                    "level": 2
-                }
-            },
-            {
-                "type": "paragraph",
-                "data": {
-                    "text": "The `Program.cs` file is crucial for setting up the `ProtectedAPI` microservice. It defines how the host is built, configures Azure App Configuration and Key Vault integration, and registers services for JWT validation and scope-based authorization. This structure ensures that the microservice is configured securely and efficiently."
                 }
             },
             {
@@ -1967,15 +1799,15 @@ export const postList = [
             {
                 "type": "hyperlink",
                 "data": {
-                    "href": "https://auth0.com/docs/secure/tokens/json-web-tokens",
-                    "text": "JSON Web Tokens"
+                    "href": "https://learn.microsoft.com/en-us/entra/identity-platform/v2-oauth2-implicit-grant-flow",
+                    "text": "OAuth 2.0 Implicit Grant Flow"
                 }
             },
             {
                 "type": "hyperlink",
                 "data": {
-                    "href": "https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-client-creds-grant-flow",
-                    "text": "OAuth 2.0 Client Credentials Grant Flow"
+                    "href": "https://auth0.com/docs/secure/tokens/json-web-tokens",
+                    "text": "JSON Web Tokens"
                 }
             },
             {
@@ -2029,7 +1861,7 @@ export const postList = [
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "This post demonstrates a proof of concept for building an Azure Function microservice that acts as a B2C redirect endpoint. The service validates the user sign-in/up using Azure AD B2C, processes the token, and creates or updates user entities in the database. Finally, it will either redirect user to successful (200) or failure (401) endpoints."
+                    "text": "This post demonstrates a proof of concept for building an Azure Function microservice that acts as a B2C redirect endpoint. The service validates the user sign-up sign-in using Azure AD B2C, processes the token, and creates or updates user entities in the database. Finally, it will either redirect user to successful (200) or failure (401) endpoints."
                 }
             },
             {
@@ -2050,11 +1882,11 @@ export const postList = [
                 "data": {
                     "items": [
                         "Microsoft.AspNetCore.App",
-                        "Azure.Identity",
                         "Microsoft.Azure.Functions.Worker",
-                        "Microsoft.Azure.Functions.Worker.Extensions.Http",
                         "Microsoft.Azure.Functions.Worker.Sdk",
+                        "Microsoft.Azure.Functions.Worker.Extensions.Http",
                         "Microsoft.Azure.AppConfiguration.Functions.Worker",
+                        "Azure.Identity",
                         "Microsoft.EntityFrameworkCore",
                         "Microsoft.EntityFrameworkCore.SqlServer",
                         "Microsoft.Extensions.Http",
@@ -2069,7 +1901,7 @@ export const postList = [
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "The [1] framework reference is essential for ASP.NET Core-based applications, providing common functionality such as dependency injection and middleware support. The [2] package offers a simplified way to manage Azure authentication, allowing the application to securely access resources like Azure App Configuration and Key Vault using default credentials. [3] and its extensions enable the development of isolated Azure Functions using the .NET worker model, providing a robust environment for building microservices with improved performance and control."
+                    "text": "The [1] framework reference is essential for ASP.NET Core-based applications, providing common functionality such as dependency injection and middleware support. The [6] package offers a simplified way to manage Azure authentication, allowing the application to securely access resources like Azure App Configuration and Key Vault using default credentials. [2] and its extensions enable the development of isolated Azure Functions using the .NET worker model, providing a robust environment for building microservices with improved performance and control."
                 }
             },
             {
@@ -2100,7 +1932,7 @@ export const postList = [
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "To implement this microservice, we need to set up the `AuthFlow`, which includes an Azure Function that handles B2C sign-in and user management. The microservice uses dependency injection to register services such as `AuthService` and `TokenService`, and the `DbContext` for database interaction."
+                    "text": "To implement this microservice, we need to set up the Azure Function that handles B2C sign-in and user management. The microservice uses dependency injection to register services such as `AuthService` and `TokenService`, and the `DbContext` for database interaction."
                 }
             },
             {
@@ -2158,7 +1990,7 @@ export const postList = [
             {
                 "type": "paragraph",
                 "data": {
-                    "text": "The `AuthService` class is responsible for handling the core logic related to user management within the `AuthFlow` microservice. It implements the `IAuthService` interface, which defines the contract for verifying the authentication code received from the Azure AD B2C redirect and processing the user entity accordingly. The service interacts with the `TokenService` to exchange the authorization code for an ID token, which is then used to extract user information and either create a new user entity or update an existing one in the database."
+                    "text": "The `AuthService` class is responsible for handling the core logic related to user management within the `AuthFlow` microservice. It implements the `IAuthService` interface, which defines the contract for verifying the authorization code received from the Azure AD B2C redirect and processing the user entity accordingly. The service interacts with the `TokenService` to exchange the authorization code for an ID token, which is then used to extract user information and either create a new user entity or update an existing one in the database."
                 }
             },
             {
@@ -2615,6 +2447,13 @@ export const postList = [
                 "data": {
                     "text": "Further Reading",
                     "level": 2
+                }
+            },
+            {
+                "type": "hyperlink",
+                "data": {
+                    "href": "https://learn.microsoft.com/en-us/entra/identity-platform/v2-oauth2-auth-code-flow",
+                    "text": "OAuth 2.0 Authorization Code Flow"
                 }
             },
             {

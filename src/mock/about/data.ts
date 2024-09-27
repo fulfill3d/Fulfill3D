@@ -2,7 +2,7 @@ export const personProfileJson = {
     id: "person1",
     name: "Abdurrahman Gazi Yavuz",
     title: "Project Lead of Fulfill3D",
-    description: 'Hi, I’m Abdurrahman (Apo), a software developer with 5 years of experience in engineering and software development. At Fulfill3D, I design and implement backend solutions using .NET and Microsoft Azure, focusing on scalability, performance, and security. I am skilled in developing distributed systems, integrating with cloud platforms, and utilizing modern development practices to build efficient and maintainable applications.',
+    description: 'Hi, I’m Gazi, a software developer with 5+ years of experience in engineering and software development. At Fulfill3D, I design and implement backend solutions using .NET and Microsoft Azure, focusing on scalability, performance, and security. I am skilled in developing distributed systems, integrating with cloud platforms, and utilizing modern development practices to build efficient and maintainable applications.',
     imageUrl: "/fulfill3d_person_profile.png",
     tags: ["System Development", "System Architecture", "Cloud Computing", "Microservices", "Web Apps"],
     socialMedia: [
