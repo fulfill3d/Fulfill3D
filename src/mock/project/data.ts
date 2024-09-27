@@ -120,7 +120,7 @@ export const projectList = [
         "id": 2,
         "uuid": "4f7334bd-f946-446e-81e7-77ea52c5fb9c",
         "name": "POD",
-        "description": "A cloud-based ecommerce app with 3D print-on-demand business model having full integration capabilities to Shopify stores with Braintree and Stripe payment options.",
+        "description": "An enterprise level cloud-based ecommerce app with 3D print-on-demand business model having full integration capabilities to Shopify stores with Braintree and Stripe payment options.",
         "isDemoReady": false,
         "demoUrl": "",
         "imageUrl": "/pod.png",
