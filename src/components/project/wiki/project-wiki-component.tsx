@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ProjectWiki } from "@/models/project/wiki/project-wiki";
+import RequestForm from "@/components/common/request-form";
 
 interface ProductWikiComponentProps {
     wiki: ProjectWiki;
@@ -135,29 +136,7 @@ const ProjectWikiComponent: React.FC<ProductWikiComponentProps> = ({ wiki }) => 
                         <div className="w-full flex flex-col">
                             <p className="text-lg text-gray-700 mb-2">Source code is not publicly available for this project. Fill out the following form to request it:</p>
                             <div className="w-full flex flex-col items-center justify-center">
-                                <form className="w-2/3 flex flex-col gap-4 bg-gray-100 p-4 rounded-lg">
-                                    <label className="text-gray-700">
-                                        Email Address:
-                                        <input
-                                            type="email"
-                                            placeholder="Enter your email"
-                                            className="mt-2 px-4 py-2 border rounded-lg w-full"
-                                            required
-                                        />
-                                    </label>
-                                    <label className="text-gray-700">
-                                        Message:
-                                        <textarea
-                                            placeholder="Please provide details about your request..."
-                                            className="mt-2 px-4 py-2 border rounded-lg w-full resize-none"
-                                            rows={4}
-                                            required
-                                        />
-                                    </label>
-                                    <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors">
-                                        Request Source Code
-                                    </button>
-                                </form>
+                                <RequestForm/>
                             </div>
                         </div>
                     )}

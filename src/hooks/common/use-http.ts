@@ -50,16 +50,25 @@ const useHttp = (): UseHttpResult => {
                 headers,
             });
 
-            const data = await response.json();
+            const contentType = response.headers.get('Content-Type');
+            let data;
 
-            if (!response.ok) {
-                setError(data.message || 'Something went wrong');
-                setLoading(false);
-                return { error: data.message || 'Something went wrong' };
+            if (contentType && contentType.includes('application/json')) {
+                data = await response.json();
+            } else {
+                data = null;
             }
 
-            setLoading(false);
-            return data;
+            if (response.ok) {
+                setLoading(false);
+                return data || { message: 'Request successful', status: response.status };
+            } else {
+                const errorMessage = data?.message || `Something went wrong: ${response.status}`;
+                setError(errorMessage);
+                setLoading(false);
+                return { error: errorMessage };
+            }
+
         } catch (err: any) {
             setLoading(false);
             setError(err.message);
