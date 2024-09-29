@@ -5,7 +5,7 @@ import ProjectWikiComponent from "@/components/project/wiki/project-wiki-compone
 import { useEffect, useState } from "react";
 import { projectList } from "@/mock/project/data";
 import Loading from "@/app/loading";
-import NotFound from "@/components/common/not-found";
+import NotFound from "@/app/not-found";
 
 // Mock async function to fetch wiki based on id (simulate async behavior)
 const fetchWikiById = async (uid: string): Promise<ProjectWiki | null> => {

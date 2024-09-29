@@ -5,7 +5,7 @@ import { postList } from '@/mock/post/data';
 import { useEffect, useState } from 'react';
 import PostContent from '@/components/post/post-content';
 import Loading from "@/app/loading";
-import NotFound from "@/components/common/not-found";
+import NotFound from "@/app/not-found";
 
 // Mock async function to fetch post based on id (simulate async behavior)
 const fetchPostById = async (uid: string): Promise<Post | null> => {
