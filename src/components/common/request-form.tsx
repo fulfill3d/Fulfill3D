@@ -36,7 +36,7 @@ const RequestForm = () => {
     };
 
     return (
-        <form onSubmit={submitHandler} className="w-2/3 flex flex-col gap-4 bg-gray-100 p-4 rounded-lg">
+        <form onSubmit={submitHandler} className="w-full md:w-2/3 flex flex-col gap-4 bg-gray-100 p-4 rounded-lg">
             <label className="text-gray-700">
                 Email Address:
                 <input
