@@ -35,7 +35,7 @@ export default function About() {
 
                 {/* Request Form Section */}
                 <section>
-                    <div className="w-full flex flex-col items-center justify-center">
+                    <div className="w-full flex flex-col items-center justify-center pb-6 md:pb-0">
                         <h2 className="text-md font-bold text-gray-800 mb-6">
                             Please fill out the following form to send me a message
                         </h2>
