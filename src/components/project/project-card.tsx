@@ -50,7 +50,7 @@ const ProjectCard: React.FC<ProductCardProps> = ({ project }) => {
             </div>
 
             {/* Links */}
-            <div className="md:w-1/4 w-full flex flex-col md:justify-center md:items-end items-start">
+            <div className="md:w-1/4 w-full flex flex-col md:justify-center md:items-end items-center justify-center">
                 <div className="flex gap-4 mt-4 md:mt-0">
                     {project.isDemoReady ? (
                         <a
@@ -92,7 +92,7 @@ const ProjectCard: React.FC<ProductCardProps> = ({ project }) => {
                                 />
                             </svg>
                             Demo
-                            <span className="absolute bottom-full mb-2 hidden text-xs text-white bg-gray-700 p-1 rounded-lg group-hover:block">
+                            <span className="absolute bottom-full mb-2 hidden text-xs text-white bg-gray-700 p-1 rounded-sm group-hover:block">
                                 Not Ready
                             </span>
                         </div>
@@ -136,7 +136,7 @@ const ProjectCard: React.FC<ProductCardProps> = ({ project }) => {
                             </svg>
                             Wiki
                             <span
-                                className="absolute bottom-full mb-2 hidden text-xs text-white bg-gray-700 p-1 rounded-lg group-hover:block">
+                                className="absolute bottom-full mb-2 hidden text-xs text-white bg-gray-700 p-1 rounded-sm group-hover:block">
                                 Not Ready
                             </span>
                         </div>
