@@ -15,8 +15,18 @@ export default function About() {
 
     // PING to Wake Up Azure Function
     useEffect(() => {
+
         (async () => {
-            await fetch(process.env.NEXT_PUBLIC_FULFILL3D_API_ENDPOINT || '');
+            try {
+                const endpoints = [
+                    process.env.NEXT_PUBLIC_FULFILL3D_API_ENDPOINT || ''
+                ];
+
+                // Use Promise.all to send all requests at once
+                await Promise.all(endpoints.map(endpoint => fetch(endpoint)));
+            } catch (error) {
+                console.error('Error pinging Azure Functions:', error);
+            }
         })();
     }, []);
 
