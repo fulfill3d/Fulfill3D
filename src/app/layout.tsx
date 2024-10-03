@@ -5,11 +5,10 @@ import NavBar from "@/components/common/nav-bar";
 import Fulfill3d from "@/svg/fulfill3d";
 
 export const metadata: Metadata = {
-  title: "Fulfill3D",
-  description: "Fulfill3D is a project lab on apps as a service." +
-      "It uses Microsoft Azure as PaaS." +
-      "Function App / Web App / Service Messaging Bus / B2C idP" +
-      "Blob Storage / Azure Cosmos DB / Azure SQL",
+    title: "Fulfill3D",
+    description: "Fulfill3D is a project lab focused on building cloud-native applications using Microsoft Azure as a Platform as a Service (PaaS). " +
+        "It covers various Azure services such as Function App, Web App, Service Bus, B2C Identity Provider (idP), " +
+        "Blob Storage, Azure Cosmos DB, and Azure SQL, showcasing backend development, integration, and scalable solutions.",
 };
 
 const links = [
