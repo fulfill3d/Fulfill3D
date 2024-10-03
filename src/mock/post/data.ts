@@ -82,6 +82,38 @@ export const postList = [
             {
                 "type": "heading",
                 "data": {
+                    "text": "Using the IOptions Pattern",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `IOptions` pattern in .NET is used to manage and access configuration settings in a strongly-typed manner. In this PoC, we use `StorageQueueClientOptions` to encapsulate the connection string for the Azure Storage Queue."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `StorageQueueClientOptions` class holds the configuration needed by the `StorageQueueClient`, such as the connection string. By using the `IOptions<T>` interface, we inject these options into the client through dependency injection, making the configuration easy to manage and modify across different environments."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "This pattern allows for clean separation of concerns, ensuring that the `StorageQueueClient` doesn't need to be aware of how the connection string is provided—whether from appsettings.json, environment variables, or another configuration source."
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "public class StorageQueueClientOptions\n{\n    public string ConnectionString { get; set; }\n}"
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
                     "text": "Creating the `StorageQueueClient` interface",
                     "level": 2
                 }
@@ -288,6 +320,38 @@ export const postList = [
                 "type": "paragraph",
                 "data": {
                     "text": "In the above code, we define a `DepInj` class that registers the `ServiceBusClient` service and its options using the dependency injection container. This will allow the client to be injected wherever it's needed."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Using the IOptions Pattern",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `IOptions` pattern in .NET is used to manage and access configuration settings in a strongly-typed manner. In this PoC, we use `ServiceBusClientOptions` to encapsulate the connection string for the Azure Service Bus."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `ServiceBusClientOptions` class holds the configuration needed by the `ServiceBusClient`, such as the connection string. By using the `IOptions<T>` interface, we inject these options into the client through dependency injection, making the configuration easy to manage and modify across different environments."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "This pattern allows for clean separation of concerns, ensuring that the `ServiceBusClient` doesn't need to be aware of how the connection string is provided—whether from appsettings.json, environment variables, or another configuration source."
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "public class ServiceBusClientOptions\n{\n    public string ConnectionString { get; set; }\n}"
                 }
             },
             {
@@ -524,6 +588,38 @@ export const postList = [
             {
                 "type": "heading",
                 "data": {
+                    "text": "Using the IOptions Pattern",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `IOptions` pattern in .NET is used to manage and access configuration settings in a strongly-typed manner. In this PoC, we use `SendGridOptions` to encapsulate the API key for the SendGrid email service."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `SendGridOptions` class holds the configuration needed by the `SendGridClient`, such as the API key for authentication with the SendGrid API. By using the `IOptions<T>` interface, we inject these options into the client through dependency injection, making the configuration easy to manage and modify across different environments."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "This pattern allows for clean separation of concerns, ensuring that the `SendGridClient` doesn't need to be aware of how the API key is provided—whether from appsettings.json, environment variables, or another configuration source."
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "public class SendGridOptions\n{\n    public string ApiKey { get; set; }\n}"
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
                     "text": "Creating the `SendGridClient` interface",
                     "level": 2
                 }
@@ -738,6 +834,38 @@ export const postList = [
                 "type": "paragraph",
                 "data": {
                     "text": "In the above code, we define a `DepInj` class that registers the `GoogleMapsClient` service and its options using the dependency injection container. This allows the client to be injected wherever it’s needed within the application."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Using the IOptions Pattern",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `IOptions` pattern in .NET is used to manage and access configuration settings in a strongly-typed manner. In this PoC, we use `GoogleMapsOptions` to encapsulate the API key for the Google Maps API."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `GoogleMapsOptions` class holds the configuration needed by the `GoogleMapsClient`, such as the API key. By using the `IOptions<T>` interface, we inject these options into the client through dependency injection, making the configuration easy to manage and modify across different environments."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "This pattern allows for clean separation of concerns, ensuring that the `GoogleMapsClient` doesn't need to be aware of how the API key is provided—whether from appsettings.json, environment variables, or another configuration source."
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "public class GoogleMapsOptions\n{\n    public string ApiKey { get; set; }\n}"
                 }
             },
             {
@@ -980,6 +1108,38 @@ export const postList = [
             {
                 "type": "heading",
                 "data": {
+                    "text": "Using the IOptions Pattern",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `IOptions` pattern in .NET is used to manage and access configuration settings in a strongly-typed manner. In this PoC, we use `BlobStorageClientOptions` to encapsulate the connection string for Azure Blob Storage."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `BlobStorageClientOptions` class holds the configuration needed by the `BlobStorageClient`, such as the connection string for Azure Blob Storage. By using the `IOptions<T>` interface, we inject these options into the client through dependency injection, making the configuration easy to manage and modify across different environments."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "This pattern allows for clean separation of concerns, ensuring that the `BlobStorageClient` doesn't need to be aware of how the connection string is provided—whether from appsettings.json, environment variables, or another configuration source."
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "public class BlobStorageClientOptions\n{\n    public string ConnectionString { get; set; }\n}"
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
                     "text": "Creating the `BlobStorageClient` interface",
                     "level": 2
                 }
@@ -1206,6 +1366,38 @@ export const postList = [
                 "type": "paragraph",
                 "data": {
                     "text": "In the above code, we define a `DepInj` class that registers the `RedisCacheClient` service and its options using the dependency injection container. This allows the client to be injected wherever it’s needed."
+                }
+            },
+            {
+                "type": "heading",
+                "data": {
+                    "text": "Using the IOptions Pattern",
+                    "level": 2
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `IOptions` pattern in .NET is used to manage and access configuration settings in a strongly-typed manner. In this PoC, we use `RedisCacheClientOptions` to encapsulate the configuration settings for Redis, such as the host, password, and other connection details."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "The `RedisCacheClientOptions` class holds the configuration needed by the `RedisCacheClient`, including the host, password, SSL options, and default expiration settings for cached objects. By using the `IOptions<T>` interface, we inject these options into the client through dependency injection, making the configuration easy to manage and modify across different environments."
+                }
+            },
+            {
+                "type": "paragraph",
+                "data": {
+                    "text": "This pattern allows for clean separation of concerns, ensuring that the `RedisCacheClient` doesn't need to be aware of how these settings are provided—whether from appsettings.json, environment variables, or another configuration source."
+                }
+            },
+            {
+                "type": "code",
+                "data": {
+                    "language": "csharp",
+                    "code": "public class RedisCacheClientOptions\n{\n    public string Host { get; set; }\n    public string Password { get; set; }\n    public bool Ssl { get; set; }\n    public bool AbortOnConnectFail { get; set; }\n    public int DefaultStringExpiryDay { get; set; }\n    public int DefaultHashExpiryDay { get; set; }\n}"
                 }
             },
             {
