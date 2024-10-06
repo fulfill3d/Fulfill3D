@@ -1,148 +1,234 @@
 import React, { useState } from 'react';
 import { ProjectWiki } from "@/models/project/wiki/project-wiki";
 import RequestForm from "@/components/common/request-form";
+import DevOpsList from "@/components/project/wiki/devops-list";
+import WikiSection from "@/components/project/wiki/wiki-section";
+import List from "@/components/project/wiki/wiki-list";
+import Accordion from "@/components/project/wiki/wiki-accordion";
+import MicroserviceComponent from "@/components/project/wiki/microservice-component";
+import Image from "next/image";
+import ImagePlaceholder from "@/svg/image-placeholder";
 
-interface ProductWikiComponentProps {
-    wiki: ProjectWiki;
-}
+const ProjectWikiComponent: React.FC<{ wiki: ProjectWiki }> = ({ wiki }) => {
+    const [isFullScreen, setIsFullScreen] = useState(false); // State to track full-screen mode
+    const [fullScreenImage, setFullScreenImage] = useState<string | null>(null); // Track which image to display
 
-const ProjectWikiComponent: React.FC<ProductWikiComponentProps> = ({ wiki }) => {
-    // State to manage which microservice is expanded
-    const [expandedService, setExpandedService] = useState<number | null>(null);
+    // Function to open full-screen image
+    const handleImageClick = (imageSrc: string) => {
+        setFullScreenImage(imageSrc);
+        setIsFullScreen(true);
+    };
 
-    // Toggle the visibility of a microservice's details
-    const toggleService = (index: number) => {
-        setExpandedService(expandedService === index ? null : index);
+    // Function to close full-screen mode
+    const handleCloseFullScreen = () => {
+        setIsFullScreen(false);
+        setFullScreenImage(null);
     };
 
     return (
-        <div className="bg-white shadow-lg rounded-lg p-6 max-w-4xl mx-auto">
-            {/* Product Name */}
-            <h1 className="text-4xl font-bold text-gray-800 mb-4">{wiki.name}</h1>
+        <div className="bg-white shadow-lg rounded-xl p-8 max-w-5xl mx-auto">
+            <h1 className="text-3xl font-bold text-gray-900 mb-6">{wiki.name}</h1>
 
-            {/* Purpose */}
-            <section className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-700 mb-2">Purpose</h2>
-                <p className="text-lg text-gray-700">{wiki.purpose}</p>
-            </section>
-
-            {/* Project Type */}
-            <section className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-700 mb-2">Project Type</h2>
-                <p className="text-lg text-gray-700">{wiki.projectType}</p>
-            </section>
-
-            {/* Overview */}
-            <section className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-700 mb-2">Overview</h2>
-                <p className="text-lg text-gray-700">{wiki.overview}</p>
-            </section>
-
-            {/* Features */}
-            <section className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-700 mb-2">Features</h2>
-                <ul className="list-disc list-inside">
-                    {wiki.features.map((feature, index) => (
-                        <li key={index} className="text-lg text-gray-700">{feature}</li>
-                    ))}
-                </ul>
-            </section>
-
-            {/* Technology Stack */}
-            <section className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-700 mb-2">Technology Stack</h2>
-                <ul className="list-disc list-inside">
-                    {wiki.technologyStack.map((tech, index) => (
-                        <li key={index} className="text-lg text-gray-700">{tech}</li>
-                    ))}
-                </ul>
-            </section>
-
-            {/* Architecture */}
-            <section className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-700 mb-2">Architecture</h2>
-                <p className="text-lg text-gray-700">{wiki.architecture}</p>
-            </section>
-
-            {/* Use Cases */}
-            <section className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-700 mb-2">Use Cases</h2>
-                <ul className="list-disc list-inside">
-                    {wiki.useCases.map((useCase, index) => (
-                        <li key={index} className="text-lg text-gray-700">{useCase}</li>
-                    ))}
-                </ul>
-            </section>
-
-            {/* Microservices */}
-            <section className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-700 mb-2">Microservices</h2>
-                {wiki.microservices.map((service, index) => (
-                    <div key={index} className="mb-4">
-                        <div
-                            className="cursor-pointer bg-gray-100 p-4 rounded-lg flex justify-between items-center"
-                            onClick={() => toggleService(index)}
+            {/* Tags Section */}
+            <WikiSection title={""}>
+                <div className="flex flex-wrap gap-2 mb-4">
+                    {wiki.tags.map((tag, index) => (
+                        <span
+                            key={index}
+                            className="bg-gray-200 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"
                         >
-                            <h3 className="text-xl font-semibold">{service.name}</h3>
-                            <span className="text-lg">{expandedService === index ? '▲' : '▼'}</span>
-                        </div>
-                        {expandedService === index && (
-                            <div className="p-4 border-l-4 border-blue-500 mt-2 bg-gray-50 rounded-lg">
-                                <p className="text-lg text-gray-700 mb-2">
-                                    <strong>Type:</strong> {service.type}
-                                </p>
-                                <p className="text-lg text-gray-700 mb-2">
-                                    <strong>Description:</strong> {service.description}
-                                </p>
-                                <p className="text-lg text-gray-700 mb-2">
-                                    <strong>Scalability:</strong> {service.scalability}
-                                </p>
-                                <p className="text-lg text-gray-700 mb-2">
-                                    <strong>Deployment:</strong> {service.deployment}
-                                </p>
-                                <p className="text-lg text-gray-700 mb-2">
-                                    <strong>Trigger:</strong> {service.trigger}
-                                </p>
-                            </div>
-                        )}
+                            {tag}
+                        </span>
+                    ))}
+                </div>
+            </WikiSection>
+
+            {/* Technology Stack Section */}
+            <WikiSection title="Technology Stack">
+                <List items={wiki.technologyStack} />
+            </WikiSection>
+
+            {/* Overview Section */}
+            <WikiSection title="Overview">
+                <p className="text-lg text-gray-600">{wiki.overview}</p>
+            </WikiSection>
+
+            {/* Key Features Section */}
+            <WikiSection title="Key Features">
+                <List items={wiki.features} />
+            </WikiSection>
+
+            {/* Use Cases Section */}
+            <WikiSection title="Use Cases">
+                <List items={wiki.useCases} />
+            </WikiSection>
+
+            {/* Architecture Section */}
+            <WikiSection title="Architecture">
+                <div className="p-4 rounded-lg mb-6 flex flex-col items-center">
+                    {/* Clickable Image for Full-Screen */}
+                    <div className="w-full min-h-96 relative mb-4 cursor-pointer"
+                         onClick={() => handleImageClick(wiki.architecture.diagram.url)}>
+                        <Image
+                            className="rounded-lg"
+                            src={wiki.architecture.diagram.url || ImagePlaceholder}
+                            alt={wiki.name}
+                            layout="fill"
+                            objectFit="contain"
+                        />
                     </div>
+                    <p className="text-sm text-gray-500 text-center">
+                        {wiki.architecture.diagram.description}
+                    </p>
+                </div>
+                {wiki.architecture.description.map((description, key) => (
+                    <p key={key} className="text-lg text-gray-600 mb-4">{description}</p>
                 ))}
-            </section>
+            </WikiSection>
 
-            <section className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-700 mb-2">See Also</h2>
-                {wiki.seeAlso.map((see, index) => (
-                    <a
-                        key={index}
-                        href={see.url}
-                        className="text-blue-600 underline mb-4 block"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        {see.name}
-                    </a>
+            {/* Database Section */}
+            <WikiSection title="Database">
+                <div className="p-4 rounded-lg mb-6 flex flex-col items-center">
+                    {/* Clickable Image for Full-Screen */}
+                    <div className="w-full min-h-96 relative mb-4 cursor-pointer"
+                         onClick={() => handleImageClick(wiki.database.diagram.url)}>
+                        <Image
+                            className="rounded-lg"
+                            src={wiki.database.diagram.url || ImagePlaceholder}
+                            alt={wiki.name}
+                            layout="fill"
+                            objectFit="contain"
+                        />
+                    </div>
+                    <p className="text-sm text-gray-500 text-center">
+                        {wiki.database.diagram.description}
+                    </p>
+                </div>
+                {wiki.database.description.map((description, key) => (
+                    <p key={key} className="text-lg text-gray-600 mb-4">{description}</p>
                 ))}
-            </section>
+            </WikiSection>
 
-            {/* Demo and Source Code */}
-            <section className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-700 mb-2">Source Code</h2>
+            {/* IdP Section */}
+            <WikiSection title="IdP">
+                {wiki.idp.description.map((description, key) => (
+                    <p key={key} className="text-lg text-gray-600 mb-4">{description}</p>
+                ))}
+            </WikiSection>
+
+            {/* Security Section */}
+            <WikiSection title="Security">
+                <div className="p-4 rounded-lg mb-6 flex flex-col items-center">
+                    {/* Clickable Image for Full-Screen */}
+                    <div className="w-full min-h-96 relative mb-4 cursor-pointer" onClick={() => handleImageClick(wiki.security.diagram.url)}>
+                        <Image
+                            className="rounded-lg"
+                            src={wiki.security.diagram.url || ImagePlaceholder}
+                            alt={wiki.name}
+                            layout="fill"
+                            objectFit="contain"
+                        />
+                    </div>
+                    <p className="text-sm text-gray-500 text-center">
+                        {wiki.security.diagram.description}
+                    </p>
+                </div>
+                {wiki.security.description.map((description, key) => (
+                    <p key={key} className="text-lg text-gray-600 mb-4">{description}</p>
+                ))}
+            </WikiSection>
+
+            {/* Project DevOps Section */}
+            <WikiSection title="DevOps">
+                <p className="text-lg text-gray-600 mb-4">
+                    The DevOps pipelines for this project are designed to ensure continuous integration and continuous
+                    deployment (CI/CD) workflows using Azure DevOps. Each pipeline is tailored to automate the build,
+                    test, and deployment of microservices within the project.
+                </p>
+                <Accordion title={"Pipelines"}>
+                    <DevOpsList devOps={wiki.devOps}/>
+                </Accordion>
+            </WikiSection>
+
+            {/* Microservices Section */}
+            <WikiSection title="Microservices">
+                {wiki.microservices.map((service, index) => (
+                    <MicroserviceComponent key={index} service={service}/>
+                ))}
+            </WikiSection>
+
+            {/* Source Code Section */}
+            <WikiSection title="Source Code">
                 <div className="flex gap-4">
-                    {wiki.sourceCodeUrl && wiki.sourceCodeUrl.trim() !== "" ? (
-                        <a href={wiki.sourceCodeUrl} target="_blank" className="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-colors">
+                    {wiki.sourceCodeUrl ? (
+                        <a
+                            href={wiki.sourceCodeUrl}
+                            target="_blank"
+                            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+                        >
                             Source Code
                         </a>
                     ) : (
                         <div className="w-full flex flex-col">
-                            <p className="text-lg text-gray-700 mb-2">Source code is not publicly available for this project. Fill out the following form to request it:</p>
-                            <div className="w-full flex flex-col items-center justify-center">
-                                <RequestForm/>
+                            <p className="text-lg text-gray-600 mb-4">
+                                Source code is not publicly available. Please fill out the following form to request it:
+                            </p>
+                            <div className="flex items-center justify-center">
+                                <RequestForm />
                             </div>
                         </div>
                     )}
                 </div>
-            </section>
+            </WikiSection>
 
+            {/* See Also Section */}
+            <WikiSection title="See Also">
+                {wiki.seeAlso.map((seeAlso, index) => (
+                    <a
+                        key={index}
+                        href={seeAlso.url}
+                        className="text-blue-600 underline hover:text-blue-800 mb-4 transition block"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        {seeAlso.name}
+                    </a>
+                ))}
+            </WikiSection>
+
+            {/* Further Reading Section */}
+            <WikiSection title="Further Reading">
+                {wiki.furtherReading.map((data, index) => (
+                    <a
+                        key={index}
+                        href={data.url}
+                        className="text-blue-600 underline hover:text-blue-800 mb-4 transition block"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        {data.name}
+                    </a>
+                ))}
+            </WikiSection>
+
+            {/* Full-Screen Image Modal */}
+            {isFullScreen && fullScreenImage && (
+                <div
+                    className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 cursor-pointer"
+                    onClick={handleCloseFullScreen}
+                >
+                    <div className="relative w-full max-w-5xl max-h-[90vh] h-auto flex justify-center">
+                        <Image
+                            src={fullScreenImage}
+                            alt="Full-Screen"
+                            layout="intrinsic"
+                            width={1920}
+                            height={1080}
+                            className="rounded-lg object-contain"
+                        />
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
