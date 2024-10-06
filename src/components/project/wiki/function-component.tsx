@@ -21,8 +21,8 @@ const getMethodColor = (method: string) => {
 
 const FunctionComponent: React.FC<{ func: Function, putLine: boolean }> = ({func, putLine}) => (
     <div className="mb-4">
-        <p className="text-lg font-semibold text-coral-500 mb-1">{func.name}</p>
-        <p className="text-gray-600"><strong>Path:</strong> {func.path}</p>
+        <p className="text-md md:text-lg font-semibold text-coral-500 mb-1">{func.name}</p>
+        <p className="text-gray-600"><strong>Path: </strong>{'${microservice_path}'}{func.path}</p>
         <p className="text-gray-600"><strong>Trigger:</strong> {func.trigger}</p>
         <p className="text-gray-600"><strong>Method: </strong>
             {(func.method ?? []).map((method, index) => (

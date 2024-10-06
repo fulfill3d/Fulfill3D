@@ -8,6 +8,7 @@ import Accordion from "@/components/project/wiki/wiki-accordion";
 import MicroserviceComponent from "@/components/project/wiki/microservice-component";
 import Image from "next/image";
 import ImagePlaceholder from "@/svg/image-placeholder";
+import {GoogleReCaptchaProvider} from "react-google-recaptcha-v3";
 
 const ProjectWikiComponent: React.FC<{ wiki: ProjectWiki }> = ({ wiki }) => {
     const [isFullScreen, setIsFullScreen] = useState(false); // State to track full-screen mode
@@ -27,7 +28,7 @@ const ProjectWikiComponent: React.FC<{ wiki: ProjectWiki }> = ({ wiki }) => {
 
     return (
         <div className="bg-white shadow-lg rounded-xl p-8 max-w-5xl mx-auto">
-            <h1 className="text-3xl font-bold text-gray-900 mb-6">{wiki.name}</h1>
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">{wiki.name}</h1>
 
             {/* Tags Section */}
             <WikiSection title={""}>
@@ -50,7 +51,7 @@ const ProjectWikiComponent: React.FC<{ wiki: ProjectWiki }> = ({ wiki }) => {
 
             {/* Overview Section */}
             <WikiSection title="Overview">
-                <p className="text-lg text-gray-600">{wiki.overview}</p>
+                <p className="text-md md:text-lg text-gray-600">{wiki.overview}</p>
             </WikiSection>
 
             {/* Key Features Section */}
@@ -82,7 +83,7 @@ const ProjectWikiComponent: React.FC<{ wiki: ProjectWiki }> = ({ wiki }) => {
                     </p>
                 </div>
                 {wiki.architecture.description.map((description, key) => (
-                    <p key={key} className="text-lg text-gray-600 mb-4">{description}</p>
+                    <p key={key} className="text-md md:text-lg text-gray-600 mb-4">{description}</p>
                 ))}
             </WikiSection>
 
@@ -105,14 +106,14 @@ const ProjectWikiComponent: React.FC<{ wiki: ProjectWiki }> = ({ wiki }) => {
                     </p>
                 </div>
                 {wiki.database.description.map((description, key) => (
-                    <p key={key} className="text-lg text-gray-600 mb-4">{description}</p>
+                    <p key={key} className="text-md md:text-lg text-gray-600 mb-4">{description}</p>
                 ))}
             </WikiSection>
 
             {/* IdP Section */}
             <WikiSection title="IdP">
                 {wiki.idp.description.map((description, key) => (
-                    <p key={key} className="text-lg text-gray-600 mb-4">{description}</p>
+                    <p key={key} className="text-md md:text-lg text-gray-600 mb-4">{description}</p>
                 ))}
             </WikiSection>
 
@@ -134,16 +135,16 @@ const ProjectWikiComponent: React.FC<{ wiki: ProjectWiki }> = ({ wiki }) => {
                     </p>
                 </div>
                 {wiki.security.description.map((description, key) => (
-                    <p key={key} className="text-lg text-gray-600 mb-4">{description}</p>
+                    <p key={key} className="text-md md:text-lg text-gray-600 mb-4">{description}</p>
                 ))}
             </WikiSection>
 
             {/* Project DevOps Section */}
             <WikiSection title="DevOps">
-                <p className="text-lg text-gray-600 mb-4">
+                <p className="text-md md:text-lg text-gray-600 mb-4">
                     The DevOps pipelines for this project are designed to ensure continuous integration and continuous
                     deployment (CI/CD) workflows using Azure DevOps. Each pipeline is tailored to automate the build,
-                    test, and deployment of microservices within the project.
+                    test, and deployment of microservices within the project. All microservices uses the following pipelines as template
                 </p>
                 <Accordion title={"Pipelines"}>
                     <DevOpsList devOps={wiki.devOps}/>
@@ -170,11 +171,13 @@ const ProjectWikiComponent: React.FC<{ wiki: ProjectWiki }> = ({ wiki }) => {
                         </a>
                     ) : (
                         <div className="w-full flex flex-col">
-                            <p className="text-lg text-gray-600 mb-4">
+                            <p className="text-md md:text-lg text-gray-600 mb-4">
                                 Source code is not publicly available. Please fill out the following form to request it:
                             </p>
                             <div className="flex items-center justify-center">
-                                <RequestForm />
+                                <GoogleReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ''}>
+                                    <RequestForm/>
+                                </GoogleReCaptchaProvider>
                             </div>
                         </div>
                     )}

@@ -77,13 +77,13 @@ export const projectList = [
                     "devOps": [
                         {
                             "name": "ci-client-identity.yml",
-                            "description": "Continuous integration pipeline template for the project. Each microservices use the template",
+                            "description": "Continuous integration pipeline for the microservice, that also benefits from the project pipeline template.",
                             "type": "CI",
                             "yml": "trigger:\n  branches:\n    include:\n      - main\n  paths:\n    include:\n        // list of paths that is related to the microservice\n\nvariables:\n  vmImageName: 'windows-latest'\n  workingDirectory: '$(System.DefaultWorkingDirectory)/${function-project-path}'\n  packageName: ${package-name}\n\nsteps:\n  - template: ${ci-pipeline-template-path}\n"
                         },
                         {
                             "name": "cd-client-identity.yml",
-                            "description": "Continuous deployment pipeline template for the project. Each microservices use the template",
+                            "description": "Continuous deployment pipeline for the microservice, that also benefits from the project pipeline template.",
                             "type": "CD",
                             "yml": "trigger: none\npr: none\n\npool:\n  vmImage: 'windows-latest'\n\nvariables:\n  ciPipeline: ${ci-pipeline}\n  functionAppName: ${function-app-name}\n  packageName: ${package-name}\n  project: ${project-name}\n\nresources:\n  pipelines:\n    - pipeline: ${ci-pipeline}\n      source: ${ci-pipeline}\n      trigger: true\n\nsteps:\n  - template: ${cd-pipeline-template-path}\n"
                         }
@@ -117,13 +117,13 @@ export const projectList = [
                     "devOps": [
                         {
                             "name": "ci-client-appointment.yml",
-                            "description": "Continuous integration pipeline template for the project. Each microservices use the template",
+                            "description": "Continuous integration pipeline for the microservice, that also benefits from the project pipeline template.",
                             "type": "CI",
                             "yml": "trigger:\n  branches:\n    include:\n      - main\n  paths:\n    include:\n        // list of paths that is related to the microservice\n\nvariables:\n  vmImageName: 'windows-latest'\n  workingDirectory: '$(System.DefaultWorkingDirectory)/${function-project-path}'\n  packageName: ${package-name}\n\nsteps:\n  - template: ${ci-pipeline-template-path}\n"
                         },
                         {
                             "name": "cd-client-appointment.yml",
-                            "description": "Continuous deployment pipeline template for the project. Each microservices use the template",
+                            "description": "Continuous deployment pipeline for the microservice, that also benefits from the project pipeline template.",
                             "type": "CD",
                             "yml": "trigger: none\npr: none\n\npool:\n  vmImage: 'windows-latest'\n\nvariables:\n  ciPipeline: ${ci-pipeline}\n  functionAppName: ${function-app-name}\n  packageName: ${package-name}\n  project: ${project-name}\n\nresources:\n  pipelines:\n    - pipeline: ${ci-pipeline}\n      source: ${ci-pipeline}\n      trigger: true\n\nsteps:\n  - template: ${cd-pipeline-template-path}\n"
                         }
@@ -175,13 +175,13 @@ export const projectList = [
                     "devOps": [
                         {
                             "name": "ci-client-service.yml",
-                            "description": "Continuous integration pipeline template for the project. Each microservices use the template",
+                            "description": "Continuous integration pipeline for the microservice, that also benefits from the project pipeline template.",
                             "type": "CI",
                             "yml": "trigger:\n  branches:\n    include:\n      - main\n  paths:\n    include:\n        // list of paths that is related to the microservice\n\nvariables:\n  vmImageName: 'windows-latest'\n  workingDirectory: '$(System.DefaultWorkingDirectory)/${function-project-path}'\n  packageName: ${package-name}\n\nsteps:\n  - template: ${ci-pipeline-template-path}\n"
                         },
                         {
                             "name": "cd-client-service.yml",
-                            "description": "Continuous deployment pipeline template for the project. Each microservices use the template",
+                            "description": "Continuous deployment pipeline for the microservice, that also benefits from the project pipeline template.",
                             "type": "CD",
                             "yml": "trigger: none\npr: none\n\npool:\n  vmImage: 'windows-latest'\n\nvariables:\n  ciPipeline: ${ci-pipeline}\n  functionAppName: ${function-app-name}\n  packageName: ${package-name}\n  project: ${project-name}\n\nresources:\n  pipelines:\n    - pipeline: ${ci-pipeline}\n      source: ${ci-pipeline}\n      trigger: true\n\nsteps:\n  - template: ${cd-pipeline-template-path}\n"
                         }
@@ -215,13 +215,13 @@ export const projectList = [
                     "devOps": [
                         {
                             "name": "ci-business-identity.yml",
-                            "description": "Continuous integration pipeline template for the project. Each microservices use the template",
+                            "description": "Continuous integration pipeline for the microservice, that also benefits from the project pipeline template.",
                             "type": "CI",
                             "yml": "trigger:\n  branches:\n    include:\n      - main\n  paths:\n    include:\n        // list of paths that is related to the microservice\n\nvariables:\n  vmImageName: 'windows-latest'\n  workingDirectory: '$(System.DefaultWorkingDirectory)/${function-project-path}'\n  packageName: ${package-name}\n\nsteps:\n  - template: ${ci-pipeline-template-path}\n"
                         },
                         {
                             "name": "cd-business-identity.yml",
-                            "description": "Continuous deployment pipeline template for the project. Each microservices use the template",
+                            "description": "Continuous deployment pipeline for the microservice, that also benefits from the project pipeline template.",
                             "type": "CD",
                             "yml": "trigger: none\npr: none\n\npool:\n  vmImage: 'windows-latest'\n\nvariables:\n  ciPipeline: ${ci-pipeline}\n  functionAppName: ${function-app-name}\n  packageName: ${package-name}\n  project: ${project-name}\n\nresources:\n  pipelines:\n    - pipeline: ${ci-pipeline}\n      source: ${ci-pipeline}\n      trigger: true\n\nsteps:\n  - template: ${cd-pipeline-template-path}\n"
                         }
@@ -255,13 +255,13 @@ export const projectList = [
                     "devOps": [
                         {
                             "name": "ci-business-appointment.yml",
-                            "description": "Continuous integration pipeline template for the project. Each microservices use the template",
+                            "description": "Continuous integration pipeline for the microservice, that also benefits from the project pipeline template.",
                             "type": "CI",
                             "yml": "trigger:\n  branches:\n    include:\n      - main\n  paths:\n    include:\n        // list of paths that is related to the microservice\n\nvariables:\n  vmImageName: 'windows-latest'\n  workingDirectory: '$(System.DefaultWorkingDirectory)/${function-project-path}'\n  packageName: ${package-name}\n\nsteps:\n  - template: ${ci-pipeline-template-path}\n"
                         },
                         {
                             "name": "cd-business-appointment.yml",
-                            "description": "Continuous deployment pipeline template for the project. Each microservices use the template",
+                            "description": "Continuous deployment pipeline for the microservice, that also benefits from the project pipeline template.",
                             "type": "CD",
                             "yml": "trigger: none\npr: none\n\npool:\n  vmImage: 'windows-latest'\n\nvariables:\n  ciPipeline: ${ci-pipeline}\n  functionAppName: ${function-app-name}\n  packageName: ${package-name}\n  project: ${project-name}\n\nresources:\n  pipelines:\n    - pipeline: ${ci-pipeline}\n      source: ${ci-pipeline}\n      trigger: true\n\nsteps:\n  - template: ${cd-pipeline-template-path}\n"
                         }
@@ -276,13 +276,13 @@ export const projectList = [
                     "devOps": [
                         {
                             "name": "ci-business-management.yml",
-                            "description": "Continuous integration pipeline template for the project. Each microservices use the template",
+                            "description": "Continuous integration pipeline for the microservice, that also benefits from the project pipeline template.",
                             "type": "CI",
                             "yml": "trigger:\n  branches:\n    include:\n      - main\n  paths:\n    include:\n        // list of paths that is related to the microservice\n\nvariables:\n  vmImageName: 'windows-latest'\n  workingDirectory: '$(System.DefaultWorkingDirectory)/${function-project-path}'\n  packageName: ${package-name}\n\nsteps:\n  - template: ${ci-pipeline-template-path}\n"
                         },
                         {
                             "name": "cd-business-management.yml",
-                            "description": "Continuous deployment pipeline template for the project. Each microservices use the template",
+                            "description": "Continuous deployment pipeline for the microservice, that also benefits from the project pipeline template.",
                             "type": "CD",
                             "yml": "trigger: none\npr: none\n\npool:\n  vmImage: 'windows-latest'\n\nvariables:\n  ciPipeline: ${ci-pipeline}\n  functionAppName: ${function-app-name}\n  packageName: ${package-name}\n  project: ${project-name}\n\nresources:\n  pipelines:\n    - pipeline: ${ci-pipeline}\n      source: ${ci-pipeline}\n      trigger: true\n\nsteps:\n  - template: ${cd-pipeline-template-path}\n"
                         }
@@ -343,13 +343,13 @@ export const projectList = [
                     "devOps": [
                         {
                             "name": "ci-business-management.yml",
-                            "description": "Continuous integration pipeline template for the project. Each microservices use the template",
+                            "description": "Continuous integration pipeline for the microservice, that also benefits from the project pipeline template.",
                             "type": "CI",
                             "yml": "trigger:\n  branches:\n    include:\n      - main\n  paths:\n    include:\n        // list of paths that is related to the microservice\n\nvariables:\n  vmImageName: 'windows-latest'\n  workingDirectory: '$(System.DefaultWorkingDirectory)/${function-project-path}'\n  packageName: ${package-name}\n\nsteps:\n  - template: ${ci-pipeline-template-path}\n"
                         },
                         {
                             "name": "cd-business-management.yml",
-                            "description": "Continuous deployment pipeline template for the project. Each microservices use the template",
+                            "description": "Continuous deployment pipeline for the microservice, that also benefits from the project pipeline template.",
                             "type": "CD",
                             "yml": "trigger: none\npr: none\n\npool:\n  vmImage: 'windows-latest'\n\nvariables:\n  ciPipeline: ${ci-pipeline}\n  functionAppName: ${function-app-name}\n  packageName: ${package-name}\n  project: ${project-name}\n\nresources:\n  pipelines:\n    - pipeline: ${ci-pipeline}\n      source: ${ci-pipeline}\n      trigger: true\n\nsteps:\n  - template: ${cd-pipeline-template-path}\n"
                         }
@@ -401,13 +401,13 @@ export const projectList = [
                     "devOps": [
                         {
                             "name": "ci-business-management.yml",
-                            "description": "Continuous integration pipeline template for the project. Each microservices use the template",
+                            "description": "Continuous integration pipeline for the microservice, that also benefits from the project pipeline template.",
                             "type": "CI",
                             "yml": "trigger:\n  branches:\n    include:\n      - main\n  paths:\n    include:\n        // list of paths that is related to the microservice\n\nvariables:\n  vmImageName: 'windows-latest'\n  workingDirectory: '$(System.DefaultWorkingDirectory)/${function-project-path}'\n  packageName: ${package-name}\n\nsteps:\n  - template: ${ci-pipeline-template-path}\n"
                         },
                         {
                             "name": "cd-business-management.yml",
-                            "description": "Continuous deployment pipeline template for the project. Each microservices use the template",
+                            "description": "Continuous deployment pipeline for the microservice, that also benefits from the project pipeline template.",
                             "type": "CD",
                             "yml": "trigger: none\npr: none\n\npool:\n  vmImage: 'windows-latest'\n\nvariables:\n  ciPipeline: ${ci-pipeline}\n  functionAppName: ${function-app-name}\n  packageName: ${package-name}\n  project: ${project-name}\n\nresources:\n  pipelines:\n    - pipeline: ${ci-pipeline}\n      source: ${ci-pipeline}\n      trigger: true\n\nsteps:\n  - template: ${cd-pipeline-template-path}\n"
                         }
