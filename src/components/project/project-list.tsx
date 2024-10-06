@@ -11,7 +11,6 @@ const ProjectList: React.FC<ProductListProps> = ({ projects }) => {
         <div className="flex flex-col">
             {projects
                 .filter(project => project.status === 'active')
-                .reverse()
                 .map((project) => <ProjectCard key={project.id} project={project} />)
             }
         </div>

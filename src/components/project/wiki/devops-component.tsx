@@ -23,7 +23,7 @@ const getDevOpsTitle = (type: DevOpsType) => {
 const DevOpsComponent: React.FC<DevOpsComponentProps> = ({ devOps, putLine }) => (
     <div className="mb-6">
         {/* Header with dynamic title based on type */}
-        <h2 className="text-xl font-semibold text-blue-600 mb-2">
+        <h2 className="text-xl font-semibold text-coral-500 mb-2">
             {getDevOpsTitle(devOps.type)}
         </h2>
 

@@ -50,18 +50,43 @@ export class DevOps {
     }
 }
 
-export class Database {
+export class Diagram {
+    description: string;
+    url: string;
+
+    constructor(
+        description: string,
+        url: string,
+    ) {
+        this.description = description;
+        this.url = url;
+    }
+}
+
+export class Architecture {
     description: string[];
-    diagram: string;
+    diagram: Diagram;
 
     constructor(
         description: string[],
-        diagram: string,
+        diagram: Diagram,
     ) {
         this.description = description;
         this.diagram = diagram;
     }
+}
 
+export class Database {
+    description: string[];
+    diagram: Diagram;
+
+    constructor(
+        description: string[],
+        diagram: Diagram,
+    ) {
+        this.description = description;
+        this.diagram = diagram;
+    }
 }
 
 export class IdP {
@@ -76,11 +101,14 @@ export class IdP {
 
 export class Security {
     description: string[];
+    diagram: Diagram;
 
     constructor(
         description: string[],
+        diagram: Diagram
     ) {
         this.description = description;
+        this.diagram = diagram;
     }
 }
 
@@ -181,13 +209,12 @@ export class Microservice {
 }
 
 export class ProjectWiki {
+    tags: string[];
     name: string;
-    purpose: string;
-    projectType: string;
     overview: string;
     features: string[];
     technologyStack: string[];
-    architecture: string;
+    architecture: Architecture;
     useCases: string[];
     microservices: Microservice[];
     devOps: DevOps[];
@@ -199,13 +226,12 @@ export class ProjectWiki {
     furtherReading: SeeAlso[];
 
     constructor(
+        tags: string[],
         name: string,
-        purpose: string,
-        projectType: string,
         overview: string,
         features: string[],
         technologyStack: string[],
-        architecture: string,
+        architecture: Architecture,
         useCases: string[],
         microservices: Microservice[],
         devOps: DevOps[],
@@ -216,9 +242,8 @@ export class ProjectWiki {
         seeAlso: SeeAlso[],
         furtherReading: SeeAlso[]
     ) {
+        this.tags = tags;
         this.name = name;
-        this.purpose = purpose;
-        this.projectType = projectType;
         this.overview = overview;
         this.features = features;
         this.technologyStack = technologyStack;
@@ -240,9 +265,8 @@ export class ProjectWiki {
         const furtherReading = json.furtherReading.map((seeAlso: any) => SeeAlso.fromJson(seeAlso));
         const devOps = json.devOps.map((dev: any) => DevOps.fromJson(dev));
         return new ProjectWiki(
+            json.tags,
             json.name,
-            json.purpose,
-            json.projectType,
             json.overview,
             json.features,
             json.technologyStack,

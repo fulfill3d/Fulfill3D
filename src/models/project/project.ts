@@ -1,4 +1,4 @@
-import {ProjectWiki} from "@/models/project/wiki/project-wiki";
+import { ProjectWiki } from "@/models/project/wiki/project-wiki";
 
 export type ProjectStatus = 'active' | 'draft';
 
@@ -7,10 +7,9 @@ export class Project {
     uuid: string;
     name: string;
     description: string;
-    isDemoReady: boolean;
-    demoUrl: string;
+    demo: string | null;
     isWikiReady: boolean;
-    wiki: ProjectWiki;
+    wiki: ProjectWiki | null;
     imageUrl: string;
     status: ProjectStatus;
     tags: string[];
@@ -20,10 +19,9 @@ export class Project {
         uuid: string,
         name: string,
         description: string,
-        isDemoReady: boolean,
-        demoUrl: string,
+        demo: string | null,
         isWikiReady: boolean,
-        wiki: ProjectWiki,
+        wiki: ProjectWiki | null,
         imageUrl: string,
         status: ProjectStatus,
         tags: string[]
@@ -32,8 +30,7 @@ export class Project {
         this.uuid = uuid;
         this.name = name;
         this.description = description;
-        this.isDemoReady = isDemoReady;
-        this.demoUrl = demoUrl;
+        this.demo = demo;
         this.isWikiReady = isWikiReady;
         this.wiki = wiki;
         this.imageUrl = imageUrl;
@@ -42,16 +39,15 @@ export class Project {
     }
 
     static fromJson(json: any): Project {
-        const wiki = ProjectWiki.fromJson(json.wiki);
+        const wiki = json.wiki ? ProjectWiki.fromJson(json.wiki) : null;
         return new Project(
             json.id,
             json.uuid,
             json.name,
             json.description,
-            json.isDemoReady,
-            json.demoUrl,
+            json.demo,
             json.isWikiReady,
-            wiki,
+            wiki, // Pass the nullable wiki
             json.imageUrl,
             json.status,
             json.tags || []

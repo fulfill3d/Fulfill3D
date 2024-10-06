@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ProjectWiki } from "@/models/project/wiki/project-wiki";
 import RequestForm from "@/components/common/request-form";
 import DevOpsList from "@/components/project/wiki/devops-list";
@@ -6,20 +6,46 @@ import WikiSection from "@/components/project/wiki/wiki-section";
 import List from "@/components/project/wiki/wiki-list";
 import Accordion from "@/components/project/wiki/wiki-accordion";
 import MicroserviceComponent from "@/components/project/wiki/microservice-component";
+import Image from "next/image";
+import ImagePlaceholder from "@/svg/image-placeholder";
 
-const ProjectWikiComponent: React.FC<{ wiki: ProjectWiki }> = ({wiki}) => {
+const ProjectWikiComponent: React.FC<{ wiki: ProjectWiki }> = ({ wiki }) => {
+    const [isFullScreen, setIsFullScreen] = useState(false); // State to track full-screen mode
+    const [fullScreenImage, setFullScreenImage] = useState<string | null>(null); // Track which image to display
+
+    // Function to open full-screen image
+    const handleImageClick = (imageSrc: string) => {
+        setFullScreenImage(imageSrc);
+        setIsFullScreen(true);
+    };
+
+    // Function to close full-screen mode
+    const handleCloseFullScreen = () => {
+        setIsFullScreen(false);
+        setFullScreenImage(null);
+    };
+
     return (
         <div className="bg-white shadow-lg rounded-xl p-8 max-w-5xl mx-auto">
-            <h1 className="text-4xl font-bold text-gray-900 mb-10">{wiki.name}</h1>
+            <h1 className="text-3xl font-bold text-gray-900 mb-6">{wiki.name}</h1>
 
-            {/* Purpose Section */}
-            <WikiSection title="Purpose">
-                <p className="text-lg text-gray-600">{wiki.purpose}</p>
+            {/* Tags Section */}
+            <WikiSection title={""}>
+                <div className="flex flex-wrap gap-2 mb-4">
+                    {wiki.tags.map((tag, index) => (
+                        <span
+                            key={index}
+                            className="bg-gray-200 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"
+                        >
+                            {tag}
+                        </span>
+                    ))}
+                </div>
             </WikiSection>
 
-            {/* Project Type Section */}
-            <WikiSection title="Project Type">
-                <p className="text-lg text-gray-600">{wiki.projectType}</p>
+            {/* Technology Stack Section */}
+            <WikiSection title="Technology Stack">
+                <List items={wiki.technologyStack} />
             </WikiSection>
 
             {/* Overview Section */}
@@ -37,18 +63,47 @@ const ProjectWikiComponent: React.FC<{ wiki: ProjectWiki }> = ({wiki}) => {
                 <List items={wiki.useCases} />
             </WikiSection>
 
-            {/* Technology Stack Section */}
-            <WikiSection title="Technology Stack">
-                <List items={wiki.technologyStack} />
-            </WikiSection>
-
             {/* Architecture Section */}
             <WikiSection title="Architecture">
-                <p className="text-lg text-gray-600">{wiki.architecture}</p>
+                <div className="p-4 rounded-lg mb-6 flex flex-col items-center">
+                    {/* Clickable Image for Full-Screen */}
+                    <div className="w-full min-h-96 relative mb-4 cursor-pointer"
+                         onClick={() => handleImageClick(wiki.architecture.diagram.url)}>
+                        <Image
+                            className="rounded-lg"
+                            src={wiki.architecture.diagram.url || ImagePlaceholder}
+                            alt={wiki.name}
+                            layout="fill"
+                            objectFit="contain"
+                        />
+                    </div>
+                    <p className="text-sm text-gray-500 text-center">
+                        {wiki.architecture.diagram.description}
+                    </p>
+                </div>
+                {wiki.architecture.description.map((description, key) => (
+                    <p key={key} className="text-lg text-gray-600 mb-4">{description}</p>
+                ))}
             </WikiSection>
 
             {/* Database Section */}
             <WikiSection title="Database">
+                <div className="p-4 rounded-lg mb-6 flex flex-col items-center">
+                    {/* Clickable Image for Full-Screen */}
+                    <div className="w-full min-h-96 relative mb-4 cursor-pointer"
+                         onClick={() => handleImageClick(wiki.database.diagram.url)}>
+                        <Image
+                            className="rounded-lg"
+                            src={wiki.database.diagram.url || ImagePlaceholder}
+                            alt={wiki.name}
+                            layout="fill"
+                            objectFit="contain"
+                        />
+                    </div>
+                    <p className="text-sm text-gray-500 text-center">
+                        {wiki.database.diagram.description}
+                    </p>
+                </div>
                 {wiki.database.description.map((description, key) => (
                     <p key={key} className="text-lg text-gray-600 mb-4">{description}</p>
                 ))}
@@ -63,6 +118,21 @@ const ProjectWikiComponent: React.FC<{ wiki: ProjectWiki }> = ({wiki}) => {
 
             {/* Security Section */}
             <WikiSection title="Security">
+                <div className="p-4 rounded-lg mb-6 flex flex-col items-center">
+                    {/* Clickable Image for Full-Screen */}
+                    <div className="w-full min-h-96 relative mb-4 cursor-pointer" onClick={() => handleImageClick(wiki.security.diagram.url)}>
+                        <Image
+                            className="rounded-lg"
+                            src={wiki.security.diagram.url || ImagePlaceholder}
+                            alt={wiki.name}
+                            layout="fill"
+                            objectFit="contain"
+                        />
+                    </div>
+                    <p className="text-sm text-gray-500 text-center">
+                        {wiki.security.diagram.description}
+                    </p>
+                </div>
                 {wiki.security.description.map((description, key) => (
                     <p key={key} className="text-lg text-gray-600 mb-4">{description}</p>
                 ))}
@@ -75,15 +145,6 @@ const ProjectWikiComponent: React.FC<{ wiki: ProjectWiki }> = ({wiki}) => {
                     deployment (CI/CD) workflows using Azure DevOps. Each pipeline is tailored to automate the build,
                     test, and deployment of microservices within the project.
                 </p>
-                <p className="text-lg text-gray-600 mb-4">
-                    For Continuous Integration (CI), the pipeline automatically triggers on code pushes to the
-                    repository, building and running tests to verify the integrity of the code.
-                </p>
-                <p className="text-lg text-gray-600 mb-4">
-                    For Continuous Deployment (CD), the pipeline handles packaging and deploying services to the Azure
-                    cloud environment, ensuring that each update is properly deployed and configured.
-                </p>
-
                 <Accordion title={"Pipelines"}>
                     <DevOpsList devOps={wiki.devOps}/>
                 </Accordion>
@@ -110,7 +171,7 @@ const ProjectWikiComponent: React.FC<{ wiki: ProjectWiki }> = ({wiki}) => {
                     ) : (
                         <div className="w-full flex flex-col">
                             <p className="text-lg text-gray-600 mb-4">
-                                Source code is not publicly available. Please fill out the following form to request access:
+                                Source code is not publicly available. Please fill out the following form to request it:
                             </p>
                             <div className="flex items-center justify-center">
                                 <RequestForm />
@@ -149,6 +210,25 @@ const ProjectWikiComponent: React.FC<{ wiki: ProjectWiki }> = ({wiki}) => {
                     </a>
                 ))}
             </WikiSection>
+
+            {/* Full-Screen Image Modal */}
+            {isFullScreen && fullScreenImage && (
+                <div
+                    className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 cursor-pointer"
+                    onClick={handleCloseFullScreen}
+                >
+                    <div className="relative w-full max-w-5xl max-h-[90vh] h-auto flex justify-center">
+                        <Image
+                            src={fullScreenImage}
+                            alt="Full-Screen"
+                            layout="intrinsic"
+                            width={1920}
+                            height={1080}
+                            className="rounded-lg object-contain"
+                        />
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

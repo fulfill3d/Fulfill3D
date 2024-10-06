@@ -4,31 +4,32 @@ export const projectList = [
         "uuid": "eee2bdbd-e460-46b9-b793-5b3c9a02e98a",
         "name": "CRM",
         "description": "A cloud-based customer relationship management platform tailored for small businesses to manage services, appointments, and client relationships effectively.",
-        "isDemoReady": false,
-        "demoUrl": "",
         "imageUrl": "/crm.png",
         "tags": ["CRM", "Appointment", "Small Business"],
         "status": "active",
-        "isWikiReady": true,
         "wiki": {
             "name": "CRM (Customer Relationship Management)",
-            "purpose": "To provide a comprehensive solution for small businesses to manage their services, employees, and appointments, while allowing clients to find and book nearby services seamlessly.",
-            "projectType": "A scalable MVP designed to automate service and appointment management for small businesses, enabling them to efficiently handle client bookings and improve customer satisfaction.",
-            "overview": "CRM is a cloud-based backend system designed for small businesses to manage their stores, employees, services, and appointments, while clients can find and book nearby services with ease. The platform supports secure APIs with JWT-based authentication and authorization, integrates with Azure AD B2C for identity management, and follows a microservices architecture for scalable and efficient operations. Admins can manage business profiles, service offerings, and employee schedules, while clients can explore services using Google Maps integration and book appointments based on real-time availability. The system leverages Azure services like App Configuration for managing settings, Key Vaults for secure storage, and FluentMigrator for database migrations, making it a robust solution for managing customer relationships and appointments effectively.",
-            "features": [
-                "Microservice architecture built with .NET 8 for modular, maintainable, and scalable services, supporting separate business and client functionalities.",
-                "Secure APIs with JWT-based authentication and authorization, ensuring secure access control and role-based permissions.",
-                "Integration with Azure AD B2C for identity management, providing a scalable and customizable identity provider for both businesses and clients.",
-                "Database migration support using FluentMigrator for automated schema management and version control, simplifying database evolution across environments.",
-                "Centralized configuration management using Azure App Configuration, enabling consistent and dynamic management of application settings across microservices.",
-                "Secure storage of sensitive information such as API keys and secrets with Azure Key Vaults, ensuring compliance with security best practices.",
-                "Integration with Google Maps API via custom RestSharp client, enabling location-based service discovery and navigation for clients.",
-                "Asynchronous processing of business and client operations using Azure Functions, supporting scalable and resilient service execution.",
-                "Client management for handling profiles, appointment history, and personal preferences, enabling a personalized service experience.",
-                "Business management features for configuring store details, managing services, scheduling employees, and tracking appointments in real-time.",
-                "Real-time appointment booking system, utilizing Azure SQL Server for efficient data handling and ensuring accurate availability tracking.",
-                "Automated CI/CD pipelines with Azure DevOps, supporting continuous integration and deployment for rapid, reliable updates and improvements.",
-                "Scalable API design adhering to RESTful principles, providing a robust and extensible platform for future integrations and enhancements."
+            "tags": [
+                ".NET 8",
+                "Azure Functions",
+                "Azure SQL Server",
+                "Azure App Configuration",
+                "Azure Key Vault",
+                "Azure AD B2C",
+                "JWT",
+                "RESTful API",
+                "CI/CD",
+                "FluentMigrator",
+                "Entity Framework Core",
+                "Google Maps API",
+                "Azure DevOps",
+                "Microservices",
+                "Serverless",
+                "Dependency Injection",
+                "TailwindCSS",
+                "NextJS",
+                "OAuth 2.0",
+                "JSON Web Tokens"
             ],
             "technologyStack": [
                 ".NET 8",
@@ -37,16 +38,36 @@ export const projectList = [
                 "Azure App Configuration",
                 "Azure Key Vaults",
                 "Azure AD B2C",
-                "NextJS (Demo Frontend)"
+                "NextJS",
+                "TailwindCSS"
             ],
-            "architecture": "Microservice architecture with event-driven design using Azure Functions and Service Bus. Each microservice is responsible for specific tasks such as managing client profiles, handling appointments, and integrating with third-party APIs like Google Maps. Azure Functions provide serverless execution and scalability, while Azure Service Bus ensures reliable messaging between services. The system is built with clean code principles, making it maintainable and scalable for future enhancements.",
+            "overview": "CRM is a cloud-based backend system designed for small businesses to manage their stores, employees, services, and appointments, while clients can find and book nearby services with ease. The platform supports secure APIs with JWT-based authentication and authorization, integrates with Azure AD B2C for identity management, and follows a microservices architecture for scalable and efficient operations. Admins can manage business profiles, service offerings, and employee schedules, while clients can explore services using Google Maps integration and book appointments based on real-time availability. The system leverages Azure services like App Configuration for managing settings, Key Vaults for secure storage, and FluentMigrator for database migrations, making it a robust solution for managing customer relationships and appointments effectively.",
+            "features": [
+                "Microservice architecture built with .NET 8 for modular, maintainable, and scalable services.",
+                "Asynchronous processing using Azure Functions for scalable and resilient service execution.",
+                "Scalable and extensible RESTful API design, adhering to best practices for future integrations.",
+                "JWT-based authentication and authorization to secure APIs and manage scope-based permissions.",
+                "Integration with Azure AD B2C for identity management, providing a scalable identity provider.",
+                "Centralized configuration management using Azure App Configuration for dynamic setting updates.",
+                "Secure storage of sensitive data using Azure Key Vaults for API keys, secrets, and certificates.",
+                "Real-time data management and appointment booking using Azure SQL Server for efficient handling.",
+                "Automated database schema management using FluentMigrator for version control and migrations.",
+                "Google Maps API integration via RestSharp client for location-based services and navigation.",
+                "Automated CI/CD pipelines with Azure DevOps for continuous integration and deployment."
+            ],
             "useCases": [
-                "Managing business profiles, services, and employee schedules.",
-                "Allowing clients to search for and book nearby services.",
-                "Providing secure, role-based access to store and service management.",
-                "Handling real-time appointment bookings and cancellations.",
-                "Managing client profiles and past appointment history."
+                "Businesses managing their profiles, stores, store employees, store services, and store appointments.",
+                "Clients managing their profiles, finding nearby services, and booking or canceling appointments."
             ],
+            "architecture": {
+                "description": [
+                    "Microservice architecture with event-driven design using Azure Functions. Each microservice is responsible for specific tasks such as managing business profiles, store services, employees, and client appointments. Azure Functions provide serverless execution and scalability, supporting real-time appointment booking and data management. The system is built with clean code principles, ensuring it remains maintainable, scalable, and adaptable for future enhancements."
+                ],
+                "diagram": {
+                    "description": "Image shows the basic architecture diagram",
+                    "url": "/crm-architecture.png"
+                }
+            },
             "microservices": [
                 {
                     "name": "CRM.API.Client.Identity",
@@ -245,31 +266,12 @@ export const projectList = [
                             "yml": "trigger: none\npr: none\n\npool:\n  vmImage: 'windows-latest'\n\nvariables:\n  ciPipeline: ${ci-pipeline}\n  functionAppName: ${function-app-name}\n  packageName: ${package-name}\n  project: ${project-name}\n\nresources:\n  pipelines:\n    - pipeline: ${ci-pipeline}\n      source: ${ci-pipeline}\n      trigger: true\n\nsteps:\n  - template: ${cd-pipeline-template-path}\n"
                         }
                     ],
-                    "functions": [
-                        {
-                            "name": "PostRegister",
-                            "path": "/post-register",
-                            "description": "This is a callback function of Azure Active Directory B2C. B2C callbacks here after successful sign up/sign in with authorization_code. PostRegister verifies that authorization_code, get an id_token and create a Business entity in the database",
-                            "trigger": "HTTP",
-                            "method": ["GET", "POST"],
-                            "request": "",
-                            "response": ""
-                        },
-                        {
-                            "name": "PostUpdate",
-                            "path": "/post-update",
-                            "description": "This is a callback function of Azure Active Directory B2C. B2C callbacks here after successful profile edit in with authorization_code. PostUpdate verifies that authorization_code, get an id_token and update the Business entity in the database",
-                            "trigger": "HTTP",
-                            "method": ["GET", "POST"],
-                            "request": "",
-                            "response": ""
-                        }
-                    ]
+                    "functions": []
                 },
                 {
-                    "name": "CRM.API.Business.Management",
+                    "name": "CRM.API.Business.Store",
                     "type": "Azure Function App",
-                    "description": "Manage business services and employee scheduling.",
+                    "description": "Manage business stores.",
                     "scalability": "Scales with Azure Functions' auto-scaling capabilities.",
                     "devOps": [
                         {
@@ -287,20 +289,172 @@ export const projectList = [
                     ],
                     "functions": [
                         {
-                            "name": "PostRegister",
-                            "path": "/post-register",
-                            "description": "This is a callback function of Azure Active Directory B2C. B2C callbacks here after successful sign up/sign in with authorization_code. PostRegister verifies that authorization_code, get an id_token and create a Business entity in the database",
+                            "name": "GetStores",
+                            "path": "/store/get-all",
+                            "description": "Get all stores of the business",
                             "trigger": "HTTP",
-                            "method": ["GET", "POST"],
+                            "method": ["GET"],
                             "request": "",
+                            "response": "[\n  {\n    \"id\": 0,\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"created_at\": \"2024-10-06T19:16:51.985Z\",\n    \"updated_at\": \"2024-10-06T19:16:51.985Z\",\n    \"location\": {\n      \"location_id\": 0,\n      \"address_id\": 0,\n      \"created_at\": \"2024-10-06T19:16:51.985Z\",\n      \"updated_at\": \"2024-10-06T19:16:51.985Z\",\n      \"location_name\": \"string\",\n      \"latitude\": 0,\n      \"longitude\": 0,\n      \"address_first_name\": \"string\",\n      \"address_last_name\": \"string\",\n      \"street1\": \"string\",\n      \"street2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"country\": \"string\",\n      \"zip_code\": \"string\"\n    },\n    \"employees\": [\n      {\n        \"id\": 0,\n        \"nick_name\": \"string\",\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"e_mail\": \"string\",\n        \"phone\": \"string\",\n        \"created_at\": \"2024-10-06T19:16:51.986Z\",\n        \"updated_at\": \"2024-10-06T19:16:51.986Z\"\n      }\n    ]\n  }\n]"
+                        },
+                        {
+                            "name": "GetStore",
+                            "path": "/store/get/{storeId}",
+                            "description": "Get a store of the business",
+                            "trigger": "HTTP",
+                            "method": ["GET"],
+                            "request": "",
+                            "response": "{\n  \"id\": 0,\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"created_at\": \"2024-10-06T19:18:55.821Z\",\n  \"updated_at\": \"2024-10-06T19:18:55.821Z\",\n  \"location\": {\n    \"location_id\": 0,\n    \"address_id\": 0,\n    \"created_at\": \"2024-10-06T19:18:55.821Z\",\n    \"updated_at\": \"2024-10-06T19:18:55.821Z\",\n    \"location_name\": \"string\",\n    \"latitude\": 0,\n    \"longitude\": 0,\n    \"address_first_name\": \"string\",\n    \"address_last_name\": \"string\",\n    \"street1\": \"string\",\n    \"street2\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"country\": \"string\",\n    \"zip_code\": \"string\"\n  },\n  \"employees\": [\n    {\n      \"id\": 0,\n      \"nick_name\": \"string\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"e_mail\": \"string\",\n      \"phone\": \"string\",\n      \"created_at\": \"2024-10-06T19:18:55.821Z\",\n      \"updated_at\": \"2024-10-06T19:18:55.821Z\"\n    }\n  ]\n}"
+                        },
+                        {
+                            "name": "AddStore",
+                            "path": "/store/add",
+                            "description": "Add a store to the business",
+                            "trigger": "HTTP",
+                            "method": ["POST"],
+                            "request": "{\n  \"id\": 0,\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"address\": {\n    \"id\": 0,\n    \"location_name\": \"string\",\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"street1\": \"string\",\n    \"street2\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"country\": \"string\",\n    \"zip_code\": \"string\"\n  }\n}",
                             "response": ""
                         },
                         {
-                            "name": "PostUpdate",
-                            "path": "/post-update",
-                            "description": "This is a callback function of Azure Active Directory B2C. B2C callbacks here after successful profile edit in with authorization_code. PostUpdate verifies that authorization_code, get an id_token and update the Business entity in the database",
+                            "name": "EditStore",
+                            "path": "/store/edit",
+                            "description": "Edit a store of the business",
                             "trigger": "HTTP",
-                            "method": ["GET", "POST"],
+                            "method": ["PATCH"],
+                            "request": "{\n  \"id\": 0,\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"address\": {\n    \"id\": 0,\n    \"location_name\": \"string\",\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"street1\": \"string\",\n    \"street2\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"country\": \"string\",\n    \"zip_code\": \"string\"\n  }\n}",
+                            "response": ""
+                        },
+                        {
+                            "name": "DeleteStore",
+                            "path": "/store/delete/{storeId}",
+                            "description": "Delete a store of the business",
+                            "trigger": "HTTP",
+                            "method": ["DELETE"],
+                            "request": "",
+                            "response": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "CRM.API.Business.Employee",
+                    "type": "Azure Function App",
+                    "description": "Manage business employees.",
+                    "scalability": "Scales with Azure Functions' auto-scaling capabilities.",
+                    "devOps": [
+                        {
+                            "name": "ci-business-management.yml",
+                            "description": "Continuous integration pipeline template for the project. Each microservices use the template",
+                            "type": "CI",
+                            "yml": "trigger:\n  branches:\n    include:\n      - main\n  paths:\n    include:\n        // list of paths that is related to the microservice\n\nvariables:\n  vmImageName: 'windows-latest'\n  workingDirectory: '$(System.DefaultWorkingDirectory)/${function-project-path}'\n  packageName: ${package-name}\n\nsteps:\n  - template: ${ci-pipeline-template-path}\n"
+                        },
+                        {
+                            "name": "cd-business-management.yml",
+                            "description": "Continuous deployment pipeline template for the project. Each microservices use the template",
+                            "type": "CD",
+                            "yml": "trigger: none\npr: none\n\npool:\n  vmImage: 'windows-latest'\n\nvariables:\n  ciPipeline: ${ci-pipeline}\n  functionAppName: ${function-app-name}\n  packageName: ${package-name}\n  project: ${project-name}\n\nresources:\n  pipelines:\n    - pipeline: ${ci-pipeline}\n      source: ${ci-pipeline}\n      trigger: true\n\nsteps:\n  - template: ${cd-pipeline-template-path}\n"
+                        }
+                    ],
+                    "functions": [
+                        {
+                            "name": "GetEmployees",
+                            "path": "/employee/get-all",
+                            "description": "Get employees of a store",
+                            "trigger": "HTTP",
+                            "method": ["GET"],
+                            "request": "",
+                            "response": "[\n  {\n    \"id\": 0,\n    \"nick_name\": \"string\",\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"e_mail\": \"string\",\n    \"phone\": \"string\",\n    \"created_at\": \"2024-10-06T19:23:17.191Z\",\n    \"updated_at\": \"2024-10-06T19:23:17.191Z\"\n  }\n]"
+                        },
+                        {
+                            "name": "AddEmployee",
+                            "path": "/employee/add/{storeId}",
+                            "description": "Add employee to a store",
+                            "trigger": "HTTP",
+                            "method": ["POST"],
+                            "request": "{\n  \"id\": 0,\n  \"nick_name\": \"string\",\n  \"first_name\": \"string\",\n  \"last_name\": \"string\",\n  \"e_mail\": \"string\",\n  \"phone\": \"string\"\n}",
+                            "response": ""
+                        },
+                        {
+                            "name": "EditEmployees",
+                            "path": "/employee/edit",
+                            "description": "Edit employee of a store",
+                            "trigger": "HTTP",
+                            "method": ["PATCH"],
+                            "request": "{\n  \"id\": 0,\n  \"nick_name\": \"string\",\n  \"first_name\": \"string\",\n  \"last_name\": \"string\",\n  \"e_mail\": \"string\",\n  \"phone\": \"string\"\n}",
+                            "response": ""
+                        },
+                        {
+                            "name": "DeleteEmployee",
+                            "path": "/employee/delete/{employeeId}",
+                            "description": "Delete employee of a store",
+                            "trigger": "HTTP",
+                            "method": ["DELETE"],
+                            "request": "",
+                            "response": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "CRM.API.Business.Service",
+                    "type": "Azure Function App",
+                    "description": "Manage business services.",
+                    "scalability": "Scales with Azure Functions' auto-scaling capabilities.",
+                    "devOps": [
+                        {
+                            "name": "ci-business-management.yml",
+                            "description": "Continuous integration pipeline template for the project. Each microservices use the template",
+                            "type": "CI",
+                            "yml": "trigger:\n  branches:\n    include:\n      - main\n  paths:\n    include:\n        // list of paths that is related to the microservice\n\nvariables:\n  vmImageName: 'windows-latest'\n  workingDirectory: '$(System.DefaultWorkingDirectory)/${function-project-path}'\n  packageName: ${package-name}\n\nsteps:\n  - template: ${ci-pipeline-template-path}\n"
+                        },
+                        {
+                            "name": "cd-business-management.yml",
+                            "description": "Continuous deployment pipeline template for the project. Each microservices use the template",
+                            "type": "CD",
+                            "yml": "trigger: none\npr: none\n\npool:\n  vmImage: 'windows-latest'\n\nvariables:\n  ciPipeline: ${ci-pipeline}\n  functionAppName: ${function-app-name}\n  packageName: ${package-name}\n  project: ${project-name}\n\nresources:\n  pipelines:\n    - pipeline: ${ci-pipeline}\n      source: ${ci-pipeline}\n      trigger: true\n\nsteps:\n  - template: ${cd-pipeline-template-path}\n"
+                        }
+                    ],
+                    "functions": [
+                        {
+                            "name": "GetServiceCategories",
+                            "path": "/service/category/get",
+                            "description": "Get all system defined service categories/sub categories",
+                            "trigger": "HTTP",
+                            "method": ["GET"],
+                            "request": "",
+                            "response": "{\n  \"categories\": [\n    {\n      \"id\": 0,\n      \"name\": \"string\",\n      \"description\": \"string\"\n    }\n  ],\n  \"sub_categories\": [\n    {\n      \"id\": 0,\n      \"name\": \"string\",\n      \"description\": \"string\"\n    }\n  ]\n}"
+                        },
+                        {
+                            "name": "GetServices",
+                            "path": "/service/{storeId}/get",
+                            "description": "Get services provided by a store",
+                            "trigger": "HTTP",
+                            "method": ["GET"],
+                            "request": "",
+                            "response": "[\n  {\n    \"id\": 0,\n    \"duration\": 0,\n    \"price\": 0,\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"categories\": [\n      {\n        \"id\": 0,\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"sub_categories\": [\n          {\n            \"id\": 0,\n            \"name\": \"string\",\n            \"description\": \"string\"\n          }\n        ]\n      }\n    ]\n  }\n]"
+                        },
+                        {
+                            "name": "AddServices",
+                            "path": "/service/{storeId}/add",
+                            "description": "Add service to a store",
+                            "trigger": "HTTP",
+                            "method": ["POST"],
+                            "request": "{\n  \"store_service_id\": 0,\n  \"service_name\": \"string\",\n  \"description\": \"string\",\n  \"duration\": 0,\n  \"price\": 0,\n  \"categories\": [\n    0\n  ],\n  \"sub_categories\": [\n    0\n  ]\n}",
+                            "response": ""
+                        },
+                        {
+                            "name": "EditService",
+                            "path": "/service/edit",
+                            "description": "Edit service of a store",
+                            "trigger": "HTTP",
+                            "method": ["PATCH"],
+                            "request": "{\n  \"store_service_id\": 0,\n  \"service_name\": \"string\",\n  \"description\": \"string\",\n  \"duration\": 0,\n  \"price\": 0,\n  \"categories\": [\n    0\n  ],\n  \"sub_categories\": [\n    0\n  ]\n}",
+                            "response": ""
+                        },
+                        {
+                            "name": "DeleteService",
+                            "path": "/service/{serviceId}/delete",
+                            "description": "Delete service of a store",
+                            "trigger": "HTTP",
+                            "method": ["DELETE"],
                             "request": "",
                             "response": ""
                         }
@@ -326,7 +480,10 @@ export const projectList = [
                     "The application utilizes Azure SQL Database, a fully managed, scalable relational database service in the cloud. Azure SQL provides high availability, performance tuning, and built-in security features such as data encryption. Entity Framework (EF) Core, a modern object-relational mapper (ORM), is employed to simplify data access by allowing developers to interact with the database using strongly-typed .NET objects. This enables efficient querying and manipulation of data, reducing the need to write raw SQL while maintaining optimal performance.",
                     "Database migrations are handled using FluentMigrator, a migration framework that enables versioning of the database schema. FluentMigrator helps manage schema changes over time by defining migrations in C# code, which are then applied in a controlled and automated manner. This approach allows the application to evolve safely while ensuring that all changes are tracked and can be rolled forward or backward as needed."
                 ],
-                "diagram": "/db-diagram.png"
+                "diagram": {
+                    "description": "Image shows the database diagram",
+                    "url": "/crm-db-diagram.png"
+                }
             },
             "idp": {
                 "description": [
@@ -338,7 +495,11 @@ export const projectList = [
                     "The application leverages JSON Web Tokens (JWT) to authenticate users and secure communication with the backend services. Each API request is authorized based on scope-based access control, where users are granted access to specific services and resources according to the scopes embedded in the token. This approach provides fine-grained control over permissions and enforces security policies dynamically at runtime.",
                     "Azure App Configuration is used to store and manage application settings across different environments. By centralizing configuration management, Azure App Configuration enables dynamic updates to configuration values without the need to redeploy services. This ensures better scalability, flexibility, and consistency in handling non-sensitive application settings.",
                     "Azure Key Vault is integrated to securely manage sensitive data, including API keys, database connection strings, and certificates. It ensures that only authorized services and applications can access the secrets stored in Key Vault. This integration provides secure management of sensitive information and reduces the risk of security breaches, ensuring compliance with best practices for sensitive data handling."
-                ]
+                ],
+                "diagram": {
+                    "description": "The diagram shows what the entire implicit sign-in flow looks like",
+                    "url": "/crm-security-diagram.png"
+                }
             },
             "sourceCodeUrl": "",
             "seeAlso": [
@@ -393,9 +554,26 @@ export const projectList = [
                     "url": "https://auth0.com/docs/secure/tokens/json-web-tokens"
                 }
             ],
-            "tags": [".NET", "Azure", "Microservices", "CosmosDB", "Service Bus"]
         }
     },
+    {
+        "id": 2,
+        "uuid": "4f7334bd-f946-446e-81e7-77ea52c5fb9c",
+        "name": "POD",
+        "description": "An enterprise level cloud-based ecommerce app with 3D print-on-demand business model having full integration capabilities to Shopify stores with Braintree and Stripe payment options.",
+        "imageUrl": "/pod.png",
+        "tags": ["Print-on-Demand", "E-commerce", "Shopify"],
+        "status": "active",
+    },
+    {
+        "id": 3,
+        "uuid": "e3b0c442-98fc-4dfb-897e-4aa3e1c8506e",
+        "name": "DStudio",
+        "description": "A 3D product design SaaS enabling users to create, customize, and visualize products in real-time with high-quality 3D rendering, making it ideal for businesses offering custom or 3D printed products.",
+        "imageUrl": "/dstudio.png",
+        "tags": ["3D Design", "Product Design", "SaaS"],
+        "status": "active",
+    }
     // {
     //     "id": 2,
     //     "uuid": "4f7334bd-f946-446e-81e7-77ea52c5fb9c",
