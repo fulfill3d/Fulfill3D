@@ -1,22 +1,23 @@
 import React from 'react';
-import {Project} from "@/models/project/project";
+import { Project } from "@/models/project/project";
 import Image from "next/image";
 import ImagePlaceholder from "@/svg/image-placeholder";
-import {useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
 
-interface ProductCardProps {
+interface ProjectCardProps {
     project: Project;
 }
 
-const ProjectCard: React.FC<ProductCardProps> = ({ project }) => {
+const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
     const router = useRouter();
 
     const handleClick = () => {
         router.push(`/projects/${project.uuid}`); // Navigate to dynamic [id] page
     };
+
     return (
         <div className="flex flex-col md:flex-row bg-white shadow-lg rounded-lg p-4 mb-6 h-auto">
-            {/* Product Image */}
+            {/* Project Image */}
             <div className="relative md:w-1/4 w-full h-48 md:h-auto mb-4 md:mb-0">
                 <Image
                     src={project.imageUrl || ImagePlaceholder}
@@ -27,13 +28,12 @@ const ProjectCard: React.FC<ProductCardProps> = ({ project }) => {
                 />
             </div>
 
-
-            {/* Product Details */}
+            {/* Project Details */}
             <div className="md:w-2/4 w-full md:px-4 flex flex-col justify-center">
-                {/* Product Name */}
+                {/* Project Name */}
                 <h2 className="text-xl font-bold text-gray-800 mb-2">{project.name}</h2>
 
-                {/* Product Description */}
+                {/* Project Description */}
                 <p className="text-gray-700 mb-4">{project.description}</p>
 
                 {/* Tags */}
@@ -52,9 +52,10 @@ const ProjectCard: React.FC<ProductCardProps> = ({ project }) => {
             {/* Links */}
             <div className="md:w-1/4 w-full flex flex-col md:justify-center md:items-end items-center justify-center">
                 <div className="flex gap-4 mt-4 md:mt-0">
-                    {project.isDemoReady ? (
+                    {/* Demo Button */}
+                    {project.demo ? (
                         <a
-                            href={project.demoUrl}
+                            href={project.demo}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors"
@@ -97,10 +98,12 @@ const ProjectCard: React.FC<ProductCardProps> = ({ project }) => {
                             </span>
                         </div>
                     )}
-                    {project.isWikiReady ? (
+
+                    {/* Wiki Button */}
+                    {project.wiki ? (
                         <div
                             onClick={handleClick}
-                            className="flex items-center bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-colors cursor-pointer">
+                            className="flex items-center bg-coral-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-colors cursor-pointer">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 className="h-5 w-5 mr-2"
