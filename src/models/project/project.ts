@@ -8,6 +8,7 @@ export class Project {
     name: string;
     description: string;
     demo: string | null;
+    src: string | null;
     isWikiReady: boolean;
     wiki: ProjectWiki | null;
     imageUrl: string;
@@ -20,6 +21,7 @@ export class Project {
         name: string,
         description: string,
         demo: string | null,
+        src: string | null,
         isWikiReady: boolean,
         wiki: ProjectWiki | null,
         imageUrl: string,
@@ -31,6 +33,7 @@ export class Project {
         this.name = name;
         this.description = description;
         this.demo = demo;
+        this.src = src;
         this.isWikiReady = isWikiReady;
         this.wiki = wiki;
         this.imageUrl = imageUrl;
@@ -46,6 +49,7 @@ export class Project {
             json.name,
             json.description,
             json.demo,
+            json.src,
             json.isWikiReady,
             wiki, // Pass the nullable wiki
             json.imageUrl,

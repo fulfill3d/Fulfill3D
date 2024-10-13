@@ -8,11 +8,11 @@ interface PostMetadataCardProps {
     post: Post;
 }
 
-const PostMetadataCard: React.FC<PostMetadataCardProps> = ({ post }) => {
+const PostMetadataCard: React.FC<PostMetadataCardProps> = (props) => {
     const router = useRouter();
 
     const handleClick = () => {
-        router.push(`/${post.uuid}`); // Navigate to dynamic [id] page
+        router.push(`/posts/${props.post.uuid}`); // Navigate to dynamic [id] page
     };
     return (
         <div
@@ -24,8 +24,8 @@ const PostMetadataCard: React.FC<PostMetadataCardProps> = ({ post }) => {
             {/* Image */}
             <div className="relative w-full h-48 mb-4">
                 <Image
-                    src={post.image || ImagePlaceholder}
-                    alt={post.title}
+                    src={props.post.image || ImagePlaceholder}
+                    alt={props.post.title}
                     layout="fill"  // Ensures the image fills the container
                     objectFit="contain"  // Ensures the aspect ratio is maintained and the image covers the container
                     className="rounded-lg"  // Optional Tailwind classes for styling
@@ -33,17 +33,17 @@ const PostMetadataCard: React.FC<PostMetadataCardProps> = ({ post }) => {
             </div>
 
             {/* Title */}
-            <h2 className="text-2xl font-bold text-gray-800 mb-2">{post.title}</h2>
+            <h2 className="text-2xl font-bold text-gray-800 mb-2">{props.post.title}</h2>
 
             {/* Author */}
-            <p className="text-sm text-gray-500 mb-1">By {post.author}</p>
+            <p className="text-sm text-gray-500 mb-1">By {props.post.author}</p>
 
             {/* Excerpt */}
-            <p className="text-gray-700 mt-4 mb-4">{post.excerpt}</p>
+            <p className="text-gray-700 mt-4 mb-4">{props.post.excerpt}</p>
 
             {/* Tags */}
             <div className="flex flex-wrap gap-2">
-                {post.tags.map((tag, index) => (
+                {props.post.tags.map((tag, index) => (
                     <span
                         key={index}
                         className="bg-gray-200 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"

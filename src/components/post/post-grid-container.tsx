@@ -1,20 +1,16 @@
 import React from 'react';
-import { Post } from "@/models/post/post";
 import PostMetadataCard from "@/components/post/post-metadata-card";
+import {getPublishedPosts} from "@/service/feature/get-published-posts";
 
 interface PostGridContainerProps {
-    posts: Post[];
 }
 
-const PostGridContainer: React.FC<PostGridContainerProps> = ({ posts }) => {
+const PostGridContainer: React.FC<PostGridContainerProps> = () => {
+    const { posts} = getPublishedPosts();
+
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {posts
-                .filter(post => post.status === 'published')
-                .reverse()
-                .map((post) => (
-                    <PostMetadataCard key={post.id} post={post} />
-                ))}
+            {posts.map((post) => (<PostMetadataCard key={post.id} post={post} />))}
         </div>
     );
 };

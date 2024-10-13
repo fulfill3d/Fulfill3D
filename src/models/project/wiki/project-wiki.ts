@@ -1,4 +1,4 @@
-import {HttpMethod} from "@/hooks/common/use-http";
+import {HttpMethod} from "@/service/common/http-request";
 
 export class SeeAlso {
     name: string;
@@ -221,7 +221,8 @@ export class ProjectWiki {
     database: Database;
     idp: IdP;
     security: Security;
-    sourceCodeUrl: string;
+    frontendSrc: string;
+    backendSrc: string;
     seeAlso: SeeAlso[];
     furtherReading: SeeAlso[];
 
@@ -238,7 +239,8 @@ export class ProjectWiki {
         database: Database,
         idp: IdP,
         security: Security,
-        sourceCodeUrl: string,
+        frontendSrc: string,
+        backendSrc: string,
         seeAlso: SeeAlso[],
         furtherReading: SeeAlso[]
     ) {
@@ -254,7 +256,8 @@ export class ProjectWiki {
         this.database = database;
         this.idp = idp;
         this.security = security;
-        this.sourceCodeUrl = sourceCodeUrl;
+        this.frontendSrc = frontendSrc;
+        this.backendSrc = backendSrc;
         this.seeAlso = seeAlso;
         this.furtherReading = furtherReading;
     }
@@ -277,7 +280,8 @@ export class ProjectWiki {
             json.database,
             json.idp,
             json.security,
-            json.sourceCodeUrl,
+            json.frontendSrc,
+            json.backendSrc,
             seeAlso,
             furtherReading
         );

@@ -1,46 +1,27 @@
 "use client";
 
-import React, {useEffect} from "react";
+import React from "react";
 import CompanyComponent from "@/components/about/company-component";
 import PersonComponent from "@/components/about/person-component";
-import {Company} from "@/models/about/company";
-import {Person} from "@/models/about/person";
-import {companyProfileJson, personProfileJson} from "@/mock/about/data";
 import RequestForm from "@/components/common/request-form";
 import {GoogleReCaptchaProvider} from "react-google-recaptcha-v3";
+import {useWakeUpAzureFunctions} from "@/hooks/common/use-wake-up-azure-functions";
 
 export default function About() {
-    const companyProfile = Company.fromJson(companyProfileJson);
-    const personProfile = Person.fromJson(personProfileJson);
 
-    // PING to Wake Up Azure Function
-    useEffect(() => {
-
-        (async () => {
-            try {
-                const endpoints = [
-                    process.env.NEXT_PUBLIC_FULFILL3D_API_ENDPOINT || ''
-                ];
-
-                // Use Promise.all to send all requests at once
-                await Promise.all(endpoints.map(endpoint => fetch(endpoint)));
-            } catch (error) {
-                console.error('Error pinging Azure Functions:', error);
-            }
-        })();
-    }, []);
+    useWakeUpAzureFunctions()
 
     return (
         <div className="w-full h-full">
             <div className="container mx-auto p-6 space-y-12 max-w-4xl">
                 {/* Fulfill3D Section */}
                 <section>
-                    <CompanyComponent profile={companyProfile}/>
+                    <CompanyComponent />
                 </section>
 
                 {/* About Me Section */}
                 <section>
-                    <PersonComponent profile={personProfile}/>
+                    <PersonComponent />
                 </section>
 
                 {/* Request Form Section */}
