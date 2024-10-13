@@ -7,7 +7,7 @@ const Home = () => {
     const router = useRouter();
 
     return (
-        <div className="min-h-screen w-full flex items-center justify-center px-6 py-10 bg-gray-50 overflow-hidden">
+        <div className="min-h-screen w-full flex flex-col items-center justify-between px-6 py-10 bg-gray-50 overflow-hidden">
             <div className="w-full h-full max-w-5xl text-center space-y-10 flex flex-col items-center justify-center">
                 {/* Heading */}
                 <h1 className="text-5xl md:text-7xl font-extrabold text-gray-900 leading-tight">
@@ -51,6 +51,18 @@ const Home = () => {
                     </div>
                 </div>
             </div>
+
+            {/* Link to Fulfill3D Frontend Repo */}
+            <footer className="text-gray-600 font-semibold text-sm mt-10">
+                <a
+                    href="https://github.com/fulfill3d/Fulfill3D_Frontend"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:underline"
+                >
+                    View src of Fulfill3D
+                </a>
+            </footer>
         </div>
     );
 }
