@@ -1,14 +1,14 @@
 import React from 'react';
-import { Company } from "@/models/about/company";
 import Image from "next/legacy/image";
 import ImagePlaceholder from "@/svg/image-placeholder";
 import SocialMediaIcon from "@/components/about/social-media-icon";
+import {getCompanyProfile} from "@/service/feature/get-company-profile";
 
 interface CompanyProps {
-    profile: Company;
 }
 
-const CompanyComponent: React.FC<CompanyProps> = ({ profile }) => {
+const CompanyComponent: React.FC<CompanyProps> = () => {
+    const { profile } = getCompanyProfile();
     return (
         <div className="bg-white shadow-lg rounded-lg p-4 md:p-6 overflow-hidden">
             {/* Company Logo */}

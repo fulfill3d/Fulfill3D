@@ -1,6 +1,6 @@
 import React from "react";
 import {Function} from "@/models/project/wiki/project-wiki";
-import {HttpMethod} from "@/hooks/common/use-http";
+import {HttpMethod} from "@/service/common/http-request";
 
 const getMethodColor = (method: string) => {
     switch (method) {

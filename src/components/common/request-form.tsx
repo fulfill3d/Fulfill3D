@@ -1,39 +1,16 @@
 import React, { useState } from 'react';
-import useHttp, {HttpMethod} from "@/hooks/common/use-http";
-import {RequestModel} from "@/models/common/request-model";
-import {useGoogleReCaptcha} from "react-google-recaptcha-v3";
+import {useRequestFormSubmitHandler} from "@/hooks/feature/use-request-form-submit-handler";
 
 const RequestForm = () => {
-    const { loading, error, request } = useHttp();
     const [email, setEmail] = useState('');
     const [subject, setSubject] = useState('');
     const [message, setMessage] = useState('');
-    const { executeRecaptcha } = useGoogleReCaptcha();
 
-    const submitHandler = async (e: React.FormEvent) => {
-        e.preventDefault();
-
-        if (!executeRecaptcha) {
-            alert('reCAPTCHA not yet available');
-            return;
-        }
-
-        const recaptchaToken = await executeRecaptcha('submit');
-
-        const requestModel = new RequestModel(email, subject, message, recaptchaToken);
-
-        const result = await request(
-            process.env.NEXT_PUBLIC_SEND_FORM_REQUEST_ENDPOINT || '',
-            HttpMethod.POST,
-            requestModel
-        );
-
-        if (result.error) {
-            alert(`Failed to send request: ${result.error}`);
-        } else {
-            alert('Request sent successfully!');
-        }
-    };
+    const { submitHandler, loading, error } = useRequestFormSubmitHandler(
+        email,
+        subject,
+        message
+    );
 
     return (
         <form onSubmit={submitHandler} className="w-full md:w-2/3 flex flex-col gap-4 bg-gray-100 p-4 rounded-lg">

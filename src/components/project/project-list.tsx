@@ -1,18 +1,15 @@
 import React from 'react';
 import ProjectCard from "@/components/project/project-card";
-import {Project} from "@/models/project/project";
+import {getActiveProjects} from "@/service/feature/get-active-projects";
 
 interface ProductListProps {
-    projects: Project[];
 }
 
-const ProjectList: React.FC<ProductListProps> = ({ projects }) => {
+const ProjectList: React.FC<ProductListProps> = () => {
+    const { projects } = getActiveProjects();
     return (
         <div className="flex flex-col">
-            {projects
-                .filter(project => project.status === 'active')
-                .map((project) => <ProjectCard key={project.id} project={project} />)
-            }
+            {projects.map((project) => <ProjectCard key={project.id} project={project} />)}
         </div>
     );
 };

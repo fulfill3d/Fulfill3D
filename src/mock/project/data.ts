@@ -7,6 +7,8 @@ export const projectList = [
         "imageUrl": "/crm.png",
         "tags": ["CRM", "Appointment", "Small Business"],
         "status": "active",
+        "demo": "https://crm.fulfill3d.com",
+        "src": "https://github.com/fulfill3d/CRM_Backend",
         "wiki": {
             "name": "CRM (Customer Relationship Management)",
             "tags": [
@@ -501,7 +503,8 @@ export const projectList = [
                     "url": "/crm-security-diagram.png"
                 }
             },
-            "sourceCodeUrl": "",
+            "frontendSrc": "https://github.com/fulfill3d/CRM_Frontend",
+            "backendSrc": "https://github.com/fulfill3d/CRM_Backend",
             "seeAlso": [
                 {
                     "name": "A Secured Microservice",

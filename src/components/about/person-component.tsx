@@ -1,14 +1,14 @@
 import React from 'react';
-import {Person} from "@/models/about/person";
 import Image from "next/image";
 import ImagePlaceholder from "@/svg/image-placeholder";
 import SocialMediaIcon from "@/components/about/social-media-icon";
+import {getPersonProfile} from "@/service/feature/get-person-profile";
 
 interface PersonProps {
-    profile: Person;
 }
 
-const PersonComponent: React.FC<PersonProps> = ({ profile }) => {
+const PersonComponent: React.FC<PersonProps> = () => {
+    const { profile } = getPersonProfile();
     return (
         <div className="bg-white shadow-lg rounded-lg p-6">
             <div className="flex flex-col items-center text-center">
