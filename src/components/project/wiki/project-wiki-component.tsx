@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { ProjectWiki } from "@/models/project/wiki/project-wiki";
-import RequestForm from "@/components/common/request-form";
 import DevOpsList from "@/components/project/wiki/devops-list";
 import WikiSection from "@/components/project/wiki/wiki-section";
 import List from "@/components/project/wiki/wiki-list";
@@ -8,7 +7,6 @@ import Accordion from "@/components/project/wiki/wiki-accordion";
 import MicroserviceComponent from "@/components/project/wiki/microservice-component";
 import Image from "next/image";
 import ImagePlaceholder from "@/svg/image-placeholder";
-import {GoogleReCaptchaProvider} from "react-google-recaptcha-v3";
 
 const ProjectWikiComponent: React.FC<{ wiki: ProjectWiki }> = ({ wiki }) => {
     const [isFullScreen, setIsFullScreen] = useState(false); // State to track full-screen mode
@@ -160,25 +158,65 @@ const ProjectWikiComponent: React.FC<{ wiki: ProjectWiki }> = ({ wiki }) => {
 
             {/* Source Code Section */}
             <WikiSection title="Source Code">
-                <div className="flex gap-4">
-                    {wiki.sourceCodeUrl ? (
+                <div className="flex gap-4 mb-2">
+                    {wiki.frontendSrc ? (
                         <a
-                            href={wiki.sourceCodeUrl}
+                            href={wiki.frontendSrc}
                             target="_blank"
-                            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+                            className="flex items-center bg-coral-600 text-white px-4 py-2 rounded-lg hover:bg-coral-700 transition"
                         >
-                            Source Code
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-5 w-5 mr-2"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M16 18l6-6-6-6M8 6l-6 6 6 6"
+                                />
+                            </svg>
+                            Frontend Source Code
                         </a>
                     ) : (
                         <div className="w-full flex flex-col">
                             <p className="text-md md:text-lg text-gray-600 mb-4">
-                                Source code is not publicly available. Please fill out the following form to request it:
+                                Frontend source code is not available yet.
                             </p>
-                            <div className="flex items-center justify-center">
-                                <GoogleReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ''}>
-                                    <RequestForm/>
-                                </GoogleReCaptchaProvider>
-                            </div>
+                        </div>
+                    )}
+                </div>
+                <div className="flex gap-4 mb-2">
+                    {wiki.backendSrc ? (
+                        <a
+                            href={wiki.backendSrc}
+                            target="_blank"
+                            className="flex items-center bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-5 w-5 mr-2"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M16 18l6-6-6-6M8 6l-6 6 6 6"
+                                />
+                            </svg>
+                            Backend Source Code
+                        </a>
+                    ) : (
+                        <div className="w-full flex flex-col">
+                            <p className="text-md md:text-lg text-gray-600 mb-4">
+                                Backend source code is not available yet.
+                            </p>
                         </div>
                     )}
                 </div>

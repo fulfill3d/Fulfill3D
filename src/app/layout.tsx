@@ -12,6 +12,7 @@ export const metadata: Metadata = {
 };
 
 const links = [
+    { name: 'Posts', href: '/posts' },
     { name: 'Projects', href: '/projects' },
     { name: 'About', href: '/about' },
 ];
