@@ -2,13 +2,20 @@ import React from 'react';
 import Image from "next/legacy/image";
 import ImagePlaceholder from "@/svg/image-placeholder";
 import SocialMediaIcon from "@/components/about/social-media-icon";
-import {getCompanyProfile} from "@/service/feature/get-company-profile";
+import {useGetCompanyProfile} from "@/hooks/feature/use-get-company-profile";
+import Loading from "@/app/loading";
+import ErrorPage from "@/app/error";
 
 interface CompanyProps {
 }
 
 const CompanyComponent: React.FC<CompanyProps> = () => {
-    const { profile } = getCompanyProfile();
+    const { profile, loading, error } = useGetCompanyProfile();
+
+    if (loading || !profile) return <Loading />;
+
+    if (error) return (<ErrorPage error={new Error(error || "Unknown error")} reset={() => window.location.reload()}/>);
+
     return (
         <div className="bg-white shadow-lg rounded-lg p-4 md:p-6 overflow-hidden">
             {/* Company Logo */}

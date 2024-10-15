@@ -12,8 +12,7 @@ import {
 export type BlogPostStatus = 'published' | 'draft';
 
 export class Post {
-    id: number;
-    uuid: string;
+    id: string;
     title: string;
     slug: string;
     author: string;
@@ -24,8 +23,7 @@ export class Post {
     contentBlocks: ContentBlock[];
 
     constructor(
-        id: number,
-        uuid: string,
+        id: string,
         title: string,
         slug: string,
         author: string,
@@ -36,7 +34,6 @@ export class Post {
         contentBlocks: ContentBlock[]
     ) {
         this.id = id;
-        this.uuid = uuid;
         this.title = title;
         this.slug = slug;
         this.author = author;
@@ -72,7 +69,6 @@ export class Post {
 
         return new Post(
             json.id,
-            json.uuid,
             json.title,
             json.slug,
             json.author,
