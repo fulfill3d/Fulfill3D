@@ -4,14 +4,14 @@ import {ProjectWiki} from "@/models/project/wiki/project-wiki";
 
 interface DocsButtonProps {
     wiki: ProjectWiki | null
-    uuid: string
+    id: string
 }
 
 const DocsButton: React.FC<DocsButtonProps> = (props) => {
     const router = useRouter();
 
     const handleClick = () => {
-        router.push(`/projects/${props.uuid}`); // Navigate to dynamic [id] page
+        router.push(`/projects/${props.id}`); // Navigate to dynamic [id] page
     };
     return(
         props.wiki ? (
