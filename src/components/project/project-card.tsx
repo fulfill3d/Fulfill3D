@@ -53,7 +53,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                     <DemoButton demo={project.demo} />
 
                     {/* Docs Button */}
-                    <DocsButton wiki={project.wiki} uuid={project.uuid} />
+                    <DocsButton wiki={project.wiki} id={project.id} />
 
                     {/* Src Button */}
                     <SrcButton src={project.src} />

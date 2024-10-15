@@ -2,13 +2,20 @@ import React from 'react';
 import Image from "next/image";
 import ImagePlaceholder from "@/svg/image-placeholder";
 import SocialMediaIcon from "@/components/about/social-media-icon";
-import {getPersonProfile} from "@/service/feature/get-person-profile";
+import {useGetPersonProfile} from "@/hooks/feature/use-get-person-profile";
+import Loading from "@/app/loading";
+import ErrorPage from "@/app/error";
 
 interface PersonProps {
 }
 
 const PersonComponent: React.FC<PersonProps> = () => {
-    const { profile } = getPersonProfile();
+    const { profile, loading, error } = useGetPersonProfile();
+
+    if (loading || !profile) return <Loading />;
+
+    if (error) return (<ErrorPage error={new Error(error || "Unknown error")} reset={() => window.location.reload()}/>);
+
     return (
         <div className="bg-white shadow-lg rounded-lg p-6">
             <div className="flex flex-col items-center text-center">

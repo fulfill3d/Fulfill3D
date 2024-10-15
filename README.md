@@ -25,7 +25,6 @@ Here is an overview of the key directories in the project:
 - **`src/app`**: Contains Next.js pages and components for the application, including routing and main UI layout.
 - **`src/components`**: Reusable React components used throughout the app, such as form elements, buttons, modals, etc.
 - **`src/hooks`**: Custom hooks for managing application state, fetching data, and interacting with external APIs.
-- **`src/mock`**: Hard-coded mock data used for testing and development purposes.
 - **`src/models`**: TypeScript interfaces and types representing the data models used across the application.
 - **`src/service`**: Service files for connecting to APIs, handling data requests, and managing proxy connections.
 - **`src/svg`**: SVG files used for icons and other vector-based elements in the UI.
