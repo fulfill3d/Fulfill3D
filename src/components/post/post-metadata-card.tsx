@@ -1,8 +1,8 @@
 import React from 'react';
 import {Post} from "@/models/post/post";
 import {useRouter} from "next/navigation";
-import Image from "next/image";
 import ImagePlaceholder from "@/svg/image-placeholder";
+import ImageWithLoader from "@/components/common/image-with-loader";
 
 interface PostMetadataCardProps {
     post: Post;
@@ -23,12 +23,11 @@ const PostMetadataCard: React.FC<PostMetadataCardProps> = (props) => {
         >
             {/* Image */}
             <div className="relative w-full h-48 mb-4">
-                <Image
-                    src={props.post.image || ImagePlaceholder}
+                <ImageWithLoader
+                    src={props.post.image}
                     alt={props.post.title}
-                    layout="fill"  // Ensures the image fills the container
-                    objectFit="contain"  // Ensures the aspect ratio is maintained and the image covers the container
-                    className="rounded-lg"  // Optional Tailwind classes for styling
+                    placeholderSrc={ImagePlaceholder}
+                    className="rounded-lg"
                 />
             </div>
 

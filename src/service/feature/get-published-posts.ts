@@ -13,6 +13,6 @@ export const getPublishedPosts = async () => {
         );
         return response.map((post: any) => Post.fromJSON(post));
     } catch (error) {
-        throw new Error("Failed to fetch posts.");
+        throw new Error("Failed to fetch published posts.");
     }
 }

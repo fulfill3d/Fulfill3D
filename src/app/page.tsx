@@ -60,7 +60,7 @@ const Home = () => {
                     rel="noopener noreferrer"
                     className="hover:underline"
                 >
-                    View src of Fulfill3D
+                    View src of this app
                 </a>
             </footer>
         </div>

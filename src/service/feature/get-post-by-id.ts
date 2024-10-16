@@ -13,6 +13,6 @@ export const getPostById = async (id: string): Promise<Post | null> => {
         );
         return Post.fromJSON(response);
     } catch (error) {
-        throw new Error("Failed to fetch stores.");
+        throw new Error("Failed to fetch post.");
     }
 };

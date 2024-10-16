@@ -1,10 +1,10 @@
 import React from 'react';
-import Image from "next/legacy/image";
 import ImagePlaceholder from "@/svg/image-placeholder";
 import SocialMediaIcon from "@/components/about/social-media-icon";
 import {useGetCompanyProfile} from "@/hooks/feature/use-get-company-profile";
 import Loading from "@/app/loading";
 import ErrorPage from "@/app/error";
+import ImageWithLoader from "@/components/common/image-with-loader";
 
 interface CompanyProps {
 }
@@ -21,11 +21,11 @@ const CompanyComponent: React.FC<CompanyProps> = () => {
             {/* Company Logo */}
             <div className="flex justify-center mb-4">
                 <div className="relative w-24 h-24 md:w-32 md:h-32 mb-4">
-                    <Image
-                        src={profile.logoUrl || ImagePlaceholder}
+                    <ImageWithLoader
+                        src={profile.logoUrl}
                         alt={profile.companyName}
-                        layout="fill"  // Ensures the image fills the container
-                        className="rounded-lg"  // Optional Tailwind classes
+                        placeholderSrc={ImagePlaceholder}
+                        className="rounded-lg"
                     />
                 </div>
             </div>

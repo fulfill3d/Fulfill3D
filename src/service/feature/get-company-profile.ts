@@ -13,6 +13,6 @@ export const getCompanyProfile = async () => {
         );
         return Company.fromJson(response);
     } catch (error) {
-        throw new Error("Failed to fetch projects.");
+        throw new Error("Failed to fetch company profile.");
     }
 }

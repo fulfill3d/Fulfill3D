@@ -15,6 +15,6 @@ export const getProjectWikiById = async (id: string): Promise<ProjectWiki | null
         const project = Project.fromJson(response)
         return project.wiki;
     } catch (error) {
-        throw new Error("Failed to fetch stores.");
+        throw new Error("Failed to fetch project docs.");
     }
 };
