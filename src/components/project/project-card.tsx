@@ -1,10 +1,10 @@
 import React from 'react';
 import { Project } from "@/models/project/project";
-import Image from "next/image";
 import ImagePlaceholder from "@/svg/image-placeholder";
 import DemoButton from "@/components/project/demo-button";
 import DocsButton from "@/components/project/docs-button";
 import SrcButton from "@/components/project/src-button";
+import ImageWithLoader from "@/components/common/image-with-loader";
 
 interface ProjectCardProps {
     project: Project;
@@ -16,11 +16,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         <div className="flex flex-col md:flex-row bg-white shadow-lg rounded-lg p-4 mb-6 h-auto">
             {/* Project Image */}
             <div className="relative md:w-1/4 w-full h-48 md:h-auto mb-4 md:mb-0">
-                <Image
-                    src={project.imageUrl || ImagePlaceholder}
+                <ImageWithLoader
+                    src={project.imageUrl}
                     alt={project.name}
-                    layout="fill"
-                    objectFit="contain"
+                    placeholderSrc={ImagePlaceholder}
                     className="rounded-lg"
                 />
             </div>

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Post } from "@/models/post/post";
-import Image from "next/image";
 import ImagePlaceholder from "@/svg/image-placeholder";
 import {RenderContentBlock} from "@/components/post/render-post-content-block";
+import ImageWithLoader from "@/components/common/image-with-loader";
 
 interface PostContentProps {
     post: Post;
@@ -16,12 +16,11 @@ const PostContent: React.FC<PostContentProps> = ({ post }) => {
             <header className="mb-8">
                 {/* Header Image */}
                 <div className="relative w-full h-64 mb-4">
-                    <Image
-                        src={post.image || ImagePlaceholder}
+                    <ImageWithLoader
+                        src={post.image}
                         alt={post.title}
-                        layout="fill"  // Ensures the image fills the container
-                        objectFit="contain"  // Ensures the aspect ratio is maintained and the image covers the area
-                        className="rounded-lg"  // Optional Tailwind classes
+                        placeholderSrc={ImagePlaceholder}
+                        className="rounded-lg"
                     />
                 </div>
 

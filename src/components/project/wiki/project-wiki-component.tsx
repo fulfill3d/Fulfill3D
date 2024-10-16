@@ -7,6 +7,7 @@ import Accordion from "@/components/project/wiki/wiki-accordion";
 import MicroserviceComponent from "@/components/project/wiki/microservice-component";
 import Image from "next/image";
 import ImagePlaceholder from "@/svg/image-placeholder";
+import ImageWithLoader from "@/components/common/image-with-loader";
 
 const ProjectWikiComponent: React.FC<{ wiki: ProjectWiki }> = ({ wiki }) => {
     const [isFullScreen, setIsFullScreen] = useState(false); // State to track full-screen mode
@@ -68,12 +69,11 @@ const ProjectWikiComponent: React.FC<{ wiki: ProjectWiki }> = ({ wiki }) => {
                     {/* Clickable Image for Full-Screen */}
                     <div className="w-full min-h-96 relative mb-4 cursor-pointer"
                          onClick={() => handleImageClick(wiki.architecture.diagram.url)}>
-                        <Image
-                            className="rounded-lg"
-                            src={wiki.architecture.diagram.url || ImagePlaceholder}
+                        <ImageWithLoader
+                            src={wiki.architecture.diagram.url}
                             alt={wiki.name}
-                            layout="fill"
-                            objectFit="contain"
+                            placeholderSrc={ImagePlaceholder}
+                            className="rounded-lg"
                         />
                     </div>
                     <p className="text-sm text-gray-500 text-center">
@@ -91,12 +91,11 @@ const ProjectWikiComponent: React.FC<{ wiki: ProjectWiki }> = ({ wiki }) => {
                     {/* Clickable Image for Full-Screen */}
                     <div className="w-full min-h-96 relative mb-4 cursor-pointer"
                          onClick={() => handleImageClick(wiki.database.diagram.url)}>
-                        <Image
-                            className="rounded-lg"
-                            src={wiki.database.diagram.url || ImagePlaceholder}
+                        <ImageWithLoader
+                            src={wiki.database.diagram.url}
                             alt={wiki.name}
-                            layout="fill"
-                            objectFit="contain"
+                            placeholderSrc={ImagePlaceholder}
+                            className="rounded-lg"
                         />
                     </div>
                     <p className="text-sm text-gray-500 text-center">
@@ -120,12 +119,11 @@ const ProjectWikiComponent: React.FC<{ wiki: ProjectWiki }> = ({ wiki }) => {
                 <div className="p-4 rounded-lg mb-6 flex flex-col items-center">
                     {/* Clickable Image for Full-Screen */}
                     <div className="w-full min-h-96 relative mb-4 cursor-pointer" onClick={() => handleImageClick(wiki.security.diagram.url)}>
-                        <Image
-                            className="rounded-lg"
-                            src={wiki.security.diagram.url || ImagePlaceholder}
+                        <ImageWithLoader
+                            src={wiki.security.diagram.url}
                             alt={wiki.name}
-                            layout="fill"
-                            objectFit="contain"
+                            placeholderSrc={ImagePlaceholder}
+                            className="rounded-lg"
                         />
                     </div>
                     <p className="text-sm text-gray-500 text-center">

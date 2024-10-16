@@ -11,6 +11,6 @@ export const sendFormRequest = async (requestModel: RequestModel) => {
         );
 
     } catch (error) {
-        throw new Error("Failed to fetch appointments.");
+        throw new Error("Failed to send form request.");
     }
 }

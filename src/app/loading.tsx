@@ -8,7 +8,7 @@ const Loading: React.FC = () => {
     const message = useLoadingStateMessage();
 
     return (
-        <div className="flex justify-center items-center h-screen bg-gray-100">
+        <div className="flex justify-center items-center h-screen">
             <div className="flex flex-col items-center">
                 {/* Loader Animation */}
                 <svg

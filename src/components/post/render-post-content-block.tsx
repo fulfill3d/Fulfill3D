@@ -6,9 +6,9 @@ import {
     ParagraphBlock,
     QuoteBlock
 } from "@/models/post/content-block";
-import Image from "next/image";
 import ImagePlaceholder from "@/svg/image-placeholder";
 import React from "react";
+import ImageWithLoader from "@/components/common/image-with-loader";
 
 // Function to render each content block based on its type
 export const RenderContentBlock = (block: any) => {
@@ -24,12 +24,11 @@ export const RenderContentBlock = (block: any) => {
         case ImageBlock:
             return (
                 <div className="relative w-full h-64 mb-6">
-                    <Image
-                        src={block.src || ImagePlaceholder}
+                    <ImageWithLoader
+                        src={block.src}
                         alt={block.alt}
-                        layout="fill"  // Ensures the image fills the container
-                        objectFit="cover"  // Ensures the aspect ratio is maintained and the image covers the area
-                        className="rounded-lg"  // Optional Tailwind classes
+                        placeholderSrc={ImagePlaceholder}
+                        className="rounded-lg"
                     />
                 </div>
             );
