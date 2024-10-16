@@ -13,6 +13,6 @@ export const getPersonProfile = async () => {
         );
         return Person.fromJson(response);
     } catch (error) {
-        throw new Error("Failed to fetch projects.");
+        throw new Error("Failed to fetch person profile.");
     }
 }

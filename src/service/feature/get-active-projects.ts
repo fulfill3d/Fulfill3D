@@ -13,6 +13,6 @@ export const getActiveProjects = async () => {
         );
         return response.map((project: any) => Project.fromJson(project));
     } catch (error) {
-        throw new Error("Failed to fetch projects.");
+        throw new Error("Failed to fetch active projects.");
     }
 }
