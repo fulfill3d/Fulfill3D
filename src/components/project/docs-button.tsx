@@ -1,6 +1,6 @@
 import React from "react";
-import {useRouter} from "next/navigation";
 import {ProjectWiki} from "@/models/project/wiki/project-wiki";
+import Link from "next/link";
 
 interface DocsButtonProps {
     wiki: ProjectWiki | null
@@ -8,15 +8,11 @@ interface DocsButtonProps {
 }
 
 const DocsButton: React.FC<DocsButtonProps> = (props) => {
-    const router = useRouter();
 
-    const handleClick = () => {
-        router.push(`/projects/${props.id}`); // Navigate to dynamic [id] page
-    };
     return(
         props.wiki ? (
-            <div
-                onClick={handleClick}
+            <Link
+                href={`/projects/${props.id}`}
                 className="flex items-center bg-coral-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-colors cursor-pointer">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -33,7 +29,7 @@ const DocsButton: React.FC<DocsButtonProps> = (props) => {
                     />
                 </svg>
                 Docs
-            </div>
+            </Link>
         ) : (
             <div
                 className="relative flex items-center bg-gray-400 text-white px-4 py-2 rounded-lg cursor-not-allowed group">

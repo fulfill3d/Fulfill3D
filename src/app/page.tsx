@@ -1,13 +1,12 @@
 'use client';
 
 import React from "react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const Home = () => {
-    const router = useRouter();
 
     return (
-        <div className="min-h-screen w-full flex flex-col items-center justify-between px-6 py-10 bg-gray-50 overflow-hidden">
+        <div className="min-h-screen w-full flex flex-col items-center justify-between px-6 py-10 overflow-hidden">
             <div className="w-full h-full max-w-5xl text-center space-y-10 flex flex-col items-center justify-center">
                 {/* Heading */}
                 <h1 className="text-5xl md:text-7xl font-extrabold text-gray-900 leading-tight">
@@ -33,27 +32,27 @@ const Home = () => {
                 {/* Call to Action (CTA) Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-3xl">
                     {/* Projects Card */}
-                    <div
-                        onClick={() => router.push('/projects')}
+                    <Link
+                        href='/projects'
                         className="cursor-pointer p-6 bg-indigo-600 text-white rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:shadow-xl"
                     >
                         <h2 className="text-2xl font-bold">View Projects</h2>
                         <p className="mt-2 text-lg">Explore the latest projects and solutions built with modern technologies.</p>
-                    </div>
+                    </Link>
 
                     {/* Posts Card */}
-                    <div
-                        onClick={() => router.push('/posts')}
+                    <Link
+                        href="/posts"
                         className="cursor-pointer p-6 bg-teal-600 text-white rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:shadow-xl"
                     >
                         <h2 className="text-2xl font-bold">Read Posts</h2>
                         <p className="mt-2 text-lg">Read insightful posts on best practices, tips, and modern web solutions.</p>
-                    </div>
+                    </Link>
                 </div>
             </div>
 
             {/* Link to Fulfill3D Frontend Repo */}
-            <footer className="text-gray-600 font-semibold text-sm mt-10">
+            <div className="text-gray-600 font-semibold text-sm mt-10">
                 <a
                     href="https://github.com/fulfill3d/Fulfill3D_Frontend"
                     target="_blank"
@@ -62,7 +61,7 @@ const Home = () => {
                 >
                     View src of this app
                 </a>
-            </footer>
+            </div>
         </div>
     );
 }
