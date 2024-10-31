@@ -5,7 +5,6 @@ import WikiSection from "@/components/project/wiki/wiki-section";
 import List from "@/components/project/wiki/wiki-list";
 import Accordion from "@/components/project/wiki/wiki-accordion";
 import MicroserviceComponent from "@/components/project/wiki/microservice-component";
-import Image from "next/image";
 import ImagePlaceholder from "@/svg/image-placeholder";
 import ImageWithLoader from "@/components/common/image-with-loader";
 
@@ -67,7 +66,7 @@ const ProjectWikiComponent: React.FC<{ wiki: ProjectWiki }> = ({ wiki }) => {
             <WikiSection title="Architecture">
                 <div className="p-4 rounded-lg mb-6 flex flex-col items-center">
                     {/* Clickable Image for Full-Screen */}
-                    <div className="w-full min-h-96 relative mb-4 cursor-pointer"
+                    <div className="w-full h-96 relative mb-4 cursor-pointer"
                          onClick={() => handleImageClick(wiki.architecture.diagram.url)}>
                         <ImageWithLoader
                             src={wiki.architecture.diagram.url}
@@ -89,7 +88,7 @@ const ProjectWikiComponent: React.FC<{ wiki: ProjectWiki }> = ({ wiki }) => {
             <WikiSection title="Database">
                 <div className="p-4 rounded-lg mb-6 flex flex-col items-center">
                     {/* Clickable Image for Full-Screen */}
-                    <div className="w-full min-h-96 relative mb-4 cursor-pointer"
+                    <div className="w-full h-96 relative mb-4 cursor-pointer"
                          onClick={() => handleImageClick(wiki.database.diagram.url)}>
                         <ImageWithLoader
                             src={wiki.database.diagram.url}
@@ -118,7 +117,7 @@ const ProjectWikiComponent: React.FC<{ wiki: ProjectWiki }> = ({ wiki }) => {
             <WikiSection title="Security">
                 <div className="p-4 rounded-lg mb-6 flex flex-col items-center">
                     {/* Clickable Image for Full-Screen */}
-                    <div className="w-full min-h-96 relative mb-4 cursor-pointer" onClick={() => handleImageClick(wiki.security.diagram.url)}>
+                    <div className="w-full h-96 relative mb-4 cursor-pointer" onClick={() => handleImageClick(wiki.security.diagram.url)}>
                         <ImageWithLoader
                             src={wiki.security.diagram.url}
                             alt={wiki.name}
@@ -256,14 +255,11 @@ const ProjectWikiComponent: React.FC<{ wiki: ProjectWiki }> = ({ wiki }) => {
                     className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 cursor-pointer"
                     onClick={handleCloseFullScreen}
                 >
-                    <div className="relative w-full max-w-5xl max-h-[90vh] h-auto flex justify-center">
-                        <Image
+                    <div className="relative w-full h-full flex justify-center">
+                        <ImageWithLoader
                             src={fullScreenImage}
-                            alt="Full-Screen"
-                            layout="intrinsic"
-                            width={1920}
-                            height={1080}
-                            className="rounded-lg object-contain"
+                            alt='Full-Screen'
+                            className='rounded-lg object-contain'
                         />
                     </div>
                 </div>
