@@ -1,25 +1,19 @@
 import React from 'react';
 import {Post} from "@/models/post/post";
-import {useRouter} from "next/navigation";
 import ImagePlaceholder from "@/svg/image-placeholder";
 import ImageWithLoader from "@/components/common/image-with-loader";
+import Link from "next/link";
 
 interface PostMetadataCardProps {
     post: Post;
 }
 
 const PostMetadataCard: React.FC<PostMetadataCardProps> = (props) => {
-    const router = useRouter();
 
-    const handleClick = () => {
-        router.push(`/posts/${props.post.id}`); // Navigate to dynamic [id] page
-    };
     return (
-        <div
-            role="button"  // Adds button role for accessibility
-            tabIndex={0}    // Makes the div focusable
+        <Link
+            href={`/posts/${props.post.id}`}
             className="bg-white shadow-lg rounded-lg p-6 cursor-pointer focus:outline-none focus:ring-2 focus:ring-coral hover:bg-gray-50 active:bg-gray-200 transition-all"
-            onClick={handleClick}
         >
             {/* Image */}
             <div className="relative w-full h-48 mb-4">
@@ -51,7 +45,7 @@ const PostMetadataCard: React.FC<PostMetadataCardProps> = (props) => {
           </span>
                 ))}
             </div>
-        </div>
+        </Link>
     );
 };
 
