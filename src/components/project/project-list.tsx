@@ -16,7 +16,7 @@ const ProjectList: React.FC<ProductListProps> = () => {
 
     return (
         <div className="flex flex-col">
-            {projects.map((project) => <ProjectCard key={project.id} project={project} />)}
+            {projects.map((project) => <ProjectCard key={project.id} project={project} />).reverse()}
         </div>
     );
 };
