@@ -5,17 +5,15 @@ pr:
     include:
       - main
   paths:
-    exclude:
-      - /README.md
-      - /LICENCE
+    include:
+      - /frontend/*
 trigger:
   branches:
     include:
       - main
   paths:
-    exclude:
-      - /README.md
-      - /LICENCE
+    include:
+      - /frontend/*
 
 jobs:
   - job: build_and_deploy_job
