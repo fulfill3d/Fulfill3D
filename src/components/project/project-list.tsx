@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react';
 import ProjectCard from "@/components/project/project-card";
 import {useGetProjects} from "@/hooks/feature/use-get-projects";

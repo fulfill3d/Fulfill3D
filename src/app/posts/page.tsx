@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import PostGridContainer from "@/components/post/post-grid-container";
 

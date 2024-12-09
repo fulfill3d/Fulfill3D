@@ -17,5 +17,5 @@ export const useProjectWiki = (id: string) => {
         })();
     }, [id]);
 
-    return {projectWiki, loading};
+    return {wiki: projectWiki, loading};
 }
