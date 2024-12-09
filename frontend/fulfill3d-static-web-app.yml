@@ -6,6 +6,7 @@ pr:
       - main
   paths:
     exclude:
+      - /backend/*
       - /README.md
       - /LICENCE
 trigger:
@@ -14,6 +15,7 @@ trigger:
       - main
   paths:
     exclude:
+      - /backend/*
       - /README.md
       - /LICENCE
 
