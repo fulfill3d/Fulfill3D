@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react';
 import PostMetadataCard from "@/components/post/post-metadata-card";
 import {useGetPosts} from "@/hooks/feature/use-get-posts";
