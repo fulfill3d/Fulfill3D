@@ -1,5 +1,6 @@
+'use client'
+
 import React, { useState } from 'react';
-import { ProjectWiki } from "@/models/project/wiki/project-wiki";
 import DevOpsList from "@/components/project/wiki/devops-list";
 import WikiSection from "@/components/project/wiki/wiki-section";
 import List from "@/components/project/wiki/wiki-list";
@@ -7,10 +8,22 @@ import Accordion from "@/components/project/wiki/wiki-accordion";
 import MicroserviceComponent from "@/components/project/wiki/microservice-component";
 import ImagePlaceholder from "@/svg/image-placeholder";
 import ImageWithLoader from "@/components/common/image-with-loader";
+import {useProjectWiki} from "@/hooks/feature/use-project-wiki";
+import Loading from "@/app/loading";
+import NotFound from "@/app/not-found";
 
-const ProjectWikiComponent: React.FC<{ wiki: ProjectWiki }> = ({ wiki }) => {
+const ProjectWikiComponent: React.FC<{ id: string }> = (params: { id: string }) => {
     const [isFullScreen, setIsFullScreen] = useState(false); // State to track full-screen mode
     const [fullScreenImage, setFullScreenImage] = useState<string | null>(null); // Track which image to display
+    const {wiki, loading} = useProjectWiki(params.id);
+
+    if (loading) {
+        return <Loading />;
+    }
+
+    if (!wiki) {
+        return <NotFound/>;
+    }
 
     // Function to open full-screen image
     const handleImageClick = (imageSrc: string) => {

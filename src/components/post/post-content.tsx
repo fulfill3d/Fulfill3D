@@ -1,14 +1,27 @@
+'use client';
+
 import React from 'react';
-import { Post } from "@/models/post/post";
 import ImagePlaceholder from "@/svg/image-placeholder";
 import {RenderContentBlock} from "@/components/post/render-post-content-block";
 import ImageWithLoader from "@/components/common/image-with-loader";
+import {usePostDetail} from "@/hooks/feature/use-post-detail";
+import Loading from "@/app/loading";
+import NotFound from "@/app/not-found";
 
 interface PostContentProps {
-    post: Post;
+    id: string;
 }
 
-const PostContent: React.FC<PostContentProps> = ({ post }) => {
+const PostContent: React.FC<PostContentProps> = ({ id }) => {
+    const {post, loading} = usePostDetail(id);
+
+    if (loading) {
+        return <Loading />;
+    }
+
+    if (!post) {
+        return <NotFound/>;
+    }
 
     return (
         <article className="bg-white shadow-lg rounded-lg p-4 md:p-6 max-w-4xl mx-auto overflow-hidden">
