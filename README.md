@@ -26,7 +26,7 @@ Here is an overview of the key directories in the project:
 - **`frontend/src/hooks`**: Custom hooks for managing application state, fetching data, and interacting with external APIs.
 - **`frontend/src/models`**: TypeScript interfaces and types representing the data models used across the application.
 - **`frontend/src/service`**: Service files for connecting to APIs, handling data requests, and managing proxy connections.
-- **`sfrontend/rc/svg`**: SVG files used for icons and other vector-based elements in the UI.
+- **`frontend/src/svg`**: SVG files used for icons and other vector-based elements in the UI.
 - **`frontend/src/utils`**: Utility functions and helper methods used across different parts of the project to perform common tasks like formatting, validation, etc.
 
 ## Microservices
